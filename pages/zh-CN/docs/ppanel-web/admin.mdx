@@ -1,0 +1,201 @@
+---
+title: 管理端
+---
+
+# 部署指南
+
+## 在 Vercel 上部署
+
+点击下方按钮以自动在 Vercel 上部署该项目：
+
+[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fperfect-panel%2Fppanel-admin-web&env=NEXT_PUBLIC_API_URL&envDescription=环境变量说明&envLink=https%3A%2F%2Fraw.githubusercontent.com%2Fperfect-panel%2Fppanel-admin-web%2Frefs%2Fheads%2Fmain%2F.env.development&project-name=ppanel-admin-web&repository-name=ppanel-admin-web)
+
+### 环境变量
+
+在部署之前，请确保应用程序设置了所需的环境变量：
+
+```env
+# 默认语言
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<你的默认语言>
+
+# 站点 URL 和 API 地址
+NEXT_PUBLIC_SITE_URL=<你的站点 URL>
+NEXT_PUBLIC_API_URL=<你的 API 地址>
+
+# 联系邮箱
+NEXT_PUBLIC_EMAIL=<你的联系邮箱>
+
+# 社区链接
+NEXT_PUBLIC_TELEGRAM_LINK=<你的 Telegram 链接>
+NEXT_PUBLIC_TWITTER_LINK=<你的 Twitter 链接>
+NEXT_PUBLIC_DISCORD_LINK=<你的 Discord 链接>
+NEXT_PUBLIC_INSTAGRAM_LINK=<你的 Instagram 链接>
+NEXT_PUBLIC_LINKEDIN_LINK=<你的 LinkedIn 链接>
+NEXT_PUBLIC_FACEBOOK_LINK=<你的 Facebook 链接>
+NEXT_PUBLIC_GITHUB_LINK=<你的 Github 链接>
+```
+
+参阅[示例环境文件](https://raw.githubusercontent.com/perfect-panel/ppanel-admin-web/refs/heads/main/.env.development)以获取结构化的变量参考。
+
+### 在 Vercel 上部署的步骤
+
+1. 登录你的 [Vercel 账户](https://vercel.com/) 或创建一个账户。
+2. 点击上方 **使用 Vercel 部署** 按钮。
+3. 在 Vercel 仪表板中设置所需的环境变量，例如 `NEXT_PUBLIC_API_URL`。
+4. 点击 **部署** 以启动部署。
+5. 部署完成后，您可以在 Vercel 仪表板中查看实时 URL。
+
+---
+
+## 使用 Docker 部署
+
+### 先决条件
+
+确保已安装以下内容：
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### 步骤
+
+1. **克隆仓库：**
+
+   ```bash
+   git clone https://github.com/perfect-panel/ppanel-admin-web.git
+   cd ppanel-admin-web
+   ```
+
+2. **修改 `docker-compose.yml` 文件：**
+
+   根据需要自定义您的 `docker-compose.yml` 文件中的环境变量：
+
+   ```yml
+   version: '3'
+
+   services:
+     web:
+       container_name: ppanel-user
+       build:
+         context: ./
+         dockerfile: Dockerfile
+       args:
+         NEXT_PUBLIC_DEFAULT_LANGUAGE:
+         NEXT_PUBLIC_SITE_URL:
+         NEXT_PUBLIC_API_URL:
+         NEXT_PUBLIC_EMAIL:
+         NEXT_PUBLIC_TELEGRAM_LINK:
+         NEXT_PUBLIC_TWITTER_LINK:
+         NEXT_PUBLIC_DISCORD_LINK:
+         NEXT_PUBLIC_INSTAGRAM_LINK:
+         NEXT_PUBLIC_LINKEDIN_LINK:
+         NEXT_PUBLIC_FACEBOOK_LINK:
+         NEXT_PUBLIC_GITHUB_LINK:
+       restart: always
+       ports:
+         - "3000:3000"
+   ```
+
+3. **构建并运行 Docker 容器：**
+
+   使用以下命令构建并运行容器：
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   此命令将构建 Docker 镜像，并以分离模式启动应用程序。
+
+4. **访问应用程序：**
+
+   访问 `http://localhost:3000` 以查看应用程序。
+
+### 停止容器
+
+要停止容器，请运行：
+
+```bash
+docker-compose down
+```
+
+这将停止并删除容器，但保留已构建的镜像和卷。
+
+### 自定义
+
+您可以调整 `docker-compose.yml` 文件，来自定义端口、卷或添加其他服务。
+
+---
+
+## 使用 Node.js 部署
+
+### 先决条件
+
+确保已安装以下内容：
+
+- [Node.js](https://nodejs.org/en/download/) (版本 14+)
+- [npm](https://www.npmjs.com/get-npm)
+
+### 步骤
+
+1. **克隆仓库：**
+
+   ```bash
+   git clone https://github.com/perfect-panel/ppanel-admin-web.git
+   cd ppanel-admin-web
+   ```
+
+2. **安装依赖：**
+
+   ```bash
+   npm install
+   ```
+
+3. **设置环境变量：**
+
+   复制 `.env.development` 文件或创建 `.env` 文件，并添加以下内容：
+
+   ```env
+   # 默认语言
+   NEXT_PUBLIC_DEFAULT_LANGUAGE=<你的默认语言>
+
+   # 站点 URL 和 API 地址
+   NEXT_PUBLIC_SITE_URL=<你的站点 URL>
+   NEXT_PUBLIC_API_URL=<你的 API 地址>
+
+   # 联系邮箱
+   NEXT_PUBLIC_EMAIL=<你的联系邮箱>
+
+   # 社区链接
+   NEXT_PUBLIC_TELEGRAM_LINK=<你的 Telegram 链接>
+   NEXT_PUBLIC_TWITTER_LINK=<你的 Twitter 链接>
+   NEXT_PUBLIC_DISCORD_LINK=<你的 Discord 链接>
+   NEXT_PUBLIC_INSTAGRAM_LINK=<你的 Instagram 链接>
+   NEXT_PUBLIC_LINKEDIN_LINK=<你的 LinkedIn 链接>
+   NEXT_PUBLIC_FACEBOOK_LINK=<你的 Facebook 链接>
+   NEXT_PUBLIC_GITHUB_LINK=<你的 Github 链接>
+   ```
+
+4. **构建应用：**
+
+   ```bash
+   npm run build
+   ```
+
+5. **启动应用：**
+
+   ```bash
+   npm start
+   ```
+
+   应用将通过 `http://localhost:3000` 访问。
+
+### 停止应用
+
+要停止应用，请在终端中按 `Ctrl + C`。
+
+### 自定义
+
+根据您的部署需求，修改配置文件或环境变量。
+
+---
+
+通过上述步骤，您可以根据需要选择使用 Vercel、Docker 或 Node.js 部署该项目。

@@ -1,0 +1,201 @@
+---
+title: User Web
+---
+
+# Deployment Guide
+
+## Deploy on Vercel
+
+Click the button below to automatically deploy the project on Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fperfect-panel%2Fppanel-user-web&env=NEXT_PUBLIC_API_URL&envDescription=Environment%20Variables%20Description&envLink=https%3A%2F%2Fraw.githubusercontent.com%2Fperfect-panel%2Fppanel-user-web%2Frefs%2Fheads%2Fmain%2F.env.development&project-name=ppanel-user-web&repository-name=ppanel-user-web)
+
+### Environment Variables
+
+Before deploying, ensure the required environment variables are set for the application:
+
+```env
+# Default language
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<your_default_language>
+
+# Site URL and API address
+NEXT_PUBLIC_SITE_URL=<your_site_url>
+NEXT_PUBLIC_API_URL=<your_api_url>
+
+# Contact email
+NEXT_PUBLIC_EMAIL=<your_contact_email>
+
+# Community links
+NEXT_PUBLIC_TELEGRAM_LINK=<your_telegram_link>
+NEXT_PUBLIC_TWITTER_LINK=<your_twitter_link>
+NEXT_PUBLIC_DISCORD_LINK=<your_discord_link>
+NEXT_PUBLIC_INSTAGRAM_LINK=<your_instagram_link>
+NEXT_PUBLIC_LINKEDIN_LINK=<your_linkedin_link>
+NEXT_PUBLIC_FACEBOOK_LINK=<your_facebook_link>
+NEXT_PUBLIC_GITHUB_LINK=<your_github_link>
+```
+
+Refer to the [example environment file](https://raw.githubusercontent.com/perfect-panel/ppanel-user-web/refs/heads/main/.env.development) for a structured reference of the variables.
+
+### Steps to Deploy on Vercel
+
+1. Sign in to your [Vercel account](https://vercel.com/) or create one if necessary.
+2. Click the **Deploy with Vercel** button above.
+3. In the Vercel dashboard, set the necessary environment variables, such as `NEXT_PUBLIC_API_URL`.
+4. Click **Deploy** to initiate deployment.
+5. Once deployed, you can view the live URL in your Vercel dashboard.
+
+---
+
+## Deploy with Docker
+
+### Prerequisites
+
+Ensure that you have the following installed:
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Steps
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/perfect-panel/ppanel-user-web.git
+   cd ppanel-user-web
+   ```
+
+2. **Modify the `docker-compose.yml` file:**
+
+   Customize the environment variables in your `docker-compose.yml` file as needed:
+
+   ```yml
+   version: '3'
+
+   services:
+     web:
+       container_name: ppanel-user
+       build:
+         context: ./
+         dockerfile: Dockerfile
+       args:
+         NEXT_PUBLIC_DEFAULT_LANGUAGE:
+         NEXT_PUBLIC_SITE_URL:
+         NEXT_PUBLIC_API_URL:
+         NEXT_PUBLIC_EMAIL:
+         NEXT_PUBLIC_TELEGRAM_LINK:
+         NEXT_PUBLIC_TWITTER_LINK:
+         NEXT_PUBLIC_DISCORD_LINK:
+         NEXT_PUBLIC_INSTAGRAM_LINK:
+         NEXT_PUBLIC_LINKEDIN_LINK:
+         NEXT_PUBLIC_FACEBOOK_LINK:
+         NEXT_PUBLIC_GITHUB_LINK:
+       restart: always
+       ports:
+         - "3000:3000"
+   ```
+
+3. **Build and run Docker containers:**
+
+   Use the following command to build and run the containers:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   This will build the Docker image and start the application in detached mode.
+
+4. **Access the application:**
+
+   Navigate to `http://localhost:3000` to view the application.
+
+### Stopping the Containers
+
+To stop the containers, run:
+
+```bash
+docker-compose down
+```
+
+This will stop and remove the containers, but preserve built images and volumes.
+
+### Customization
+
+You can adjust the `docker-compose.yml` file to customize ports, volumes, or add other services.
+
+---
+
+## Deploy with Node.js
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/en/download/) (version 14+)
+- [npm](https://www.npmjs.com/get-npm)
+
+### Steps
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/perfect-panel/ppanel-user-web.git
+   cd ppanel-user-web
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+
+   Copy `.env.development` or create a `.env` file with the following:
+
+   ```env
+   # Default language
+   NEXT_PUBLIC_DEFAULT_LANGUAGE=<your_default_language>
+
+   # Site URL and API address
+   NEXT_PUBLIC_SITE_URL=<your_site_url>
+   NEXT_PUBLIC_API_URL=<your_api_url>
+
+   # Contact email
+   NEXT_PUBLIC_EMAIL=<your_contact_email>
+
+   # Community links
+   NEXT_PUBLIC_TELEGRAM_LINK=<your_telegram_link>
+   NEXT_PUBLIC_TWITTER_LINK=<your_twitter_link>
+   NEXT_PUBLIC_DISCORD_LINK=<your_discord_link>
+   NEXT_PUBLIC_INSTAGRAM_LINK=<your_instagram_link>
+   NEXT_PUBLIC_LINKEDIN_LINK=<your_linkedin_link>
+   NEXT_PUBLIC_FACEBOOK_LINK=<your_facebook_link>
+   NEXT_PUBLIC_GITHUB_LINK=<your_github_link>
+   ```
+
+4. **Build the application:**
+
+   ```bash
+   npm run build
+   ```
+
+5. **Start the application:**
+
+   ```bash
+   npm start
+   ```
+
+   The application will be accessible at `http://localhost:3000`.
+
+### Stopping the Application
+
+To stop the application, press `Ctrl + C` in the terminal.
+
+### Customization
+
+Modify configuration files or environment variables as needed for your deployment.
+
+---
+
+By following these steps, you can deploy the project using Vercel, Docker, or Node.js based on your preference.
