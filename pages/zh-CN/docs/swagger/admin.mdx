@@ -2,5 +2,10 @@ import SwaggerUI from "swagger-ui-react"
 import "swagger-ui-react/swagger-ui.css"
 
 export default function Page() {
-  return <SwaggerUI url="https://swagger.ppanel.dev/admin.json" />
+  return (
+    <div className="relative">
+      <a href="https://swagger.ppanel.dev/admin.json" className="absolute right-0">Swagger下载</a>
+      <SwaggerUI url="https://swagger.ppanel.dev/admin.json" />
+    </div>
+  )
 }

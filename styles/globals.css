@@ -73,6 +73,8 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+
 .swagger-ui {
   padding-top: 20px;
 }
@@ -81,6 +83,19 @@
 }
 .swagger-ui .information-container,
 .swagger-ui .scheme-container,
-.swagger-ui section.models{
+.swagger-ui section.models {
   display: none!important;
+}
+
+.swagger-ui .opblock {
+  background-color:  transparent !important;
+
+}
+
+.swagger-ui .opblock-tag,
+.swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-ui .opblock .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-path__deprecated,
+.swagger-ui .opblock .opblock-summary-description {
+  color: initial !important;
 }
