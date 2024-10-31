@@ -1,0 +1,132 @@
+# 部署指南
+
+## 服务端运行环境
+
+| 模块           | 要求                                 |
+| :------------- | ------------------------------------ |
+| 服务器配置     | 最低：1U 2G  推荐：2U 4G             |
+| MySQL          | 版本 5.7 及以上（推荐使用 MySQL 8） |
+| Redis          | 版本 6 及以上                        |
+| NGINX / Apache | 不限版本                             |
+
+Docker 环境安装指南：[Docker Practice 安装指南](https://yeasy.gitbook.io/docker_practice/install)
+
+### 下载服务端文件
+
+```shell
+cd /root
+wget https://github.com/perfect-panel/ppanel-release/releases/download/0.1.0_alpha/ppanel.zip
+unzip ppanel.zip
+```
+
+### 修改配置文件
+
+```shell
+cd ppanel/app
+vim ppanel.yaml
+```
+
+配置项说明：
+
+```yaml
+Host: 0.0.0.0 # 监听 IP
+Port: 8080 # 运行端口
+Debug: true # 是否开启调试模式
+
+Logger:
+  File: ./ppanel.log # 日志文件路径
+  Level: debug # 日志级别：info, debug, error
+
+JwtAuth:
+  AccessSecret: 333ab3d5-429f-4a51-b001-ef484bf11db7 # Token 密钥（务必修改）
+  AccessExpire: 604800 # Token 有效期（秒）
+
+MySQL:
+  Path: 127.0.0.1 # 数据库地址
+  Port: 3306
+  Dbname: vpnboard # 数据库名称
+  Username: root # 替换为你的用户名
+  Password: Password # 替换为你的 root 密码
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  LogMode: "dev"
+  LogZap: false
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+Redis:
+  Host: 127.0.0.1:6379
+  Type: server
+  Pass: # Redis 密码（如果有）
+```
+
+## 通过 Docker 安装运行环境
+
+创建 `docker-compose.yml` 文件：
+
+```yaml
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.23
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # 替换为你的 root 密码
+      MYSQL_DATABASE: my_database        # 默认数据库
+      MYSQL_USER: user                   # 替换为你的用户名
+      MYSQL_PASSWORD: userpassword       # 替换为你的用户密码
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7
+    container_name: redis_cache
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  nginx:
+    image: uozi/nginx-ui:latest
+    container_name: nginx_server
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /root/ppanel/nginx:/etc/nginx
+    depends_on:
+      - mysql
+      - redis
+
+  ppanel:
+    image: ppanel
+    container_name: ppanel
+    restart: always
+    command: ["./ppanel", "run", "--config", "./ppanel.yaml"]
+    volumes:
+      - ./root/ppanel/app:/app
+    depends_on:
+      - mysql
+      - redis
+
+volumes:
+  mysql_data:
+  redis_data:
+```
+
+### 运行程序
+
+```shell
+# 创建 docker-compose.yml 文件并粘贴上面的内容
+vim docker-compose.yml
+# 保存并退出 (:wq!)
+docker-compose up -d # 运行 Docker 容器
+```
+
+至此，PPanel 服务端已成功部署并运行。
+

@@ -4,7 +4,10 @@ const meta =  {
     type: 'separator',
     title: 'Deployment'
   },
-  'ppanel-web': 'PPanel Web',
+  'server': 'Server',
+  'admin': 'Admin',
+  'user': 'User',
+  'node': 'Node',
   '-- API': {
     type: 'separator',
     title: 'API'
