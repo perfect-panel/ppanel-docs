@@ -1,25 +1,17 @@
 # 部署指南
 
-## 服务端运行环境
+## 服务端运行环境要求
 
-| 模块           | 要求                                 |
-| :------------- | ------------------------------------ |
-| 服务器配置     | 最低：1U 2G  推荐：2U 4G             |
-| MySQL          | 版本 5.7 及以上（推荐使用 MySQL 8） |
-| Redis          | 版本 6 及以上                        |
-| NGINX / Apache | 不限版本                             |
+| 模块          | 要求                       |
+| --------------- | --------------------------- |
+| 服务器配置   | 最低：1U 2G  推荐：2U 4G       |
+| MySQL           | 版本 5.7 及以上（推荐使用 MySQL 8） |
+| Redis           | 版本 6 及以上          |
+| NGINX / Apache  | 任意版本                 |
 
-Docker 环境安装指南：[Docker Practice 安装指南](https://yeasy.gitbook.io/docker_practice/install)
+## 修改配置文件
 
-### 下载服务端文件
-
-```shell
-cd /root
-wget https://github.com/perfect-panel/ppanel-release/releases/download/0.1.0_alpha/ppanel.zip
-unzip ppanel.zip
-```
-
-### 修改配置文件
+进入配置文件目录并编辑配置：
 
 ```shell
 cd ppanel/app
@@ -45,8 +37,8 @@ MySQL:
   Path: 127.0.0.1 # 数据库地址
   Port: 3306
   Dbname: vpnboard # 数据库名称
-  Username: root # 替换为你的用户名
-  Password: Password # 替换为你的 root 密码
+  Username: root # 数据库用户名
+  Password: Password # 数据库密码（务必修改）
   MaxIdleConns: 10
   MaxOpenConns: 10
   LogMode: "dev"
@@ -59,74 +51,87 @@ Redis:
   Pass: # Redis 密码（如果有）
 ```
 
-## 通过 Docker 安装运行环境
+## 安装 Docker
 
-创建 `docker-compose.yml` 文件：
+运行以下命令安装 Docker：
 
-```yaml
-version: '3.8'
-
-services:
-  mysql:
-    image: mysql:8.0.23
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword  # 替换为你的 root 密码
-      MYSQL_DATABASE: my_database        # 默认数据库
-      MYSQL_USER: user                   # 替换为你的用户名
-      MYSQL_PASSWORD: userpassword       # 替换为你的用户密码
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-  redis:
-    image: redis:7
-    container_name: redis_cache
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-  nginx:
-    image: uozi/nginx-ui:latest
-    container_name: nginx_server
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /root/ppanel/nginx:/etc/nginx
-    depends_on:
-      - mysql
-      - redis
-
-  ppanel:
-    image: ppanel
-    container_name: ppanel
-    restart: always
-    command: ["./ppanel", "run", "--config", "./ppanel.yaml"]
-    volumes:
-      - ./root/ppanel/app:/app
-    depends_on:
-      - mysql
-      - redis
-
-volumes:
-  mysql_data:
-  redis_data:
+```sh
+curl -fsSL https://get.docker.com | bash -s docker
 ```
 
-### 运行程序
+## 使用 Docker 部署
 
-```shell
-# 创建 docker-compose.yml 文件并粘贴上面的内容
-vim docker-compose.yml
-# 保存并退出 (:wq!)
-docker-compose up -d # 运行 Docker 容器
-```
+应用程序包含一个用于初始设置的默认管理员账户：
 
-至此，PPanel 服务端已成功部署并运行。
+- **用户名**：`admin@ppanel.dev`
+- **密码**：`admin-password`
 
+> **注意**：首次登录后请更改默认密码以确保安全。
+
+### 运行 Docker 容器
+
+1. **使用最新版本**：
+
+   ```sh
+   docker run -d -p 8080:8080 \
+     --name ppanel-server \
+     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
+     ppanel/ppanel-server:latest
+   ```
+
+2. **使用 Beta 版本**：
+
+   ```sh
+   docker run -d -p 8080:8080 \
+     --name ppanel-server-beta \
+     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
+     ppanel/ppanel-server:beta
+   ```
+
+### 使用 Docker Compose 部署
+
+3. **使用 Docker Compose（最新版本）**：
+   创建一个 `docker compose.yml` 文件并进行如下配置：
+
+   ```yaml
+   version: '3'
+
+   services:
+     ppanel-server:
+       image: ppanel/ppanel-server:latest
+       container_name: ppanel-server
+       ports:
+         - '8080:8080'
+       volumes:
+         - ./ppanel.yaml:/app/etc/ppanel.yaml
+       restart: always
+   ```
+
+   启动服务：
+
+   ```sh
+   docker compose up -d
+   ```
+
+4. **使用 Docker Compose（Beta 版本）**：
+   创建一个 `docker compose-beta.yml` 文件并进行如下配置：
+
+   ```yaml
+   version: '3'
+
+   services:
+     ppanel-server-beta:
+       image: ppanel/ppanel-server:beta
+       container_name: ppanel-server-beta
+       ports:
+         - '8081:8080'
+       volumes:
+         - ./ppanel.yaml:/app/etc/ppanel.yaml
+       restart: always
+   ```
+
+   启动 Beta 服务：
+
+   ```sh
+   docker compose -f docker compose-beta.yml up -d
+   ```

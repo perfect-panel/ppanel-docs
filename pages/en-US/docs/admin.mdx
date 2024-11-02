@@ -1,14 +1,10 @@
----
-title: Admin Web
----
-
 # Deployment Guide
 
 ## Environment Variables
 
 Before deploying, make sure to set the following environment variables directly in your deployment commands to configure the application:
 
-```env
+```bash
 # Default language for the application
 NEXT_PUBLIC_DEFAULT_LANGUAGE=<your_default_language zh-CN | en-US>
 
@@ -48,6 +44,14 @@ To quickly deploy on Vercel, click the button below:
 ---
 
 ## Deploy with Docker
+
+## Install Docker
+
+To install Docker, run the following command:
+
+```sh
+curl -fsSL https://get.docker.com | bash -s docker
+```
 
 ### Run the Docker Container
 
@@ -105,7 +109,7 @@ To quickly deploy on Vercel, click the button below:
    Start the service:
 
    ```sh
-   docker-compose up -d
+   docker compose up -d
    ```
 
 4. **Using Docker Compose (Beta Version)**:
@@ -132,5 +136,5 @@ To quickly deploy on Vercel, click the button below:
    Start the beta service:
 
    ```sh
-   docker-compose -f docker-compose-beta.yml up -d
+   docker compose -f docker-compose-beta.yml up -d
    ```

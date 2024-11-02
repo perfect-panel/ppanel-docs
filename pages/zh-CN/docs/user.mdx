@@ -1,14 +1,10 @@
----
-title: 用户端
----
-
 # 部署指南
 
 ## 环境变量
 
 在部署前，请确保在部署命令中直接设置以下环境变量以配置应用程序：
 
-```env
+```bash
 # 应用的默认语言
 NEXT_PUBLIC_DEFAULT_LANGUAGE=<您的默认语言 zh-CN | en-US>
 
@@ -55,6 +51,13 @@ NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
 
 ## 使用 Docker 部署
 
+### 安装 Docker
+
+运行以下命令安装 Docker：
+
+```sh
+curl -fsSL https://get.docker.com | bash -s docker
+```
 
 ### 运行 Docker 容器
 
@@ -130,7 +133,7 @@ NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
    启动服务：
 
    ```sh
-   docker-compose up -d
+   docker compose up -d
    ```
 
 4. **使用 Docker Compose（Beta 版本）**：
@@ -163,5 +166,5 @@ NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
    启动 Beta 服务：
 
    ```sh
-   docker-compose -f docker-compose-beta.yml up -d
+   docker compose -f docker-compose-beta.yml up -d
    ```

@@ -1,38 +1,29 @@
-
 # Deployment Guide
 
 ## Server Environment Requirements
 
-| Module          | Requirements                          |
-| :-------------- | ------------------------------------- |
-| Server Config   | Minimum: 1 CPU, 2 GB RAM  Recommended: 2 CPUs, 4 GB RAM |
-| MySQL           | Version 5.7 and above (MySQL 8 recommended) |
-| Redis           | Version 6 and above                   |
-| NGINX / Apache  | Any version                           |
+| Module          | Requirements                |
+| --------------- | --------------------------- |
+| Server Config   | Minimum: 1U 2G  Recommended: 2U 4G |
+| MySQL           | Version 5.7 or above (MySQL 8 recommended) |
+| Redis           | Version 6 or above          |
+| NGINX / Apache  | Any version                 |
 
-Docker installation guide: [Docker Practice Installation Guide](https://yeasy.gitbook.io/docker_practice/install)
+## Modify Configuration File
 
-### Download Server Files
-
-```shell
-cd /root
-wget https://github.com/perfect-panel/ppanel-release/releases/download/0.1.0_alpha/ppanel.zip
-unzip ppanel.zip
-```
-
-### Modify Configuration File
+Navigate to the configuration file directory and edit the configuration:
 
 ```shell
 cd ppanel/app
 vim ppanel.yaml
 ```
 
-Configuration description:
+Configuration options:
 
 ```yaml
 Host: 0.0.0.0 # Listening IP
 Port: 8080 # Running port
-Debug: true # Enable debug mode
+Debug: true # Enable debug mode or not
 
 Logger:
   File: ./ppanel.log # Log file path
@@ -40,14 +31,14 @@ Logger:
 
 JwtAuth:
   AccessSecret: 333ab3d5-429f-4a51-b001-ef484bf11db7 # Token secret (must be changed)
-  AccessExpire: 604800 # Token expiration time (in seconds)
+  AccessExpire: 604800 # Token expiration time (seconds)
 
 MySQL:
   Path: 127.0.0.1 # Database address
   Port: 3306
   Dbname: vpnboard # Database name
-  Username: root # Replace with your username
-  Password: Password # Replace with your root password
+  Username: root # Database username
+  Password: Password # Database password (must be changed)
   MaxIdleConns: 10
   MaxOpenConns: 10
   LogMode: "dev"
@@ -60,73 +51,87 @@ Redis:
   Pass: # Redis password (if any)
 ```
 
-## Install Runtime Environment via Docker
+## Deploy Using Docker
 
-Create a `docker-compose.yml` file:
+## Install Docker
 
-```yaml
-version: '3.8'
+To install Docker, run the following command:
 
-services:
-  mysql:
-    image: mysql:8.0.23
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword  # Replace with your root password
-      MYSQL_DATABASE: my_database        # Default database
-      MYSQL_USER: user                   # Replace with your username
-      MYSQL_PASSWORD: userpassword       # Replace with your user password
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-  redis:
-    image: redis:7
-    container_name: redis_cache
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-  nginx:
-    image: uozi/nginx-ui:latest
-    container_name: nginx_server
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /root/ppanel/nginx:/etc/nginx
-    depends_on:
-      - mysql
-      - redis
-
-  ppanel:
-    image: ppanel
-    container_name: ppanel
-    restart: always
-    command: ["./ppanel", "run", "--config", "./ppanel.yaml"]
-    volumes:
-      - ./root/ppanel/app:/app
-    depends_on:
-      - mysql
-      - redis
-
-volumes:
-  mysql_data:
-  redis_data:
+```sh
+curl -fsSL https://get.docker.com | bash -s docker
 ```
 
-### Run the Application
+The application includes a default administrator account for initial setup:
 
-```shell
-# Create the docker-compose.yml file and paste the content above
-vim docker-compose.yml
-# Save and exit (:wq!)
-docker-compose up -d # Run Docker containers
-```
+- **Username**: `admin@ppanel.dev`
+- **Password**: `admin-password`
 
-At this point, the PPanel server has been successfully deployed and is running.
+> **Note**: Change the default password after the first login to ensure security.
+
+### Run Docker Container
+
+1. **Using the latest version**:
+
+   ```sh
+   docker run -d -p 8080:8080 \
+     --name ppanel-server \
+     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
+     ppanel/ppanel-server:latest
+   ```
+
+2. **Using the Beta version**:
+
+   ```sh
+   docker run -d -p 8080:8080 \
+     --name ppanel-server-beta \
+     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
+     ppanel/ppanel-server:beta
+   ```
+
+### Deploy Using Docker Compose
+
+3. **Using Docker Compose (latest version)**:
+   Create a `docker compose.yml` file and configure it as follows:
+
+   ```yaml
+   version: '3'
+
+   services:
+     ppanel-server:
+       image: ppanel/ppanel-server:latest
+       container_name: ppanel-server
+       ports:
+         - '8080:8080'
+       volumes:
+         - ./ppanel.yaml:/app/etc/ppanel.yaml
+       restart: always
+   ```
+
+   Start the service:
+
+   ```sh
+   docker compose up -d
+   ```
+
+4. **Using Docker Compose (Beta version)**:
+   Create a `docker compose-beta.yml` file and configure it as follows:
+
+   ```yaml
+   version: '3'
+
+   services:
+     ppanel-server-beta:
+       image: ppanel/ppanel-server:beta
+       container_name: ppanel-server-beta
+       ports:
+         - '8081:8080'
+       volumes:
+         - ./ppanel.yaml:/app/etc/ppanel.yaml
+       restart: always
+   ```
+
+   Start the Beta service:
+
+   ```sh
+   docker compose -f docker compose-beta.yml up -d
+   ```
