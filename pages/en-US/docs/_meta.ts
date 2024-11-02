@@ -4,6 +4,7 @@ const meta =  {
     type: 'separator',
     title: 'Deployment'
   },
+  'quick': "Quick",
   'server': 'Server',
   'admin': 'Admin',
   'user': 'User',
