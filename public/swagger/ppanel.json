@@ -4731,27 +4731,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "tags": [
           "ppanel/server"
         ]
@@ -4781,38 +4760,16 @@
         },
         "parameters": [
           {
-            "name": "protocol",
-            "in": "formData",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "formData",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "traffic",
-            "in": "formData",
-            "required": true,
-            "type": "invalid",
-            "format": "UNKNOWN"
+            "schema": {
+              "$ref": "#/definitions/ServerPushUserTrafficRequest"
+            }
           }
         ],
         "tags": [
           "ppanel/server"
-        ],
-        "consumes": [
-          "multipart/form-data",
-          "application/x-www-form-urlencoded"
         ]
       }
     },
@@ -4840,59 +4797,16 @@
         },
         "parameters": [
           {
-            "name": "protocol",
-            "in": "formData",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "formData",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "cpu",
-            "in": "formData",
-            "required": true,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "mem",
-            "in": "formData",
-            "required": true,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "disk",
-            "in": "formData",
-            "required": true,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "updated_at",
-            "in": "formData",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
+            "schema": {
+              "$ref": "#/definitions/ServerPushStatusRequest"
+            }
           }
         ],
         "tags": [
           "ppanel/server"
-        ],
-        "consumes": [
-          "multipart/form-data",
-          "application/x-www-form-urlencoded"
         ]
       }
     },
@@ -4920,27 +4834,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "tags": [
           "ppanel/server"
         ]
@@ -8182,16 +8075,6 @@
     "ServerPushStatusRequest": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secret_key": {
-          "type": "string"
-        },
         "cpu": {
           "type": "number",
           "format": "double"
@@ -8220,16 +8103,6 @@
     "ServerPushUserTrafficRequest": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secret_key": {
-          "type": "string"
-        },
         "traffic": {
           "type": "array",
           "items": {
