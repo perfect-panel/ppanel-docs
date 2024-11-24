@@ -1,0 +1,2641 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/public/announcement/list": {
+      "get": {
+        "summary": "Query announcement",
+        "operationId": "QueryAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryAnnouncementResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/public/announcement"
+        ]
+      }
+    },
+    "/v1/public/document/detail": {
+      "get": {
+        "summary": "Get document detail",
+        "operationId": "QueryDocumentDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/DocumentDetail"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/public/document"
+        ]
+      }
+    },
+    "/v1/public/document/list": {
+      "get": {
+        "summary": "Get document list",
+        "operationId": "QueryDocumentList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryDocumentListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/document"
+        ]
+      }
+    },
+    "/v1/public/order/checkout": {
+      "post": {
+        "summary": "Checkout order",
+        "operationId": "CheckoutOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CheckoutOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckoutOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/close": {
+      "post": {
+        "summary": "Close order",
+        "operationId": "CloseOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/detail": {
+      "get": {
+        "summary": "Get order",
+        "operationId": "QueryOrderDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OrderDetails"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_no",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/list": {
+      "get": {
+        "summary": "Get order list",
+        "operationId": "QueryOrderList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryOrderListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/pre": {
+      "post": {
+        "summary": "Pre create order",
+        "operationId": "PreCreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PreOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/purchase": {
+      "post": {
+        "summary": "purchase Subscription",
+        "operationId": "Purchase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PurchaseOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/recharge": {
+      "post": {
+        "summary": "Recharge",
+        "operationId": "Recharge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RechargeOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RechargeOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/renewal": {
+      "post": {
+        "summary": "Renewal Subscription",
+        "operationId": "Renewal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RenewalOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenewalOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/order/reset": {
+      "post": {
+        "summary": "Reset traffic",
+        "operationId": "ResetTraffic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ResetTrafficOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetTrafficOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/order"
+        ]
+      }
+    },
+    "/v1/public/payment/methods": {
+      "get": {
+        "summary": "Get available payment methods",
+        "operationId": "GetAvailablePaymentMethods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAvailablePaymentMethodsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/payment"
+        ]
+      }
+    },
+    "/v1/public/subscribe/application/config": {
+      "get": {
+        "summary": "Get application config",
+        "operationId": "QueryApplicationConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryApplicationConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
+      }
+    },
+    "/v1/public/subscribe/group/list": {
+      "get": {
+        "summary": "Get subscribe group list",
+        "operationId": "QuerySubscribeGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
+      }
+    },
+    "/v1/public/subscribe/list": {
+      "get": {
+        "summary": "Get subscribe list",
+        "operationId": "QuerySubscribeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
+      }
+    },
+    "/v1/public/ticket/": {
+      "post": {
+        "summary": "Create ticket",
+        "operationId": "CreateUserTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserTicketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/ticket"
+        ]
+      },
+      "put": {
+        "summary": "Update ticket status",
+        "operationId": "UpdateUserTicketStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserTicketStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/ticket"
+        ]
+      }
+    },
+    "/v1/public/ticket/detail": {
+      "get": {
+        "summary": "Get ticket detail",
+        "operationId": "GetUserTicketDetails",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserTicket"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/public/ticket"
+        ]
+      }
+    },
+    "/v1/public/ticket/follow": {
+      "post": {
+        "summary": "Create ticket follow",
+        "operationId": "CreateUserTicketFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserTicketFollowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/ticket"
+        ]
+      }
+    },
+    "/v1/public/ticket/list": {
+      "get": {
+        "summary": "Get ticket list",
+        "operationId": "GetUserTicketList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserTicketListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/public/ticket"
+        ]
+      }
+    },
+    "/v1/public/user/affiliate": {
+      "get": {
+        "summary": "Query User Affiliate",
+        "operationId": "QueryUserAffiliate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserAffiliateResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/balance_log": {
+      "get": {
+        "summary": "Query User Balance Log",
+        "operationId": "QueryUserBalanceLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserBalanceLogListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/info": {
+      "get": {
+        "summary": "Query User Info",
+        "operationId": "QueryUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserInfo"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/notify": {
+      "put": {
+        "summary": "Update User Notify",
+        "operationId": "UpdateUserNotify",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserNotifyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/notify_setting": {
+      "put": {
+        "summary": "Update User Notify Setting",
+        "operationId": "UpdateUserNotifySetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserNotifySettingRequet"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/password": {
+      "put": {
+        "summary": "Update User Password",
+        "operationId": "UpdateUserPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/subscribe": {
+      "get": {
+        "summary": "Query User Subscribe",
+        "operationId": "QueryUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserSubscribeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AnnouncementDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AnnouncementDetails",
+      "required": [
+        "id",
+        "title",
+        "content",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "ApplicationConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "subscribe_type": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "ApplicationConfig",
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "subscribe_type",
+        "icon",
+        "url"
+      ]
+    },
+    "CheckoutOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        }
+      },
+      "title": "CheckoutOrderRequest",
+      "required": [
+        "orderNo"
+      ]
+    },
+    "CheckoutOrderResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "checkout_url": {
+          "type": "string"
+        },
+        "stripe": {
+          "$ref": "#/definitions/StripePayment"
+        }
+      },
+      "title": "CheckoutOrderResponse",
+      "required": [
+        "type"
+      ]
+    },
+    "CloseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        }
+      },
+      "title": "CloseOrderRequest",
+      "required": [
+        "orderNo"
+      ]
+    },
+    "CreateUserTicketFollowRequest": {
+      "type": "object",
+      "properties": {
+        "ticket_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "title": "CreateUserTicketFollowRequest",
+      "required": [
+        "ticket_id",
+        "from",
+        "type",
+        "content"
+      ]
+    },
+    "CreateUserTicketRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "CreateUserTicketRequest",
+      "required": [
+        "title",
+        "description"
+      ]
+    },
+    "DocumentDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DocumentDetail",
+      "required": [
+        "id",
+        "title",
+        "content",
+        "tags",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "DocumentItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DocumentItem",
+      "required": [
+        "id",
+        "title",
+        "tags",
+        "updated_at"
+      ]
+    },
+    "GetAvailablePaymentMethodsResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentItem"
+          }
+        }
+      },
+      "title": "GetAvailablePaymentMethodsResponse",
+      "required": [
+        "list"
+      ]
+    },
+    "GetUserTicketDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserTicketDetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "GetUserTicketListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetUserTicketListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetUserTicketListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTicket"
+          }
+        }
+      },
+      "title": "GetUserTicketListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "OrderDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "orderNo": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/SubscribeInfo"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "OrderDetails",
+      "required": [
+        "id",
+        "orderNo",
+        "type",
+        "quantity",
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "method",
+        "fee_amount",
+        "trade_no",
+        "status",
+        "subscribe_id",
+        "subscribe",
+        "created_at"
+      ]
+    },
+    "PaymentItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "PaymentItem",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "icon",
+        "domain",
+        "fee_mode",
+        "fee_percent",
+        "fee_amount",
+        "enable"
+      ]
+    },
+    "PreOrderResponse": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PreOrderResponse",
+      "required": [
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "fee_amount"
+      ]
+    },
+    "PreRenewalOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        }
+      },
+      "title": "PreRenewalOrderResponse",
+      "required": [
+        "orderNo"
+      ]
+    },
+    "PurchaseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "coupon": {
+          "type": "string"
+        }
+      },
+      "title": "PurchaseOrderRequest",
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment"
+      ]
+    },
+    "PurchaseOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "PurchaseOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
+    "QueryAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryAnnouncementRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryAnnouncementResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "announcements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnnouncementDetails"
+          }
+        }
+      },
+      "title": "QueryAnnouncementResponse",
+      "required": [
+        "total",
+        "announcements"
+      ]
+    },
+    "QueryApplicationConfigResponse": {
+      "type": "object",
+      "properties": {
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          }
+        },
+        "mac": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          }
+        },
+        "linux": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          }
+        },
+        "android": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          }
+        },
+        "ios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          }
+        }
+      },
+      "title": "QueryApplicationConfigResponse",
+      "required": [
+        "windows",
+        "mac",
+        "linux",
+        "android",
+        "ios"
+      ]
+    },
+    "QueryDocumentDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryDocumentDetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "QueryDocumentListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentItem"
+          }
+        }
+      },
+      "title": "QueryDocumentListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "QueryOrderDetailRequest": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "QueryOrderDetailRequest",
+      "required": [
+        "order_no"
+      ]
+    },
+    "QueryOrderListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryOrderListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryOrderListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetails"
+          }
+        }
+      },
+      "title": "QueryOrderListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "QuerySubscribeGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeGroupDetails"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QuerySubscribeGroupListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "QuerySubscribeListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDetails"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QuerySubscribeListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "QueryUserAffiliateResponse": {
+      "type": "object",
+      "properties": {
+        "sum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAffiliate"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserAffiliateResponse",
+      "required": [
+        "sum",
+        "list",
+        "total"
+      ]
+    },
+    "QueryUserBalanceLogListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserBalanceLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserBalanceLogListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "QueryUserSubscribeListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribe"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserSubscribeListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "RechargeOrderRequest": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "RechargeOrderRequest",
+      "required": [
+        "amount",
+        "payment"
+      ]
+    },
+    "RechargeOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "RechargeOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
+    "RenewalOrderRequest": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "subscribe_mark": {
+          "type": "string"
+        }
+      },
+      "title": "RenewalOrderRequest",
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment",
+        "subscribe_mark"
+      ]
+    },
+    "RenewalOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "RenewalOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
+    "ResetTrafficOrderRequest": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_mark": {
+          "type": "string"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "ResetTrafficOrderRequest",
+      "required": [
+        "subscribe_id",
+        "subscribe_mark",
+        "payment"
+      ]
+    },
+    "ResetTrafficOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "ResetTrafficOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "状态码"
+        },
+        "msg": {
+          "type": "string",
+          "description": "消息"
+        },
+        "data": {
+          "type": "object",
+          "description": "数据"
+        }
+      }
+    },
+    "StripePayment": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "publishable_key": {
+          "type": "string"
+        }
+      },
+      "title": "StripePayment",
+      "required": [
+        "method",
+        "client_secret",
+        "publishable_key"
+      ]
+    },
+    "SubscribeDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeDetails",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "unit_price",
+        "discount",
+        "replacement",
+        "inventory",
+        "traffic",
+        "group_id",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "show",
+        "sell"
+      ]
+    },
+    "SubscribeDiscountInfo": {
+      "type": "object",
+      "properties": {
+        "months": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeDiscountInfo",
+      "required": [
+        "months",
+        "discount"
+      ]
+    },
+    "SubscribeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeInfo",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "discount",
+        "unit_price",
+        "replacement",
+        "inventory",
+        "traffic",
+        "group_id",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "show",
+        "sell"
+      ]
+    },
+    "SubscribeItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeItem",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "discount",
+        "unit_price",
+        "replacement",
+        "inventory",
+        "traffic",
+        "group_id",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "show",
+        "sell"
+      ]
+    },
+    "UpdateUserNotifyRequest": {
+      "type": "object",
+      "properties": {
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateUserNotifyRequest",
+      "required": [
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify"
+      ]
+    },
+    "UpdateUserNotifySettingRequet": {
+      "type": "object",
+      "properties": {
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateUserNotifySettingRequet",
+      "required": [
+        "telegram",
+        "enable_email_notify",
+        "enable_telegram_notify"
+      ]
+    },
+    "UpdateUserPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateUserPasswordRequest",
+      "required": [
+        "password"
+      ]
+    },
+    "UpdateUserTicketStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "UpdateUserTicketStatusRequest",
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "UserAffiliate": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "registered_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UserAffiliate",
+      "required": [
+        "email",
+        "avatar",
+        "registered_at",
+        "enable"
+      ]
+    },
+    "UserBalanceLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserBalanceLog",
+      "required": [
+        "id",
+        "user_id",
+        "amount",
+        "type",
+        "order_id",
+        "balance",
+        "created_at"
+      ]
+    },
+    "UserFollow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ticket_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserFollow",
+      "required": [
+        "id",
+        "ticket_id",
+        "from",
+        "type",
+        "content",
+        "created_at"
+      ]
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "valid_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserInfo",
+      "required": [
+        "id",
+        "email",
+        "avatar",
+        "balance",
+        "telegram",
+        "refer_code",
+        "referer_id",
+        "enable",
+        "valid_email",
+        "enable_email_notify",
+        "enable_telegram_notify",
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "UserSubscribe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/SubscribeItem"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribe",
+      "required": [
+        "id",
+        "user_id",
+        "order_id",
+        "subscribe_id",
+        "subscribe",
+        "start_time",
+        "expire_time",
+        "traffic",
+        "download",
+        "upload",
+        "mark",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "UserSubscribeDiscount": {
+      "type": "object",
+      "properties": {
+        "months": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribeDiscount",
+      "required": [
+        "months",
+        "discount"
+      ]
+    },
+    "UserSubscribeGroupDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "UserSubscribeGroupDetails",
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
+    },
+    "UserTicket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "follow": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserFollow"
+          }
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserTicket",
+      "required": [
+        "id",
+        "title",
+        "description",
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

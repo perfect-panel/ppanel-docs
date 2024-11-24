@@ -1,0 +1,629 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/auth/check": {
+      "get": {
+        "summary": "Check user is exist",
+        "operationId": "CheckUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CheckUserResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "summary": "User login",
+        "operationId": "UserLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "User login request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/register": {
+      "post": {
+        "summary": "User register",
+        "operationId": "UserRegister",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "User login response",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegisterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/reset": {
+      "post": {
+        "summary": "Reset password",
+        "operationId": "ResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "User login response",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/common/send_code": {
+      "post": {
+        "summary": "Get verification code",
+        "operationId": "SendEmailCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SendCodeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "GetCodeRequest Get code request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
+    "/v1/common/site/config": {
+      "get": {
+        "summary": "Get global config",
+        "operationId": "GetGlobalConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetGlobalConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
+    "/v1/common/site/tos": {
+      "get": {
+        "summary": "Get Tos Content",
+        "operationId": "GetTos",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetTosResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CheckUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "CheckUserRequest",
+      "required": [
+        "email"
+      ]
+    },
+    "CheckUserResponse": {
+      "type": "object",
+      "properties": {
+        "exist": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CheckUserResponse",
+      "required": [
+        "exist"
+      ]
+    },
+    "CurrencyConfig": {
+      "type": "object",
+      "properties": {
+        "currency_unit": {
+          "type": "string"
+        },
+        "currency_symbol": {
+          "type": "string"
+        }
+      },
+      "title": "CurrencyConfig",
+      "required": [
+        "currency_unit",
+        "currency_symbol"
+      ]
+    },
+    "GetGlobalConfigResponse": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "$ref": "#/definitions/SiteConfig"
+        },
+        "verify": {
+          "$ref": "#/definitions/VeifyConfig"
+        },
+        "register": {
+          "$ref": "#/definitions/RegisterConfig"
+        },
+        "invite": {
+          "$ref": "#/definitions/InviteConfig"
+        },
+        "currency": {
+          "$ref": "#/definitions/CurrencyConfig"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/SubscribeConfig"
+        }
+      },
+      "title": "GetGlobalConfigResponse",
+      "required": [
+        "site",
+        "verify",
+        "register",
+        "invite",
+        "currency",
+        "subscribe"
+      ]
+    },
+    "GetTosResponse": {
+      "type": "object",
+      "properties": {
+        "tos_content": {
+          "type": "string"
+        }
+      },
+      "title": "GetTosResponse",
+      "required": [
+        "tos_content"
+      ]
+    },
+    "InviteConfig": {
+      "type": "object",
+      "properties": {
+        "forced_invite": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "InviteConfig",
+      "required": [
+        "forced_invite"
+      ]
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "LoginResponse",
+      "required": [
+        "token"
+      ]
+    },
+    "RegisterConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterConfig",
+      "required": [
+        "stop_register",
+        "enable_email_verify",
+        "enable_email_domain_suffix",
+        "email_domain_suffix_list"
+      ]
+    },
+    "ResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "ResetPasswordRequest",
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "状态码"
+        },
+        "msg": {
+          "type": "string",
+          "description": "消息"
+        },
+        "data": {
+          "type": "object",
+          "description": "数据"
+        }
+      }
+    },
+    "SendCodeRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "SendCodeRequest",
+      "required": [
+        "email",
+        "type"
+      ]
+    },
+    "SendCodeResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SendCodeResponse",
+      "required": [
+        "status"
+      ]
+    },
+    "SiteConfig": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "site_name": {
+          "type": "string"
+        },
+        "site_desc": {
+          "type": "string"
+        },
+        "site_logo": {
+          "type": "string"
+        }
+      },
+      "title": "SiteConfig",
+      "required": [
+        "host",
+        "site_name",
+        "site_desc",
+        "site_logo"
+      ]
+    },
+    "SubscribeConfig": {
+      "type": "object",
+      "properties": {
+        "single_model": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "subscribe_path": {
+          "type": "string"
+        },
+        "subscribe_domain": {
+          "type": "string"
+        },
+        "pan_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeConfig",
+      "required": [
+        "single_model",
+        "subscribe_path",
+        "subscribe_domain",
+        "pan_domain"
+      ]
+    },
+    "UserLoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "UserLoginRequest",
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "UserRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "invite": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "UserRegisterRequest",
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "VeifyConfig": {
+      "type": "object",
+      "properties": {
+        "turnstile_site_key": {
+          "type": "string"
+        },
+        "enable_login_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_register_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_reset_password_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "VeifyConfig",
+      "required": [
+        "turnstile_site_key",
+        "enable_login_verify",
+        "enable_register_verify",
+        "enable_reset_password_verify"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
