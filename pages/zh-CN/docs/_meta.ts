@@ -14,7 +14,6 @@ const meta =  {
     title: 'API'
   },
   'swagger': 'Swagger',
-
 }
 
 export default meta

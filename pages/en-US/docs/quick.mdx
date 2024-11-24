@@ -1,97 +1,23 @@
+# Quick Deployment Guide
 
-# Quick Deployment
+> **Pre-Deployment Notes**
+> - **Admin Panel Default Port is 8080**: Please configure domain resolution in advance or ensure an available IP address for a smooth installation of the admin and user panels.
+> - Server: For more information, please refer to [Server](/en-US/docs/server).
+> - Admin Panel: For more information, please refer to [Admin Panel](/en-US/docs/admin).
+> - User Panel: For more information, please refer to [User Panel](/en-US/docs/user).
 
-The application includes a default administrator account for initial setup:
+## One-Click Deployment
 
-- **Username**: `admin@ppanel.dev`
-- **Password**: `admin-password`
+Use one of the following commands to deploy PPanel in one click, including the server, admin panel, and user panel:
 
-> **Note**: Change the default password after the first login to ensure security.
+### Option 1: Using `curl`
 
-## Install Docker
-
-First, run the following command to install Docker:
-
-```sh
-curl -fsSL https://get.docker.com | bash -s docker
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-## Clone Git Repository
+### Option 2: Using `wget`
 
-Next, clone the project's Git repository:
-
-```sh
-git clone https://github.com/perfect-panel/ppanel-script.git
-cd ppanel-script
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
-
-## Start Deployment
-
-**Before deployment, modify the configuration files to suit your actual deployment needs and ensure the configurations are correct.**
-
-### One-Click Deployment
-
-Run the following command to deploy PPanel with one click:
-
-```sh
- docker compose up -d
-```
-
-### Deploy the Server Side
-
-[Configuration File Instructions](https://docs.ppanel.dev/en-US/docs/server#modify-configuration-file)
-
-If you only need to deploy the server side, run the following command:
-
-```sh
- docker compose -f ppanel-server.yml up -d
-```
-
-### Deploy the Admin Panel
-
-[Environment Variables Instructions](https://docs.ppanel.dev/en-US/docs/admin#environment-variables)
-
-If you need to deploy the admin panel, run the following command:
-
-```sh
- docker compose -f ppanel-admin-web.yml up -d
-```
-
-### Deploy the User Panel
-
-[Environment Variables Instructions](https://docs.ppanel.dev/en-US/docs/user#environment-variables)
-
-If you need to deploy the user panel, run the following command:
-
-```sh
- docker compose -f ppanel-user-web.yml up -d
-```
-
-### Deploy the Frontend
-
-If you need to deploy both the admin panel and the user panel, run the following command:
-
-```sh
- docker compose -f ppanel-web.yml up -d
-```
-
-## Post-Deployment Operations
-
-After deployment, to ensure the service is running properly, you can check the running status using the following command:
-
-```sh
- docker compose ps
-```
-
-If you need to restart the service, run the following command:
-
-```sh
- docker compose restart
-```
-
-If an error occurs, you can check the error logs with the following command:
-
-```sh
- docker compose logs -f
-```
-

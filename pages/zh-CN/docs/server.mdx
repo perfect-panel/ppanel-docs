@@ -1,137 +1,166 @@
-# 部署指南
+# PPanel 部署指南
 
-## 服务端运行环境要求
+## 运行环境要求
 
-| 模块          | 要求                       |
-| --------------- | --------------------------- |
-| 服务器配置   | 最低：1U 2G  推荐：2U 4G       |
-| MySQL           | 版本 5.7 及以上（推荐使用 MySQL 8） |
-| Redis           | 版本 6 及以上          |
-| NGINX / Apache  | 任意版本                 |
-
-## 修改配置文件
-
-进入配置文件目录并编辑配置：
-
-```shell
-cd ppanel/app
-vim ppanel.yaml
-```
-
-配置项说明：
-
-```yaml
-Host: 0.0.0.0 # 监听 IP
-Port: 8080 # 运行端口
-Debug: true # 是否开启调试模式
-
-Logger:
-  File: ./ppanel.log # 日志文件路径
-  Level: debug # 日志级别：info, debug, error
-
-JwtAuth:
-  AccessSecret: 333ab3d5-429f-4a51-b001-ef484bf11db7 # Token 密钥（务必修改）
-  AccessExpire: 604800 # Token 有效期（秒）
-
-MySQL:
-  Path: 127.0.0.1 # 数据库地址
-  Port: 3306
-  Dbname: vpnboard # 数据库名称
-  Username: root # 数据库用户名
-  Password: Password # 数据库密码（务必修改）
-  MaxIdleConns: 10
-  MaxOpenConns: 10
-  LogMode: "dev"
-  LogZap: false
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-
-Redis:
-  Host: 127.0.0.1:6379
-  Type: server
-  Pass: # Redis 密码（如果有）
-```
+| 组件           | 要求                                  |
+| ------------ | ----------------------------------- |
+| 服务器配置        | 最低：1 核 CPU，2GB 内存；推荐：2 核 CPU，4GB 内存 |
+| MySQL        | 5.7 及以上（推荐 MySQL 8）                 |
+| Redis        | 6 及以上                               |
+| NGINX/Apache | 任意版本                                |
 
 ## 安装 Docker
 
-运行以下命令安装 Docker：
+运行以下命令快速安装 Docker：
 
 ```sh
 curl -fsSL https://get.docker.com | bash -s docker
 ```
 
+## 快速开始
+
+### 通过 Web 界面初始化
+
+PPanel 支持基于 Web 的初始化，简化了手动配置过程。
+
+### 初始化步骤
+
+1. **创建必须的配置文件**：首先手动创建并配置 `/app/etc/ppanel.yaml` 文件，以便进行后续配置。
+
+2. **运行 Docker 容器**：
+
+   ```sh
+   docker run -d \
+     --network host \
+     --name ppanel-server \
+     -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
+     --restart=always \
+     --log-opt max-size=10m \
+     --log-opt max-file=3 \
+     ppanel/ppanel-server:beta
+   ```
+
+3. **访问初始化页面**：在浏览器中访问 `http://服务器IP:8080/init`。
+
+4. **完成配置**：按照指引设置管理员账户、配置 MySQL 数据库和 Redis 服务器。
+
+5. **点击初始化按钮**：完成配置后，点击“初始化”按钮，应用将自动保存配置并重启。
+
+   > **注意**：PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
+
 ## 使用 Docker 部署
 
-应用程序包含一个用于初始设置的默认管理员账户：
+PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
+
+如果不使用 Web 初始化，可以使用默认的管理员账户登录：
 
 - **用户名**：`admin@ppanel.dev`
 - **密码**：`admin-password`
 
-> **注意**：首次登录后请更改默认密码以确保安全。
+> **注意**：首次登录后请及时更改默认密码以确保安全。
+
+### 创建必须的配置文件
+
+在开始 Docker 部署之前，首先手动创建并配置 `/app/etc/ppanel.yaml`，以确保系统正常运行。详细的配置项示例，请参阅文档的 [配置项示例](#配置项示例) 部分。
 
 ### 运行 Docker 容器
 
-1. **使用最新版本**：
+运行以下命令启动容器：
 
-   ```sh
-   docker run -d -p 8080:8080 \
-     --name ppanel-server \
-     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
-     ppanel/ppanel-server:latest
-   ```
+```sh
+docker run -d \
+  --network host \
+  --name ppanel-server \
+  -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
+  --restart=always \
+  --log-opt max-size=10m \
+  --log-opt max-file=3 \
+  ppanel/ppanel-server:beta
+```
 
-2. **使用 Beta 版本**：
+## 使用 Docker Compose 部署
 
-   ```sh
-   docker run -d -p 8080:8080 \
-     --name ppanel-server-beta \
-     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
-     ppanel/ppanel-server:beta
-   ```
+PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
 
-### 使用 Docker Compose 部署
+### 创建必须的配置文件
 
-3. **使用 Docker Compose（最新版本）**：
-   创建一个 `docker compose.yml` 文件并进行如下配置：
+在开始 Docker Compose 部署之前，首先手动创建并配置 `/app/etc/ppanel.yaml`，以确保系统正常运行。详细的配置项示例，请参阅文档的 [配置项示例](#配置项示例) 部分。
 
-   ```yaml
-   version: '3'
+### 创建 Docker Compose 配置文件
 
-   services:
-     ppanel-server:
-       image: ppanel/ppanel-server:latest
-       container_name: ppanel-server
-       ports:
-         - '8080:8080'
-       volumes:
-         - ./ppanel.yaml:/app/etc/ppanel.yaml
-       restart: always
-   ```
+创建 `docker-compose.yml` 文件：
 
-   启动服务：
+```yaml
+version: '3'
 
-   ```sh
-   docker compose up -d
-   ```
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:beta
+    container_name: ppanel-server
+    network_mode: host
+    volumes:
+      - /app/etc/ppanel.yaml:/app/etc/ppanel.yaml
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+```
 
-4. **使用 Docker Compose（Beta 版本）**：
-   创建一个 `docker compose-beta.yml` 文件并进行如下配置：
+### 启动服务
 
-   ```yaml
-   version: '3'
+运行以下命令启动服务：
 
-   services:
-     ppanel-server-beta:
-       image: ppanel/ppanel-server:beta
-       container_name: ppanel-server-beta
-       ports:
-         - '8081:8080'
-       volumes:
-         - ./ppanel.yaml:/app/etc/ppanel.yaml
-       restart: always
-   ```
+```sh
+docker compose up -d
+```
 
-   启动 Beta 服务：
+## 重要提示
 
-   ```sh
-   docker compose -f docker compose-beta.yml up -d
-   ```
+- **安全性**：请务必更改默认密码和密钥，以确保应用安全。
+- **端口配置**：确保必要的端口已开放，避免网络访问问题。
+- **数据持久化**：建议在运行容器时挂载数据卷以实现数据持久化。
+
+## 配置项示例
+
+下面是 `ppanel.yaml` 的配置项示例：
+
+```yaml
+Host: 0.0.0.0            # 监听 IP
+Port: 8080               # 运行端口
+Debug: true              # 是否开启调试模式
+JwtAuth:
+  AccessSecret: your-secret-key   # Token 密钥（请修改）
+  AccessExpire: 604800            # Token 有效期（秒）
+Logger:
+  FilePath: ./ppanel.log # 日志文件路径
+  MaxSize: 50
+  MaxBackup: 3
+  MaxAge: 30
+  Compress: true
+  LogType: json
+  Level: info            # 日志级别：info, debug, error
+MySQL:
+  Addr: 127.0.0.1:3306   # 数据库地址
+  Dbname: vpnboard       # 数据库名称
+  Username: root         # 数据库用户名
+  Password: your-password   # 数据库密码（请修改）
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  LogMode: dev
+  LogZap: false
+  SlowThreshold: 1000
+Redis:
+  Host: 127.0.0.1:6379
+  Pass:                  # Redis 密码（如果有）
+  DB: 0
+```
+
+> **注意**：修改配置文件后，请重启 Docker 容器以应用更改。
+
+## 获取支持
+
+如遇到问题，请参考官方文档或联系支持团队获取帮助。
+

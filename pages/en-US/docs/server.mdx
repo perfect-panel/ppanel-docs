@@ -1,137 +1,166 @@
-# Deployment Guide
+# PPanel Deployment Guide
 
-## Server Environment Requirements
+## System Requirements
 
-| Module          | Requirements                |
-| --------------- | --------------------------- |
-| Server Config   | Minimum: 1U 2G  Recommended: 2U 4G |
-| MySQL           | Version 5.7 or above (MySQL 8 recommended) |
-| Redis           | Version 6 or above          |
-| NGINX / Apache  | Any version                 |
-
-## Modify Configuration File
-
-Navigate to the configuration file directory and edit the configuration:
-
-```shell
-cd ppanel/app
-vim ppanel.yaml
-```
-
-Configuration options:
-
-```yaml
-Host: 0.0.0.0 # Listening IP
-Port: 8080 # Running port
-Debug: true # Enable debug mode or not
-
-Logger:
-  File: ./ppanel.log # Log file path
-  Level: debug # Log level: info, debug, error
-
-JwtAuth:
-  AccessSecret: 333ab3d5-429f-4a51-b001-ef484bf11db7 # Token secret (must be changed)
-  AccessExpire: 604800 # Token expiration time (seconds)
-
-MySQL:
-  Path: 127.0.0.1 # Database address
-  Port: 3306
-  Dbname: vpnboard # Database name
-  Username: root # Database username
-  Password: Password # Database password (must be changed)
-  MaxIdleConns: 10
-  MaxOpenConns: 10
-  LogMode: "dev"
-  LogZap: false
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-
-Redis:
-  Host: 127.0.0.1:6379
-  Type: server
-  Pass: # Redis password (if any)
-```
-
-## Deploy Using Docker
+| Component      | Requirements                           |
+| -------------- | ------------------------------------- |
+| Server Specs   | Minimum: 1 Core CPU, 2GB RAM; Recommended: 2 Core CPU, 4GB RAM |
+| MySQL          | Version 5.7 or above (MySQL 8 recommended) |
+| Redis          | Version 6 or above                     |
+| NGINX/Apache   | Any version                            |
 
 ## Install Docker
 
-To install Docker, run the following command:
+Run the following command to quickly install Docker:
 
 ```sh
 curl -fsSL https://get.docker.com | bash -s docker
 ```
 
-The application includes a default administrator account for initial setup:
+## Quick Start
+
+### Initialize via Web Interface
+
+PPanel supports web-based initialization, simplifying the manual configuration process.
+
+### Initialization Steps
+
+1. **Create the Required Configuration File**: First, manually create and configure the `/app/etc/ppanel.yaml` file to proceed.
+
+2. **Run Docker Container**:
+
+   ```sh
+   docker run -d \
+     --network host \
+     --name ppanel-server \
+     -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
+     --restart=always \
+     --log-opt max-size=10m \
+     --log-opt max-file=3 \
+     ppanel/ppanel-server:beta
+   ```
+
+3. **Access the Initialization Page**: Visit `http://server-IP:8080/init` in your browser.
+
+4. **Complete the Configuration**: Follow the prompts to set up the admin account, configure the MySQL database, and Redis server.
+
+5. **Click the Initialize Button**: After completing the configuration, click the "Initialize" button. The application will automatically save the settings and restart.
+
+   > **Note**: PPanel uses port **8080** by default. Please ensure this port is accessible, and adjust firewall settings if necessary.
+
+## Deploy Using Docker
+
+PPanel uses port **8080** by default. Please ensure this port is accessible, and adjust firewall settings if necessary.
+
+If you do not use web initialization, you can log in with the default admin account:
 
 - **Username**: `admin@ppanel.dev`
 - **Password**: `admin-password`
 
-> **Note**: Change the default password after the first login to ensure security.
+> **Note**: Please change the default password immediately after the first login to ensure security.
+
+### Create the Required Configuration File
+
+Before starting the Docker deployment, manually create and configure the `/app/etc/ppanel.yaml` file to ensure the system runs correctly. For a detailed configuration example, see the [Configuration Example](#configuration-example) section.
 
 ### Run Docker Container
 
-1. **Using the latest version**:
+Run the following command to start the container:
 
-   ```sh
-   docker run -d -p 8080:8080 \
-     --name ppanel-server \
-     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
-     ppanel/ppanel-server:latest
-   ```
+```sh
+docker run -d \
+  --network host \
+  --name ppanel-server \
+  -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
+  --restart=always \
+  --log-opt max-size=10m \
+  --log-opt max-file=3 \
+  ppanel/ppanel-server:beta
+```
 
-2. **Using the Beta version**:
+## Deploy Using Docker Compose
 
-   ```sh
-   docker run -d -p 8080:8080 \
-     --name ppanel-server-beta \
-     -v $(pwd)/ppanel.yaml:/app/etc/ppanel.yaml \
-     ppanel/ppanel-server:beta
-   ```
+PPanel uses port **8080** by default. Please ensure this port is accessible, and adjust firewall settings if necessary.
 
-### Deploy Using Docker Compose
+### Create the Required Configuration File
 
-3. **Using Docker Compose (latest version)**:
-   Create a `docker compose.yml` file and configure it as follows:
+Before starting the Docker Compose deployment, manually create and configure the `/app/etc/ppanel.yaml` file to ensure the system runs correctly. For a detailed configuration example, see the [Configuration Example](#configuration-example) section.
 
-   ```yaml
-   version: '3'
+### Create Docker Compose Configuration File
 
-   services:
-     ppanel-server:
-       image: ppanel/ppanel-server:latest
-       container_name: ppanel-server
-       ports:
-         - '8080:8080'
-       volumes:
-         - ./ppanel.yaml:/app/etc/ppanel.yaml
-       restart: always
-   ```
+Create the `docker-compose.yml` file:
 
-   Start the service:
+```yaml
+version: '3'
 
-   ```sh
-   docker compose up -d
-   ```
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:beta
+    container_name: ppanel-server
+    network_mode: host
+    volumes:
+      - /app/etc/ppanel.yaml:/app/etc/ppanel.yaml
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+```
 
-4. **Using Docker Compose (Beta version)**:
-   Create a `docker compose-beta.yml` file and configure it as follows:
+### Start the Service
 
-   ```yaml
-   version: '3'
+Run the following command to start the service:
 
-   services:
-     ppanel-server-beta:
-       image: ppanel/ppanel-server:beta
-       container_name: ppanel-server-beta
-       ports:
-         - '8081:8080'
-       volumes:
-         - ./ppanel.yaml:/app/etc/ppanel.yaml
-       restart: always
-   ```
+```sh
+docker compose up -d
+```
 
-   Start the Beta service:
+## Important Notes
 
-   ```sh
-   docker compose -f docker compose-beta.yml up -d
-   ```
+- **Security**: Make sure to change the default password and keys to ensure application security.
+- **Port Configuration**: Ensure the required ports are open to avoid network access issues.
+- **Data Persistence**: It is recommended to mount data volumes when running containers to achieve data persistence.
+
+## Configuration Example
+
+Below is an example of the `ppanel.yaml` configuration file:
+
+```yaml
+Host: 0.0.0.0            # Listening IP
+Port: 8080               # Running port
+Debug: true              # Enable debug mode
+JwtAuth:
+  AccessSecret: your-secret-key   # Token secret key (please modify)
+  AccessExpire: 604800            # Token expiration time (seconds)
+Logger:
+  FilePath: ./ppanel.log # Log file path
+  MaxSize: 50
+  MaxBackup: 3
+  MaxAge: 30
+  Compress: true
+  LogType: json
+  Level: info            # Log level: info, debug, error
+MySQL:
+  Addr: 127.0.0.1:3306   # Database address
+  Dbname: vpnboard       # Database name
+  Username: root         # Database username
+  Password: your-password   # Database password (please modify)
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  LogMode: dev
+  LogZap: false
+  SlowThreshold: 1000
+Redis:
+  Host: 127.0.0.1:6379
+  Pass:                  # Redis password (if any)
+  DB: 0
+```
+
+> **Note**: After modifying the configuration file, please restart the Docker container to apply the changes.
+
+## Getting Support
+
+If you encounter issues, please refer to the official documentation or contact the support team for assistance.
+

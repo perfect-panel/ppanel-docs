@@ -1,95 +1,23 @@
-# 快速部署
+# 快速部署指南
 
-应用程序包含一个用于初始设置的默认管理员账户：
+> **部署前注意事项**
+> - **管理端默认端口为 8080**：请提前配置好域名解析或确保有可用的 IP 地址，以便顺利完成管理端和用户端的安装。
+> - 服务端：更多信息请参考 [服务端](/zh-CN/docs/server)。
+> - 管理端：更多信息请参考 [管理端](/zh-CN/docs/admin)。
+> - 用户端：更多信息请参考 [用户端](/zh-CN/docs/user)。
 
-- **用户名**：`admin@ppanel.dev`
-- **密码**：`admin-password`
+## 一键部署
 
-> **注意**：首次登录后请更改默认密码以确保安全。
+使用以下任意命令即可一键部署 PPanel，包括服务端、管理端和用户端：
 
-## 安装 Docker
+### 选项 1：使用 `curl`
 
-首先运行以下命令安装 Docker：
-
-```sh
-curl -fsSL https://get.docker.com | bash -s docker
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-## 克隆 Git 仓库
+### 选项 2：使用 `wget`
 
-接下来，克隆项目的 Git 仓库：
-
-```sh
-git clone https://github.com/perfect-panel/ppanel-script.git
-cd ppanel-script
-```
-
-## 开始部署
-
-**部署前，请修改配置文件以适应您的实际部署需求，确保配置正确无误**
-
-### 一键部署
-
-运行以下命令一键部署 PPanel：
-
-```sh
- docker compose up -d
-```
-
-### 部署服务端
-
-[配置文件说明](https://docs.ppanel.dev/zh-CN/docs/server#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
-
-如果只需要部署服务端，运行以下命令：
-
-```sh
- docker compose -f ppanel-server.yml up -d
-```
-
-### 部署管理端
-
-[环境变量说明](https://docs.ppanel.dev/zh-CN/docs/admin#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
-
-如果需要部署管理端，运行以下命令：
-
-```sh
- docker compose -f ppanel-admin-web.yml up -d
-```
-
-### 部署用户端
-
-[环境变量说明](https://docs.ppanel.dev/zh-CN/docs/user#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
-
-如果需要部署用户端，运行以下命令：
-
-```sh
- docker compose -f ppanel-user-web.yml up -d
-```
-
-### 部署前端
-
-如果需要同时部署管理端和用户端，运行以下命令：
-
-```sh
- docker compose -f ppanel-web.yml up -d
-```
-
-## 部署后的运行事项
-
-部署完成后，为确保服务正常运行，可以使用以下命令查看运行状态：
-
-```sh
- docker compose ps
-```
-
-如果需要重新启动服务，可以运行以下命令：
-
-```sh
- docker compose restart
-```
-
-当服务发生错误时，可以使用以下命令查看错误日志：
-
-```sh
- docker compose logs -f
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
