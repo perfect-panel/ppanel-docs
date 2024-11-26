@@ -3515,6 +3515,33 @@
         ]
       }
     },
+    "/v1/common/site/stat": {
+      "get": {
+        "summary": "Get stat",
+        "operationId": "GetStat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/site/tos": {
       "get": {
         "summary": "Get Tos Content",
@@ -6706,6 +6733,29 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "GetStatResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "node": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "country": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetStatResponse",
+      "required": [
+        "user",
+        "node",
+        "country"
       ]
     },
     "GetSubscribeConfigResponse": {
