@@ -3530,7 +3530,9 @@
                 {
                   "type": "object",
                   "properties": {
-                    "data": {}
+                    "data": {
+                      "$ref": "#/definitions/GetStatResponse"
+                    }
                   }
                 }
               ]
