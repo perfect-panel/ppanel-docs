@@ -76,7 +76,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/DocumentDetail"
+                      "$ref": "#/definitions/Document"
                     }
                   }
                 }
@@ -219,7 +219,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/OrderDetails"
+                      "$ref": "#/definitions/Order"
                     }
                   }
                 }
@@ -525,7 +525,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/QueryApplicationConfigResponse"
+                      "$ref": "#/definitions/ApplicationResponse"
                     }
                   }
                 }
@@ -684,7 +684,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/UserTicket"
+                      "$ref": "#/definitions/Ticket"
                     }
                   }
                 }
@@ -875,7 +875,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/UserInfo"
+                      "$ref": "#/definitions/User"
                     }
                   }
                 }
@@ -1030,7 +1030,7 @@
     }
   },
   "definitions": {
-    "AnnouncementDetails": {
+    "Announcement": {
       "type": "object",
       "properties": {
         "id": {
@@ -1043,6 +1043,10 @@
         "content": {
           "type": "string"
         },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1052,16 +1056,17 @@
           "format": "int64"
         }
       },
-      "title": "AnnouncementDetails",
+      "title": "Announcement",
       "required": [
         "id",
         "title",
         "content",
+        "enable",
         "created_at",
         "updated_at"
       ]
     },
-    "ApplicationConfig": {
+    "Application": {
       "type": "object",
       "properties": {
         "id": {
@@ -1084,7 +1089,7 @@
           "type": "string"
         }
       },
-      "title": "ApplicationConfig",
+      "title": "Application",
       "required": [
         "id",
         "name",
@@ -1092,6 +1097,49 @@
         "subscribe_type",
         "icon",
         "url"
+      ]
+    },
+    "ApplicationResponse": {
+      "type": "object",
+      "properties": {
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "mac": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "linux": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "android": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "ios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      },
+      "title": "ApplicationResponse",
+      "required": [
+        "windows",
+        "mac",
+        "linux",
+        "android",
+        "ios"
       ]
     },
     "CheckoutOrderRequest": {
@@ -1136,6 +1184,85 @@
         "orderNo"
       ]
     },
+    "Coupon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "used_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Coupon",
+      "required": [
+        "id",
+        "name",
+        "code",
+        "count",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time",
+        "user_limit",
+        "subscribe",
+        "used_count",
+        "enable",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "CreateUserTicketFollowRequest": {
       "type": "object",
       "properties": {
@@ -1178,7 +1305,27 @@
         "description"
       ]
     },
-    "DocumentDetail": {
+    "CurrencyConfig": {
+      "type": "object",
+      "properties": {
+        "currency_unit": {
+          "type": "string"
+        },
+        "currency_symbol": {
+          "type": "string"
+        },
+        "access_key": {
+          "type": "string"
+        }
+      },
+      "title": "CurrencyConfig",
+      "required": [
+        "currency_unit",
+        "currency_symbol",
+        "access_key"
+      ]
+    },
+    "Document": {
       "type": "object",
       "properties": {
         "id": {
@@ -1197,6 +1344,10 @@
             "type": "string"
           }
         },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1206,43 +1357,97 @@
           "format": "int64"
         }
       },
-      "title": "DocumentDetail",
+      "title": "Document",
       "required": [
         "id",
         "title",
         "content",
         "tags",
+        "show",
         "created_at",
         "updated_at"
       ]
     },
-    "DocumentItem": {
+    "EmailSmtpConfig": {
+      "type": "object",
+      "properties": {
+        "email_smtp_host": {
+          "type": "string"
+        },
+        "email_smtp_port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email_smtp_user": {
+          "type": "string"
+        },
+        "email_smtp_pass": {
+          "type": "string"
+        },
+        "email_smtp_from": {
+          "type": "string"
+        },
+        "email_smtp_ssl": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "verify_email_template": {
+          "type": "string"
+        },
+        "maintenance_email_template": {
+          "type": "string"
+        },
+        "expiration_email_template": {
+          "type": "string"
+        }
+      },
+      "title": "EmailSmtpConfig",
+      "required": [
+        "email_smtp_host",
+        "email_smtp_port",
+        "email_smtp_user",
+        "email_smtp_pass",
+        "email_smtp_from",
+        "email_smtp_ssl",
+        "verify_email_template",
+        "maintenance_email_template",
+        "expiration_email_template"
+      ]
+    },
+    "Follow": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "title": {
+        "ticket_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from": {
           "type": "string"
         },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "type": {
+          "type": "integer",
+          "format": "uint8"
         },
-        "updated_at": {
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
           "type": "integer",
           "format": "int64"
         }
       },
-      "title": "DocumentItem",
+      "title": "Follow",
       "required": [
         "id",
-        "title",
-        "tags",
-        "updated_at"
+        "ticket_id",
+        "from",
+        "type",
+        "content",
+        "created_at"
       ]
     },
     "GetAvailablePaymentMethodsResponse": {
@@ -1251,7 +1456,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PaymentItem"
+            "$ref": "#/definitions/PaymentConfig"
           }
         }
       },
@@ -1308,7 +1513,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserTicket"
+            "$ref": "#/definitions/Ticket"
           }
         }
       },
@@ -1318,14 +1523,63 @@
         "list"
       ]
     },
-    "OrderDetails": {
+    "InviteConfig": {
+      "type": "object",
+      "properties": {
+        "forced_invite": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "InviteConfig",
+      "required": [
+        "forced_invite",
+        "referral_percentage",
+        "only_first_purchase"
+      ]
+    },
+    "NodeConfig": {
+      "type": "object",
+      "properties": {
+        "node_secret": {
+          "type": "string"
+        },
+        "node_pull_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "node_push_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeConfig",
+      "required": [
+        "node_secret",
+        "node_pull_interval",
+        "node_push_interval"
+      ]
+    },
+    "Order": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "orderNo": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
           "type": "string"
         },
         "type": {
@@ -1373,18 +1627,20 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscribe": {
-          "$ref": "#/definitions/SubscribeInfo"
-        },
         "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
           "type": "integer",
           "format": "int64"
         }
       },
-      "title": "OrderDetails",
+      "title": "Order",
       "required": [
         "id",
-        "orderNo",
+        "user_id",
+        "order_no",
         "type",
         "quantity",
         "price",
@@ -1397,11 +1653,11 @@
         "trade_no",
         "status",
         "subscribe_id",
-        "subscribe",
-        "created_at"
+        "created_at",
+        "updated_at"
       ]
     },
-    "PaymentItem": {
+    "PaymentConfig": {
       "type": "object",
       "properties": {
         "id": {
@@ -1420,6 +1676,9 @@
         "domain": {
           "type": "string"
         },
+        "config": {
+          "type": "object"
+        },
         "fee_mode": {
           "type": "integer",
           "format": "uint32"
@@ -1437,16 +1696,13 @@
           "format": "boolean"
         }
       },
-      "title": "PaymentItem",
+      "title": "PaymentConfig",
       "required": [
         "id",
         "name",
         "mark",
-        "icon",
-        "domain",
+        "config",
         "fee_mode",
-        "fee_percent",
-        "fee_amount",
         "enable"
       ]
     },
@@ -1536,6 +1792,24 @@
         "order_no"
       ]
     },
+    "Push": {
+      "type": "object",
+      "properties": {
+        "push_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Push",
+      "required": [
+        "push_at",
+        "count"
+      ]
+    },
     "QueryAnnouncementRequest": {
       "type": "object",
       "properties": {
@@ -1564,7 +1838,7 @@
         "announcements": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnnouncementDetails"
+            "$ref": "#/definitions/Announcement"
           }
         }
       },
@@ -1572,49 +1846,6 @@
       "required": [
         "total",
         "announcements"
-      ]
-    },
-    "QueryApplicationConfigResponse": {
-      "type": "object",
-      "properties": {
-        "windows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "mac": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "linux": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "android": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "ios": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        }
-      },
-      "title": "QueryApplicationConfigResponse",
-      "required": [
-        "windows",
-        "mac",
-        "linux",
-        "android",
-        "ios"
       ]
     },
     "QueryDocumentDetailRequest": {
@@ -1640,7 +1871,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentItem"
+            "$ref": "#/definitions/Document"
           }
         }
       },
@@ -1690,7 +1921,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrderDetails"
+            "$ref": "#/definitions/Order"
           }
         }
       },
@@ -1706,7 +1937,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserSubscribeGroupDetails"
+            "$ref": "#/definitions/SubscribeGroup"
           }
         },
         "total": {
@@ -1726,7 +1957,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscribeDetails"
+            "$ref": "#/definitions/Subscribe"
           }
         },
         "total": {
@@ -1834,6 +2065,53 @@
         "order_no"
       ]
     },
+    "RegisterConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trial": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RegisterConfig",
+      "required": [
+        "stop_register",
+        "enable_trial",
+        "enable_email_verify",
+        "enable_email_domain_suffix",
+        "email_domain_suffix_list",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
+      ]
+    },
     "RenewalOrderRequest": {
       "type": "object",
       "properties": {
@@ -1925,6 +2203,163 @@
         }
       }
     },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "groupId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "vmess": {
+          "$ref": "#/definitions/Vmess"
+        },
+        "vless": {
+          "$ref": "#/definitions/Vless"
+        },
+        "trojan": {
+          "$ref": "#/definitions/Trojan"
+        },
+        "shadowsocks": {
+          "$ref": "#/definitions/Shadowsocks"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "last": {
+          "$ref": "#/definitions/Push"
+        }
+      },
+      "title": "Server",
+      "required": [
+        "id",
+        "name",
+        "server_addr",
+        "speed_limit",
+        "traffic_ratio",
+        "groupId",
+        "protocol",
+        "enable",
+        "created_at",
+        "updated_at",
+        "last"
+      ]
+    },
+    "ServerGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerGroup",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "Shadowsocks": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Shadowsocks",
+      "required": [
+        "method",
+        "port",
+        "enable_relay",
+        "relay_host",
+        "relay_port"
+      ]
+    },
+    "SiteConfig": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "site_name": {
+          "type": "string"
+        },
+        "site_desc": {
+          "type": "string"
+        },
+        "site_logo": {
+          "type": "string"
+        }
+      },
+      "title": "SiteConfig",
+      "required": [
+        "host",
+        "site_name",
+        "site_desc",
+        "site_logo"
+      ]
+    },
     "StripePayment": {
       "type": "object",
       "properties": {
@@ -1945,7 +2380,7 @@
         "publishable_key"
       ]
     },
-    "SubscribeDetails": {
+    "Subscribe": {
       "type": "object",
       "properties": {
         "id": {
@@ -1965,7 +2400,7 @@
         "discount": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserSubscribeDiscount"
+            "$ref": "#/definitions/SubscribeDiscount"
           }
         },
         "replacement": {
@@ -1980,10 +2415,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "speed_limit": {
           "type": "integer",
           "format": "int64"
@@ -1996,6 +2427,24 @@
           "type": "integer",
           "format": "int64"
         },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
         "show": {
           "type": "boolean",
           "format": "boolean"
@@ -2003,9 +2452,17 @@
         "sell": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
         }
       },
-      "title": "SubscribeDetails",
+      "title": "Subscribe",
       "required": [
         "id",
         "name",
@@ -2015,15 +2472,45 @@
         "replacement",
         "inventory",
         "traffic",
-        "group_id",
         "speed_limit",
         "device_limit",
         "quota",
+        "group_id",
+        "server_group",
+        "server",
         "show",
-        "sell"
+        "sell",
+        "created_at",
+        "updated_at"
       ]
     },
-    "SubscribeDiscountInfo": {
+    "SubscribeConfig": {
+      "type": "object",
+      "properties": {
+        "single_model": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "subscribe_path": {
+          "type": "string"
+        },
+        "subscribe_domain": {
+          "type": "string"
+        },
+        "pan_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeConfig",
+      "required": [
+        "single_model",
+        "subscribe_path",
+        "subscribe_domain",
+        "pan_domain"
+      ]
+    },
+    "SubscribeDiscount": {
       "type": "object",
       "properties": {
         "months": {
@@ -2035,13 +2522,13 @@
           "format": "int64"
         }
       },
-      "title": "SubscribeDiscountInfo",
+      "title": "SubscribeDiscount",
       "required": [
         "months",
         "discount"
       ]
     },
-    "SubscribeInfo": {
+    "SubscribeGroup": {
       "type": "object",
       "properties": {
         "id": {
@@ -2054,141 +2541,165 @@
         "description": {
           "type": "string"
         },
-        "discount": {
-          "type": "string"
-        },
-        "unit_price": {
+        "created_at": {
           "type": "integer",
           "format": "int64"
         },
-        "replacement": {
+        "updated_at": {
           "type": "integer",
           "format": "int64"
-        },
-        "inventory": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
-      "title": "SubscribeInfo",
+      "title": "SubscribeGroup",
       "required": [
         "id",
         "name",
         "description",
-        "discount",
-        "unit_price",
-        "replacement",
-        "inventory",
-        "traffic",
-        "group_id",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "show",
-        "sell"
+        "created_at",
+        "updated_at"
       ]
     },
-    "SubscribeItem": {
+    "SubscribeType": {
+      "type": "object",
+      "properties": {
+        "subscribe_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "SubscribeType",
+      "required": [
+        "subscribe_types"
+      ]
+    },
+    "TelegramConfig": {
+      "type": "object",
+      "properties": {
+        "telegram_bot_token": {
+          "type": "string"
+        },
+        "telegram_group_url": {
+          "type": "string"
+        },
+        "telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "TelegramConfig",
+      "required": [
+        "telegram_bot_token",
+        "telegram_group_url",
+        "telegram_notify"
+      ]
+    },
+    "Ticket": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "name": {
+        "title": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
-        "discount": {
-          "type": "string"
-        },
-        "unit_price": {
+        "user_id": {
           "type": "integer",
           "format": "int64"
         },
-        "replacement": {
+        "follow": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Follow"
+          }
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
           "type": "integer",
           "format": "int64"
         },
-        "inventory": {
+        "updated_at": {
           "type": "integer",
           "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
-      "title": "SubscribeItem",
+      "title": "Ticket",
       "required": [
         "id",
-        "name",
+        "title",
         "description",
-        "discount",
-        "unit_price",
-        "replacement",
-        "inventory",
-        "traffic",
-        "group_id",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "show",
-        "sell"
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "TosConfig": {
+      "type": "object",
+      "properties": {
+        "tos_content": {
+          "type": "string"
+        }
+      },
+      "title": "TosConfig",
+      "required": [
+        "tos_content"
+      ]
+    },
+    "Trojan": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "host": {
+          "type": "string"
+        },
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "transport": {
+          "type": "object"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Trojan",
+      "required": [
+        "network",
+        "port",
+        "host",
+        "sni",
+        "allow_insecure",
+        "transport",
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     },
     "UpdateUserNotifyRequest": {
@@ -2272,6 +2783,108 @@
         "status"
       ]
     },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "valid_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deleted_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "is_del": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "User",
+      "required": [
+        "id",
+        "email",
+        "avatar",
+        "balance",
+        "telegram",
+        "refer_code",
+        "referer_id",
+        "enable",
+        "valid_email",
+        "enable_email_notify",
+        "enable_telegram_notify",
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "UserAffiliate": {
       "type": "object",
       "properties": {
@@ -2341,132 +2954,6 @@
         "created_at"
       ]
     },
-    "UserFollow": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ticket_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "from": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "content": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserFollow",
-      "required": [
-        "id",
-        "ticket_id",
-        "from",
-        "type",
-        "content",
-        "created_at"
-      ]
-    },
-    "UserInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email": {
-          "type": "string"
-        },
-        "avatar": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "telegram": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "refer_code": {
-          "type": "string"
-        },
-        "referer_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "valid_email": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_balance_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_login_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_subscribe_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trade_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserInfo",
-      "required": [
-        "id",
-        "email",
-        "avatar",
-        "balance",
-        "telegram",
-        "refer_code",
-        "referer_id",
-        "enable",
-        "valid_email",
-        "enable_email_notify",
-        "enable_telegram_notify",
-        "enable_balance_notify",
-        "enable_login_notify",
-        "enable_subscribe_notify",
-        "enable_trade_notify",
-        "created_at",
-        "updated_at"
-      ]
-    },
     "UserSubscribe": {
       "type": "object",
       "properties": {
@@ -2487,7 +2974,7 @@
           "format": "int64"
         },
         "subscribe": {
-          "$ref": "#/definitions/SubscribeItem"
+          "$ref": "#/definitions/Subscribe"
         },
         "start_time": {
           "type": "integer",
@@ -2543,90 +3030,134 @@
         "updated_at"
       ]
     },
-    "UserSubscribeDiscount": {
+    "VerifyConfig": {
       "type": "object",
       "properties": {
-        "months": {
-          "type": "integer",
-          "format": "int64"
+        "turnstile_site_key": {
+          "type": "string"
         },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
+        "turnstile_secret": {
+          "type": "string"
+        },
+        "enable_login_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_register_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_reset_password_verify": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
-      "title": "UserSubscribeDiscount",
+      "title": "VerifyConfig",
       "required": [
-        "months",
-        "discount"
+        "turnstile_site_key",
+        "turnstile_secret",
+        "enable_login_verify",
+        "enable_register_verify",
+        "enable_reset_password_verify"
       ]
     },
-    "UserSubscribeGroupDetails": {
+    "Vless": {
       "type": "object",
       "properties": {
-        "id": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
           "type": "integer",
-          "format": "int64"
+          "format": "int32"
         },
-        "name": {
+        "network": {
           "type": "string"
         },
-        "description": {
+        "transport": {
+          "type": "object"
+        },
+        "security": {
           "type": "string"
+        },
+        "security_config": {
+          "type": "object"
+        },
+        "xtls": {
+          "type": "string"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
         }
       },
-      "title": "UserSubscribeGroupDetails",
+      "title": "Vless",
       "required": [
-        "id",
-        "name",
-        "description"
+        "host",
+        "port",
+        "network",
+        "transport",
+        "security",
+        "security_config",
+        "xtls",
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     },
-    "UserTicket": {
+    "Vmess": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
+        "host": {
           "type": "string"
         },
-        "description": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enable_tls": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "tls_config": {
+          "type": "object"
+        },
+        "network": {
           "type": "string"
         },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
+        "transport": {
+          "type": "object"
         },
-        "follow": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserFollow"
-          }
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
+        "relay_host": {
+          "type": "string"
         },
-        "created_at": {
+        "relay_port": {
           "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
+          "format": "int32"
         }
       },
-      "title": "UserTicket",
+      "title": "Vmess",
       "required": [
-        "id",
-        "title",
-        "description",
-        "user_id",
-        "status",
-        "created_at",
-        "updated_at"
+        "host",
+        "port",
+        "enable_tls",
+        "tls_config",
+        "network",
+        "transport",
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     }
   },

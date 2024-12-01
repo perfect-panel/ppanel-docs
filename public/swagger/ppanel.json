@@ -1960,7 +1960,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetApplicationResponse"
+                      "$ref": "#/definitions/ApplicationResponse"
                     }
                   }
                 }
@@ -2097,7 +2097,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetCurrencyConfigResponse"
+                      "$ref": "#/definitions/CurrencyConfig"
                     }
                   }
                 }
@@ -2133,11 +2133,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update Currency config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateCurrencyConfigRequest"
+              "$ref": "#/definitions/CurrencyConfig"
             }
           }
         ],
@@ -2162,7 +2161,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetEmailSmtpConfigResponse"
+                      "$ref": "#/definitions/EmailSmtpConfig"
                     }
                   }
                 }
@@ -2198,11 +2197,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update email smtp config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateEmailSmtpConfigRequest"
+              "$ref": "#/definitions/EmailSmtpConfig"
             }
           }
         ],
@@ -2227,7 +2225,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetInviteConfigResponse"
+                      "$ref": "#/definitions/InviteConfig"
                     }
                   }
                 }
@@ -2263,11 +2261,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update invite config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateInviteConfigRequest"
+              "$ref": "#/definitions/InviteConfig"
             }
           }
         ],
@@ -2292,7 +2289,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetNodeConfigResponse"
+                      "$ref": "#/definitions/NodeConfig"
                     }
                   }
                 }
@@ -2328,11 +2325,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update node config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateNodeConfigRequest"
+              "$ref": "#/definitions/NodeConfig"
             }
           }
         ],
@@ -2357,7 +2353,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetRegisterConfigResponse"
+                      "$ref": "#/definitions/RegisterConfig"
                     }
                   }
                 }
@@ -2393,11 +2389,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update register config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateRegisterConfigRequest"
+              "$ref": "#/definitions/RegisterConfig"
             }
           }
         ],
@@ -2422,7 +2417,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetSiteConfigResponse"
+                      "$ref": "#/definitions/SiteConfig"
                     }
                   }
                 }
@@ -2458,11 +2453,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update site config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSiteConfigRequest"
+              "$ref": "#/definitions/SiteConfig"
             }
           }
         ],
@@ -2487,7 +2481,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetSubscribeConfigResponse"
+                      "$ref": "#/definitions/SubscribeConfig"
                     }
                   }
                 }
@@ -2523,11 +2517,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update subscribe config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSubscribeConfigRequest"
+              "$ref": "#/definitions/SubscribeConfig"
             }
           }
         ],
@@ -2552,7 +2545,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetSubscribeTypeResponse"
+                      "$ref": "#/definitions/SubscribeType"
                     }
                   }
                 }
@@ -2581,7 +2574,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetTelegramConfigResponse"
+                      "$ref": "#/definitions/TelegramConfig"
                     }
                   }
                 }
@@ -2617,11 +2610,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update Telegram config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateTelegramConfigRequest"
+              "$ref": "#/definitions/TelegramConfig"
             }
           }
         ],
@@ -2684,7 +2676,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetTosConfigResponse"
+                      "$ref": "#/definitions/TosConfig"
                     }
                   }
                 }
@@ -2720,11 +2712,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update Team of Service config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateTosConfigRequest"
+              "$ref": "#/definitions/TosConfig"
             }
           }
         ],
@@ -2749,7 +2740,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetVerifyConfigResponse"
+                      "$ref": "#/definitions/VerifyConfig"
                     }
                   }
                 }
@@ -2785,11 +2776,10 @@
         "parameters": [
           {
             "name": "body",
-            "description": "Update verify config request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateVerifyConfigRequest"
+              "$ref": "#/definitions/VerifyConfig"
             }
           }
         ],
@@ -3784,7 +3774,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/DocumentDetail"
+                      "$ref": "#/definitions/Document"
                     }
                   }
                 }
@@ -3927,7 +3917,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/OrderDetails"
+                      "$ref": "#/definitions/Order"
                     }
                   }
                 }
@@ -4233,7 +4223,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/QueryApplicationConfigResponse"
+                      "$ref": "#/definitions/ApplicationResponse"
                     }
                   }
                 }
@@ -4392,7 +4382,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/UserTicket"
+                      "$ref": "#/definitions/Ticket"
                     }
                   }
                 }
@@ -4583,7 +4573,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/UserInfo"
+                      "$ref": "#/definitions/User"
                     }
                   }
                 }
@@ -4918,37 +4908,6 @@
         "updated_at"
       ]
     },
-    "AnnouncementDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "AnnouncementDetails",
-      "required": [
-        "id",
-        "title",
-        "content",
-        "created_at",
-        "updated_at"
-      ]
-    },
     "Application": {
       "type": "object",
       "properties": {
@@ -4982,37 +4941,47 @@
         "url"
       ]
     },
-    "ApplicationConfig": {
+    "ApplicationResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
         },
-        "name": {
-          "type": "string"
+        "mac": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
         },
-        "platform": {
-          "type": "string"
+        "linux": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
         },
-        "subscribe_type": {
-          "type": "string"
+        "android": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
         },
-        "icon": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
+        "ios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
         }
       },
-      "title": "ApplicationConfig",
+      "title": "ApplicationResponse",
       "required": [
-        "id",
-        "name",
-        "platform",
-        "subscribe_type",
-        "icon",
-        "url"
+        "windows",
+        "mac",
+        "linux",
+        "android",
+        "ios"
       ]
     },
     "BatchDeleteCouponRequest": {
@@ -5764,12 +5733,16 @@
         },
         "currency_symbol": {
           "type": "string"
+        },
+        "access_key": {
+          "type": "string"
         }
       },
       "title": "CurrencyConfig",
       "required": [
         "currency_unit",
-        "currency_symbol"
+        "currency_symbol",
+        "access_key"
       ]
     },
     "DeleteAnnouncementRequest": {
@@ -5919,73 +5892,6 @@
         "updated_at"
       ]
     },
-    "DocumentDetail": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "DocumentDetail",
-      "required": [
-        "id",
-        "title",
-        "content",
-        "tags",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "DocumentItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "DocumentItem",
-      "required": [
-        "id",
-        "title",
-        "tags",
-        "updated_at"
-      ]
-    },
     "EPayNotifyRequest": {
       "type": "object",
       "properties": {
@@ -6033,6 +5939,52 @@
         "param",
         "sign",
         "sign_type"
+      ]
+    },
+    "EmailSmtpConfig": {
+      "type": "object",
+      "properties": {
+        "email_smtp_host": {
+          "type": "string"
+        },
+        "email_smtp_port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email_smtp_user": {
+          "type": "string"
+        },
+        "email_smtp_pass": {
+          "type": "string"
+        },
+        "email_smtp_from": {
+          "type": "string"
+        },
+        "email_smtp_ssl": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "verify_email_template": {
+          "type": "string"
+        },
+        "maintenance_email_template": {
+          "type": "string"
+        },
+        "expiration_email_template": {
+          "type": "string"
+        }
+      },
+      "title": "EmailSmtpConfig",
+      "required": [
+        "email_smtp_host",
+        "email_smtp_port",
+        "email_smtp_user",
+        "email_smtp_pass",
+        "email_smtp_from",
+        "email_smtp_ssl",
+        "verify_email_template",
+        "maintenance_email_template",
+        "expiration_email_template"
       ]
     },
     "Follow": {
@@ -6144,56 +6096,13 @@
         "id"
       ]
     },
-    "GetApplicationResponse": {
-      "type": "object",
-      "properties": {
-        "windows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Application"
-          }
-        },
-        "mac": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Application"
-          }
-        },
-        "linux": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Application"
-          }
-        },
-        "android": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Application"
-          }
-        },
-        "ios": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Application"
-          }
-        }
-      },
-      "title": "GetApplicationResponse",
-      "required": [
-        "windows",
-        "mac",
-        "linux",
-        "android",
-        "ios"
-      ]
-    },
     "GetAvailablePaymentMethodsResponse": {
       "type": "object",
       "properties": {
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PaymentItem"
+            "$ref": "#/definitions/PaymentConfig"
           }
         }
       },
@@ -6245,26 +6154,6 @@
       "required": [
         "total",
         "list"
-      ]
-    },
-    "GetCurrencyConfigResponse": {
-      "type": "object",
-      "properties": {
-        "currency_unit": {
-          "type": "string"
-        },
-        "currency_symbol": {
-          "type": "string"
-        },
-        "access_key": {
-          "type": "string"
-        }
-      },
-      "title": "GetCurrencyConfigResponse",
-      "required": [
-        "currency_unit",
-        "currency_symbol",
-        "access_key"
       ]
     },
     "GetDetailRequest": {
@@ -6337,52 +6226,6 @@
         "list"
       ]
     },
-    "GetEmailSmtpConfigResponse": {
-      "type": "object",
-      "properties": {
-        "email_smtp_host": {
-          "type": "string"
-        },
-        "email_smtp_port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email_smtp_user": {
-          "type": "string"
-        },
-        "email_smtp_pass": {
-          "type": "string"
-        },
-        "email_smtp_from": {
-          "type": "string"
-        },
-        "email_smtp_ssl": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "verify_email_template": {
-          "type": "string"
-        },
-        "maintenance_email_template": {
-          "type": "string"
-        },
-        "expiration_email_template": {
-          "type": "string"
-        }
-      },
-      "title": "GetEmailSmtpConfigResponse",
-      "required": [
-        "email_smtp_host",
-        "email_smtp_port",
-        "email_smtp_user",
-        "email_smtp_pass",
-        "email_smtp_from",
-        "email_smtp_ssl",
-        "verify_email_template",
-        "maintenance_email_template",
-        "expiration_email_template"
-      ]
-    },
     "GetGlobalConfigResponse": {
       "type": "object",
       "properties": {
@@ -6413,51 +6256,6 @@
         "invite",
         "currency",
         "subscribe"
-      ]
-    },
-    "GetInviteConfigResponse": {
-      "type": "object",
-      "properties": {
-        "forced_invite": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "referral_percentage": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "only_first_purchase": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "GetInviteConfigResponse",
-      "required": [
-        "forced_invite",
-        "referral_percentage",
-        "only_first_purchase"
-      ]
-    },
-    "GetNodeConfigResponse": {
-      "type": "object",
-      "properties": {
-        "node_secret": {
-          "type": "string"
-        },
-        "node_pull_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "node_push_interval": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "GetNodeConfigResponse",
-      "required": [
-        "node_secret",
-        "node_pull_interval",
-        "node_push_interval"
       ]
     },
     "GetNodeDetailRequest": {
@@ -6591,53 +6389,6 @@
         "list"
       ]
     },
-    "GetRegisterConfigResponse": {
-      "type": "object",
-      "properties": {
-        "stop_register": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trial": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_domain_suffix_list": {
-          "type": "string"
-        },
-        "enable_ip_register_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "ip_register_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_register_limit_duration": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "GetRegisterConfigResponse",
-      "required": [
-        "stop_register",
-        "enable_trial",
-        "enable_email_verify",
-        "enable_email_domain_suffix",
-        "email_domain_suffix_list",
-        "enable_ip_register_limit",
-        "ip_register_limit",
-        "ip_register_limit_duration"
-      ]
-    },
     "GetServerConfigRequest": {
       "type": "object",
       "properties": {
@@ -6713,30 +6464,6 @@
         "users"
       ]
     },
-    "GetSiteConfigResponse": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "site_name": {
-          "type": "string"
-        },
-        "site_desc": {
-          "type": "string"
-        },
-        "site_logo": {
-          "type": "string"
-        }
-      },
-      "title": "GetSiteConfigResponse",
-      "required": [
-        "host",
-        "site_name",
-        "site_desc",
-        "site_logo"
-      ]
-    },
     "GetStatResponse": {
       "type": "object",
       "properties": {
@@ -6758,32 +6485,6 @@
         "user",
         "node",
         "country"
-      ]
-    },
-    "GetSubscribeConfigResponse": {
-      "type": "object",
-      "properties": {
-        "single_model": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "subscribe_path": {
-          "type": "string"
-        },
-        "subscribe_domain": {
-          "type": "string"
-        },
-        "pan_domain": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "GetSubscribeConfigResponse",
-      "required": [
-        "single_model",
-        "subscribe_path",
-        "subscribe_domain",
-        "pan_domain"
       ]
     },
     "GetSubscribeDetailsRequest": {
@@ -6864,42 +6565,6 @@
         "total"
       ]
     },
-    "GetSubscribeTypeResponse": {
-      "type": "object",
-      "properties": {
-        "subscribe_types": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "GetSubscribeTypeResponse",
-      "required": [
-        "subscribe_types"
-      ]
-    },
-    "GetTelegramConfigResponse": {
-      "type": "object",
-      "properties": {
-        "telegram_bot_token": {
-          "type": "string"
-        },
-        "telegram_group_url": {
-          "type": "string"
-        },
-        "telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "GetTelegramConfigResponse",
-      "required": [
-        "telegram_bot_token",
-        "telegram_group_url",
-        "telegram_notify"
-      ]
-    },
     "GetTicketListRequest": {
       "type": "object",
       "properties": {
@@ -6960,18 +6625,6 @@
       "title": "GetTicketRequest",
       "required": [
         "id"
-      ]
-    },
-    "GetTosConfigResponse": {
-      "type": "object",
-      "properties": {
-        "tos_content": {
-          "type": "string"
-        }
-      },
-      "title": "GetTosConfigResponse",
-      "required": [
-        "tos_content"
       ]
     },
     "GetTosResponse": {
@@ -7075,7 +6728,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserTicket"
+            "$ref": "#/definitions/Ticket"
           }
         }
       },
@@ -7085,48 +6738,27 @@
         "list"
       ]
     },
-    "GetVerifyConfigResponse": {
-      "type": "object",
-      "properties": {
-        "turnstile_site_key": {
-          "type": "string"
-        },
-        "turnstile_secret": {
-          "type": "string"
-        },
-        "enable_login_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_register_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_reset_password_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "GetVerifyConfigResponse",
-      "required": [
-        "turnstile_site_key",
-        "turnstile_secret",
-        "enable_login_verify",
-        "enable_register_verify",
-        "enable_reset_password_verify"
-      ]
-    },
     "InviteConfig": {
       "type": "object",
       "properties": {
         "forced_invite": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "InviteConfig",
       "required": [
-        "forced_invite"
+        "forced_invite",
+        "referral_percentage",
+        "only_first_purchase"
       ]
     },
     "LoginResponse": {
@@ -7139,6 +6771,28 @@
       "title": "LoginResponse",
       "required": [
         "token"
+      ]
+    },
+    "NodeConfig": {
+      "type": "object",
+      "properties": {
+        "node_secret": {
+          "type": "string"
+        },
+        "node_pull_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "node_push_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeConfig",
+      "required": [
+        "node_secret",
+        "node_pull_interval",
+        "node_push_interval"
       ]
     },
     "Order": {
@@ -7230,89 +6884,6 @@
         "updated_at"
       ]
     },
-    "OrderDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "orderNo": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        },
-        "coupon_discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "method": {
-          "type": "string"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trade_no": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe": {
-          "$ref": "#/definitions/SubscribeInfo"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "OrderDetails",
-      "required": [
-        "id",
-        "orderNo",
-        "type",
-        "quantity",
-        "price",
-        "amount",
-        "discount",
-        "coupon",
-        "coupon_discount",
-        "method",
-        "fee_amount",
-        "trade_no",
-        "status",
-        "subscribe_id",
-        "subscribe",
-        "created_at"
-      ]
-    },
     "PaymentConfig": {
       "type": "object",
       "properties": {
@@ -7359,55 +6930,6 @@
         "mark",
         "config",
         "fee_mode",
-        "enable"
-      ]
-    },
-    "PaymentItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "PaymentItem",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "icon",
-        "domain",
-        "fee_mode",
-        "fee_percent",
-        "fee_amount",
         "enable"
       ]
     },
@@ -7543,7 +7065,7 @@
         "announcements": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnnouncementDetails"
+            "$ref": "#/definitions/Announcement"
           }
         }
       },
@@ -7551,49 +7073,6 @@
       "required": [
         "total",
         "announcements"
-      ]
-    },
-    "QueryApplicationConfigResponse": {
-      "type": "object",
-      "properties": {
-        "windows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "mac": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "linux": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "android": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        },
-        "ios": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationConfig"
-          }
-        }
-      },
-      "title": "QueryApplicationConfigResponse",
-      "required": [
-        "windows",
-        "mac",
-        "linux",
-        "android",
-        "ios"
       ]
     },
     "QueryDocumentDetailRequest": {
@@ -7619,7 +7098,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentItem"
+            "$ref": "#/definitions/Document"
           }
         }
       },
@@ -7669,7 +7148,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrderDetails"
+            "$ref": "#/definitions/Order"
           }
         }
       },
@@ -7685,7 +7164,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserSubscribeGroupDetails"
+            "$ref": "#/definitions/SubscribeGroup"
           }
         },
         "total": {
@@ -7705,7 +7184,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscribeDetails"
+            "$ref": "#/definitions/Subscribe"
           }
         },
         "total": {
@@ -7820,6 +7299,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "enable_trial": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "enable_email_verify": {
           "type": "boolean",
           "format": "boolean"
@@ -7830,14 +7313,30 @@
         },
         "email_domain_suffix_list": {
           "type": "string"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "RegisterConfig",
       "required": [
         "stop_register",
+        "enable_trial",
         "enable_email_verify",
         "enable_email_domain_suffix",
-        "email_domain_suffix_list"
+        "email_domain_suffix_list",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
       ]
     },
     "RenewalOrderRequest": {
@@ -8416,84 +7915,6 @@
         "pan_domain"
       ]
     },
-    "SubscribeDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "unit_price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserSubscribeDiscount"
-          }
-        },
-        "replacement": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "inventory": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "SubscribeDetails",
-      "required": [
-        "id",
-        "name",
-        "description",
-        "unit_price",
-        "discount",
-        "replacement",
-        "inventory",
-        "traffic",
-        "group_id",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "show",
-        "sell"
-      ]
-    },
     "SubscribeDiscount": {
       "type": "object",
       "properties": {
@@ -8507,24 +7928,6 @@
         }
       },
       "title": "SubscribeDiscount",
-      "required": [
-        "months",
-        "discount"
-      ]
-    },
-    "SubscribeDiscountInfo": {
-      "type": "object",
-      "properties": {
-        "months": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SubscribeDiscountInfo",
       "required": [
         "months",
         "discount"
@@ -8561,154 +7964,40 @@
         "updated_at"
       ]
     },
-    "SubscribeInfo": {
+    "SubscribeType": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "discount": {
-          "type": "string"
-        },
-        "unit_price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "replacement": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "inventory": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
-          "type": "boolean",
-          "format": "boolean"
+        "subscribe_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
-      "title": "SubscribeInfo",
+      "title": "SubscribeType",
       "required": [
-        "id",
-        "name",
-        "description",
-        "discount",
-        "unit_price",
-        "replacement",
-        "inventory",
-        "traffic",
-        "group_id",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "show",
-        "sell"
+        "subscribe_types"
       ]
     },
-    "SubscribeItem": {
+    "TelegramConfig": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
+        "telegram_bot_token": {
           "type": "string"
         },
-        "description": {
+        "telegram_group_url": {
           "type": "string"
         },
-        "discount": {
-          "type": "string"
-        },
-        "unit_price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "replacement": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "inventory": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
+        "telegram_notify": {
           "type": "boolean",
           "format": "boolean"
         }
       },
-      "title": "SubscribeItem",
+      "title": "TelegramConfig",
       "required": [
-        "id",
-        "name",
-        "description",
-        "discount",
-        "unit_price",
-        "replacement",
-        "inventory",
-        "traffic",
-        "group_id",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "show",
-        "sell"
+        "telegram_bot_token",
+        "telegram_group_url",
+        "telegram_notify"
       ]
     },
     "TestEmailSmtpRequest": {
@@ -8768,6 +8057,18 @@
         "status",
         "created_at",
         "updated_at"
+      ]
+    },
+    "TosConfig": {
+      "type": "object",
+      "properties": {
+        "tos_content": {
+          "type": "string"
+        }
+      },
+      "title": "TosConfig",
+      "required": [
+        "tos_content"
       ]
     },
     "Trojan": {
@@ -8988,26 +8289,6 @@
         "expire_time"
       ]
     },
-    "UpdateCurrencyConfigRequest": {
-      "type": "object",
-      "properties": {
-        "currency_unit": {
-          "type": "string"
-        },
-        "currency_symbol": {
-          "type": "string"
-        },
-        "access_key": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateCurrencyConfigRequest",
-      "required": [
-        "currency_unit",
-        "currency_symbol",
-        "access_key"
-      ]
-    },
     "UpdateDocumentRequest": {
       "type": "object",
       "properties": {
@@ -9038,89 +8319,6 @@
         "title",
         "content",
         "show"
-      ]
-    },
-    "UpdateEmailSmtpConfigRequest": {
-      "type": "object",
-      "properties": {
-        "email_smtp_host": {
-          "type": "string"
-        },
-        "email_smtp_port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email_smtp_user": {
-          "type": "string"
-        },
-        "email_smtp_pass": {
-          "type": "string"
-        },
-        "email_smtp_from": {
-          "type": "string"
-        },
-        "email_smtp_ssl": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_template": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateEmailSmtpConfigRequest",
-      "required": [
-        "email_smtp_host",
-        "email_smtp_port",
-        "email_smtp_user",
-        "email_smtp_pass",
-        "email_smtp_from",
-        "email_smtp_ssl",
-        "email_template"
-      ]
-    },
-    "UpdateInviteConfigRequest": {
-      "type": "object",
-      "properties": {
-        "forced_invite": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "referral_percentage": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "only_first_purchase": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateInviteConfigRequest",
-      "required": [
-        "forced_invite",
-        "referral_percentage",
-        "only_first_purchase"
-      ]
-    },
-    "UpdateNodeConfigRequest": {
-      "type": "object",
-      "properties": {
-        "node_secret": {
-          "type": "string"
-        },
-        "node_pull_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "node_push_interval": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UpdateNodeConfigRequest",
-      "required": [
-        "node_secret",
-        "node_pull_interval",
-        "node_push_interval"
       ]
     },
     "UpdateNodeGroupRequest": {
@@ -9223,103 +8421,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "UpdateRegisterConfigRequest": {
-      "type": "object",
-      "properties": {
-        "stop_register": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trial": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_domain_suffix_list": {
-          "type": "string"
-        },
-        "enable_ip_register_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "ip_register_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_register_limit_duration": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UpdateRegisterConfigRequest",
-      "required": [
-        "stop_register",
-        "enable_trial",
-        "enable_email_verify",
-        "enable_email_domain_suffix",
-        "email_domain_suffix_list",
-        "enable_ip_register_limit",
-        "ip_register_limit",
-        "ip_register_limit_duration"
-      ]
-    },
-    "UpdateSiteConfigRequest": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "site_name": {
-          "type": "string"
-        },
-        "site_desc": {
-          "type": "string"
-        },
-        "site_logo": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateSiteConfigRequest",
-      "required": [
-        "host",
-        "site_name",
-        "site_desc",
-        "site_logo"
-      ]
-    },
-    "UpdateSubscribeConfigRequest": {
-      "type": "object",
-      "properties": {
-        "single_model": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "subscribe_path": {
-          "type": "string"
-        },
-        "subscribe_domain": {
-          "type": "string"
-        },
-        "pan_domain": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateSubscribeConfigRequest",
-      "required": [
-        "single_model",
-        "subscribe_path",
-        "subscribe_domain",
-        "pan_domain"
       ]
     },
     "UpdateSubscribeGroupRequest": {
@@ -9437,27 +8538,6 @@
         "sell"
       ]
     },
-    "UpdateTelegramConfigRequest": {
-      "type": "object",
-      "properties": {
-        "telegram_bot_token": {
-          "type": "string"
-        },
-        "telegram_group_url": {
-          "type": "string"
-        },
-        "telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateTelegramConfigRequest",
-      "required": [
-        "telegram_bot_token",
-        "telegram_group_url",
-        "telegram_notify"
-      ]
-    },
     "UpdateTicketStatusRequest": {
       "type": "object",
       "properties": {
@@ -9474,18 +8554,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "UpdateTosConfigRequest": {
-      "type": "object",
-      "properties": {
-        "tos_content": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateTosConfigRequest",
-      "required": [
-        "tos_content"
       ]
     },
     "UpdateUserNotifyRequest": {
@@ -9656,37 +8724,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "UpdateVerifyConfigRequest": {
-      "type": "object",
-      "properties": {
-        "turnstile_site_key": {
-          "type": "string"
-        },
-        "turnstile_secret": {
-          "type": "string"
-        },
-        "enable_login_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_register_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_reset_password_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateVerifyConfigRequest",
-      "required": [
-        "turnstile_site_key",
-        "turnstile_secret",
-        "enable_login_verify",
-        "enable_register_verify",
-        "enable_reset_password_verify"
       ]
     },
     "User": {
@@ -9860,132 +8897,6 @@
         "created_at"
       ]
     },
-    "UserFollow": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ticket_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "from": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "content": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserFollow",
-      "required": [
-        "id",
-        "ticket_id",
-        "from",
-        "type",
-        "content",
-        "created_at"
-      ]
-    },
-    "UserInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email": {
-          "type": "string"
-        },
-        "avatar": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "telegram": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "refer_code": {
-          "type": "string"
-        },
-        "referer_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "valid_email": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_balance_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_login_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_subscribe_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trade_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserInfo",
-      "required": [
-        "id",
-        "email",
-        "avatar",
-        "balance",
-        "telegram",
-        "refer_code",
-        "referer_id",
-        "enable",
-        "valid_email",
-        "enable_email_notify",
-        "enable_telegram_notify",
-        "enable_balance_notify",
-        "enable_login_notify",
-        "enable_subscribe_notify",
-        "enable_trade_notify",
-        "created_at",
-        "updated_at"
-      ]
-    },
     "UserLoginRequest": {
       "type": "object",
       "properties": {
@@ -10050,7 +8961,7 @@
           "format": "int64"
         },
         "subscribe": {
-          "$ref": "#/definitions/SubscribeItem"
+          "$ref": "#/definitions/Subscribe"
         },
         "start_time": {
           "type": "integer",
@@ -10106,92 +9017,6 @@
         "updated_at"
       ]
     },
-    "UserSubscribeDiscount": {
-      "type": "object",
-      "properties": {
-        "months": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserSubscribeDiscount",
-      "required": [
-        "months",
-        "discount"
-      ]
-    },
-    "UserSubscribeGroupDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "title": "UserSubscribeGroupDetails",
-      "required": [
-        "id",
-        "name",
-        "description"
-      ]
-    },
-    "UserTicket": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "follow": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserFollow"
-          }
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserTicket",
-      "required": [
-        "id",
-        "title",
-        "description",
-        "user_id",
-        "status",
-        "created_at",
-        "updated_at"
-      ]
-    },
     "UserTraffic": {
       "type": "object",
       "properties": {
@@ -10237,6 +9062,37 @@
       "title": "VeifyConfig",
       "required": [
         "turnstile_site_key",
+        "enable_login_verify",
+        "enable_register_verify",
+        "enable_reset_password_verify"
+      ]
+    },
+    "VerifyConfig": {
+      "type": "object",
+      "properties": {
+        "turnstile_site_key": {
+          "type": "string"
+        },
+        "turnstile_secret": {
+          "type": "string"
+        },
+        "enable_login_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_register_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_reset_password_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "VerifyConfig",
+      "required": [
+        "turnstile_site_key",
+        "turnstile_secret",
         "enable_login_verify",
         "enable_register_verify",
         "enable_reset_password_verify"
