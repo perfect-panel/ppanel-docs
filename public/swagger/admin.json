@@ -4890,6 +4890,99 @@
         "updated_at"
       ]
     },
+    "OrderDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/Subscribe"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "OrderDetail",
+      "required": [
+        "id",
+        "user_id",
+        "order_no",
+        "type",
+        "quantity",
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "method",
+        "fee_amount",
+        "trade_no",
+        "status",
+        "subscribe_id",
+        "subscribe",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "PaymentConfig": {
       "type": "object",
       "properties": {
