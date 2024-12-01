@@ -288,6 +288,35 @@
         ]
       }
     },
+    "/v1/common/site/subscribe": {
+      "get": {
+        "summary": "Get Subscription",
+        "operationId": "GetSubscription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscriptionResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/site/tos": {
       "get": {
         "summary": "Get Tos Content",
@@ -733,6 +762,21 @@
         "user",
         "node",
         "country"
+      ]
+    },
+    "GetSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscribe"
+          }
+        }
+      },
+      "title": "GetSubscriptionResponse",
+      "required": [
+        "list"
       ]
     },
     "GetTosResponse": {
