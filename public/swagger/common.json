@@ -1183,6 +1183,38 @@
         }
       }
     },
+    "SecurityConfig": {
+      "type": "object",
+      "properties": {
+        "server_address": {
+          "type": "string"
+        },
+        "server_name": {
+          "type": "string"
+        },
+        "server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "short_id": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SecurityConfig"
+    },
     "SendCodeRequest": {
       "type": "object",
       "properties": {
@@ -2061,7 +2093,7 @@
           "type": "string"
         },
         "security_config": {
-          "type": "object"
+          "$ref": "#/definitions/SecurityConfig"
         },
         "xtls": {
           "type": "string"
