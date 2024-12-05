@@ -2699,6 +2699,19 @@
         "subscribe_types"
       ]
     },
+    "TLSConfig": {
+      "type": "object",
+      "properties": {
+        "server_name": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "TLSConfig"
+    },
     "TelegramConfig": {
       "type": "object",
       "properties": {
@@ -3252,7 +3265,7 @@
           "format": "boolean"
         },
         "tls_config": {
-          "type": "object"
+          "$ref": "#/definitions/TLSConfig"
         },
         "network": {
           "type": "string"
