@@ -6507,13 +6507,20 @@
         "country": {
           "type": "integer",
           "format": "int64"
+        },
+        "protocol": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "GetStatResponse",
       "required": [
         "user",
         "node",
-        "country"
+        "country",
+        "protocol"
       ]
     },
     "GetSubscribeDetailsRequest": {
