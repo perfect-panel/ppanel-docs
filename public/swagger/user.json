@@ -2312,6 +2312,9 @@
         "fingerprint": {
           "type": "string"
         },
+        "proxy_protocol": {
+          "type": "string"
+        },
         "private_key": {
           "type": "string"
         },
