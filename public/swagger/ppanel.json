@@ -5473,6 +5473,12 @@
         },
         "vless": {
           "$ref": "#/definitions/Vless"
+        },
+        "hysteria": {
+          "$ref": "#/definitions/Hysteria2"
+        },
+        "tuic": {
+          "$ref": "#/definitions/Tuic"
         }
       },
       "title": "CreateNodeRequest",
@@ -6801,6 +6807,36 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "Hysteria2": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hop_ports": {
+          "type": "string"
+        },
+        "hop_interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "obfs_password": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Hysteria2",
+      "required": [
+        "port",
+        "hop_ports",
+        "hop_interval",
+        "obfs_password",
+        "security_config"
       ]
     },
     "InviteConfig": {
@@ -8341,6 +8377,23 @@
         "transport"
       ]
     },
+    "Tuic": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Tuic",
+      "required": [
+        "port",
+        "security_config"
+      ]
+    },
     "UpdateAnnouncementEnableRequest": {
       "type": "object",
       "properties": {
@@ -8584,6 +8637,12 @@
         },
         "vless": {
           "$ref": "#/definitions/Vless"
+        },
+        "hysteria": {
+          "$ref": "#/definitions/Hysteria2"
+        },
+        "tuic": {
+          "$ref": "#/definitions/Tuic"
         }
       },
       "title": "UpdateNodeRequest",
