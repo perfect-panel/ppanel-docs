@@ -1193,37 +1193,35 @@
     "SecurityConfig": {
       "type": "object",
       "properties": {
-        "server_address": {
-          "type": "string"
-        },
-        "server_name": {
-          "type": "string"
-        },
-        "server_port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "proxy_protocol": {
-          "type": "string"
-        },
-        "private_key": {
-          "type": "string"
-        },
-        "public_key": {
-          "type": "string"
-        },
-        "short_id": {
+        "sni": {
           "type": "string"
         },
         "allow_insecure": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "reality_private_key": {
+          "type": "string"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
         }
       },
-      "title": "SecurityConfig"
+      "title": "SecurityConfig",
+      "required": [
+        "sni",
+        "allow_insecure",
+        "fingerprint",
+        "reality_private_key",
+        "reality_public_key",
+        "reality_short_id"
+      ]
     },
     "SendCodeRequest": {
       "type": "object",
@@ -1268,6 +1266,17 @@
         "server_addr": {
           "type": "string"
         },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        },
         "speed_limit": {
           "type": "integer",
           "format": "int32"
@@ -1276,28 +1285,19 @@
           "type": "number",
           "format": "float"
         },
-        "groupId": {
+        "group_id": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
         },
+        "config": {
+          "type": "object"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "vmess": {
-          "$ref": "#/definitions/Vmess"
-        },
-        "vless": {
-          "$ref": "#/definitions/Vless"
-        },
-        "trojan": {
-          "$ref": "#/definitions/Trojan"
-        },
-        "shadowsocks": {
-          "$ref": "#/definitions/Shadowsocks"
         },
         "created_at": {
           "type": "integer",
@@ -1316,10 +1316,14 @@
         "id",
         "name",
         "server_addr",
+        "enable_relay",
+        "relay_host",
+        "relay_port",
         "speed_limit",
         "traffic_ratio",
-        "groupId",
+        "group_id",
         "protocol",
+        "config",
         "enable",
         "created_at",
         "updated_at",
@@ -1367,25 +1371,15 @@
           "type": "integer",
           "format": "int32"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
+        "server_key": {
           "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
         }
       },
       "title": "Shadowsocks",
       "required": [
         "method",
         "port",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "server_key"
       ]
     },
     "SiteConfig": {
@@ -1606,19 +1600,6 @@
         "subscribe_types"
       ]
     },
-    "TLSConfig": {
-      "type": "object",
-      "properties": {
-        "server_name": {
-          "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "TLSConfig"
-    },
     "TelegramConfig": {
       "type": "object",
       "properties": {
@@ -1699,52 +1680,53 @@
         "tos_content"
       ]
     },
-    "Trojan": {
+    "TransportConfig": {
       "type": "object",
       "properties": {
-        "network": {
+        "path": {
           "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
         },
         "host": {
           "type": "string"
         },
-        "sni": {
+        "server_name": {
           "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "transport": {
-          "type": "object"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
+        }
+      },
+      "title": "TransportConfig",
+      "required": [
+        "path",
+        "host",
+        "server_name"
+      ]
+    },
+    "Trojan": {
+      "type": "object",
+      "properties": {
+        "port": {
           "type": "integer",
           "format": "int32"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
         }
       },
       "title": "Trojan",
       "required": [
-        "network",
         "port",
-        "host",
-        "sni",
-        "allow_insecure",
         "transport",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "transport_config",
+        "security",
+        "security_config"
       ]
     },
     "User": {
@@ -2099,100 +2081,59 @@
     "Vless": {
       "type": "object",
       "properties": {
-        "host": {
-          "type": "string"
-        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
-        "network": {
+        "transport": {
           "type": "string"
         },
-        "transport": {
-          "type": "object"
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
         },
         "security": {
           "type": "string"
         },
         "security_config": {
           "$ref": "#/definitions/SecurityConfig"
-        },
-        "xtls": {
-          "type": "string"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
         }
       },
       "title": "Vless",
       "required": [
-        "host",
         "port",
-        "network",
         "transport",
+        "transport_config",
         "security",
-        "security_config",
-        "xtls",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "security_config"
       ]
     },
     "Vmess": {
       "type": "object",
       "properties": {
-        "host": {
-          "type": "string"
-        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
-        "enable_tls": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "tls_config": {
-          "$ref": "#/definitions/TLSConfig"
-        },
-        "network": {
-          "type": "string"
-        },
         "transport": {
-          "type": "object"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
           "type": "string"
         },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
         }
       },
       "title": "Vmess",
       "required": [
-        "host",
         "port",
-        "enable_tls",
-        "tls_config",
-        "network",
         "transport",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "transport_config",
+        "security",
+        "security_config"
       ]
     }
   },
