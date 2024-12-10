@@ -7796,12 +7796,16 @@
         "pull_interval": {
           "type": "integer",
           "format": "int64"
+        },
+        "config": {
+          "type": "object"
         }
       },
       "title": "ServerBasic",
       "required": [
         "push_interval",
-        "pull_interval"
+        "pull_interval",
+        "config"
       ]
     },
     "ServerCommon": {
