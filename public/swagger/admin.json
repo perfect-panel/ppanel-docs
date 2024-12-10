@@ -3753,27 +3753,12 @@
         "protocol": {
           "type": "string"
         },
+        "config": {
+          "type": "object"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "shadowsocks": {
-          "$ref": "#/definitions/Shadowsocks"
-        },
-        "vmess": {
-          "$ref": "#/definitions/Vmess"
-        },
-        "trojan": {
-          "$ref": "#/definitions/Trojan"
-        },
-        "vless": {
-          "$ref": "#/definitions/Vless"
-        },
-        "hysteria": {
-          "$ref": "#/definitions/Hysteria2"
-        },
-        "tuic": {
-          "$ref": "#/definitions/Tuic"
         }
       },
       "title": "CreateNodeRequest",
@@ -3787,6 +3772,7 @@
         "traffic_ratio",
         "group_id",
         "protocol",
+        "config",
         "enable"
       ]
     },
@@ -5930,27 +5916,12 @@
         "protocol": {
           "type": "string"
         },
+        "config": {
+          "type": "object"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "shadowsocks": {
-          "$ref": "#/definitions/Shadowsocks"
-        },
-        "vmess": {
-          "$ref": "#/definitions/Vmess"
-        },
-        "trojan": {
-          "$ref": "#/definitions/Trojan"
-        },
-        "vless": {
-          "$ref": "#/definitions/Vless"
-        },
-        "hysteria": {
-          "$ref": "#/definitions/Hysteria2"
-        },
-        "tuic": {
-          "$ref": "#/definitions/Tuic"
         }
       },
       "title": "UpdateNodeRequest",
@@ -5965,6 +5936,7 @@
         "traffic_ratio",
         "group_id",
         "protocol",
+        "config",
         "enable"
       ]
     },
