@@ -6463,15 +6463,23 @@
         "protocol": {
           "type": "string"
         },
-        "config": {
-          "type": "object"
+        "vmess": {
+          "$ref": "#/definitions/VmessProtocol"
+        },
+        "vless": {
+          "$ref": "#/definitions/VlessProtocol"
+        },
+        "trojan": {
+          "$ref": "#/definitions/TrojanProtocol"
+        },
+        "shadowsocks": {
+          "$ref": "#/definitions/ShadowsocksProtocol"
         }
       },
       "title": "GetServerConfigResponse",
       "required": [
         "basic",
-        "protocol",
-        "config"
+        "protocol"
       ]
     },
     "GetServerUserListRequest": {
@@ -7939,6 +7947,23 @@
         "server_key"
       ]
     },
+    "ShadowsocksProtocol": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "method": {
+          "type": "string"
+        }
+      },
+      "title": "ShadowsocksProtocol",
+      "required": [
+        "port",
+        "method"
+      ]
+    },
     "SiteConfig": {
       "type": "object",
       "properties": {
@@ -8316,6 +8341,40 @@
         "transport_config",
         "security",
         "security_config"
+      ]
+    },
+    "TrojanProtocol": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enable_tls": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "tls_config": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        }
+      },
+      "title": "TrojanProtocol",
+      "required": [
+        "host",
+        "port",
+        "enable_tls",
+        "tls_config",
+        "network",
+        "transport"
       ]
     },
     "Tuic": {
@@ -9329,6 +9388,43 @@
         "security_config"
       ]
     },
+    "VlessProtocol": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "network": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "type": "string"
+        },
+        "xtls": {
+          "type": "string"
+        }
+      },
+      "title": "VlessProtocol",
+      "required": [
+        "host",
+        "port",
+        "network",
+        "transport",
+        "security",
+        "security_config",
+        "xtls"
+      ]
+    },
     "Vmess": {
       "type": "object",
       "properties": {
@@ -9356,6 +9452,40 @@
         "transport_config",
         "security",
         "security_config"
+      ]
+    },
+    "VmessProtocol": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enable_tls": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "tls_config": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        }
+      },
+      "title": "VmessProtocol",
+      "required": [
+        "host",
+        "port",
+        "enable_tls",
+        "tls_config",
+        "network",
+        "transport"
       ]
     }
   },
