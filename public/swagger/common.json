@@ -2132,6 +2132,9 @@
           "type": "integer",
           "format": "int32"
         },
+        "flow": {
+          "type": "string"
+        },
         "transport": {
           "type": "string"
         },
@@ -2148,6 +2151,7 @@
       "title": "Vless",
       "required": [
         "port",
+        "flow",
         "transport",
         "transport_config",
         "security",
