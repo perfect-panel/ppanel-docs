@@ -6449,23 +6449,15 @@
         "protocol": {
           "type": "string"
         },
-        "vmess": {
-          "$ref": "#/definitions/VmessProtocol"
-        },
-        "vless": {
-          "$ref": "#/definitions/VlessProtocol"
-        },
-        "trojan": {
-          "$ref": "#/definitions/TrojanProtocol"
-        },
-        "shadowsocks": {
-          "$ref": "#/definitions/ShadowsocksProtocol"
+        "config": {
+          "type": "object"
         }
       },
       "title": "GetServerConfigResponse",
       "required": [
         "basic",
-        "protocol"
+        "protocol",
+        "config"
       ]
     },
     "GetServerUserListRequest": {
@@ -7782,16 +7774,12 @@
         "pull_interval": {
           "type": "integer",
           "format": "int64"
-        },
-        "config": {
-          "type": "object"
         }
       },
       "title": "ServerBasic",
       "required": [
         "push_interval",
-        "pull_interval",
-        "config"
+        "pull_interval"
       ]
     },
     "ServerCommon": {
