@@ -6450,7 +6450,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "mark": {
+        "token": {
           "type": "string"
         },
         "status": {
@@ -6478,7 +6478,7 @@
         "traffic",
         "download",
         "upload",
-        "mark",
+        "token",
         "status",
         "created_at",
         "updated_at"

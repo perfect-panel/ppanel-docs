@@ -2275,7 +2275,7 @@
         "coupon": {
           "type": "string"
         },
-        "subscribe_mark": {
+        "subscribe_token": {
           "type": "string"
         }
       },
@@ -2284,7 +2284,7 @@
         "subscribe_id",
         "quantity",
         "payment",
-        "subscribe_mark"
+        "subscribe_token"
       ]
     },
     "RenewalOrderResponse": {
@@ -2306,7 +2306,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscribe_mark": {
+        "subscribe_token": {
           "type": "string"
         },
         "payment": {
@@ -2316,7 +2316,7 @@
       "title": "ResetTrafficOrderRequest",
       "required": [
         "subscribe_id",
-        "subscribe_mark",
+        "subscribe_token",
         "payment"
       ]
     },
@@ -3217,7 +3217,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "mark": {
+        "token": {
           "type": "string"
         },
         "status": {
@@ -3245,7 +3245,7 @@
         "traffic",
         "download",
         "upload",
-        "mark",
+        "token",
         "status",
         "created_at",
         "updated_at"
