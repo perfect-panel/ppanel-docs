@@ -1598,6 +1598,47 @@
         "node_push_interval"
       ]
     },
+    "NodeStatus": {
+      "type": "object",
+      "properties": {
+        "online_users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineUser"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ServerStatus"
+        },
+        "last_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeStatus",
+      "required": [
+        "online_users",
+        "status",
+        "last_at"
+      ]
+    },
+    "OnlineUser": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip": {
+          "type": "string"
+        }
+      },
+      "title": "OnlineUser",
+      "required": [
+        "uid",
+        "ip"
+      ]
+    },
     "Order": {
       "type": "object",
       "properties": {
@@ -1913,24 +1954,6 @@
       "title": "PurchaseOrderResponse",
       "required": [
         "order_no"
-      ]
-    },
-    "Push": {
-      "type": "object",
-      "properties": {
-        "push_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "title": "Push",
-      "required": [
-        "push_at",
-        "count"
       ]
     },
     "QueryAnnouncementRequest": {
@@ -2413,8 +2436,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "last": {
-          "$ref": "#/definitions/Push"
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
         }
       },
       "title": "Server",
@@ -2433,7 +2456,7 @@
         "enable",
         "created_at",
         "updated_at",
-        "last"
+        "status"
       ]
     },
     "ServerGroup": {
@@ -2464,6 +2487,34 @@
         "name",
         "description",
         "created_at",
+        "updated_at"
+      ]
+    },
+    "ServerStatus": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "double"
+        },
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerStatus",
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
         "updated_at"
       ]
     },
@@ -2815,7 +2866,7 @@
         "host": {
           "type": "string"
         },
-        "server_name": {
+        "service_name": {
           "type": "string"
         }
       },
@@ -2823,7 +2874,7 @@
       "required": [
         "path",
         "host",
-        "server_name"
+        "service_name"
       ]
     },
     "Trojan": {
