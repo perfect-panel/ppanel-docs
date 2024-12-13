@@ -4779,6 +4779,27 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/server"
         ]
@@ -4807,6 +4828,25 @@
           }
         },
         "parameters": [
+          {
+            "name": "protocol",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -4845,6 +4885,25 @@
         },
         "parameters": [
           {
+            "name": "protocol",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -4881,6 +4940,25 @@
           }
         },
         "parameters": [
+          {
+            "name": "protocol",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -4919,6 +4997,27 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/server"
         ]
