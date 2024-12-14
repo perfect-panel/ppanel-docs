@@ -1,93 +1,87 @@
 # Deployment Guide
 
-## Install XrayR First
+## Installing the Node Endpoint
 
-### Install Node Side
-
+### One-Click Installation
 ```shell
-cd /usr/local/XrayR/
-rm XrayR
-rm config.yaml
-url="wget https://github.com/perfect-panel/ppanel-relsease/releases/download/0.1.0_alpha/XrayR_linux_amd64.zip"
-wget -q -N --no-check-certificate -O /usr/local/XrayR/XrayR-linux.zip
-unzip XrayR-linux.zip
-rm XrayR-linux.zip -f
-chmod +x XrayR
+bash <(curl -Ls https://raw.githubusercontent.com/perfect-panel/XrayR-release/master/install.sh)
 ```
 
-### Others Same as XrayR
+### Docker Installation
+```shell
+curl -fsSL https://get.docker.com | bash -s docker
 
-Configuration description:
+docker pull ghcr.io/perfect-panel/xrayr:latest && docker run --restart=always --name xrayr -d -v ${PATH_TO_CONFIG}/config.yml:/etc/XrayR/config.yml --network=host ghcr.io/perfect-panel/xrayr:latest
+```
+
+### Docker Compose Installation
+```shell
+# Install Docker and Docker Compose
+curl -fsSL https://get.docker.com | bash -s docker
+
+# Clone the configuration repository
+git clone https://github.com/perfect-panel/XrayR-release
+
+# Navigate to the directory
+cd XrayR-release
+
+# Edit the configuration file, refer to the options below, save and continue
+vi ./config/config.yml
+
+# Start the service
+docker compose up -d
+```
+
+### Configuration Options:
 
 ```yaml
 Log:
   Level: none # Log level: none, error, warning, info, debug
-  AccessPath: # /etc/XrayR/access.Log
+  AccessPath: # /etc/XrayR/access.log
   ErrorPath: # /etc/XrayR/error.log
-DnsConfigPath: # /etc/XrayR/dns.json # Path to DNS config, check https://xtls.github.io/config/dns.html for help
-RouteConfigPath: # /etc/XrayR/route.json # Path to route config, check https://xtls.github.io/config/routing.html for help
-InboundConfigPath: # /etc/XrayR/custom_inbound.json # Path to custom inbound config, check https://xtls.github.io/config/inbound.html for help
-OutboundConfigPath: # /etc/XrayR/custom_outbound.json # Path to custom outbound config, check https://xtls.github.io/config/outbound.html for help
+DnsConfigPath: # /etc/XrayR/dns.json Path to DNS configuration
 ConnectionConfig:
-  Handshake: 4 # Handshake time limit, in seconds
-  ConnIdle: 10 # Connection idle time limit, in seconds
-  UplinkOnly: 2 # Time limit when the connection downstream is closed, in seconds
-  DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, in seconds
-  BufferSize: 64 # The internal cache size of each connection, in kB
+  Handshake: 4 # Handshake time limit, seconds
+  ConnIdle: 10 # Connection idle time limit, seconds
+  UplinkOnly: 2 # Time limit when the connection downstream is closed, seconds
+  DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, seconds
+  BufferSize: 64 # Internal cache size per connection, kB
 Nodes:
   -
-    PanelType: "PPanel" # Panel type: SSpanel, NewV2board, V2board, PMpanel, Proxypanel, PPanel
+    PanelType: "PPanel" # Panel type: PPanel, SSpanel, V2board, NewV2board, PMpanel, Proxypanel, V2RaySocks
     ApiConfig:
-      ApiHost: "http://127.0.0.1:8080"
-      ApiKey: "12345678"
-      NodeID: 6
-      NodeType: Shadowsocks # Node type: V2ray, Trojan, Shadowsocks, Shadowsocks-Plugin
-      Timeout: 30 # Timeout for the API request
+      ApiHost: "http://127.0.0.1:667"
+      ApiKey: "123"
+      NodeID: 41
+      NodeType: V2ray # Node type: V2ray, Shadowsocks, Trojan
+      Timeout: 30 # API request timeout
       EnableVless: false # Enable Vless for V2ray type
       EnableXTLS: false # Enable XTLS for V2ray and Trojan
-      SpeedLimit: 0 # Mbps, local settings will replace remote settings, 0 means disable
-      DeviceLimit: 0 # Local settings will replace remote settings, 0 means disable
+      SpeedLimit: 0 # Mbps, local settings override remote settings, 0 means disabled
+      DeviceLimit: 0 # Local settings override remote settings, 0 means disabled
       RuleListPath: # /etc/XrayR/rulelist Path to local rule list file
     ControllerConfig:
-      ListenIP: 0.0.0.0 # IP address you want to listen on
-      SendIP: 0.0.0.0 # IP address you want to send packets from
-      UpdatePeriodic: 60 # Time to update the node info, in seconds
-      EnableDNS: false # Use custom DNS config, ensure that you set dns.json correctly
-      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
-      DisableUploadTraffic: false # Disable upload traffic to the panel
-      DisableGetRule: false # Disable getting rule from the panel
-      DisableIVCheck: false # Disable anti-replay protection for Shadowsocks
-      DisableSniffing: false # Disable domain sniffing
-      EnableProxyProtocol: false
-      AutoSpeedLimitConfig:
-        Limit: 0 # Warning speed. Set to 0 to disable AutoSpeedLimit (Mbps)
-        WarnTimes: 0 # After (WarnTimes) consecutive warnings, the user will be limited. Set to 0 to punish an overspeed user immediately.
-        LimitSpeed: 0 # The speed limit for a limited user (in Mbps)
-        LimitDuration: 0 # Duration of the speed limit (in minutes)
-      GlobalDeviceLimitConfig:
-        Enable: false # Enable global device limit for a user
-        RedisAddr: 127.0.0.1:6379 # Redis server address
-        RedisPassword: YOUR PASSWORD # Redis password
-        RedisDB: 0 # Redis database
-        Timeout: 5 # Timeout for Redis request, in seconds
-        Expiry: 60 # Expiry time, in seconds
-      EnableFallback: false # Only support for Trojan and Vless
-      FallBackConfigs:  # Support multiple fallbacks
+      ListenIP: 0.0.0.0 # IP address to listen on
+      SendIP: 0.0.0.0 # IP address to send packets from
+      UpdatePeriodic: 60 # Node info update interval, seconds
+      EnableDNS: false # Use custom DNS configuration, ensure dns.json is properly set up
+      DNSType: AsIs # DNS strategy: AsIs, UseIP, UseIPv4, UseIPv6
+      EnableProxyProtocol: false # Only works for WebSocket and TCP
+      EnableFallback: false # Only supported for Trojan and Vless
+      FallBackConfigs: # Support multiple fallbacks
         -
           SNI: # TLS SNI (Server Name Indication), empty for any
-          Alpn: # Alpn, empty for any
           Path: # HTTP path, empty for any
-          Dest: 80 # Required, destination of fallback, check https://xtls.github.io/config/fallback/ for details
-          ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for disable
+          Dest: 80 # Required, fallback destination, check https://xtls.github.io/config/fallback/ for details
+          ProxyProtocolVer: 0 # Send PROXY protocol version, 0 to disable
       CertConfig:
-        CertMode: dns # Option for obtaining a certificate: none, file, http, dns. Choose "none" to forcefully disable the TLS config
-        RejectUnknownSni: false # Reject unknown SNI
-        CertDomain: "node1.test.com" # Domain for certificate
-        CertFile: /etc/XrayR/cert/node1.test.com.cert # Provided if CertMode is file
+        CertMode: dns # Certificate acquisition method: none, file, http, dns. Choose "none" to forcibly disable TLS configuration.
+        CertDomain: "node1.test.com" # Domain for the certificate
+        CertFile: /etc/XrayR/cert/node1.test.com.cert # Required if CertMode is "file"
         KeyFile: /etc/XrayR/cert/node1.test.com.key
-        Provider: alidns # DNS cert provider, get the full support list here: https://go-acme.github.io/lego/dns/
+        Provider: alidns # DNS provider, see the full support list: https://go-acme.github.io/lego/dns/
         Email: test@me.com
-        DNSEnv: # DNS environment options used by the DNS provider
+        DNSEnv: # Environment variables for the DNS provider
           ALICLOUD_ACCESS_KEY: aaa
           ALICLOUD_SECRET_KEY: bbb
 ```

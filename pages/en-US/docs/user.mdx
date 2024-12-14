@@ -62,28 +62,6 @@ curl -fsSL https://get.docker.com | bash -s docker
 
 ### Run the Docker Container
 
-1. **Using the Latest Version**:
-
-   ```sh
-   docker run -d -p 3000:3000 \
-     --env NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
-     --env NEXT_PUBLIC_SITE_URL=https://example.com \
-     --env NEXT_PUBLIC_API_URL=https://api.example.com \
-     --env NEXT_PUBLIC_EMAIL=contact@example.com \
-     --env NEXT_PUBLIC_TELEGRAM_LINK=https://t.me/example \
-     --env NEXT_PUBLIC_TWITTER_LINK=https://twitter.com/example \
-     --env NEXT_PUBLIC_DISCORD_LINK=https://discord.com/example \
-     --env NEXT_PUBLIC_INSTAGRAM_LINK=https://instagram.com/example \
-     --env NEXT_PUBLIC_LINKEDIN_LINK=https://linkedin.com/example \
-     --env NEXT_PUBLIC_FACEBOOK_LINK=https://facebook.com/example \
-     --env NEXT_PUBLIC_GITHUB_LINK=https://github.com/example/repository \
-     --env NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
-     --env NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-     --name ppanel-user-web ppanel/ppanel-user-web:latest
-   ```
-
-2. **Using the Beta Version**:
-
    ```sh
    docker run -d -p 3000:3000 \
      --env NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
@@ -104,41 +82,7 @@ curl -fsSL https://get.docker.com | bash -s docker
 
 ### Run with Docker Compose
 
-3. **Using Docker Compose (Latest Version)**:
-   Create a `docker-compose.yml` file with this configuration:
-
-   ```yaml
-   version: '3'
-
-   services:
-     ppanel-user-web:
-       image: ppanel/ppanel-user-web:latest
-       ports:
-         - '3000:3000'
-       environment:
-         NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
-         NEXT_PUBLIC_SITE_URL: https://example.com
-         NEXT_PUBLIC_API_URL: https://api.example.com
-         NEXT_PUBLIC_EMAIL: contact@example.com
-         NEXT_PUBLIC_TELEGRAM_LINK: https://t.me/example
-         NEXT_PUBLIC_TWITTER_LINK: https://twitter.com/example
-         NEXT_PUBLIC_DISCORD_LINK: https://discord.com/example
-         NEXT_PUBLIC_INSTAGRAM_LINK: https://instagram.com/example
-         NEXT_PUBLIC_LINKEDIN_LINK: https://linkedin.com/example
-         NEXT_PUBLIC_FACEBOOK_LINK: https://facebook.com/example
-         NEXT_PUBLIC_GITHUB_LINK: https://github.com/example/repository
-         NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
-         NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
-   ```
-
-   Start the service:
-
-   ```sh
-   docker compose up -d
-   ```
-
-4. **Using Docker Compose (Beta Version)**:
-   Create a `docker-compose-beta.yml` file with this configuration:
+  Create a `docker-compose.yml` file with this configuration:
 
    ```yaml
    version: '3'
@@ -164,8 +108,8 @@ curl -fsSL https://get.docker.com | bash -s docker
          NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
    ```
 
-   Start the beta service:
+   Start service:
 
    ```sh
-   docker compose -f docker-compose-beta.yml up -d
+   docker compose -f docker-compose.yml up -d
    ```

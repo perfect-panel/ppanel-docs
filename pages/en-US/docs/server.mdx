@@ -55,7 +55,7 @@ PPanel uses port **8080** by default. Please ensure this port is accessible, and
 If you do not use web initialization, you can log in with the default admin account:
 
 - **Username**: `admin@ppanel.dev`
-- **Password**: `admin-password`
+- **Password**: `password`
 
 > **Note**: Please change the default password immediately after the first login to ensure security.
 
@@ -127,35 +127,37 @@ docker compose up -d
 Below is an example of the `ppanel.yaml` configuration file:
 
 ```yaml
-Host: 0.0.0.0            # Listening IP
-Port: 8080               # Running port
-Debug: true              # Enable debug mode
-JwtAuth:
-  AccessSecret: your-secret-key   # Token secret key (please modify)
-  AccessExpire: 604800            # Token expiration time (seconds)
+Host: 0.0.0.0  # IP address the application will listen on
+Port: 8080  # Port for the application
+Debug: true  # Enable debug mode
+
 Logger:
-  FilePath: ./ppanel.log # Log file path
-  MaxSize: 50
-  MaxBackup: 3
-  MaxAge: 30
-  Compress: true
-  LogType: json
-  Level: info            # Log level: info, debug, error
+  File: ./ppanel.log  # Log file path
+  Level: production  # Log level: info, debug, error, production
+
+JwtAuth:
+  AccessSecret: 333ab3d5-429f-4a51-b001-ef484bf11db7  # Token secret (should be changed)
+  AccessExpire: 604800  # Token expiration time in seconds
+
 MySQL:
-  Addr: 127.0.0.1:3306   # Database address
-  Dbname: vpnboard       # Database name
-  Username: root         # Database username
-  Password: your-password   # Database password (please modify)
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-  MaxIdleConns: 10
-  MaxOpenConns: 10
-  LogMode: dev
-  LogZap: false
-  SlowThreshold: 1000
+  Addr: mysql_db:3306 # Database address
+  Dbname: my_database  # Database name
+  Username: root  # Database username
+  Password: rootpassword # Database password
+  MaxIdleConns: 10  # Maximum idle connections
+  MaxOpenConns: 10  # Maximum open connections
+  LogMode: "dev"  # Log mode
+  LogZap: false  # Enable Zap logger
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai  # Database config parameters
+
 Redis:
-  Host: 127.0.0.1:6379
-  Pass:                  # Redis password (if any)
-  DB: 0
+  Host: redis_cache:6379  # Redis server address
+  Pass:  # Redis password (if any)
+  DB: 0  # Redis database number
+
+Administer:
+  Password: password # Admin password (should be changed)
+  Email: admin@ppanel.dev # Admin email address
 ```
 
 > **Note**: After modifying the configuration file, please restart the Docker container to apply the changes.

@@ -46,22 +46,6 @@ curl -fsSL https://get.docker.com | bash -s docker
 
 ### 运行 Docker 容器
 
-1. **使用最新版本**：
-
-   ```sh
-   docker run -d -p 3000:3000 \
-     --env NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
-     --env NEXT_PUBLIC_SITE_URL=https://example.com \
-     --env NEXT_PUBLIC_API_URL=https://api.example.com \
-     --env NEXT_PUBLIC_EMAIL=contact@example.com \
-     --env NEXT_PUBLIC_GITHUB_LINK=https://github.com/example/repository \
-     --env NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
-     --env NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-     --name ppanel-admin-web ppanel/ppanel-admin-web:latest
-   ```
-
-2. **使用 Beta 版本**：
-
    ```sh
    docker run -d -p 3000:3000 \
      --env NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
@@ -76,35 +60,7 @@ curl -fsSL https://get.docker.com | bash -s docker
 
 ### 使用 Docker Compose 部署
 
-3. **使用 Docker Compose（最新版本）**：
-   创建 `docker-compose.yml` 文件，并配置如下：
-
-   ```yaml
-   version: '3'
-
-   services:
-     ppanel-admin-web:
-       image: ppanel/ppanel-admin-web:latest
-       ports:
-         - '3000:3000'
-       environment:
-         NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
-         NEXT_PUBLIC_SITE_URL: https://example.com
-         NEXT_PUBLIC_API_URL: https://api.example.com
-         NEXT_PUBLIC_EMAIL: contact@example.com
-         NEXT_PUBLIC_GITHUB_LINK: https://github.com/example/repository
-         NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
-         NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
-   ```
-
-   启动服务：
-
-   ```sh
-   docker compose up -d
-   ```
-
-4. **使用 Docker Compose（Beta 版本）**：
-   创建 `docker-compose-beta.yml` 文件，并配置如下：
+  创建 `docker-compose.yml` 文件，并配置如下：
 
    ```yaml
    version: '3'
@@ -124,8 +80,8 @@ curl -fsSL https://get.docker.com | bash -s docker
          NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
    ```
 
-   启动 Beta 服务：
+   启动服务：
 
    ```sh
-   docker compose -f docker-compose-beta.yml up -d
+   docker compose -f docker-compose.yml up -d
    ```
