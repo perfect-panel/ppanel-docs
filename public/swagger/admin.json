@@ -5186,6 +5186,13 @@
         "fingerprint": {
           "type": "string"
         },
+        "reality_server_addr": {
+          "type": "string"
+        },
+        "reality_server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
         "reality_private_key": {
           "type": "string"
         },
@@ -5201,6 +5208,8 @@
         "sni",
         "allow_insecure",
         "fingerprint",
+        "reality_server_addr",
+        "reality_server_port",
         "reality_private_key",
         "reality_public_key",
         "reality_short_id"
