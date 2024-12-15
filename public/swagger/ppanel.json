@@ -3622,7 +3622,7 @@
       }
     },
     "/v1/notify/epay": {
-      "post": {
+      "get": {
         "summary": "EPay notify",
         "operationId": "EPayNotify",
         "responses": {
@@ -3646,72 +3646,68 @@
         "parameters": [
           {
             "name": "pid",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "integer",
             "format": "int64"
           },
           {
             "name": "trade_no",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "out_trade_no",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "type",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "name",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "money",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "trade_status",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "param",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "sign",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "sign_type",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
           "ppanel/notify"
-        ],
-        "consumes": [
-          "multipart/form-data",
-          "application/x-www-form-urlencoded"
         ]
       }
     },
