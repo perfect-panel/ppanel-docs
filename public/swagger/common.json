@@ -572,16 +572,12 @@
         },
         "currency_symbol": {
           "type": "string"
-        },
-        "access_key": {
-          "type": "string"
         }
       },
       "title": "CurrencyConfig",
       "required": [
         "currency_unit",
-        "currency_symbol",
-        "access_key"
+        "currency_symbol"
       ]
     },
     "Document": {
