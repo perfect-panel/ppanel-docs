@@ -888,7 +888,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PaymentConfig"
+              "$ref": "#/definitions/UpdateAlipayF2fRequest"
             }
           }
         ],
@@ -981,7 +981,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PaymentConfig"
+              "$ref": "#/definitions/UpdateEpayRequest"
             }
           }
         ],
@@ -1045,7 +1045,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PaymentConfig"
+              "$ref": "#/definitions/UpdateStripeRequest"
             }
           }
         ],
@@ -1109,7 +1109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PaymentConfig"
+              "$ref": "#/definitions/UpdateStripeRequest"
             }
           }
         ],
@@ -5021,6 +5021,35 @@
     }
   },
   "definitions": {
+    "AlipayF2FConfig": {
+      "type": "object",
+      "properties": {
+        "app_id": {
+          "type": "string"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "invoice_name": {
+          "type": "string"
+        },
+        "sandbox": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AlipayF2FConfig",
+      "required": [
+        "app_id",
+        "private_key",
+        "public_key",
+        "invoice_name",
+        "sandbox"
+      ]
+    },
     "AlipayNotifyResponse": {
       "type": "object",
       "properties": {
@@ -6148,6 +6177,26 @@
         "verify_email_template",
         "maintenance_email_template",
         "expiration_email_template"
+      ]
+    },
+    "EpayConfig": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "title": "EpayConfig",
+      "required": [
+        "pid",
+        "url",
+        "key"
       ]
     },
     "Follow": {
@@ -8169,6 +8218,30 @@
         "site_logo"
       ]
     },
+    "StripeConfig": {
+      "type": "object",
+      "properties": {
+        "public_key": {
+          "type": "string"
+        },
+        "secret_key": {
+          "type": "string"
+        },
+        "webhook_secret": {
+          "type": "string"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "StripeConfig",
+      "required": [
+        "public_key",
+        "secret_key",
+        "webhook_secret",
+        "payment"
+      ]
+    },
     "StripePayment": {
       "type": "object",
       "properties": {
@@ -8575,6 +8648,55 @@
         "security_config"
       ]
     },
+    "UpdateAlipayF2fRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/AlipayF2FConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateAlipayF2fRequest",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
+    },
     "UpdateAnnouncementEnableRequest": {
       "type": "object",
       "properties": {
@@ -8743,6 +8865,55 @@
         "show"
       ]
     },
+    "UpdateEpayRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/EpayConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateEpayRequest",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
+    },
     "UpdateNodeGroupRequest": {
       "type": "object",
       "properties": {
@@ -8849,6 +9020,55 @@
       "required": [
         "id",
         "status"
+      ]
+    },
+    "UpdateStripeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/StripeConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateStripeRequest",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
       ]
     },
     "UpdateSubscribeGroupRequest": {
