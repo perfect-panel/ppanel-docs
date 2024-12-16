@@ -2965,6 +2965,62 @@
         ]
       }
     },
+    "/v1/admin/tool/log": {
+      "get": {
+        "summary": "Get System Log",
+        "operationId": "GetSystemLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/tool"
+        ]
+      }
+    },
+    "/v1/admin/tool/restart": {
+      "get": {
+        "summary": "Restart System",
+        "operationId": "RestartSystem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/tool"
+        ]
+      }
+    },
     "/v1/admin/user/": {
       "delete": {
         "summary": "Delete user",
@@ -4858,6 +4914,18 @@
         "forced_invite",
         "referral_percentage",
         "only_first_purchase"
+      ]
+    },
+    "LogResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "object"
+        }
+      },
+      "title": "LogResponse",
+      "required": [
+        "list"
       ]
     },
     "NodeConfig": {
