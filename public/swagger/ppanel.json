@@ -313,6 +313,35 @@
         ]
       }
     },
+    "/v1/admin/console/ticket": {
+      "get": {
+        "summary": "Query ticket wait reply",
+        "operationId": "QueryTicketWaitReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/TicketWaitRelpyResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/console"
+        ]
+      }
+    },
     "/v1/admin/console/user": {
       "get": {
         "summary": "Query user statistics",
@@ -7444,9 +7473,12 @@
         "updated_at"
       ]
     },
-    "OrdersTotal": {
+    "OrdersStatistics": {
       "type": "object",
       "properties": {
+        "date": {
+          "type": "string"
+        },
         "amount": {
           "type": "integer",
           "format": "int64"
@@ -7458,9 +7490,15 @@
         "renewal_orders": {
           "type": "integer",
           "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrdersStatistics"
+          }
         }
       },
-      "title": "OrdersTotal",
+      "title": "OrdersStatistics",
       "required": [
         "amount",
         "new_orders",
@@ -8017,65 +8055,24 @@
         }
       }
     },
-    "RevenueChart": {
-      "type": "object",
-      "properties": {
-        "date": {
-          "type": "string"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new_orders": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_orders": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "RevenueChart",
-      "required": [
-        "date",
-        "amount",
-        "new_orders",
-        "renewal_orders"
-      ]
-    },
     "RevenueStatisticsResponse": {
       "type": "object",
       "properties": {
         "today": {
-          "$ref": "#/definitions/OrdersTotal"
+          "$ref": "#/definitions/OrdersStatistics"
         },
         "monthly": {
-          "$ref": "#/definitions/OrdersTotal"
+          "$ref": "#/definitions/OrdersStatistics"
         },
         "all": {
-          "$ref": "#/definitions/OrdersTotal"
-        },
-        "monthly_chart": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RevenueChart"
-          }
-        },
-        "all_chart": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RevenueChart"
-          }
+          "$ref": "#/definitions/OrdersStatistics"
         }
       },
       "title": "RevenueStatisticsResponse",
       "required": [
         "today",
         "monthly",
-        "all",
-        "monthly_chart",
-        "all_chart"
+        "all"
       ]
     },
     "SecurityConfig": {
@@ -8876,6 +8873,19 @@
         "status",
         "created_at",
         "updated_at"
+      ]
+    },
+    "TicketWaitRelpyResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "TicketWaitRelpyResponse",
+      "required": [
+        "count"
       ]
     },
     "TosConfig": {
@@ -9887,33 +9897,6 @@
         "created_at"
       ]
     },
-    "UserChart": {
-      "type": "object",
-      "properties": {
-        "date": {
-          "type": "string"
-        },
-        "register": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new_orders": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_orders": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserChart",
-      "required": [
-        "date",
-        "register",
-        "new_orders",
-        "renewal_orders"
-      ]
-    },
     "UserLoginRequest": {
       "type": "object",
       "properties": {
@@ -9958,38 +9941,56 @@
         "password"
       ]
     },
+    "UserStatistics": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "register": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserStatistics"
+          }
+        }
+      },
+      "title": "UserStatistics",
+      "required": [
+        "register",
+        "new_orders",
+        "renewal_orders"
+      ]
+    },
     "UserStatisticsResponse": {
       "type": "object",
       "properties": {
         "today": {
-          "$ref": "#/definitions/UsersTotal"
+          "$ref": "#/definitions/UserStatistics"
         },
         "monthly": {
-          "$ref": "#/definitions/UsersTotal"
+          "$ref": "#/definitions/UserStatistics"
         },
         "all": {
-          "$ref": "#/definitions/UsersTotal"
-        },
-        "monthly_chart": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RevenueChart"
-          }
-        },
-        "all_chart": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RevenueChart"
-          }
+          "$ref": "#/definitions/UserStatistics"
         }
       },
       "title": "UserStatisticsResponse",
       "required": [
         "today",
         "monthly",
-        "all",
-        "monthly_chart",
-        "all_chart"
+        "all"
       ]
     },
     "UserSubscribe": {
@@ -10116,29 +10117,6 @@
         "email",
         "upload",
         "download"
-      ]
-    },
-    "UsersTotal": {
-      "type": "object",
-      "properties": {
-        "register": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new_orders": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_orders": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UsersTotal",
-      "required": [
-        "register",
-        "new_orders",
-        "renewal_orders"
       ]
     },
     "VeifyConfig": {
