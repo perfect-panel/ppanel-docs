@@ -255,6 +255,93 @@
         ]
       }
     },
+    "/v1/admin/console/revenue": {
+      "get": {
+        "summary": "Query revenue statistics",
+        "operationId": "QueryRevenueStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RevenueStatisticsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/console"
+        ]
+      }
+    },
+    "/v1/admin/console/server": {
+      "get": {
+        "summary": "Query server total data",
+        "operationId": "QueryServerTotalData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ServerTotalDataResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/console"
+        ]
+      }
+    },
+    "/v1/admin/console/user": {
+      "get": {
+        "summary": "Query user statistics",
+        "operationId": "QueryUserStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserStatisticsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/console"
+        ]
+      }
+    },
     "/v1/admin/coupon/": {
       "delete": {
         "summary": "Delete coupon",
@@ -5173,6 +5260,29 @@
         "updated_at"
       ]
     },
+    "OrdersTotal": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_orders": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "OrdersTotal",
+      "required": [
+        "amount",
+        "new_orders",
+        "renewal_orders"
+      ]
+    },
     "PaymentConfig": {
       "type": "object",
       "properties": {
@@ -5285,6 +5395,67 @@
           "description": "数据"
         }
       }
+    },
+    "RevenueChart": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_orders": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RevenueChart",
+      "required": [
+        "date",
+        "amount",
+        "new_orders",
+        "renewal_orders"
+      ]
+    },
+    "RevenueStatisticsResponse": {
+      "type": "object",
+      "properties": {
+        "today": {
+          "$ref": "#/definitions/OrdersTotal"
+        },
+        "monthly": {
+          "$ref": "#/definitions/OrdersTotal"
+        },
+        "all": {
+          "$ref": "#/definitions/OrdersTotal"
+        },
+        "monthly_chart": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RevenueChart"
+          }
+        },
+        "all_chart": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RevenueChart"
+          }
+        }
+      },
+      "title": "RevenueStatisticsResponse",
+      "required": [
+        "today",
+        "monthly",
+        "all",
+        "monthly_chart",
+        "all_chart"
+      ]
     },
     "SecurityConfig": {
       "type": "object",
@@ -5462,6 +5633,109 @@
         "mem",
         "disk",
         "updated_at"
+      ]
+    },
+    "ServerTotalDataResponse": {
+      "type": "object",
+      "properties": {
+        "online_user_ips": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "online_servers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "offline_servers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "today_upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "today_download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "monthly_upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "monthly_download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_traffic_ranking_today": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrafficData"
+          }
+        },
+        "server_traffic_ranking_yesterday": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrafficData"
+          }
+        },
+        "user_traffic_ranking_today": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTrafficData"
+          }
+        },
+        "user_traffic_ranking_yesterday": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTrafficData"
+          }
+        }
+      },
+      "title": "ServerTotalDataResponse",
+      "required": [
+        "online_user_ips",
+        "online_servers",
+        "offline_servers",
+        "today_upload",
+        "today_download",
+        "monthly_upload",
+        "monthly_download",
+        "updated_at",
+        "server_traffic_ranking_today",
+        "server_traffic_ranking_yesterday",
+        "user_traffic_ranking_today",
+        "user_traffic_ranking_yesterday"
+      ]
+    },
+    "ServerTrafficData": {
+      "type": "object",
+      "properties": {
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerTrafficData",
+      "required": [
+        "server_id",
+        "name",
+        "upload",
+        "download"
       ]
     },
     "Shadowsocks": {
@@ -6701,6 +6975,67 @@
         "created_at"
       ]
     },
+    "UserChart": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "register": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_orders": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserChart",
+      "required": [
+        "date",
+        "register",
+        "new_orders",
+        "renewal_orders"
+      ]
+    },
+    "UserStatisticsResponse": {
+      "type": "object",
+      "properties": {
+        "today": {
+          "$ref": "#/definitions/UsersTotal"
+        },
+        "monthly": {
+          "$ref": "#/definitions/UsersTotal"
+        },
+        "all": {
+          "$ref": "#/definitions/UsersTotal"
+        },
+        "monthly_chart": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RevenueChart"
+          }
+        },
+        "all_chart": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RevenueChart"
+          }
+        }
+      },
+      "title": "UserStatisticsResponse",
+      "required": [
+        "today",
+        "monthly",
+        "all",
+        "monthly_chart",
+        "all_chart"
+      ]
+    },
     "UserSubscribe": {
       "type": "object",
       "properties": {
@@ -6775,6 +7110,56 @@
         "status",
         "created_at",
         "updated_at"
+      ]
+    },
+    "UserTrafficData": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserTrafficData",
+      "required": [
+        "user_id",
+        "email",
+        "upload",
+        "download"
+      ]
+    },
+    "UsersTotal": {
+      "type": "object",
+      "properties": {
+        "register": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_orders": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_orders": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UsersTotal",
+      "required": [
+        "register",
+        "new_orders",
+        "renewal_orders"
       ]
     },
     "VerifyConfig": {
