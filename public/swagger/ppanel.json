@@ -7479,15 +7479,15 @@
         "date": {
           "type": "string"
         },
-        "amount": {
+        "amount_total": {
           "type": "integer",
           "format": "int64"
         },
-        "new_orders": {
+        "new_order_amount": {
           "type": "integer",
           "format": "int64"
         },
-        "renewal_orders": {
+        "renewal_order_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -7500,9 +7500,9 @@
       },
       "title": "OrdersStatistics",
       "required": [
-        "amount",
-        "new_orders",
-        "renewal_orders"
+        "amount_total",
+        "new_order_amount",
+        "renewal_order_amount"
       ]
     },
     "PaymentConfig": {
@@ -9951,11 +9951,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "new_orders": {
+        "new_order_users": {
           "type": "integer",
           "format": "int64"
         },
-        "renewal_orders": {
+        "renewal_order_users": {
           "type": "integer",
           "format": "int64"
         },
@@ -9969,8 +9969,8 @@
       "title": "UserStatistics",
       "required": [
         "register",
-        "new_orders",
-        "renewal_orders"
+        "new_order_users",
+        "renewal_order_users"
       ]
     },
     "UserStatisticsResponse": {
