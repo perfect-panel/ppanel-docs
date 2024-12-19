@@ -5251,6 +5251,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -5266,6 +5270,7 @@
         "title",
         "content",
         "enable",
+        "type",
         "created_at",
         "updated_at"
       ]
@@ -5612,12 +5617,17 @@
         },
         "content": {
           "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
         }
       },
       "title": "CreateAnnouncementRequest",
       "required": [
         "title",
-        "content"
+        "content",
+        "type"
       ]
     },
     "CreateApplicationRequest": {
@@ -9083,6 +9093,10 @@
         "enable": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
         }
       },
       "title": "UpdateAnnouncementRequest",
@@ -9090,7 +9104,8 @@
         "id",
         "title",
         "content",
-        "enable"
+        "enable",
+        "type"
       ]
     },
     "UpdateApplicationRequest": {

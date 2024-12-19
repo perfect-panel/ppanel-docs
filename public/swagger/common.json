@@ -365,6 +365,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -380,6 +384,7 @@
         "title",
         "content",
         "enable",
+        "type",
         "created_at",
         "updated_at"
       ]
