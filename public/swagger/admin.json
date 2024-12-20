@@ -160,43 +160,6 @@
         ]
       }
     },
-    "/v1/admin/announcement/enable": {
-      "put": {
-        "summary": "Update announcement enable",
-        "operationId": "UpdateAnnouncementEnable",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateAnnouncementEnableRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/announcement"
-        ]
-      }
-    },
     "/v1/admin/announcement/list": {
       "get": {
         "summary": "Get announcement list",
@@ -3551,13 +3514,17 @@
         "content": {
           "type": "string"
         },
-        "enable": {
+        "show": {
           "type": "boolean",
           "format": "boolean"
         },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "created_at": {
           "type": "integer",
@@ -3573,8 +3540,9 @@
         "id",
         "title",
         "content",
-        "enable",
-        "type",
+        "show",
+        "pinned",
+        "popup",
         "created_at",
         "updated_at"
       ]
@@ -3854,17 +3822,12 @@
         },
         "content": {
           "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
         }
       },
       "title": "CreateAnnouncementRequest",
       "required": [
         "title",
-        "content",
-        "type"
+        "content"
       ]
     },
     "CreateApplicationRequest": {
@@ -6394,13 +6357,17 @@
         "content": {
           "type": "string"
         },
-        "enable": {
+        "show": {
           "type": "boolean",
           "format": "boolean"
         },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "UpdateAnnouncementRequest",
@@ -6408,8 +6375,9 @@
         "id",
         "title",
         "content",
-        "enable",
-        "type"
+        "show",
+        "pinned",
+        "popup"
       ]
     },
     "UpdateApplicationRequest": {

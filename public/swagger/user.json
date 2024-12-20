@@ -1043,13 +1043,17 @@
         "content": {
           "type": "string"
         },
-        "enable": {
+        "show": {
           "type": "boolean",
           "format": "boolean"
         },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "created_at": {
           "type": "integer",
@@ -1065,8 +1069,9 @@
         "id",
         "title",
         "content",
-        "enable",
-        "type",
+        "show",
+        "pinned",
+        "popup",
         "created_at",
         "updated_at"
       ]
