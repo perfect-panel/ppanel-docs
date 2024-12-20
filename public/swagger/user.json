@@ -2610,6 +2610,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "unit_time": {
+          "type": "string"
+        },
         "discount": {
           "type": "array",
           "items": {
@@ -2681,6 +2684,7 @@
         "name",
         "description",
         "unit_price",
+        "unit_time",
         "discount",
         "replacement",
         "inventory",
@@ -2726,7 +2730,7 @@
     "SubscribeDiscount": {
       "type": "object",
       "properties": {
-        "months": {
+        "quantity": {
           "type": "integer",
           "format": "int64"
         },
@@ -2737,7 +2741,7 @@
       },
       "title": "SubscribeDiscount",
       "required": [
-        "months",
+        "quantity",
         "discount"
       ]
     },
