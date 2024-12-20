@@ -8766,6 +8766,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -8794,6 +8798,7 @@
         "server",
         "show",
         "sell",
+        "sort",
         "created_at",
         "updated_at"
       ]
