@@ -1647,6 +1647,43 @@
         ]
       }
     },
+    "/v1/admin/server/sort": {
+      "post": {
+        "summary": "Node sort ",
+        "operationId": "NodeSort",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeSortRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/subscribe/": {
       "delete": {
         "summary": "Delete subscribe",
@@ -2053,6 +2090,43 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
+      }
+    },
+    "/v1/admin/subscribe/sort": {
+      "post": {
+        "summary": "Subscribe sort",
+        "operationId": "SubscribeSort",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscribeSortRequest"
+            }
           }
         ],
         "tags": [
@@ -5080,6 +5154,21 @@
         "node_push_interval"
       ]
     },
+    "NodeSortRequest": {
+      "type": "object",
+      "properties": {
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortItem"
+          }
+        }
+      },
+      "title": "NodeSortRequest",
+      "required": [
+        "sort"
+      ]
+    },
     "NodeStatus": {
       "type": "object",
       "properties": {
@@ -5566,6 +5655,10 @@
         },
         "status": {
           "$ref": "#/definitions/NodeStatus"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "Server",
@@ -5584,7 +5677,8 @@
         "enable",
         "created_at",
         "updated_at",
-        "status"
+        "status",
+        "sort"
       ]
     },
     "ServerGroup": {
@@ -5794,6 +5888,24 @@
         "site_logo"
       ]
     },
+    "SortItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SortItem",
+      "required": [
+        "id",
+        "sort"
+      ]
+    },
     "StripeConfig": {
       "type": "object",
       "properties": {
@@ -5999,6 +6111,21 @@
         "description",
         "created_at",
         "updated_at"
+      ]
+    },
+    "SubscribeSortRequest": {
+      "type": "object",
+      "properties": {
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortItem"
+          }
+        }
+      },
+      "title": "SubscribeSortRequest",
+      "required": [
+        "sort"
       ]
     },
     "SubscribeType": {
@@ -6711,6 +6838,10 @@
         "sell": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "UpdateSubscribeRequest",
@@ -6731,7 +6862,8 @@
         "server_group",
         "server",
         "show",
-        "sell"
+        "sell",
+        "sort"
       ]
     },
     "UpdateTicketStatusRequest": {

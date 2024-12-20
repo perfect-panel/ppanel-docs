@@ -1372,6 +1372,10 @@
         },
         "status": {
           "$ref": "#/definitions/NodeStatus"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "Server",
@@ -1390,7 +1394,8 @@
         "enable",
         "created_at",
         "updated_at",
-        "status"
+        "status",
+        "sort"
       ]
     },
     "ServerGroup": {
@@ -1495,6 +1500,24 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "SortItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SortItem",
+      "required": [
+        "id",
+        "sort"
       ]
     },
     "Subscribe": {
