@@ -1965,19 +1965,21 @@
     "QueryAnnouncementRequest": {
       "type": "object",
       "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "size": {
-          "type": "integer",
-          "format": "int32"
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "QueryAnnouncementRequest",
       "required": [
         "page",
-        "size"
+        "size",
+        "pinned",
+        "popup"
       ]
     },
     "QueryAnnouncementResponse": {
