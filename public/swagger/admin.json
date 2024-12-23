@@ -200,7 +200,21 @@
             "format": "int64"
           },
           {
-            "name": "enable",
+            "name": "show",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
             "in": "query",
             "required": false,
             "type": "boolean",
@@ -4007,6 +4021,10 @@
         "enable": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "CreateNodeRequest",
@@ -4021,7 +4039,8 @@
         "group_id",
         "protocol",
         "config",
-        "enable"
+        "enable",
+        "sort"
       ]
     },
     "CreateOrderRequest": {
@@ -4556,7 +4575,15 @@
           "type": "integer",
           "format": "int64"
         },
-        "enable": {
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -6624,6 +6651,10 @@
         "enable": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "UpdateNodeRequest",
@@ -6639,7 +6670,8 @@
         "group_id",
         "protocol",
         "config",
-        "enable"
+        "enable",
+        "sort"
       ]
     },
     "UpdateOrderStatusRequest": {
