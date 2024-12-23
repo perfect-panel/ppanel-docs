@@ -53,6 +53,20 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -1965,6 +1979,14 @@
     "QueryAnnouncementRequest": {
       "type": "object",
       "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
         "pinned": {
           "type": "boolean",
           "format": "boolean"
