@@ -2860,13 +2860,17 @@
         "telegram_notify": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "telegram_web_hook_domain": {
+          "type": "string"
         }
       },
       "title": "TelegramConfig",
       "required": [
         "telegram_bot_token",
         "telegram_group_url",
-        "telegram_notify"
+        "telegram_notify",
+        "telegram_web_hook_domain"
       ]
     },
     "Ticket": {
