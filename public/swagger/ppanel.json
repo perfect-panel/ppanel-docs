@@ -4846,6 +4846,35 @@
         ]
       }
     },
+    "/v1/public/user/bind_telegram": {
+      "get": {
+        "summary": "Bind Telegram",
+        "operationId": "BindTelegram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/BindTelegramResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/info": {
       "get": {
         "summary": "Query User Info",
@@ -5558,6 +5587,23 @@
       "title": "BatchDeleteUserRequest",
       "required": [
         "ids"
+      ]
+    },
+    "BindTelegramResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BindTelegramResponse",
+      "required": [
+        "url",
+        "expired_at"
       ]
     },
     "CheckUserRequest": {
