@@ -53,6 +53,20 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -859,6 +873,35 @@
         ]
       }
     },
+    "/v1/public/user/bind_telegram": {
+      "get": {
+        "summary": "Bind Telegram",
+        "operationId": "BindTelegram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/BindTelegramResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/info": {
       "get": {
         "summary": "Query User Info",
@@ -1027,6 +1070,33 @@
           "ppanel/public/user"
         ]
       }
+    },
+    "/v1/public/user/unbind_telegram": {
+      "post": {
+        "summary": "Unbind Telegram",
+        "operationId": "UnbindTelegram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1043,7 +1113,15 @@
         "content": {
           "type": "string"
         },
-        "enable": {
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -1061,7 +1139,9 @@
         "id",
         "title",
         "content",
-        "enable",
+        "show",
+        "pinned",
+        "popup",
         "created_at",
         "updated_at"
       ]
@@ -1140,6 +1220,23 @@
         "linux",
         "android",
         "ios"
+      ]
+    },
+    "BindTelegramResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BindTelegramResponse",
+      "required": [
+        "url",
+        "expired_at"
       ]
     },
     "CheckoutOrderRequest": {
@@ -1313,16 +1410,12 @@
         },
         "currency_symbol": {
           "type": "string"
-        },
-        "access_key": {
-          "type": "string"
         }
       },
       "title": "CurrencyConfig",
       "required": [
         "currency_unit",
-        "currency_symbol",
-        "access_key"
+        "currency_symbol"
       ]
     },
     "Document": {
@@ -1523,6 +1616,36 @@
         "list"
       ]
     },
+    "Hysteria2": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hop_ports": {
+          "type": "string"
+        },
+        "hop_interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "obfs_password": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Hysteria2",
+      "required": [
+        "port",
+        "hop_ports",
+        "hop_interval",
+        "obfs_password",
+        "security_config"
+      ]
+    },
     "InviteConfig": {
       "type": "object",
       "properties": {
@@ -1566,6 +1689,47 @@
         "node_secret",
         "node_pull_interval",
         "node_push_interval"
+      ]
+    },
+    "NodeStatus": {
+      "type": "object",
+      "properties": {
+        "online_users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineUser"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ServerStatus"
+        },
+        "last_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeStatus",
+      "required": [
+        "online_users",
+        "status",
+        "last_at"
+      ]
+    },
+    "OnlineUser": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip": {
+          "type": "string"
+        }
+      },
+      "title": "OnlineUser",
+      "required": [
+        "uid",
+        "ip"
       ]
     },
     "Order": {
@@ -1885,24 +2049,6 @@
         "order_no"
       ]
     },
-    "Push": {
-      "type": "object",
-      "properties": {
-        "push_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "title": "Push",
-      "required": [
-        "push_at",
-        "count"
-      ]
-    },
     "QueryAnnouncementRequest": {
       "type": "object",
       "properties": {
@@ -1913,12 +2059,22 @@
         "size": {
           "type": "integer",
           "format": "int32"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "QueryAnnouncementRequest",
       "required": [
         "page",
-        "size"
+        "size",
+        "pinned",
+        "popup"
       ]
     },
     "QueryAnnouncementResponse": {
@@ -2222,7 +2378,7 @@
         "coupon": {
           "type": "string"
         },
-        "subscribe_mark": {
+        "subscribe_token": {
           "type": "string"
         }
       },
@@ -2231,7 +2387,7 @@
         "subscribe_id",
         "quantity",
         "payment",
-        "subscribe_mark"
+        "subscribe_token"
       ]
     },
     "RenewalOrderResponse": {
@@ -2253,7 +2409,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscribe_mark": {
+        "subscribe_token": {
           "type": "string"
         },
         "payment": {
@@ -2263,7 +2419,7 @@
       "title": "ResetTrafficOrderRequest",
       "required": [
         "subscribe_id",
-        "subscribe_mark",
+        "subscribe_token",
         "payment"
       ]
     },
@@ -2299,34 +2455,44 @@
     "SecurityConfig": {
       "type": "object",
       "properties": {
-        "server_address": {
-          "type": "string"
-        },
-        "server_name": {
-          "type": "string"
-        },
-        "server_port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "private_key": {
-          "type": "string"
-        },
-        "public_key": {
-          "type": "string"
-        },
-        "short_id": {
+        "sni": {
           "type": "string"
         },
         "allow_insecure": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "reality_server_addr": {
+          "type": "string"
+        },
+        "reality_server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_private_key": {
+          "type": "string"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
         }
       },
-      "title": "SecurityConfig"
+      "title": "SecurityConfig",
+      "required": [
+        "sni",
+        "allow_insecure",
+        "fingerprint",
+        "reality_server_addr",
+        "reality_server_port",
+        "reality_private_key",
+        "reality_public_key",
+        "reality_short_id"
+      ]
     },
     "Server": {
       "type": "object",
@@ -2341,6 +2507,17 @@
         "server_addr": {
           "type": "string"
         },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        },
         "speed_limit": {
           "type": "integer",
           "format": "int32"
@@ -2349,28 +2526,19 @@
           "type": "number",
           "format": "float"
         },
-        "groupId": {
+        "group_id": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
         },
+        "config": {
+          "type": "object"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "vmess": {
-          "$ref": "#/definitions/Vmess"
-        },
-        "vless": {
-          "$ref": "#/definitions/Vless"
-        },
-        "trojan": {
-          "$ref": "#/definitions/Trojan"
-        },
-        "shadowsocks": {
-          "$ref": "#/definitions/Shadowsocks"
         },
         "created_at": {
           "type": "integer",
@@ -2380,8 +2548,12 @@
           "type": "integer",
           "format": "int64"
         },
-        "last": {
-          "$ref": "#/definitions/Push"
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "Server",
@@ -2389,14 +2561,19 @@
         "id",
         "name",
         "server_addr",
+        "enable_relay",
+        "relay_host",
+        "relay_port",
         "speed_limit",
         "traffic_ratio",
-        "groupId",
+        "group_id",
         "protocol",
+        "config",
         "enable",
         "created_at",
         "updated_at",
-        "last"
+        "status",
+        "sort"
       ]
     },
     "ServerGroup": {
@@ -2430,6 +2607,34 @@
         "updated_at"
       ]
     },
+    "ServerStatus": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "double"
+        },
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerStatus",
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
+      ]
+    },
     "Shadowsocks": {
       "type": "object",
       "properties": {
@@ -2440,25 +2645,15 @@
           "type": "integer",
           "format": "int32"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
+        "server_key": {
           "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
         }
       },
       "title": "Shadowsocks",
       "required": [
         "method",
         "port",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "server_key"
       ]
     },
     "SiteConfig": {
@@ -2483,6 +2678,24 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "SortItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SortItem",
+      "required": [
+        "id",
+        "sort"
       ]
     },
     "StripePayment": {
@@ -2521,6 +2734,9 @@
         "unit_price": {
           "type": "integer",
           "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
         },
         "discount": {
           "type": "array",
@@ -2578,6 +2794,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -2593,6 +2813,7 @@
         "name",
         "description",
         "unit_price",
+        "unit_time",
         "discount",
         "replacement",
         "inventory",
@@ -2605,6 +2826,7 @@
         "server",
         "show",
         "sell",
+        "sort",
         "created_at",
         "updated_at"
       ]
@@ -2638,7 +2860,7 @@
     "SubscribeDiscount": {
       "type": "object",
       "properties": {
-        "months": {
+        "quantity": {
           "type": "integer",
           "format": "int64"
         },
@@ -2649,7 +2871,7 @@
       },
       "title": "SubscribeDiscount",
       "required": [
-        "months",
+        "quantity",
         "discount"
       ]
     },
@@ -2699,19 +2921,6 @@
         "subscribe_types"
       ]
     },
-    "TLSConfig": {
-      "type": "object",
-      "properties": {
-        "server_name": {
-          "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "TLSConfig"
-    },
     "TelegramConfig": {
       "type": "object",
       "properties": {
@@ -2724,13 +2933,17 @@
         "telegram_notify": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "telegram_web_hook_domain": {
+          "type": "string"
         }
       },
       "title": "TelegramConfig",
       "required": [
         "telegram_bot_token",
         "telegram_group_url",
-        "telegram_notify"
+        "telegram_notify",
+        "telegram_web_hook_domain"
       ]
     },
     "Ticket": {
@@ -2792,52 +3005,70 @@
         "tos_content"
       ]
     },
-    "Trojan": {
+    "TransportConfig": {
       "type": "object",
       "properties": {
-        "network": {
+        "path": {
           "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
         },
         "host": {
           "type": "string"
         },
-        "sni": {
+        "service_name": {
           "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "transport": {
-          "type": "object"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
+        }
+      },
+      "title": "TransportConfig",
+      "required": [
+        "path",
+        "host",
+        "service_name"
+      ]
+    },
+    "Trojan": {
+      "type": "object",
+      "properties": {
+        "port": {
           "type": "integer",
           "format": "int32"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
         }
       },
       "title": "Trojan",
       "required": [
-        "network",
         "port",
-        "host",
-        "sni",
-        "allow_insecure",
         "transport",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "transport_config",
+        "security",
+        "security_config"
+      ]
+    },
+    "Tuic": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Tuic",
+      "required": [
+        "port",
+        "security_config"
       ]
     },
     "UpdateUserNotifyRequest": {
@@ -3134,7 +3365,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "mark": {
+        "token": {
           "type": "string"
         },
         "status": {
@@ -3162,7 +3393,7 @@
         "traffic",
         "download",
         "upload",
-        "mark",
+        "token",
         "status",
         "created_at",
         "updated_at"
@@ -3202,100 +3433,63 @@
     "Vless": {
       "type": "object",
       "properties": {
-        "host": {
-          "type": "string"
-        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
-        "network": {
+        "flow": {
           "type": "string"
         },
         "transport": {
-          "type": "object"
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
         },
         "security": {
           "type": "string"
         },
         "security_config": {
           "$ref": "#/definitions/SecurityConfig"
-        },
-        "xtls": {
-          "type": "string"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
         }
       },
       "title": "Vless",
       "required": [
-        "host",
         "port",
-        "network",
+        "flow",
         "transport",
+        "transport_config",
         "security",
-        "security_config",
-        "xtls",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "security_config"
       ]
     },
     "Vmess": {
       "type": "object",
       "properties": {
-        "host": {
-          "type": "string"
-        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
-        "enable_tls": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "tls_config": {
-          "$ref": "#/definitions/TLSConfig"
-        },
-        "network": {
-          "type": "string"
-        },
         "transport": {
-          "type": "object"
-        },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
           "type": "string"
         },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
         }
       },
       "title": "Vmess",
       "required": [
-        "host",
         "port",
-        "enable_tls",
-        "tls_config",
-        "network",
         "transport",
-        "enable_relay",
-        "relay_host",
-        "relay_port"
+        "transport_config",
+        "security",
+        "security_config"
       ]
     }
   },
