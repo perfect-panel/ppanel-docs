@@ -160,6 +160,43 @@
         ]
       }
     },
+    "/v1/admin/announcement/enable": {
+      "put": {
+        "summary": "Update announcement enable",
+        "operationId": "UpdateAnnouncementEnable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAnnouncementEnableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
+      }
+    },
     "/v1/admin/announcement/list": {
       "get": {
         "summary": "Get announcement list",
@@ -200,21 +237,7 @@
             "format": "int64"
           },
           {
-            "name": "show",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "pinned",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "popup",
+            "name": "enable",
             "in": "query",
             "required": false,
             "type": "boolean",
@@ -229,122 +252,6 @@
         ],
         "tags": [
           "ppanel/admin/announcement"
-        ]
-      }
-    },
-    "/v1/admin/console/revenue": {
-      "get": {
-        "summary": "Query revenue statistics",
-        "operationId": "QueryRevenueStatistics",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/RevenueStatisticsResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/console"
-        ]
-      }
-    },
-    "/v1/admin/console/server": {
-      "get": {
-        "summary": "Query server total data",
-        "operationId": "QueryServerTotalData",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/ServerTotalDataResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/console"
-        ]
-      }
-    },
-    "/v1/admin/console/ticket": {
-      "get": {
-        "summary": "Query ticket wait reply",
-        "operationId": "QueryTicketWaitReply",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/TicketWaitRelpyResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/console"
-        ]
-      }
-    },
-    "/v1/admin/console/user": {
-      "get": {
-        "summary": "Query user statistics",
-        "operationId": "QueryUserStatistics",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/UserStatisticsResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/console"
         ]
       }
     },
@@ -981,7 +888,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAlipayF2fRequest"
+              "$ref": "#/definitions/PaymentConfig"
             }
           }
         ],
@@ -1074,7 +981,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateEpayRequest"
+              "$ref": "#/definitions/PaymentConfig"
             }
           }
         ],
@@ -1138,7 +1045,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateStripeRequest"
+              "$ref": "#/definitions/PaymentConfig"
             }
           }
         ],
@@ -1202,7 +1109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateStripeRequest"
+              "$ref": "#/definitions/PaymentConfig"
             }
           }
         ],
@@ -1624,43 +1531,6 @@
         ]
       }
     },
-    "/v1/admin/server/sort": {
-      "post": {
-        "summary": "Node sort ",
-        "operationId": "NodeSort",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeSortRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
     "/v1/admin/subscribe/": {
       "delete": {
         "summary": "Delete subscribe",
@@ -2067,43 +1937,6 @@
             "in": "query",
             "required": false,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/admin/subscribe"
-        ]
-      }
-    },
-    "/v1/admin/subscribe/sort": {
-      "post": {
-        "summary": "Subscribe sort",
-        "operationId": "SubscribeSort",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SubscribeSortRequest"
-            }
           }
         ],
         "tags": [
@@ -2563,33 +2396,6 @@
             }
           }
         ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/setting_telegram_bot": {
-      "post": {
-        "summary": "setting telegram bot",
-        "operationId": "SettingTelegramBot",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
         "tags": [
           "ppanel/admin/system"
         ]
@@ -3159,62 +2965,6 @@
         ]
       }
     },
-    "/v1/admin/tool/log": {
-      "get": {
-        "summary": "Get System Log",
-        "operationId": "GetSystemLog",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LogResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/tool"
-        ]
-      }
-    },
-    "/v1/admin/tool/restart": {
-      "get": {
-        "summary": "Restart System",
-        "operationId": "RestartSystem",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/tool"
-        ]
-      }
-    },
     "/v1/admin/user/": {
       "delete": {
         "summary": "Delete user",
@@ -3513,35 +3263,6 @@
     }
   },
   "definitions": {
-    "AlipayF2FConfig": {
-      "type": "object",
-      "properties": {
-        "app_id": {
-          "type": "string"
-        },
-        "private_key": {
-          "type": "string"
-        },
-        "public_key": {
-          "type": "string"
-        },
-        "invoice_name": {
-          "type": "string"
-        },
-        "sandbox": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "AlipayF2FConfig",
-      "required": [
-        "app_id",
-        "private_key",
-        "public_key",
-        "invoice_name",
-        "sandbox"
-      ]
-    },
     "Announcement": {
       "type": "object",
       "properties": {
@@ -3555,15 +3276,7 @@
         "content": {
           "type": "string"
         },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "pinned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "popup": {
+        "enable": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -3581,9 +3294,7 @@
         "id",
         "title",
         "content",
-        "show",
-        "pinned",
-        "popup",
+        "enable",
         "created_at",
         "updated_at"
       ]
@@ -4016,17 +3727,6 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
-        },
         "speed_limit": {
           "type": "integer",
           "format": "int32"
@@ -4035,39 +3735,39 @@
           "type": "number",
           "format": "float"
         },
-        "group_id": {
+        "groupId": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
         },
-        "config": {
-          "type": "object"
-        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
         },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
+        "vmess": {
+          "$ref": "#/definitions/Vmess"
+        },
+        "vless": {
+          "$ref": "#/definitions/Vless"
+        },
+        "trojan": {
+          "$ref": "#/definitions/Trojan"
+        },
+        "shadowsocks": {
+          "$ref": "#/definitions/Shadowsocks"
         }
       },
       "title": "CreateNodeRequest",
       "required": [
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
         "speed_limit",
         "traffic_ratio",
-        "group_id",
+        "groupId",
         "protocol",
-        "config",
-        "enable",
-        "sort"
+        "enable"
       ]
     },
     "CreateOrderRequest": {
@@ -4161,9 +3861,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "unit_time": {
-          "type": "string"
-        },
         "discount": {
           "type": "array",
           "items": {
@@ -4226,7 +3923,6 @@
         "name",
         "description",
         "unit_price",
-        "unit_time",
         "discount",
         "replacement",
         "inventory",
@@ -4319,12 +4015,16 @@
         },
         "currency_symbol": {
           "type": "string"
+        },
+        "access_key": {
+          "type": "string"
         }
       },
       "title": "CurrencyConfig",
       "required": [
         "currency_unit",
-        "currency_symbol"
+        "currency_symbol",
+        "access_key"
       ]
     },
     "DeleteAnnouncementRequest": {
@@ -4520,26 +4220,6 @@
         "expiration_email_template"
       ]
     },
-    "EpayConfig": {
-      "type": "object",
-      "properties": {
-        "pid": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        }
-      },
-      "title": "EpayConfig",
-      "required": [
-        "pid",
-        "url",
-        "key"
-      ]
-    },
     "Follow": {
       "type": "object",
       "properties": {
@@ -4602,15 +4282,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "pinned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "popup": {
+        "enable": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -5084,36 +4756,6 @@
         "list"
       ]
     },
-    "Hysteria2": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "hop_ports": {
-          "type": "string"
-        },
-        "hop_interval": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "obfs_password": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Hysteria2",
-      "required": [
-        "port",
-        "hop_ports",
-        "hop_interval",
-        "obfs_password",
-        "security_config"
-      ]
-    },
     "InviteConfig": {
       "type": "object",
       "properties": {
@@ -5137,18 +4779,6 @@
         "only_first_purchase"
       ]
     },
-    "LogResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "object"
-        }
-      },
-      "title": "LogResponse",
-      "required": [
-        "list"
-      ]
-    },
     "NodeConfig": {
       "type": "object",
       "properties": {
@@ -5169,62 +4799,6 @@
         "node_secret",
         "node_pull_interval",
         "node_push_interval"
-      ]
-    },
-    "NodeSortRequest": {
-      "type": "object",
-      "properties": {
-        "sort": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SortItem"
-          }
-        }
-      },
-      "title": "NodeSortRequest",
-      "required": [
-        "sort"
-      ]
-    },
-    "NodeStatus": {
-      "type": "object",
-      "properties": {
-        "online_users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnlineUser"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/ServerStatus"
-        },
-        "last_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "NodeStatus",
-      "required": [
-        "online_users",
-        "status",
-        "last_at"
-      ]
-    },
-    "OnlineUser": {
-      "type": "object",
-      "properties": {
-        "uid": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip": {
-          "type": "string"
-        }
-      },
-      "title": "OnlineUser",
-      "required": [
-        "uid",
-        "ip"
       ]
     },
     "Order": {
@@ -5409,38 +4983,6 @@
         "updated_at"
       ]
     },
-    "OrdersStatistics": {
-      "type": "object",
-      "properties": {
-        "date": {
-          "type": "string"
-        },
-        "amount_total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new_order_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_order_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OrdersStatistics"
-          }
-        }
-      },
-      "title": "OrdersStatistics",
-      "required": [
-        "amount_total",
-        "new_order_amount",
-        "renewal_order_amount"
-      ]
-    },
     "PaymentConfig": {
       "type": "object",
       "properties": {
@@ -5488,6 +5030,24 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "Push": {
+      "type": "object",
+      "properties": {
+        "push_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Push",
+      "required": [
+        "push_at",
+        "count"
       ]
     },
     "RegisterConfig": {
@@ -5554,67 +5114,37 @@
         }
       }
     },
-    "RevenueStatisticsResponse": {
-      "type": "object",
-      "properties": {
-        "today": {
-          "$ref": "#/definitions/OrdersStatistics"
-        },
-        "monthly": {
-          "$ref": "#/definitions/OrdersStatistics"
-        },
-        "all": {
-          "$ref": "#/definitions/OrdersStatistics"
-        }
-      },
-      "title": "RevenueStatisticsResponse",
-      "required": [
-        "today",
-        "monthly",
-        "all"
-      ]
-    },
     "SecurityConfig": {
       "type": "object",
       "properties": {
-        "sni": {
+        "server_address": {
+          "type": "string"
+        },
+        "server_name": {
+          "type": "string"
+        },
+        "server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "short_id": {
           "type": "string"
         },
         "allow_insecure": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "reality_server_addr": {
-          "type": "string"
-        },
-        "reality_server_port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "reality_private_key": {
-          "type": "string"
-        },
-        "reality_public_key": {
-          "type": "string"
-        },
-        "reality_short_id": {
-          "type": "string"
         }
       },
-      "title": "SecurityConfig",
-      "required": [
-        "sni",
-        "allow_insecure",
-        "fingerprint",
-        "reality_server_addr",
-        "reality_server_port",
-        "reality_private_key",
-        "reality_public_key",
-        "reality_short_id"
-      ]
+      "title": "SecurityConfig"
     },
     "Server": {
       "type": "object",
@@ -5629,17 +5159,6 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
-        },
         "speed_limit": {
           "type": "integer",
           "format": "int32"
@@ -5648,19 +5167,28 @@
           "type": "number",
           "format": "float"
         },
-        "group_id": {
+        "groupId": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
         },
-        "config": {
-          "type": "object"
-        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "vmess": {
+          "$ref": "#/definitions/Vmess"
+        },
+        "vless": {
+          "$ref": "#/definitions/Vless"
+        },
+        "trojan": {
+          "$ref": "#/definitions/Trojan"
+        },
+        "shadowsocks": {
+          "$ref": "#/definitions/Shadowsocks"
         },
         "created_at": {
           "type": "integer",
@@ -5670,12 +5198,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "status": {
-          "$ref": "#/definitions/NodeStatus"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
+        "last": {
+          "$ref": "#/definitions/Push"
         }
       },
       "title": "Server",
@@ -5683,19 +5207,14 @@
         "id",
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
         "speed_limit",
         "traffic_ratio",
-        "group_id",
+        "groupId",
         "protocol",
-        "config",
         "enable",
         "created_at",
         "updated_at",
-        "status",
-        "sort"
+        "last"
       ]
     },
     "ServerGroup": {
@@ -5729,137 +5248,6 @@
         "updated_at"
       ]
     },
-    "ServerStatus": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerStatus",
-      "required": [
-        "cpu",
-        "mem",
-        "disk",
-        "updated_at"
-      ]
-    },
-    "ServerTotalDataResponse": {
-      "type": "object",
-      "properties": {
-        "online_user_ips": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "online_servers": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "offline_servers": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "today_upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "today_download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "monthly_upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "monthly_download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "server_traffic_ranking_today": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerTrafficData"
-          }
-        },
-        "server_traffic_ranking_yesterday": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerTrafficData"
-          }
-        },
-        "user_traffic_ranking_today": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserTrafficData"
-          }
-        },
-        "user_traffic_ranking_yesterday": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserTrafficData"
-          }
-        }
-      },
-      "title": "ServerTotalDataResponse",
-      "required": [
-        "online_user_ips",
-        "online_servers",
-        "offline_servers",
-        "today_upload",
-        "today_download",
-        "monthly_upload",
-        "monthly_download",
-        "updated_at",
-        "server_traffic_ranking_today",
-        "server_traffic_ranking_yesterday",
-        "user_traffic_ranking_today",
-        "user_traffic_ranking_yesterday"
-      ]
-    },
-    "ServerTrafficData": {
-      "type": "object",
-      "properties": {
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerTrafficData",
-      "required": [
-        "server_id",
-        "name",
-        "upload",
-        "download"
-      ]
-    },
     "Shadowsocks": {
       "type": "object",
       "properties": {
@@ -5870,15 +5258,25 @@
           "type": "integer",
           "format": "int32"
         },
-        "server_key": {
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
           "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
         }
       },
       "title": "Shadowsocks",
       "required": [
         "method",
         "port",
-        "server_key"
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     },
     "SiteConfig": {
@@ -5905,48 +5303,6 @@
         "site_logo"
       ]
     },
-    "SortItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SortItem",
-      "required": [
-        "id",
-        "sort"
-      ]
-    },
-    "StripeConfig": {
-      "type": "object",
-      "properties": {
-        "public_key": {
-          "type": "string"
-        },
-        "secret_key": {
-          "type": "string"
-        },
-        "webhook_secret": {
-          "type": "string"
-        },
-        "payment": {
-          "type": "string"
-        }
-      },
-      "title": "StripeConfig",
-      "required": [
-        "public_key",
-        "secret_key",
-        "webhook_secret",
-        "payment"
-      ]
-    },
     "Subscribe": {
       "type": "object",
       "properties": {
@@ -5963,9 +5319,6 @@
         "unit_price": {
           "type": "integer",
           "format": "int64"
-        },
-        "unit_time": {
-          "type": "string"
         },
         "discount": {
           "type": "array",
@@ -6023,10 +5376,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -6042,7 +5391,6 @@
         "name",
         "description",
         "unit_price",
-        "unit_time",
         "discount",
         "replacement",
         "inventory",
@@ -6055,7 +5403,6 @@
         "server",
         "show",
         "sell",
-        "sort",
         "created_at",
         "updated_at"
       ]
@@ -6089,7 +5436,7 @@
     "SubscribeDiscount": {
       "type": "object",
       "properties": {
-        "quantity": {
+        "months": {
           "type": "integer",
           "format": "int64"
         },
@@ -6100,7 +5447,7 @@
       },
       "title": "SubscribeDiscount",
       "required": [
-        "quantity",
+        "months",
         "discount"
       ]
     },
@@ -6135,21 +5482,6 @@
         "updated_at"
       ]
     },
-    "SubscribeSortRequest": {
-      "type": "object",
-      "properties": {
-        "sort": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SortItem"
-          }
-        }
-      },
-      "title": "SubscribeSortRequest",
-      "required": [
-        "sort"
-      ]
-    },
     "SubscribeType": {
       "type": "object",
       "properties": {
@@ -6165,6 +5497,19 @@
         "subscribe_types"
       ]
     },
+    "TLSConfig": {
+      "type": "object",
+      "properties": {
+        "server_name": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "TLSConfig"
+    },
     "TelegramConfig": {
       "type": "object",
       "properties": {
@@ -6177,17 +5522,13 @@
         "telegram_notify": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "telegram_web_hook_domain": {
-          "type": "string"
         }
       },
       "title": "TelegramConfig",
       "required": [
         "telegram_bot_token",
         "telegram_group_url",
-        "telegram_notify",
-        "telegram_web_hook_domain"
+        "telegram_notify"
       ]
     },
     "TestEmailSmtpRequest": {
@@ -6249,19 +5590,6 @@
         "updated_at"
       ]
     },
-    "TicketWaitRelpyResponse": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "TicketWaitRelpyResponse",
-      "required": [
-        "count"
-      ]
-    },
     "TosConfig": {
       "type": "object",
       "properties": {
@@ -6274,119 +5602,52 @@
         "tos_content"
       ]
     },
-    "TransportConfig": {
+    "Trojan": {
       "type": "object",
       "properties": {
-        "path": {
+        "network": {
           "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
         },
         "host": {
           "type": "string"
         },
-        "service_name": {
+        "sni": {
           "type": "string"
-        }
-      },
-      "title": "TransportConfig",
-      "required": [
-        "path",
-        "host",
-        "service_name"
-      ]
-    },
-    "Trojan": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "transport": {
+          "type": "object"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
           "type": "string"
         },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
         }
       },
       "title": "Trojan",
       "required": [
+        "network",
         "port",
+        "host",
+        "sni",
+        "allow_insecure",
         "transport",
-        "transport_config",
-        "security",
-        "security_config"
-      ]
-    },
-    "Tuic": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Tuic",
-      "required": [
-        "port",
-        "security_config"
-      ]
-    },
-    "UpdateAlipayF2fRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/AlipayF2FConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateAlipayF2fRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
-        "enable"
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     },
     "UpdateAnnouncementEnableRequest": {
@@ -6420,15 +5681,7 @@
         "content": {
           "type": "string"
         },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "pinned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "popup": {
+        "enable": {
           "type": "boolean",
           "format": "boolean"
         }
@@ -6438,9 +5691,7 @@
         "id",
         "title",
         "content",
-        "show",
-        "pinned",
-        "popup"
+        "enable"
       ]
     },
     "UpdateApplicationRequest": {
@@ -6567,55 +5818,6 @@
         "show"
       ]
     },
-    "UpdateEpayRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/EpayConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateEpayRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
-        "enable"
-      ]
-    },
     "UpdateNodeGroupRequest": {
       "type": "object",
       "properties": {
@@ -6650,17 +5852,6 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
-          "type": "string"
-        },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
-        },
         "speed_limit": {
           "type": "integer",
           "format": "int32"
@@ -6669,23 +5860,28 @@
           "type": "number",
           "format": "float"
         },
-        "group_id": {
+        "groupId": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
         },
-        "config": {
-          "type": "object"
-        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
         },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
+        "vmess": {
+          "$ref": "#/definitions/Vmess"
+        },
+        "vless": {
+          "$ref": "#/definitions/Vless"
+        },
+        "trojan": {
+          "$ref": "#/definitions/Trojan"
+        },
+        "shadowsocks": {
+          "$ref": "#/definitions/Shadowsocks"
         }
       },
       "title": "UpdateNodeRequest",
@@ -6693,16 +5889,11 @@
         "id",
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
         "speed_limit",
         "traffic_ratio",
-        "group_id",
+        "groupId",
         "protocol",
-        "config",
-        "enable",
-        "sort"
+        "enable"
       ]
     },
     "UpdateOrderStatusRequest": {
@@ -6727,55 +5918,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "UpdateStripeRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/StripeConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateStripeRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
-        "enable"
       ]
     },
     "UpdateSubscribeGroupRequest": {
@@ -6815,9 +5957,6 @@
         "unit_price": {
           "type": "integer",
           "format": "int64"
-        },
-        "unit_time": {
-          "type": "string"
         },
         "discount": {
           "type": "array",
@@ -6874,10 +6013,6 @@
         "sell": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "UpdateSubscribeRequest",
@@ -6886,7 +6021,6 @@
         "name",
         "description",
         "unit_price",
-        "unit_time",
         "discount",
         "replacement",
         "inventory",
@@ -6898,8 +6032,7 @@
         "server_group",
         "server",
         "show",
-        "sell",
-        "sort"
+        "sell"
       ]
     },
     "UpdateTicketStatusRequest": {
@@ -7180,58 +6313,6 @@
         "created_at"
       ]
     },
-    "UserStatistics": {
-      "type": "object",
-      "properties": {
-        "date": {
-          "type": "string"
-        },
-        "register": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new_order_users": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_order_users": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserStatistics"
-          }
-        }
-      },
-      "title": "UserStatistics",
-      "required": [
-        "register",
-        "new_order_users",
-        "renewal_order_users"
-      ]
-    },
-    "UserStatisticsResponse": {
-      "type": "object",
-      "properties": {
-        "today": {
-          "$ref": "#/definitions/UserStatistics"
-        },
-        "monthly": {
-          "$ref": "#/definitions/UserStatistics"
-        },
-        "all": {
-          "$ref": "#/definitions/UserStatistics"
-        }
-      },
-      "title": "UserStatisticsResponse",
-      "required": [
-        "today",
-        "monthly",
-        "all"
-      ]
-    },
     "UserSubscribe": {
       "type": "object",
       "properties": {
@@ -7274,7 +6355,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "token": {
+        "mark": {
           "type": "string"
         },
         "status": {
@@ -7302,37 +6383,10 @@
         "traffic",
         "download",
         "upload",
-        "token",
+        "mark",
         "status",
         "created_at",
         "updated_at"
-      ]
-    },
-    "UserTrafficData": {
-      "type": "object",
-      "properties": {
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email": {
-          "type": "string"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserTrafficData",
-      "required": [
-        "user_id",
-        "email",
-        "upload",
-        "download"
       ]
     },
     "VerifyConfig": {
@@ -7369,63 +6423,100 @@
     "Vless": {
       "type": "object",
       "properties": {
+        "host": {
+          "type": "string"
+        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
-        "flow": {
+        "network": {
           "type": "string"
         },
         "transport": {
-          "type": "string"
-        },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
+          "type": "object"
         },
         "security": {
           "type": "string"
         },
         "security_config": {
           "$ref": "#/definitions/SecurityConfig"
+        },
+        "xtls": {
+          "type": "string"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
         }
       },
       "title": "Vless",
       "required": [
+        "host",
         "port",
-        "flow",
+        "network",
         "transport",
-        "transport_config",
         "security",
-        "security_config"
+        "security_config",
+        "xtls",
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     },
     "Vmess": {
       "type": "object",
       "properties": {
+        "host": {
+          "type": "string"
+        },
         "port": {
           "type": "integer",
           "format": "int32"
         },
+        "enable_tls": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "tls_config": {
+          "$ref": "#/definitions/TLSConfig"
+        },
+        "network": {
+          "type": "string"
+        },
         "transport": {
+          "type": "object"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
           "type": "string"
         },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
         }
       },
       "title": "Vmess",
       "required": [
+        "host",
         "port",
+        "enable_tls",
+        "tls_config",
+        "network",
         "transport",
-        "transport_config",
-        "security",
-        "security_config"
+        "enable_relay",
+        "relay_host",
+        "relay_port"
       ]
     }
   },
