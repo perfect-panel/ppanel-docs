@@ -5044,6 +5044,33 @@
         ]
       }
     },
+    "/v1/public/user/unbind_telegram": {
+      "post": {
+        "summary": "Unbind Telegram",
+        "operationId": "UnbindTelegram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/server/config": {
       "get": {
         "summary": "Get server config",
