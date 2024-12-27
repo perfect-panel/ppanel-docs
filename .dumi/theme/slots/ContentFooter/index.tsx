@@ -13,7 +13,6 @@ export default memo(() => {
         process.env.UMI_APP_GISCUS_CATEGORY_ID && (
           <section style={{ marginTop: '32px' }}>
             <Giscus
-              id="comments"
               repo={process.env.UMI_APP_GISCUS_REPO}
               repoId={process.env.UMI_APP_GISCUS_REPO_ID}
               categoryId={process.env.UMI_APP_GISCUS_CATEGORY_ID}
@@ -23,7 +22,7 @@ export default memo(() => {
               emitMetadata="1"
               inputPosition="top"
               theme={color === 'dark' ? 'dark_protanopia' : 'light_protanopia'}
-              lang={locale}
+              lang={locale.id === 'zh-CN' ? 'zh-CN' : 'en'}
               loading="lazy"
               crossorigin="anonymous"
               async
