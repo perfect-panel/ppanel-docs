@@ -1,0 +1,39 @@
+{
+  "name": "ppanel-docs",
+  "version": "0.0.1",
+  "description": "PPanel is a pure, professional, and perfect open-source proxy panel tool, designed to be your ideal choice for learning and practical use. ",
+  "scripts": {
+    "build": "dumi build",
+    "dev": "dumi dev",
+    "locale": "lobe-i18n md",
+    "prepare": "husky install && dumi setup",
+    "preview": "dumi preview",
+    "start": "npm run dev"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ]
+  },
+  "dependencies": {
+    "swagger-ui-react": "^5.18.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@lobehub/i18n-cli": "^1.20.2",
+    "dumi": "^2.4.13",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "packageManager": "bun@1.1.42",
+  "authors": [
+    "support@ppanel.dev"
+  ]
+}
