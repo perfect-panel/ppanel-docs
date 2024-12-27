@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@giscus/react": "^3.0.0",
     "swagger-ui-react": "^5.18.2"
   },
   "devDependencies": {
