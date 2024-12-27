@@ -1,9 +1,11 @@
 import Giscus from '@giscus/react';
+import { useLocale, usePrefersColor } from 'dumi';
 import ContentFooter from 'dumi/theme-default/slots/ContentFooter';
 import { memo } from 'react';
 
 export default memo(() => {
-  console.log('process.env.GISCUS_REPO', process.env.GISCUS_REPO);
+  const locale = useLocale();
+  const [color] = usePrefersColor();
   return (
     <>
       {process.env.UMI_APP_GISCUS_REPO &&
@@ -13,15 +15,15 @@ export default memo(() => {
             <Giscus
               id="comments"
               repo={process.env.UMI_APP_GISCUS_REPO}
-              repo-id={process.env.UMI_APP_GISCUS_REPO_ID}
-              category-id={process.env.UMI_APP_GISCUS_CATEGORY_ID}
+              repoId={process.env.UMI_APP_GISCUS_REPO_ID}
+              categoryId={process.env.UMI_APP_GISCUS_CATEGORY_ID}
               mapping="pathname"
               strict="0"
-              reactions-enabled="1"
-              emit-metadata="1"
-              input-position="top"
-              theme="preferred_color_scheme"
-              lang="zh-CN"
+              reactionsEnabled="1"
+              emitMetadata="1"
+              inputPosition="top"
+              theme={color === 'dark' ? 'dark_protanopia' : 'light_protanopia'}
+              lang={locale}
               loading="lazy"
               crossorigin="anonymous"
               async
