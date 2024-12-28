@@ -1605,6 +1605,22 @@
           "type": "integer",
           "format": "int64"
         },
+        "deduction_ratio": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchase_with_discount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reset_cycle": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_reset": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1634,6 +1650,10 @@
         "show",
         "sell",
         "sort",
+        "deduction_ratio",
+        "purchase_with_discount",
+        "reset_cycle",
+        "renewal_reset",
         "created_at",
         "updated_at"
       ]
