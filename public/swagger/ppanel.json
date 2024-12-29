@@ -9296,10 +9296,10 @@
     "TimePeriod": {
       "type": "object",
       "properties": {
-        "start_at": {
+        "start_time": {
           "type": "string"
         },
-        "end_at": {
+        "end_time": {
           "type": "string"
         },
         "multiplier": {
@@ -9309,8 +9309,8 @@
       },
       "title": "TimePeriod",
       "required": [
-        "start_at",
-        "end_at",
+        "start_time",
+        "end_time",
         "multiplier"
       ]
     },
