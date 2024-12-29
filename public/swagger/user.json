@@ -3013,6 +3013,27 @@
         "updated_at"
       ]
     },
+    "TimePeriod": {
+      "type": "object",
+      "properties": {
+        "start_at": {
+          "type": "string"
+        },
+        "end_at": {
+          "type": "string"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "TimePeriod",
+      "required": [
+        "start_at",
+        "end_at",
+        "multiplier"
+      ]
+    },
     "TosConfig": {
       "type": "object",
       "properties": {

@@ -2376,6 +2376,35 @@
         ]
       }
     },
+    "/v1/admin/system/get_node_multiplier": {
+      "get": {
+        "summary": "Get Node Multiplier",
+        "operationId": "GetNodeMultiplier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetNodeMultiplierResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/invite_config": {
       "get": {
         "summary": "Get invite config",
@@ -2560,6 +2589,44 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
+    "/v1/admin/system/set_node_multiplier": {
+      "post": {
+        "summary": "Set Node Multiplier",
+        "operationId": "SetNodeMultiplier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "SetNodeMultiplierRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetNodeMultiplierRequest"
             }
           }
         ],
@@ -6887,6 +6954,21 @@
         "list"
       ]
     },
+    "GetNodeMultiplierResponse": {
+      "type": "object",
+      "properties": {
+        "periods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimePeriod"
+          }
+        }
+      },
+      "title": "GetNodeMultiplierResponse",
+      "required": [
+        "periods"
+      ]
+    },
     "GetNodeServerListRequest": {
       "type": "object",
       "properties": {
@@ -8737,6 +8819,21 @@
         "device_limit"
       ]
     },
+    "SetNodeMultiplierRequest": {
+      "type": "object",
+      "properties": {
+        "periods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimePeriod"
+          }
+        }
+      },
+      "title": "SetNodeMultiplierRequest",
+      "required": [
+        "periods"
+      ]
+    },
     "Shadowsocks": {
       "type": "object",
       "properties": {
@@ -9194,6 +9291,27 @@
       "title": "TicketWaitRelpyResponse",
       "required": [
         "count"
+      ]
+    },
+    "TimePeriod": {
+      "type": "object",
+      "properties": {
+        "start_at": {
+          "type": "string"
+        },
+        "end_at": {
+          "type": "string"
+        },
+        "multiplier": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "TimePeriod",
+      "required": [
+        "start_at",
+        "end_at",
+        "multiplier"
       ]
     },
     "TosConfig": {
