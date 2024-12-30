@@ -2433,6 +2433,10 @@
         },
         "subscribe_token": {
           "type": "string"
+        },
+        "discount_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "RenewalOrderRequest",
@@ -2440,7 +2444,8 @@
         "subscribe_id",
         "quantity",
         "payment",
-        "subscribe_token"
+        "subscribe_token",
+        "discount_subscribe_id"
       ]
     },
     "RenewalOrderResponse": {
