@@ -4083,16 +4083,14 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
+        "relay_mode": {
           "type": "string"
         },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
+        "relay_node": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeRelay"
+          }
         },
         "speed_limit": {
           "type": "integer",
@@ -4125,9 +4123,8 @@
       "required": [
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
+        "relay_mode",
+        "relay_node",
         "speed_limit",
         "traffic_ratio",
         "group_id",
@@ -5273,6 +5270,27 @@
         "node_push_interval"
       ]
     },
+    "NodeRelay": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prefix": {
+          "type": "string"
+        }
+      },
+      "title": "NodeRelay",
+      "required": [
+        "host",
+        "port",
+        "prefix"
+      ]
+    },
     "NodeSortRequest": {
       "type": "object",
       "properties": {
@@ -5639,6 +5657,25 @@
         "ip_register_limit_duration"
       ]
     },
+    "RelayConfig": {
+      "type": "object",
+      "properties": {
+        "dispatch_mode": {
+          "type": "string"
+        },
+        "relay_nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeRelay"
+          }
+        }
+      },
+      "title": "RelayConfig",
+      "required": [
+        "dispatch_mode",
+        "relay_nodes"
+      ]
+    },
     "Response": {
       "type": "object",
       "properties": {
@@ -5731,16 +5768,14 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
+        "relay_mode": {
           "type": "string"
         },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
+        "relay_node": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeRelay"
+          }
         },
         "speed_limit": {
           "type": "integer",
@@ -5785,9 +5820,8 @@
         "id",
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
+        "relay_mode",
+        "relay_node",
         "speed_limit",
         "traffic_ratio",
         "group_id",
@@ -6808,16 +6842,14 @@
         "server_addr": {
           "type": "string"
         },
-        "enable_relay": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "relay_host": {
+        "relay_mode": {
           "type": "string"
         },
-        "relay_port": {
-          "type": "integer",
-          "format": "int32"
+        "relay_node": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeRelay"
+          }
         },
         "speed_limit": {
           "type": "integer",
@@ -6851,9 +6883,8 @@
         "id",
         "name",
         "server_addr",
-        "enable_relay",
-        "relay_host",
-        "relay_port",
+        "relay_mode",
+        "relay_node",
         "speed_limit",
         "traffic_ratio",
         "group_id",
