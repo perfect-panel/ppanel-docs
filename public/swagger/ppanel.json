@@ -7677,6 +7677,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "subscription_discount_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscription_discount_price": {
+          "type": "integer",
+          "format": "int64"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -7703,6 +7711,8 @@
         "trade_no",
         "status",
         "subscribe_id",
+        "subscription_discount_id",
+        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -7769,6 +7779,14 @@
         "subscribe": {
           "$ref": "#/definitions/Subscribe"
         },
+        "subscription_discount_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscription_discount_price": {
+          "type": "integer",
+          "format": "int64"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -7796,6 +7814,8 @@
         "status",
         "subscribe_id",
         "subscribe",
+        "subscription_discount_id",
+        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -7953,13 +7973,18 @@
         },
         "coupon": {
           "type": "string"
+        },
+        "discount_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "PurchaseOrderRequest",
       "required": [
         "subscribe_id",
         "quantity",
-        "payment"
+        "payment",
+        "discount_subscribe_id"
       ]
     },
     "PurchaseOrderResponse": {
