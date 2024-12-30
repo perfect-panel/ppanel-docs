@@ -1,9 +1,5 @@
 ---
 title: Public
-order: 2
-nav:
-  title: API
-  order: 2
 group:
   title: Swagger
   order: 1

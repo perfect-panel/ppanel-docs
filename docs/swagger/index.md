@@ -1,9 +1,5 @@
 ---
 title: All
-order: 1
-nav:
-  title: API
-  order: 2
 group:
   title: Swagger
   order: 1

@@ -1,9 +1,5 @@
 ---
 title: Management Console
-order: 4
-nav:
-  title: API
-  order: 2
 group:
   title: Swagger
   order: 1
