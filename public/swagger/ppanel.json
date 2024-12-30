@@ -8279,25 +8279,6 @@
         "ip_register_limit_duration"
       ]
     },
-    "RelayConfig": {
-      "type": "object",
-      "properties": {
-        "dispatch_mode": {
-          "type": "string"
-        },
-        "relay_nodes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeRelay"
-          }
-        }
-      },
-      "title": "RelayConfig",
-      "required": [
-        "dispatch_mode",
-        "relay_nodes"
-      ]
-    },
     "RenewalOrderRequest": {
       "type": "object",
       "properties": {
