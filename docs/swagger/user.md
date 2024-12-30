@@ -1,9 +1,5 @@
 ---
 title: User Interface
-order: 3
-nav:
-  title: API
-  order: 2
 group:
   title: Swagger
   order: 1
