@@ -7906,6 +7906,12 @@
         "fee_amount": {
           "type": "integer",
           "format": "int64"
+        },
+        "discount_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscountInfo"
+          }
         }
       },
       "title": "PreOrderResponse",
@@ -7915,7 +7921,8 @@
         "discount",
         "coupon",
         "coupon_discount",
-        "fee_amount"
+        "fee_amount",
+        "discount_list"
       ]
     },
     "PreRenewalOrderResponse": {
@@ -9148,6 +9155,32 @@
       "required": [
         "quantity",
         "discount"
+      ]
+    },
+    "SubscribeDiscountInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "string"
+        }
+      },
+      "title": "SubscribeDiscountInfo",
+      "required": [
+        "id",
+        "name",
+        "price",
+        "expire_time"
       ]
     },
     "SubscribeGroup": {
