@@ -2030,6 +2030,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "subscribe_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
         "discount_list": {
           "type": "array",
           "items": {
@@ -2045,6 +2049,7 @@
         "coupon",
         "coupon_discount",
         "fee_amount",
+        "subscribe_discount",
         "discount_list"
       ]
     },
