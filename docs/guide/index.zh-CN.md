@@ -1,8 +1,7 @@
 ---
-title: 指南
-nav:
-  title: 指南
-  order: 1
+title: 前言
+group: 指南
+nav: 指南
 toc: content
 ---
 
