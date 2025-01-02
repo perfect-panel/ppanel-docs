@@ -1,7 +1,9 @@
 ---
 title: 二进制
-order: 3
-group: 快速部署
+order: 1
+group:
+  title: 快速部署
+  order: 1
 toc: content
 ---
 # 快速部署指南

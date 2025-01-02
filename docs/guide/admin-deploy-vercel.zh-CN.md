@@ -1,7 +1,9 @@
 ---
 title: Vercel
-order: 9
-group: 管理端部署
+order: 1
+group: 
+  title: 管理端部署
+  order: 3
 toc: content
 ---
 ### 使用 Vercel 部署**

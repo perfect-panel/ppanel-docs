@@ -1,7 +1,9 @@
 ---
 title: 配置说明
-order: 5
-group: 服务端部署
+order: 0
+group: 
+  title: 服务端部署
+  order: 2
 toc: content
 ---
 ## 运行环境要求

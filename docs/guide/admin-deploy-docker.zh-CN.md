@@ -1,7 +1,9 @@
 ---
 title: Docker
-order: 10
-group: 管理端部署
+order: 2
+group: 
+  title: 管理端部署
+  order: 3
 toc: content
 ---
 ### 使用 Docker 部署**

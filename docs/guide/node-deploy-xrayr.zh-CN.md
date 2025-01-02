@@ -1,7 +1,9 @@
 ---
 title: XrayR
-order: 13
-group: 节点端部署
+order: 1
+group: 
+  title: 节点端部署
+  order: 5
 toc: content
 ---
 ## 安装节点端

@@ -1,7 +1,9 @@
 ---
 title: 配置说明
-order: 8
-group: 管理端部署
+order: 0
+group: 
+  title: 管理端部署
+  order: 3
 toc: content
 ---
 # **PPanel 管理端部署指南**

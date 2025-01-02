@@ -1,7 +1,9 @@
 ---
 title: Node
-order: 11
-group: 管理端部署
+order: 3
+group: 
+  title: 管理端部署
+  order: 3
 toc: content
 ---
 ###  使用 PM2、Node.js 或 Bun 部署

@@ -1,7 +1,9 @@
 ---
 title: PPnode
-order: 12
-group: 节点端部署
+order: 0
+group: 
+  title: 节点端部署
+  order: 5
 toc: content
 ---
 # PPnode
