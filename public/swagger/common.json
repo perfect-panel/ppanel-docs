@@ -983,6 +983,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "discount": {
           "type": "integer",
           "format": "int64"
@@ -1012,14 +1016,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscription_discount_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscription_discount_price": {
-          "type": "integer",
-          "format": "int64"
-        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1038,6 +1034,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -1046,8 +1043,6 @@
         "trade_no",
         "status",
         "subscribe_id",
-        "subscription_discount_id",
-        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -1079,6 +1074,10 @@
           "format": "int64"
         },
         "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
           "type": "integer",
           "format": "int64"
         },
@@ -1114,14 +1113,6 @@
         "subscribe": {
           "$ref": "#/definitions/Subscribe"
         },
-        "subscription_discount_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscription_discount_price": {
-          "type": "integer",
-          "format": "int64"
-        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1140,6 +1131,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -1149,8 +1141,6 @@
         "status",
         "subscribe_id",
         "subscribe",
-        "subscription_discount_id",
-        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -1647,7 +1637,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "purchase_with_discount": {
+        "allow_deduction": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -1689,7 +1679,7 @@
         "sell",
         "sort",
         "deduction_ratio",
-        "purchase_with_discount",
+        "allow_deduction",
         "reset_cycle",
         "renewal_reset",
         "created_at",
@@ -1974,6 +1964,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "telegram": {
           "type": "integer",
           "format": "int64"
@@ -2044,6 +2042,8 @@
         "email",
         "avatar",
         "balance",
+        "commission",
+        "deduction",
         "telegram",
         "refer_code",
         "referer_id",

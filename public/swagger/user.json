@@ -815,9 +815,9 @@
         ]
       }
     },
-    "/v1/public/user/affiliate": {
+    "/v1/public/user/affiliate/count": {
       "get": {
-        "summary": "Query User Affiliate",
+        "summary": "Query User Affiliate Count",
         "operationId": "QueryUserAffiliate",
         "responses": {
           "200": {
@@ -831,7 +831,36 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/QueryUserAffiliateResponse"
+                      "$ref": "#/definitions/QueryUserAffiliateCountResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/affiliate/list": {
+      "get": {
+        "summary": "Query User Affiliate List",
+        "operationId": "QueryUserAffiliateList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserAffiliateListResponse"
                     }
                   }
                 }
@@ -1093,6 +1122,82 @@
             }
           }
         },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/unsubscribe": {
+      "post": {
+        "summary": "Unsubscribe",
+        "operationId": "Unsubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnsubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/unsubscribe/pre": {
+      "post": {
+        "summary": "Pre Unsubscribe",
+        "operationId": "PreUnsubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PreUnsubscribeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreUnsubscribeRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/public/user"
         ]
@@ -1783,6 +1888,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "discount": {
           "type": "integer",
           "format": "int64"
@@ -1812,14 +1921,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscription_discount_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscription_discount_price": {
-          "type": "integer",
-          "format": "int64"
-        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1838,6 +1939,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -1846,8 +1948,6 @@
         "trade_no",
         "status",
         "subscribe_id",
-        "subscription_discount_id",
-        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -1879,6 +1979,10 @@
           "format": "int64"
         },
         "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
           "type": "integer",
           "format": "int64"
         },
@@ -1914,14 +2018,6 @@
         "subscribe": {
           "$ref": "#/definitions/Subscribe"
         },
-        "subscription_discount_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscription_discount_price": {
-          "type": "integer",
-          "format": "int64"
-        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -1940,6 +2036,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -1949,8 +2046,6 @@
         "status",
         "subscribe_id",
         "subscribe",
-        "subscription_discount_id",
-        "subscription_discount_price",
         "created_at",
         "updated_at"
       ]
@@ -2019,6 +2114,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "coupon": {
           "type": "string"
         },
@@ -2029,16 +2128,6 @@
         "fee_amount": {
           "type": "integer",
           "format": "int64"
-        },
-        "subscribe_discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount_list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscribeDiscountInfo"
-          }
         }
       },
       "title": "PreOrderResponse",
@@ -2046,11 +2135,10 @@
         "price",
         "amount",
         "discount",
+        "deduction",
         "coupon",
         "coupon_discount",
-        "fee_amount",
-        "subscribe_discount",
-        "discount_list"
+        "fee_amount"
       ]
     },
     "PreRenewalOrderResponse": {
@@ -2063,6 +2151,32 @@
       "title": "PreRenewalOrderResponse",
       "required": [
         "orderNo"
+      ]
+    },
+    "PreUnsubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PreUnsubscribeRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "PreUnsubscribeResponse": {
+      "type": "object",
+      "properties": {
+        "deduction_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PreUnsubscribeResponse",
+      "required": [
+        "deduction_amount"
       ]
     },
     "PurchaseOrderRequest": {
@@ -2081,18 +2195,13 @@
         },
         "coupon": {
           "type": "string"
-        },
-        "discount_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "PurchaseOrderRequest",
       "required": [
         "subscribe_id",
         "quantity",
-        "payment",
-        "discount_subscribe_id"
+        "payment"
       ]
     },
     "PurchaseOrderResponse": {
@@ -2278,13 +2387,45 @@
         "total"
       ]
     },
-    "QueryUserAffiliateResponse": {
+    "QueryUserAffiliateCountResponse": {
       "type": "object",
       "properties": {
-        "sum": {
+        "registers": {
           "type": "integer",
           "format": "int64"
         },
+        "total_commission": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserAffiliateCountResponse",
+      "required": [
+        "registers",
+        "total_commission"
+      ]
+    },
+    "QueryUserAffiliateListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryUserAffiliateListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryUserAffiliateListResponse": {
+      "type": "object",
+      "properties": {
         "list": {
           "type": "array",
           "items": {
@@ -2296,9 +2437,8 @@
           "format": "int64"
         }
       },
-      "title": "QueryUserAffiliateResponse",
+      "title": "QueryUserAffiliateListResponse",
       "required": [
-        "sum",
         "list",
         "total"
       ]
@@ -2422,7 +2562,7 @@
     "RenewalOrderRequest": {
       "type": "object",
       "properties": {
-        "subscribe_id": {
+        "user_subscribe_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -2435,22 +2575,13 @@
         },
         "coupon": {
           "type": "string"
-        },
-        "subscribe_token": {
-          "type": "string"
-        },
-        "discount_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "RenewalOrderRequest",
       "required": [
-        "subscribe_id",
+        "user_subscribe_id",
         "quantity",
-        "payment",
-        "subscribe_token",
-        "discount_subscribe_id"
+        "payment"
       ]
     },
     "RenewalOrderResponse": {
@@ -2468,12 +2599,9 @@
     "ResetTrafficOrderRequest": {
       "type": "object",
       "properties": {
-        "subscribe_id": {
+        "user_subscribe_id": {
           "type": "integer",
           "format": "int64"
-        },
-        "subscribe_token": {
-          "type": "string"
         },
         "payment": {
           "type": "string"
@@ -2481,8 +2609,7 @@
       },
       "title": "ResetTrafficOrderRequest",
       "required": [
-        "subscribe_id",
-        "subscribe_token",
+        "user_subscribe_id",
         "payment"
       ]
     },
@@ -2862,7 +2989,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "purchase_with_discount": {
+        "allow_deduction": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -2904,7 +3031,7 @@
         "sell",
         "sort",
         "deduction_ratio",
-        "purchase_with_discount",
+        "allow_deduction",
         "reset_cycle",
         "renewal_reset",
         "created_at",
@@ -2953,32 +3080,6 @@
       "required": [
         "quantity",
         "discount"
-      ]
-    },
-    "SubscribeDiscountInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "expire_time": {
-          "type": "string"
-        }
-      },
-      "title": "SubscribeDiscountInfo",
-      "required": [
-        "id",
-        "name",
-        "price",
-        "expire_time"
       ]
     },
     "SubscribeGroup": {
@@ -3198,6 +3299,19 @@
         "security_config"
       ]
     },
+    "UnsubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UnsubscribeRequest",
+      "required": [
+        "id"
+      ]
+    },
     "UpdateUserNotifyRequest": {
       "type": "object",
       "properties": {
@@ -3296,6 +3410,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "telegram": {
           "type": "integer",
           "format": "int64"
@@ -3366,6 +3488,8 @@
         "email",
         "avatar",
         "balance",
+        "commission",
+        "deduction",
         "telegram",
         "refer_code",
         "referer_id",
