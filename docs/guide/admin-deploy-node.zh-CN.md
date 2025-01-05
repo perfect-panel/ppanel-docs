@@ -1,8 +1,8 @@
 ---
-title: Node
+title: 管理端-Node
 order: 3
 group: 
-  title: 管理端部署
+  title: 前端部署
   order: 3
 toc: content
 ---

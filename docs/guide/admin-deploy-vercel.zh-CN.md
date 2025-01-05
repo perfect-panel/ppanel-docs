@@ -1,8 +1,8 @@
 ---
-title: Vercel
+title: 管理端-Vercel
 order: 1
 group: 
-  title: 管理端部署
+  title: 前端部署
   order: 3
 toc: content
 ---

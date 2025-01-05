@@ -1,8 +1,8 @@
 ---
-title: 配置说明
+title: 管理端-配置说明
 order: 0
 group: 
-  title: 管理端部署
+  title: 前端部署
   order: 3
 toc: content
 ---

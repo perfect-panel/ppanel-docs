@@ -33,3 +33,12 @@ PPanel 的一些术语与其他面板系统存在差异，为确保您能准确�
 
 - **客户端**
   用户用来连接系统的应用程序，通常是指用户的设备端软件或应用，负责与系统建立连接并使用相关服务。
+## 贡献者列表
+
+ppanel核心贡献者:
+
+| [![ChangLueTesn](https://avatars.githubusercontent.com/u/177191628?v=4)](https://github.com/ChangLueTesn) | [![goodpuppy12134](https://avatars.githubusercontent.com/u/182967760?v=4)](https://github.com/goodpuppy12134) | [![GoombaKio](https://avatars.githubusercontent.com/u/190634740?v=4)](https://github.com/GoombaKio) | [![lyndon986](https://avatars.githubusercontent.com/u/170910308?v=4)](https://github.com/lyndon986) | [![QChWnd](https://avatars.githubusercontent.com/u/60031666?v=4)](https://github.com/QChWnd) | [![web-ppanel](https://avatars.githubusercontent.com/u/182197017?v=4)](https://github.com/web-ppanel) | [![AceTaffy812](https://avatars.githubusercontent.com/u/144473506?v=4)](https://github.com/AceTaffy812) | [![EUForest](https://avatars.githubusercontent.com/u/182533708?v=4)](https://github.com/EUForest) | [![wyx2685](https://avatars.githubusercontent.com/u/24352157?v=4)](https://github.com/wyx2685)|
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| [ChangLueTesn](https://github.com/ChangLueTesn) | [goodpuppy12134](https://github.com/goodpuppy12134) | [GoombaKio](https://github.com/GoombaKio) | [lyndon986](https://github.com/lyndon986) | [QChWnd](https://github.com/QChWnd) | [web-ppanel](https://github.com/web-ppanel) | [AceTaffy812](https://github.com/AceTaffy812) | [EUForest](https://github.com/EUForest) | [wyx2685](https://github.com/wyx2685) |
+
+
