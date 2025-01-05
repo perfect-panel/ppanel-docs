@@ -4288,7 +4288,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "purchase_with_discount": {
+        "allow_deduction": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -4320,7 +4320,7 @@
         "show",
         "sell",
         "deduction_ratio",
-        "purchase_with_discount",
+        "allow_deduction",
         "reset_cycle",
         "renewal_reset"
       ]
@@ -5377,6 +5377,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "discount": {
           "type": "integer",
           "format": "int64"
@@ -5424,6 +5428,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -5463,6 +5468,10 @@
           "format": "int64"
         },
         "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
           "type": "integer",
           "format": "int64"
         },
@@ -5516,6 +5525,7 @@
         "quantity",
         "price",
         "amount",
+        "deduction",
         "discount",
         "coupon",
         "coupon_discount",
@@ -6163,7 +6173,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "purchase_with_discount": {
+        "allow_deduction": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -6205,7 +6215,7 @@
         "sell",
         "sort",
         "deduction_ratio",
-        "purchase_with_discount",
+        "allow_deduction",
         "reset_cycle",
         "renewal_reset",
         "created_at",
@@ -7053,7 +7063,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "purchase_with_discount": {
+        "allow_deduction": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -7087,7 +7097,7 @@
         "sell",
         "sort",
         "deduction_ratio",
-        "purchase_with_discount",
+        "allow_deduction",
         "reset_cycle",
         "renewal_reset"
       ]
@@ -7216,6 +7226,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction": {
+          "type": "integer",
+          "format": "int64"
+        },
         "telegram": {
           "type": "integer",
           "format": "int64"
@@ -7286,6 +7304,8 @@
         "email",
         "avatar",
         "balance",
+        "commission",
+        "deduction",
         "telegram",
         "refer_code",
         "referer_id",
@@ -7452,6 +7472,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "reset_time": {
+          "type": "integer",
+          "format": "int64"
+        },
         "traffic": {
           "type": "integer",
           "format": "int64"
@@ -7489,6 +7513,7 @@
         "subscribe",
         "start_time",
         "expire_time",
+        "reset_time",
         "traffic",
         "download",
         "upload",
