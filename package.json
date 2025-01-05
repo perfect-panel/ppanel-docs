@@ -22,13 +22,14 @@
   },
   "dependencies": {
     "@giscus/react": "^3.0.0",
+    "dumi-theme-lobehub": "^1.10.10",
     "swagger-ui-react": "^5.18.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@lobehub/i18n-cli": "^1.20.2",
-    "dumi": "^2.4.13",
+    "dumi": "^2.4.17",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"

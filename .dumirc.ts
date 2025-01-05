@@ -1,5 +1,4 @@
 import { defineConfig } from 'dumi';
-
 export default defineConfig({
   ...(process.env.NODE_ENV === 'development'
     ? {}
@@ -10,14 +9,20 @@ export default defineConfig({
     rtl: true,
     name: 'PPanel',
     logo: '/favicon.svg',
-    footer: `
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <a href="https://github.com/perfect-panel" target="_blank" style="line-height: 1; margin-right: 16px;">
-          <img src="/favicon.svg" alt="logo" style="width: 24px; height:24px;" />
-        </a>
-        <span>© 2024 PPanel</span>
-      </div>
-    `,
+    // footer: `
+    //   <div style="display: flex; justify-content: center; align-items: center;">
+    //     <a href="https://github.com/perfect-panel" target="_blank" style="line-height: 1; margin-right: 16px;">
+    //       <img src="/favicon.svg" alt="logo" style="width: 24px; height:24px;" />
+    //     </a>
+    //     <span>© 2024 PPanel</span>
+    //   </div>
+    // `,
+    footerConfig: {
+      columns: [],
+      moreProducts: [],
+      resources: [],
+      bottom: '© 2024 PPanel. All Rights Reserved.',
+    },
     socialLinks: {
       github: 'https://github.com/perfect-panel',
     },
@@ -25,6 +30,21 @@ export default defineConfig({
     prefersColor: {
       default: 'auto',
     },
+    title: 'PPanel',
+    giscus: {
+      category: 'Q&A',
+      categoryId: 'DIC_kwDOJloKoM4CXsCu',
+      repo: 'lobehub/lobe-ui',
+      repoId: 'R_kgDOJloKoA',
+    },
+    actions: [
+      {
+        icon: '/favicon.svg',
+        link: 'https://github.com/perfect-panel',
+        openExternal: true,
+        text: 'PPanel',
+      },
+    ],
   },
   locales: [
     {
