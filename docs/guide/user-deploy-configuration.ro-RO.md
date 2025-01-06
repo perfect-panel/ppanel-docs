@@ -1,0 +1,43 @@
+---
+title: Utilizator - Instrucțiuni de Configurare
+order: 4
+group: 
+  title: Implementare Frontend
+  order: 3
+toc: content
+---
+
+# **Ghid de Implementare PPanel**
+
+Acest ghid detaliază modul de implementare a interfeței utilizatorului PPanel, incluzând diverse metode de implementare cu Docker, Vercel, PM2, precum și utilizarea directă a Node.js sau Bun.
+
+---
+
+## **1. Pregătirea Mediului**
+
+Înainte de a începe implementarea, asigurați-vă că următoarele instrumente sunt instalate:
+
+- **Node.js** (se recomandă instalarea prin NVM, versiune >= 22)
+- **Bun** (runtime rapid pentru JavaScript)
+- **PM2** (instrument de gestionare a proceselor, utilizat pentru gestionarea eficientă a serviciilor)
+- **Docker** (pentru implementarea în containere)
+
+---
+
+## **2. Configurarea Variabilelor de Mediu**
+
+Înainte de implementare, trebuie să configurați următoarele variabile de mediu:
+
+```env
+# Configurarea aplicației
+NEXT_PUBLIC_DEFAULT_LANGUAGE=ro-RO
+NEXT_PUBLIC_SITE_URL=https://admin.example.com
+NEXT_PUBLIC_API_URL=https://api.example.com
+
+# Utilizator implicit
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=admin@example.com
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123
+```
+
+---
+

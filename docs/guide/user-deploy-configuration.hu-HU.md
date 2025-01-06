@@ -1,0 +1,43 @@
+---
+title: Felhasználói felület - Konfigurációs útmutató
+order: 4
+group: 
+  title: Frontend telepítés
+  order: 3
+toc: content
+---
+
+# **PPanel Telepítési Útmutató**
+
+Ez az útmutató részletesen bemutatja, hogyan telepíthető a PPanel felhasználói felület, beleértve a Docker, Vercel, PM2, valamint a Node.js vagy Bun közvetlen használatával történő telepítési lehetőségeket.
+
+---
+
+## **1. Környezet előkészítése**
+
+A telepítés előtt győződjön meg arról, hogy az alábbi eszközök telepítve vannak:
+
+- **Node.js** (ajánlott NVM-en keresztül telepíteni, verzió >= 22)
+- **Bun** (gyors JavaScript futtatókörnyezet)
+- **PM2** (folyamatkezelő eszköz a szolgáltatások hatékony kezelésére)
+- **Docker** (konténerizált telepítéshez)
+
+---
+
+## **2. Környezeti változók konfigurálása**
+
+A telepítés előtt szükséges az alábbi környezeti változók konfigurálása:
+
+```env
+# Alkalmazás konfiguráció
+NEXT_PUBLIC_DEFAULT_LANGUAGE=hu-HU
+NEXT_PUBLIC_SITE_URL=https://admin.example.com
+NEXT_PUBLIC_API_URL=https://api.example.com
+
+# Alapértelmezett felhasználó
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=admin@example.com
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123
+```
+
+---
+
