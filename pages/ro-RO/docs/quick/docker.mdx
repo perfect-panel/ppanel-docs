@@ -1,0 +1,29 @@
+# Ghid rapid de implementare
+
+> **Observații înainte de implementare**
+>
+> - **Portul implicit pentru panoul de administrare este 8080**: Vă rugăm să configurați în prealabil rezolvarea domeniului sau să vă asigurați că aveți o adresă IP disponibilă pentru a finaliza cu succes instalarea panoului de administrare și a celui utilizator.
+> - Server: Pentru mai multe informații, consultați [Server](/ro-RO/docs/server/config).
+> - Panou de administrare: Pentru mai multe informații, consultați [Panou de administrare](/ro-RO/docs/admin/config).
+> - Panou de utilizator: Pentru mai multe informații, consultați [Panou de utilizator](/ro-RO/docs/user/config).
+
+## Implementare cu un singur clic
+
+Utilizați oricare dintre comenzile de mai jos pentru a implementa PPanel cu un singur clic, inclusiv serverul, panoul de administrare și panoul de utilizator:
+
+### Opțiunea 1: Folosind `curl`
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+### Opțiunea 2: Folosind `wget`
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

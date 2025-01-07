@@ -1,0 +1,53 @@
+## Instalação do Docker
+
+Execute o seguinte comando para instalar o Docker:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Usando o Docker para iniciar serviços
+
+Execute o seguinte comando para iniciar o contêiner:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=pt-BR \
+  -e NEXT_PUBLIC_SITE_URL=https://admin.exemplo.com \
+  -e NEXT_PUBLIC_API_URL=https://api.exemplo.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=usuario@exemplo.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=senha123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Usando o Docker Compose para implantar
+
+Crie um arquivo `docker-compose.yml` com o seguinte conteúdo:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-admin-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: pt-BR
+      NEXT_PUBLIC_SITE_URL: https://admin.exemplo.com
+      NEXT_PUBLIC_API_URL: https://api.exemplo.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: usuario@exemplo.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: senha123
+```
+
+Inicie o serviço:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

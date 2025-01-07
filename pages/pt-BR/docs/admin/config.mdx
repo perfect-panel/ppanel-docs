@@ -1,0 +1,35 @@
+## Variáveis de Ambiente
+
+Antes de implantar, certifique-se de definir diretamente as seguintes variáveis de ambiente no comando de implantação para configurar o aplicativo:
+
+```bash
+# Idioma padrão do aplicativo
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<Seu idioma padrão zh-CN | en-US>
+
+# URL do site e ponto de extremidade da API
+NEXT_PUBLIC_SITE_URL=<URL do seu site>
+NEXT_PUBLIC_API_URL=<URL da sua API>
+
+# E-mail de contato para suporte ou consultas
+NEXT_PUBLIC_EMAIL=<Seu e-mail de contato>
+
+# Links para comunidade e redes sociais
+NEXT_PUBLIC_TELEGRAM_LINK=<Seu link do Telegram>
+NEXT_PUBLIC_TWITTER_LINK=<Seu link do Twitter>
+NEXT_PUBLIC_DISCORD_LINK=<Seu link do Discord>
+NEXT_PUBLIC_INSTAGRAM_LINK=<Seu link do Instagram>
+NEXT_PUBLIC_LINKEDIN_LINK=<Seu link do LinkedIn>
+NEXT_PUBLIC_FACEBOOK_LINK=<Seu link do Facebook>
+NEXT_PUBLIC_GITHUB_LINK=<Seu link do GitHub>
+
+# Credenciais padrão do usuário (para configuração inicial ou fins de teste)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Seu e-mail de usuário padrão>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Sua senha de usuário padrão>
+```
+
+Você pode consultar um [arquivo de ambiente de exemplo](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) para ver um arquivo de referência estruturado.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

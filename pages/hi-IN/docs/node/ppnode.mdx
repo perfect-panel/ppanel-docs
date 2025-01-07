@@ -1,0 +1,21 @@
+# PPanel-node
+
+एक बहु-कोर आधारित PPanel नोड सर्वर, जो V2bX से संशोधित है, V2ay, Trojan, Shadowsocks, Tuic, Hysteria प्रोटोकॉल का समर्थन करता है।
+
+### एक-क्लिक स्थापना
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## निर्माण
+
+```bash
+# -tags विकल्प के माध्यम से संकलित करने के लिए कोर निर्दिष्ट करें, वैकल्पिक xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

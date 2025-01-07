@@ -1,0 +1,21 @@
+# PPanel-node
+
+Серверна частина PPanel, що базується на різних ядрах, модифікована з V2bX, підтримує протоколи V2ay, Trojan, Shadowsocks, Tuic, Hysteria.
+
+### Одноклікове встановлення
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Побудова
+
+```bash
+# Вкажіть ядро, яке потрібно скомпілювати, за допомогою параметра -tags, доступні xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

@@ -1,0 +1,53 @@
+## Instalare Docker
+
+Rulați următoarea comandă pentru a instala Docker:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Utilizarea Docker pentru a porni serviciul
+
+Rulați următoarea comandă pentru a porni containerul:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
+  -e NEXT_PUBLIC_SITE_URL=https://admin.example.com \
+  -e NEXT_PUBLIC_API_URL=https://api.example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Utilizarea Docker Compose pentru desfășurare
+
+Creați un fișier `docker-compose.yml` cu următorul conținut:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-admin-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
+      NEXT_PUBLIC_SITE_URL: https://admin.example.com
+      NEXT_PUBLIC_API_URL: https://api.example.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
+```
+
+Porniți serviciul:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

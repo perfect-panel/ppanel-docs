@@ -1,0 +1,107 @@
+## دانلود کد
+
+از مخزن رسمی GitHub کد را دریافت کنید:
+
+```bash
+# دانلود آخرین نسخه کد
+curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-user-web.tar.gz
+
+# استخراج فایل
+tar -xzvf ppanel-user-web.tar.gz
+
+# وارد دایرکتوری کد شوید
+cd ppanel-user-web
+```
+
+## پیکربندی متغیرهای محیطی
+
+فایل `apps/user/.env` را ایجاد کرده و متغیرهای محیطی لازم را اضافه کنید (به پیکربندی متغیرهای محیطی در بالا مراجعه کنید).
+
+## پیکربندی PM2
+
+فایل `ecosystem.config.js` را ایجاد کنید و محتوای زیر را در آن قرار دهید:
+
+```javascript
+module.exports = {
+  apps: [
+    {
+      name: 'ppanel-user-web',
+      script: 'apps/user/server.js',
+      interpreter: 'bun', // می‌توانید به node تغییر دهید
+      watch: true,
+      instances: 'max',
+      exec_mode: 'cluster',
+      env: {
+        PORT: 3000,
+      },
+    },
+  ],
+};
+```
+
+## استفاده از PM2 برای راه‌اندازی سرویس
+
+```bash
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup
+```
+
+## استفاده از Node.js یا Bun برای راه‌اندازی سرویس
+
+- **راه‌اندازی با Node.js**:
+
+  ```bash
+  node apps/user/server.js
+  ```
+
+- **راه‌اندازی با Bun**:
+
+  ```bash
+  bun apps/user/server.js
+  ```
+
+---
+
+## **4. تأیید استقرار**
+
+### **4.1 وضعیت سرویس PM2**
+
+برای بررسی وضعیت، دستور زیر را اجرا کنید:
+
+```bash
+pm2 list
+```
+
+### **4.2 دسترسی از طریق مرورگر**
+
+به آدرس `http://<آدرس IP سرور شما>:3000` مراجعه کنید تا وضعیت اجرای سرویس را تأیید کنید.
+
+---
+
+## **5. مدیریت سرویس**
+
+### **دستورات PM2**
+
+- توقف سرویس:
+
+  ```bash
+  pm2 stop ppanel-user-web
+  ```
+
+- راه‌اندازی مجدد سرویس:
+
+  ```bash
+  pm2 restart ppanel-user-web
+  ```
+
+- حذف سرویس:
+
+  ```bash
+  pm2 delete ppanel-user-web
+  ```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

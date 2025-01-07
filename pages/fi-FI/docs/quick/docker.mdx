@@ -1,0 +1,29 @@
+# Nopea käyttöönotto-opas
+
+> **Huomioitavaa ennen käyttöönottoa**
+>
+> - **Hallintapaneelin oletusportti on 8080**: Varmista etukäteen, että verkkotunnuksen resoluutio on kunnossa tai että käytettävissä on IP-osoite, jotta hallintapaneelin ja käyttäjäpaneelin asennus sujuu ongelmitta.
+> - Palvelin: Lisätietoja löytyy [palvelimesta](/fi-FI/docs/server/config).
+> - Hallintapaneeli: Lisätietoja löytyy [hallintapaneelista](/fi-FI/docs/admin/config).
+> - Käyttäjäpaneeli: Lisätietoja löytyy [käyttäjäpaneelista](/fi-FI/docs/user/config).
+
+## Yhden komennon käyttöönotto
+
+Voit käyttää mitä tahansa seuraavista komennoista ottaaksesi PPanelin käyttöön yhdellä komennolla, mukaan lukien palvelin, hallintapaneeli ja käyttäjäpaneeli:
+
+### Vaihtoehto 1: Käytä `curl`
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+### Vaihtoehto 2: Käytä `wget`
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

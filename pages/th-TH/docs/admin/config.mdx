@@ -1,0 +1,35 @@
+## ตัวแปรสภาพแวดล้อม
+
+ก่อนการปรับใช้ โปรดตรวจสอบให้แน่ใจว่าได้ตั้งค่าตัวแปรสภาพแวดล้อมต่อไปนี้โดยตรงในคำสั่งการปรับใช้เพื่อกำหนดค่าการใช้งาน:
+
+```bash
+# ภาษาเริ่มต้นของแอป
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<ภาษาที่คุณต้องการ zh-CN | en-US>
+
+# URL ของไซต์และจุดสิ้นสุด API
+NEXT_PUBLIC_SITE_URL=<URL ของไซต์ของคุณ>
+NEXT_PUBLIC_API_URL=<URL ของ API ของคุณ>
+
+# อีเมลติดต่อสำหรับการสนับสนุนหรือสอบถาม
+NEXT_PUBLIC_EMAIL=<อีเมลติดต่อของคุณ>
+
+# ลิงก์ชุมชนและโซเชียลมีเดีย
+NEXT_PUBLIC_TELEGRAM_LINK=<ลิงก์ Telegram ของคุณ>
+NEXT_PUBLIC_TWITTER_LINK=<ลิงก์ Twitter ของคุณ>
+NEXT_PUBLIC_DISCORD_LINK=<ลิงก์ Discord ของคุณ>
+NEXT_PUBLIC_INSTAGRAM_LINK=<ลิงก์ Instagram ของคุณ>
+NEXT_PUBLIC_LINKEDIN_LINK=<ลิงก์ LinkedIn ของคุณ>
+NEXT_PUBLIC_FACEBOOK_LINK=<ลิงก์ Facebook ของคุณ>
+NEXT_PUBLIC_GITHUB_LINK=<ลิงก์ GitHub ของคุณ>
+
+# ข้อมูลประจำตัวผู้ใช้เริ่มต้น (สำหรับการตั้งค่าเริ่มต้นหรือวัตถุประสงค์ในการทดสอบ)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<อีเมลผู้ใช้เริ่มต้นของคุณ>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<รหัสผ่านผู้ใช้เริ่มต้นของคุณ>
+```
+
+คุณสามารถดู [ไฟล์สภาพแวดล้อมตัวอย่าง](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) เพื่อดูไฟล์อ้างอิงที่มีโครงสร้าง.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

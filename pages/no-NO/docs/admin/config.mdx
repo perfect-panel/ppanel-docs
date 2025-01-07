@@ -1,0 +1,35 @@
+## Miljøvariabler
+
+Før distribusjon, vennligst sørg for å sette følgende miljøvariabler direkte i distribusjonskommandoen for å konfigurere applikasjonen:
+
+```bash
+# Standard språk for applikasjonen
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<Ditt standard språk zh-CN | en-US>
+
+# Nettsted URL og API-endepunkt
+NEXT_PUBLIC_SITE_URL=<Din nettsted URL>
+NEXT_PUBLIC_API_URL=<Din API URL>
+
+# Kontakt e-post for støtte eller henvendelser
+NEXT_PUBLIC_EMAIL=<Din kontakt e-post>
+
+# Samfunns- og sosiale medier-lenker
+NEXT_PUBLIC_TELEGRAM_LINK=<Din Telegram-lenke>
+NEXT_PUBLIC_TWITTER_LINK=<Din Twitter-lenke>
+NEXT_PUBLIC_DISCORD_LINK=<Din Discord-lenke>
+NEXT_PUBLIC_INSTAGRAM_LINK=<Din Instagram-lenke>
+NEXT_PUBLIC_LINKEDIN_LINK=<Din LinkedIn-lenke>
+NEXT_PUBLIC_FACEBOOK_LINK=<Din Facebook-lenke>
+NEXT_PUBLIC_GITHUB_LINK=<Din GitHub-lenke>
+
+# Standard brukerlegitimasjon (for initial oppsett eller testformål)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Din standard bruker e-post>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Ditt standard brukerpassord>
+```
+
+Du kan referere til [eksempel på miljøfil](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) for å se en strukturert referansefil.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

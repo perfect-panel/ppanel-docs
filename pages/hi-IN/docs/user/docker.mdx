@@ -1,0 +1,53 @@
+## Docker स्थापित करें
+
+Docker स्थापित करने के लिए निम्नलिखित कमांड चलाएँ:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Docker का उपयोग करके सेवा शुरू करें
+
+कंटेनर शुरू करने के लिए निम्नलिखित कमांड चलाएँ:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
+  -e NEXT_PUBLIC_SITE_URL=https://user.example.com \
+  -e NEXT_PUBLIC_API_URL=https://api.example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Docker Compose का उपयोग करके तैनाती करें
+
+एक `docker-compose.yml` फ़ाइल बनाएं, जिसमें निम्नलिखित सामग्री हो:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-user-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
+      NEXT_PUBLIC_SITE_URL: https://user.example.com
+      NEXT_PUBLIC_API_URL: https://api.example.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
+```
+
+सेवा शुरू करें:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

@@ -1,0 +1,21 @@
+# PPanel-node
+
+一個基於多種內核的PPanel節點服務端，修改自V2bX，支持V2ay、Trojan、Shadowsocks、Tuic、Hysteria協議。
+
+### 一鍵安裝
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## 構建
+
+```bash
+# 通過-tags選項指定要編譯的內核， 可選 xray，sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

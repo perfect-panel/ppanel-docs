@@ -1,0 +1,68 @@
+## Käyttöympäristön vaatimukset
+
+| Komponentti      | Vaatimus                                                              |
+| ---------------- | --------------------------------------------------------------------- |
+| Palvelinmääritys | Vähintään: 1 ydin CPU, 2GB muistia; Suositus: 2 ydin CPU, 4GB muistia |
+| MySQL            | 5.7 tai uudempi (suositus MySQL 8)                                    |
+| Redis            | 6 tai uudempi                                                         |
+| NGINX/Apache     | Mikä tahansa versio                                                   |
+
+### Konfiguraatiotiedoston selitys
+
+#### 1. Konfiguraatiotiedoston polku
+
+Konfiguraatiotiedoston oletuspolku on: `./etc/ppanel.yaml`, ja sen voi määrittää käynnistysparametrilla `--config`.
+
+#### 2. Konfiguraatiotiedoston muoto
+
+- Konfiguraatiotiedosto on yaml-muodossa, tukee kommentteja, nimeltään xxx.yaml.
+
+```yaml
+# Konfiguraatiotiedoston esimerkki
+Host: # Palvelun kuunteluosoite, oletus: 0.0.0.0
+Port: # Palvelun kuuntelportti, oletus: 8080
+Debug: # Onko virheenkorjaustila käytössä, käytössä ollessa taustalokin toiminto ei ole käytettävissä, oletus: false
+JwtAuth: # JWT-todennusasetukset
+  AccessSecret: # Käyttöoikeustunnuksen salaisuus, oletus: satunnaisesti luotu
+  AccessExpire: # Käyttöoikeustunnuksen vanhenemisaika, yksikkö sekunteina, oletus: 604800
+Logger: # Lokiasetukset
+  FilePath: # Lokitiedoston polku, oletus: ./ppanel.log
+  MaxSize: # Lokitiedoston enimmäiskoko, yksikkö MB, oletus: 50
+  MaxBackup: # Lokitiedoston enimmäisvarastomäärä, oletus: 3
+  MaxAge: # Lokitiedoston enimmäissäilytysaika, yksikkö päivinä, oletus: 30
+  Compress: # Onko lokitiedosto pakattu, oletus: true
+  Level: # Lokitaso, oletus: info, vaihtoehdot: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: # MySQL-osoite, pakollinen
+  Username: # MySQL-käyttäjänimi, pakollinen
+  Password: # MySQL-salasana, pakollinen
+  Dbname: # MySQL-tietokannan nimi, pakollinen
+  Config: # Mysql-asetusten oletusarvo charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: # Enimmäislepäävien yhteyksien määrä, oletus: 10
+  MaxOpenConns: # Enimmäisavattujen yhteyksien määrä, oletus: 100
+  LogMode: # Lokitaso, oletus: info, vaihtoehdot: debug, error, warn, info
+  LogZap: # Käytetäänkö zap-lokitus SQL:lle, oletus: true
+  SlowThreshold: # Hidas kyselykynnys, yksikkö millisekunteina, oletus: 1000
+Redis:
+  Host: # Redis-osoite, oletus: localhost:6379
+  Pass: # Redis-salasana, oletus: ""
+  DB: # Redis-tietokanta, oletus: 0
+
+Administer:
+  Email: # Taustakirjautumisen sähköposti, oletus: admin@ppanel.dev
+  Password: # Taustakirjautumisen salasana, oletus: password
+```
+
+#### 3. Ympäristömuuttujat
+
+Tuetut ympäristömuuttujat ovat seuraavat:
+
+| Ympäristömuuttuja | Konfiguraatio   | Esimerkki                                   |
+| ----------------- | --------------- | :------------------------------------------ |
+| PPANEL_DB         | MySQL-asetukset | root:password\@tcp(localhost:3306)/vpnboard |
+| PPANEL_REDIS      | Redis-asetukset | redis\://localhost:6379                     |
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

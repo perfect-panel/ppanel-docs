@@ -1,0 +1,35 @@
+## Zmienne środowiskowe
+
+Przed wdrożeniem upewnij się, że bezpośrednio ustawiasz poniższe zmienne środowiskowe w poleceniu wdrożenia, aby skonfigurować aplikację:
+
+```bash
+# Domyślny język aplikacji
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<Twój domyślny język zh-CN | en-US>
+
+# URL witryny i punkty końcowe API
+NEXT_PUBLIC_SITE_URL=<URL Twojej witryny>
+NEXT_PUBLIC_API_URL=<URL Twojego API>
+
+# Adres e-mail do wsparcia lub konsultacji
+NEXT_PUBLIC_EMAIL=<Twój adres e-mail kontaktowy>
+
+# Linki do społeczności i mediów społecznościowych
+NEXT_PUBLIC_TELEGRAM_LINK=<Twój link do Telegrama>
+NEXT_PUBLIC_TWITTER_LINK=<Twój link do Twittera>
+NEXT_PUBLIC_DISCORD_LINK=<Twój link do Discorda>
+NEXT_PUBLIC_INSTAGRAM_LINK=<Twój link do Instagrama>
+NEXT_PUBLIC_LINKEDIN_LINK=<Twój link do LinkedIn>
+NEXT_PUBLIC_FACEBOOK_LINK=<Twój link do Facebooka>
+NEXT_PUBLIC_GITHUB_LINK=<Twój link do GitHuba>
+
+# Domyślne dane logowania użytkownika (do początkowej konfiguracji lub celów testowych)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Twój domyślny adres e-mail użytkownika>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Twoje domyślne hasło użytkownika>
+```
+
+Możesz zapoznać się z [przykładowym plikiem środowiskowym](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template), aby zobaczyć zorganizowany plik referencyjny.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

@@ -1,0 +1,21 @@
+# PPanel-node
+
+Egy PPanel node szerver, amely többféle kernelre épül, a V2bX módosításával készült, támogatja a V2ay, Trojan, Shadowsocks, Tuic és Hysteria protokollokat.
+
+### Egyszerű telepítés
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Építés
+
+```bash
+# A -tags opcióval adja meg a fordítani kívánt kernelt, választható xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

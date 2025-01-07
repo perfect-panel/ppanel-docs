@@ -1,0 +1,26 @@
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { SwatchBook, ShieldCheck, Component } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function Page() {
+return ( <section className="overflow-hidden py-32"> <div className="container relative mx-auto max-w-[90rem] px-6"> <div className="pointer-events-none absolute inset-0 -top-20 -z-10 mx-auto hidden size-[500px] bg-[radial-gradient(hsl(var(--muted-foreground))_1px,transparent_1px)] opacity-25 [background-size:6px_6px] [mask-image:radial-gradient(circle_at_center,white_250px,transparent_250px)] lg:block"></div> <div className="relative flex justify-between gap-16"> <div className="w-full max-w-96 shrink-0 justify-between"> <h1 className="mb-3 mt-6 text-3xl font-bold lg:text-4xl">
+Witamy w PPanel </h1> <p className="text text-muted-foreground">
+PPanel to czyste, profesjonalne i doskonałe narzędzie do zarządzania proxy, które ma na celu być idealnym wyborem do nauki i praktyki. </p> <p className="flex gap-2 mt-4">
+<Link href="/docs" className={buttonVariants({ variant: "default"})}>
+Rozpocznij </Link>
+<Link href="https://github.com/perfect-panel" className={buttonVariants({variant: "secondary"})}>
+Github </Link> </p> </div> <div className="hidden w-full max-w-3xl shrink-0 lg:block"> <Image
+           src="https://urlscan.io/liveshot/?width=1920&height=1080&url=https://user.ppanel.dev"
+           alt="Użytkownik"
+           width={1920}
+           height={1080}
+           className="max-h-[450px] w-full min-w-[450px] max-w-3xl rounded-lg border object-cover"
+         /> </div> </div> <div className="relative mt-8 grid md:grid-cols-3"> <div className="flex flex-col gap-y-6 px-2 py-10 md:p-6 lg:p-8"> <SwatchBook /> <div> <h3 className="text-lg font-medium">Wsparcie dla wielu protokołów</h3> <p className="mt-1 text-sm text-muted-foreground">
+Obsługuje zarządzanie wieloma protokołami szyfrowania, takimi jak: shadowsocks, v2ray, trojan itp. </p> </div> </div> <div className="flex flex-col gap-y-6 px-2 py-10 md:p-6 lg:p-8"> <ShieldCheck /> <div> <h3 className="text-lg font-medium">Ochrona prywatności</h3> <p className="mt-1 text-sm text-muted-foreground">
+Nie przechowuje logów użytkowników, zapewniając jednocześnie prywatność i bezpieczeństwo. </p> </div> </div> <div className="flex flex-col gap-y-6 px-2 py-10 md:p-6 lg:p-8"> <Component /> <div> <h3 className="text-lg font-medium">Projekt</h3> <p className="mt-1 text-sm text-muted-foreground">
+Minimalistyczny design zapewnia łatwość użycia produktu, jednocześnie zachowując integralność logiki biznesowej. </p> </div> </div> <div className="absolute -inset-x-4 top-0 h-px bg-input md:hidden"></div> <div className="absolute -inset-x-4 top-[-0.5px] row-start-2 h-px bg-input md:hidden"></div> <div className="absolute -inset-x-4 top-[-0.5px] row-start-3 h-px bg-input md:hidden"></div> <div className="absolute -inset-x-4 bottom-0 row-start-4 h-px bg-input md:hidden"></div> <div className="absolute -left-2 -top-2 bottom-0 w-px bg-input md:hidden"></div> <div className="absolute -right-2 -top-2 bottom-0 col-start-2 w-px bg-input md:hidden"></div> <div className="absolute -inset-x-2 top-0 hidden h-px bg-input md:block"></div> <div className="absolute -top-2 bottom-0 left-0 hidden w-px bg-input md:block"></div> <div className="absolute -left-[0.5px] -top-2 bottom-0 col-start-2 hidden w-px bg-input md:block"></div> <div className="absolute -left-[0.5px] -top-2 bottom-0 col-start-3 hidden w-px bg-input md:block"></div> <div className="absolute -top-2 bottom-0 right-0 hidden w-px bg-input md:block"></div> </div> </div> </section>
+
+);
+}

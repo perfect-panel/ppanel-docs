@@ -1,0 +1,21 @@
+# PPanel-Knoten
+
+Ein PPanel-Knoten-Server, der auf mehreren Kernen basiert, modifiziert von V2bX und unterstützt die Protokolle V2ay, Trojan, Shadowsocks, Tuic und Hysteria.
+
+### Ein-Klick-Installation
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Aufbau
+
+```bash
+# Geben Sie die zu kompilierenden Kerne über die Option -tags an, optional xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

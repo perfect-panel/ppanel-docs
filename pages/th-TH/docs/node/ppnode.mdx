@@ -1,0 +1,21 @@
+# PPanel-node
+
+เซิร์ฟเวอร์ PPanel ที่ใช้หลายคอร์ ปรับแต่งมาจาก V2bX รองรับโปรโตคอล V2ay, Trojan, Shadowsocks, Tuic, Hysteria
+
+### ติดตั้งด้วยคำสั่งเดียว
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## การสร้าง
+
+```bash
+# ใช้ตัวเลือก -tags เพื่อระบุคอร์ที่ต้องการคอมไพล์ สามารถเลือกได้ xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

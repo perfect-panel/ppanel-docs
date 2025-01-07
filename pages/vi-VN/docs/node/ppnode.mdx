@@ -1,0 +1,21 @@
+# PPanel-node
+
+Một dịch vụ máy chủ PPanel dựa trên nhiều loại kernel, được sửa đổi từ V2bX, hỗ trợ các giao thức V2ay, Trojan, Shadowsocks, Tuic, Hysteria.
+
+### Cài đặt một lần
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Xây dựng
+
+```bash
+# Sử dụng tùy chọn -tags để chỉ định kernel cần biên dịch, có thể là xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

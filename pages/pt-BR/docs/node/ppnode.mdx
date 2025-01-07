@@ -1,0 +1,21 @@
+# PPanel-node
+
+Um servidor PPanel baseado em múltiplos núcleos, modificado a partir do V2bX, que suporta os protocolos V2ay, Trojan, Shadowsocks, Tuic e Hysteria.
+
+### Instalação com um clique
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Construção
+
+```bash
+# Especifique o núcleo a ser compilado usando a opção -tags, opções disponíveis: xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

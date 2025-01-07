@@ -1,0 +1,21 @@
+# PPanel-node
+
+다양한 커널을 기반으로 한 PPanel 노드 서버로, V2bX에서 수정되었으며 V2ay, Trojan, Shadowsocks, Tuic, Hysteria 프로토콜을 지원합니다.
+
+### 원클릭 설치
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## 빌드
+
+```bash
+# -tags 옵션을 통해 컴파일할 커널을 지정합니다. 선택 사항: xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

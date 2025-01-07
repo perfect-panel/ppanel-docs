@@ -1,0 +1,107 @@
+## Download do Código
+
+Obtenha o código do repositório oficial do GitHub:
+
+```bash
+# Baixar a versão mais recente do código
+curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
+
+# Descompactar o arquivo
+tar -xzvf ppanel-user-web.tar.gz
+
+# Entrar no diretório do código
+cd ppanel-user-web
+```
+
+## Configurar Variáveis de Ambiente
+
+Crie o arquivo `apps/admin/.env` e adicione as variáveis de ambiente necessárias (consulte a configuração de variáveis de ambiente acima).
+
+## Configurar PM2
+
+Crie o arquivo `ecosystem.config.js` com o seguinte conteúdo:
+
+```javascript
+module.exports = {
+  apps: [
+    {
+      name: 'ppanel-admin-web',
+      script: 'apps/admin/server.js',
+      interpreter: 'bun', // pode ser alterado para node
+      watch: true,
+      instances: 'max',
+      exec_mode: 'cluster',
+      env: {
+        PORT: 3000,
+      },
+    },
+  ],
+};
+```
+
+## Usar PM2 para Iniciar o Serviço
+
+```bash
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup
+```
+
+## Usar Node.js ou Bun para Iniciar o Serviço
+
+- **Início com Node.js**:
+
+  ```bash
+  node apps/user/server.js
+  ```
+
+- **Início com Bun**:
+
+  ```bash
+  bun apps/user/server.js
+  ```
+
+---
+
+## **4. Verificar a Implantação**
+
+### **4.1 Status do Serviço PM2**
+
+Execute o seguinte comando para verificar:
+
+```bash
+pm2 list
+```
+
+### **4.2 Acesso pelo Navegador**
+
+Acesse `http://<Seu IP do Servidor>:3000` para verificar o estado do serviço.
+
+---
+
+## **5. Gerenciamento de Serviços**
+
+### **Comandos PM2**
+
+- Parar o serviço:
+
+  ```bash
+  pm2 stop ppanel-user-web
+  ```
+
+- Reiniciar o serviço:
+
+  ```bash
+  pm2 restart ppanel-user-web
+  ```
+
+- Deletar o serviço:
+
+  ```bash
+  pm2 delete ppanel-user-web
+  ```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

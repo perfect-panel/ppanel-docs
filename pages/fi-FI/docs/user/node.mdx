@@ -1,0 +1,107 @@
+## Lataa koodi
+
+Hanki koodi virallisesta GitHub-repositoriosta:
+
+```bash
+# Lataa uusin versio koodista
+curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-user-web.tar.gz
+
+# Purkaa tiedosto
+tar -xzvf ppanel-user-web.tar.gz
+
+# Siirry koodihakemistoon
+cd ppanel-user-web
+```
+
+## Määritä ympäristömuuttujat
+
+Luo tiedosto `apps/user/.env` ja lisää tarvittavat ympäristömuuttujat (katso yllä olevat ympäristömuuttujien asetukset).
+
+## Määritä PM2
+
+Luo tiedosto `ecosystem.config.js`, jonka sisältö on seuraava:
+
+```javascript
+module.exports = {
+  apps: [
+    {
+      name: 'ppanel-user-web',
+      script: 'apps/user/server.js',
+      interpreter: 'bun', // voidaan muuttaa nodeksi
+      watch: true,
+      instances: 'max',
+      exec_mode: 'cluster',
+      env: {
+        PORT: 3000,
+      },
+    },
+  ],
+};
+```
+
+## Käynnistä palvelu PM2:lla
+
+```bash
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup
+```
+
+## Käynnistä palvelu Node.js:llä tai Bun:illa
+
+- **Node.js käynnistys**:
+
+  ```bash
+  node apps/user/server.js
+  ```
+
+- **Bun käynnistys**:
+
+  ```bash
+  bun apps/user/server.js
+  ```
+
+---
+
+## **4. Vahvista käyttöönotto**
+
+### **4.1 PM2 palvelun tila**
+
+Suorita seuraava komento tarkistaaksesi:
+
+```bash
+pm2 list
+```
+
+### **4.2 Selaimella pääsy**
+
+Käy osoitteessa `http://<palvelimesi IP>:3000` vahvistaaksesi palvelun toiminnan.
+
+---
+
+## **5. Palvelun hallinta**
+
+### **PM2 komennot**
+
+- Pysäytä palvelu:
+
+  ```bash
+  pm2 stop ppanel-user-web
+  ```
+
+- Käynnistä palvelu uudelleen:
+
+  ```bash
+  pm2 restart ppanel-user-web
+  ```
+
+- Poista palvelu:
+
+  ```bash
+  pm2 delete ppanel-user-web
+  ```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

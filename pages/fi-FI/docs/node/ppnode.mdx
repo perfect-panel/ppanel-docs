@@ -1,0 +1,21 @@
+# PPanel-node
+
+Moniydin ytimille perustuva PPanel-solmupalvelin, muokattu V2bX:stä, tukee V2ay, Trojan, Shadowsocks, Tuic ja Hysteria -protokollia.
+
+### Yhden napsautuksen asennus
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Rakentaminen
+
+```bash
+# Määritä -tags-vaihtoehdolla käännettävä ydin, valinnaiset xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

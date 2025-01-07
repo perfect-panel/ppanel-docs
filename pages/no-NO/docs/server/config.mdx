@@ -1,0 +1,68 @@
+## Kjøringsmiljøkrav
+
+| Komponent           | Krav                                                                 |
+| ------------------- | -------------------------------------------------------------------- |
+| Serverkonfigurasjon | Minimum: 1 kjerne CPU, 2GB minne; Anbefalt: 2 kjerner CPU, 4GB minne |
+| MySQL               | 5.7 og høyere (anbefalt MySQL 8)                                     |
+| Redis               | 6 og høyere                                                          |
+| NGINX/Apache        | Valgfri versjon                                                      |
+
+### Beskrivelse av konfigurasjonsfil
+
+#### 1. Sti til konfigurasjonsfil
+
+Standardsti for konfigurasjonsfilen er: `./etc/ppanel.yaml`, og kan spesifiseres med oppstartparameteren `--config`.
+
+#### 2. Format på konfigurasjonsfil
+
+- Konfigurasjonsfilen er i yaml-format, støtter kommentarer, og navngis som xxx.yaml.
+
+```yaml
+# Eksempel på konfigurasjonsfil
+Host: # Tjenestelyttadresse, standard: 0.0.0.0
+Port: # Tjenestelytteport, standard: 8080
+Debug: # Om feilsøkingsmodus skal aktiveres, aktivering vil deaktivere bakgrunnsloggføring, standard: false
+JwtAuth: # JWT-autentiseringskonfigurasjon
+  AccessSecret: # Tilgangstoken-nøkkel, standard: tilfeldig generert
+  AccessExpire: # Utløpstid for tilgangstoken, enhet sekunder, standard: 604800
+Logger: # Loggkonfigurasjon
+  FilePath: # Sti til loggfil, standard: ./ppanel.log
+  MaxSize: # Maksimal størrelse på loggfil, enhet MB, standard: 50
+  MaxBackup: # Maksimalt antall sikkerhetskopier av loggfil, standard: 3
+  MaxAge: # Maksimal lagringstid for loggfil, enhet dager, standard: 30
+  Compress: # Om loggfilene skal komprimeres, standard: true
+  Level: # Loggnivå, standard: info, valgfrie: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: # MySQL-adresse, påkrevd
+  Username: # MySQL-brukernavn, påkrevd
+  Password: # MySQL-passord, påkrevd
+  Dbname: # MySQL-databasenavn, påkrevd
+  Config: # Mysql standardkonfigurasjon charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: # Maksimalt antall inaktive forbindelser, standard: 10
+  MaxOpenConns: # Maksimalt antall åpne forbindelser, standard: 100
+  LogMode: # Loggnivå, standard: info, valgfrie: debug, error, warn, info
+  LogZap: # Om zap-loggføring skal brukes for SQL, standard: true
+  SlowThreshold: # Terskel for langsomme spørringer, enhet millisekunder, standard: 1000
+Redis:
+  Host: # Redis-adresse, standard: localhost:6379
+  Pass: # Redis-passord, standard: ""
+  DB: # Redis-database, standard: 0
+
+Administer:
+  Email: # E-post for administrasjonsinnlogging, standard: admin@ppanel.dev
+  Password: # Passord for administrasjonsinnlogging, standard: password
+```
+
+#### 3. Miljøvariabler
+
+Støttede miljøvariabler er som følger:
+
+| Miljøvariabel | Konfigurasjonsalternativ | Eksempel                                   |
+| ------------- | ------------------------ | :----------------------------------------- |
+| PPANEL_DB     | MySQL-konfigurasjon      | root:password@tcp(localhost:3306)/vpnboard |
+| PPANEL_REDIS  | Redis-konfigurasjon      | redis://localhost:6379                     |
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

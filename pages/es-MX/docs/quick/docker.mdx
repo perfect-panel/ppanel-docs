@@ -1,0 +1,29 @@
+# Guía de Despliegue Rápido
+
+> **Consideraciones Previas al Despliegue**
+>
+> - **El puerto predeterminado del panel de administración es el 8080**: Asegúrese de configurar la resolución de nombres de dominio o de tener una dirección IP disponible para completar con éxito la instalación del panel de administración y del panel de usuario.
+> - Servidor: Para más información, consulte [Servidor](/es-MX/docs/server/config).
+> - Panel de administración: Para más información, consulte [Panel de administración](/es-MX/docs/admin/config).
+> - Panel de usuario: Para más información, consulte [Panel de usuario](/es-MX/docs/user/config).
+
+## Despliegue con un Solo Comando
+
+Utilice cualquiera de los siguientes comandos para desplegar PPanel de un solo golpe, incluyendo el servidor, el panel de administración y el panel de usuario:
+
+### Opción 1: Usando `curl`
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+### Opción 2: Usando `wget`
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

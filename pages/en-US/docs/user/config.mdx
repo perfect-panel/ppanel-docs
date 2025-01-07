@@ -1,0 +1,35 @@
+## Environment Variables
+
+Before deployment, please ensure to set the following environment variables directly in the deployment command to configure the application:
+
+```bash
+# Default language of the application
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<Your default language zh-CN | en-US>
+
+# Site URL and API endpoint
+NEXT_PUBLIC_SITE_URL=<Your site URL>
+NEXT_PUBLIC_API_URL=<Your API URL>
+
+# Support or inquiry contact email
+NEXT_PUBLIC_EMAIL=<Your contact email>
+
+# Community and social media links
+NEXT_PUBLIC_TELEGRAM_LINK=<Your Telegram link>
+NEXT_PUBLIC_TWITTER_LINK=<Your Twitter link>
+NEXT_PUBLIC_DISCORD_LINK=<Your Discord link>
+NEXT_PUBLIC_INSTAGRAM_LINK=<Your Instagram link>
+NEXT_PUBLIC_LINKEDIN_LINK=<Your LinkedIn link>
+NEXT_PUBLIC_FACEBOOK_LINK=<Your Facebook link>
+NEXT_PUBLIC_GITHUB_LINK=<Your GitHub link>
+
+# Default user credentials (for initial setup or testing purposes)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Your default user email>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Your default user password>
+```
+
+You can refer to the [example environment file](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) for a structured reference.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

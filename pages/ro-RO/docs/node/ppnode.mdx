@@ -1,0 +1,21 @@
+# PPanel-node
+
+Un server PPanel bazat pe mai multe nuclee, modificat din V2bX, care suportă protocoalele V2ay, Trojan, Shadowsocks, Tuic și Hysteria.
+
+### Instalare cu un singur clic
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Construire
+
+```bash
+# Specificați nucleul pe care doriți să-l compilați folosind opțiunea -tags, opțional xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

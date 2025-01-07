@@ -1,0 +1,35 @@
+## Környezeti változók
+
+A telepítés előtt kérjük, győződjön meg arról, hogy a telepítési parancsban közvetlenül beállította az alábbi környezeti változókat az alkalmazás konfigurálásához:
+
+```bash
+# Az alkalmazás alapértelmezett nyelve
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<az ön alapértelmezett nyelve hu-HU | en-US>
+
+# Webhely URL és API végpont
+NEXT_PUBLIC_SITE_URL=<az ön webhely URL-je>
+NEXT_PUBLIC_API_URL=<az ön API URL-je>
+
+# Támogatási vagy konzultációs kapcsolati e-mail
+NEXT_PUBLIC_EMAIL=<az ön kapcsolati e-mail címe>
+
+# Közösségi és közösségi média linkek
+NEXT_PUBLIC_TELEGRAM_LINK=<az ön Telegram linkje>
+NEXT_PUBLIC_TWITTER_LINK=<az ön Twitter linkje>
+NEXT_PUBLIC_DISCORD_LINK=<az ön Discord linkje>
+NEXT_PUBLIC_INSTAGRAM_LINK=<az ön Instagram linkje>
+NEXT_PUBLIC_LINKEDIN_LINK=<az ön LinkedIn linkje>
+NEXT_PUBLIC_FACEBOOK_LINK=<az ön Facebook linkje>
+NEXT_PUBLIC_GITHUB_LINK=<az ön GitHub linkje>
+
+# Alapértelmezett felhasználói hitelesítő adatok (kezdeti beállításokhoz vagy tesztelési célokra)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<az ön alapértelmezett felhasználói e-mail címe>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<az ön alapértelmezett felhasználói jelszava>
+```
+
+Hivatkozhat a [példa környezeti fájlra](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) a struktúrált referencia fájl megtekintéséhez.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

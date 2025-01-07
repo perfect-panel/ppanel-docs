@@ -1,0 +1,21 @@
+# PPanel-node
+
+A PPanel node server based on multiple kernels, modified from V2bX, supporting V2ray, Trojan, Shadowsocks, Tuic, and Hysteria protocols.
+
+### One-Click Installation
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## Build
+
+```bash
+# Specify the kernels to compile using the -tags option. Options include xray, sing
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

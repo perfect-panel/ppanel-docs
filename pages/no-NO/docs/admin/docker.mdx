@@ -1,0 +1,53 @@
+## Installere Docker
+
+Kjør følgende kommando for å installere Docker:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Bruke Docker for å starte tjenester
+
+Kjør følgende kommando for å starte containeren:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
+  -e NEXT_PUBLIC_SITE_URL=https://admin.example.com \
+  -e NEXT_PUBLIC_API_URL=https://api.example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Bruke Docker Compose for distribusjon
+
+Opprett en `docker-compose.yml`-fil med følgende innhold:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-admin-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
+      NEXT_PUBLIC_SITE_URL: https://admin.example.com
+      NEXT_PUBLIC_API_URL: https://api.example.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
+```
+
+Start tjenestene:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

@@ -1,0 +1,35 @@
+## 环境变量
+
+在部署前，请确保在部署命令中直接设置以下环境变量以配置应用程序：
+
+```bash
+# 应用的默认语言
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<您的默认语言 zh-CN | en-US>
+
+# 站点 URL 和 API 端点
+NEXT_PUBLIC_SITE_URL=<您的站点 URL>
+NEXT_PUBLIC_API_URL=<您的 API URL>
+
+# 支持或咨询的联系邮箱
+NEXT_PUBLIC_EMAIL=<您的联系邮箱>
+
+# 社区和社交媒体链接
+NEXT_PUBLIC_TELEGRAM_LINK=<您的 Telegram 链接>
+NEXT_PUBLIC_TWITTER_LINK=<您的 Twitter 链接>
+NEXT_PUBLIC_DISCORD_LINK=<您的 Discord 链接>
+NEXT_PUBLIC_INSTAGRAM_LINK=<您的 Instagram 链接>
+NEXT_PUBLIC_LINKEDIN_LINK=<您的 LinkedIn 链接>
+NEXT_PUBLIC_FACEBOOK_LINK=<您的 Facebook 链接>
+NEXT_PUBLIC_GITHUB_LINK=<您的 GitHub 链接>
+
+# 默认用户凭证（用于初始设置或测试目的）
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<您的默认用户邮箱>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
+```
+
+可以参考[示例环境文件](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template)来查看结构化的参考文件。
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

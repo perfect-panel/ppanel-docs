@@ -1,0 +1,53 @@
+## Dockerin asentaminen
+
+Suorita seuraava komento asentaaksesi Dockerin:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Palvelun käynnistäminen Dockerilla
+
+Suorita seuraava komento käynnistääksesi säilön:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=fi-FI \
+  -e NEXT_PUBLIC_SITE_URL=https://admin.esimerkki.com \
+  -e NEXT_PUBLIC_API_URL=https://api.esimerkki.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=kayttaja@esimerkki.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=salasana123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Docker Composen käyttäminen käyttöönotossa
+
+Luo `docker-compose.yml` -tiedosto, jonka sisältö on seuraava:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-admin-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: fi-FI
+      NEXT_PUBLIC_SITE_URL: https://admin.esimerkki.com
+      NEXT_PUBLIC_API_URL: https://api.esimerkki.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: kayttaja@esimerkki.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: salasana123
+```
+
+Käynnistä palvelu:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

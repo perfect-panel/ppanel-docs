@@ -1,0 +1,21 @@
+# PPanel-node
+
+یک سرور PPanel مبتنی بر چندین هسته، که از V2bX تغییر یافته و از پروتکل‌های V2ay، Trojan، Shadowsocks، Tuic و Hysteria پشتیبانی می‌کند.
+
+### نصب یک‌کلیک
+
+```
+wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
+```
+
+## ساخت
+
+```bash
+# با استفاده از گزینه -tags هسته‌ای که می‌خواهید کامپایل کنید را مشخص کنید، گزینه‌های قابل انتخاب xray و sing هستند
+go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

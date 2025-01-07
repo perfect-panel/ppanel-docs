@@ -1,0 +1,29 @@
+# Quick Deployment Guide
+
+> **Pre-deployment Considerations**
+>
+> - **The default port for the management interface is 8080**: Please configure your domain resolution in advance or ensure you have a usable IP address to facilitate the installation of both the management and user interfaces.
+> - Server: For more information, please refer to the [Server](/en-US/docs/server/config).
+> - Management Interface: For more information, please refer to the [Management Interface](/en-US/docs/admin/config).
+> - User Interface: For more information, please refer to the [User Interface](/en-US/docs/user/config).
+
+## One-Click Deployment
+
+You can deploy PPanel, including the server, management interface, and user interface, with any of the following commands:
+
+### Option 1: Using `curl`
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+### Option 2: Using `wget`
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

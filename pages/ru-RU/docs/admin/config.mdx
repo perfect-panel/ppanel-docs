@@ -1,0 +1,35 @@
+## Переменные окружения
+
+Перед развертыванием убедитесь, что вы напрямую установили следующие переменные окружения в команде развертывания для настройки приложения:
+
+```bash
+# Язык по умолчанию для приложения
+NEXT_PUBLIC_DEFAULT_LANGUAGE=<Ваш язык по умолчанию zh-CN | en-US>
+
+# URL сайта и конечная точка API
+NEXT_PUBLIC_SITE_URL=<Ваш URL сайта>
+NEXT_PUBLIC_API_URL=<Ваш URL API>
+
+# Контактный адрес электронной почты для поддержки или консультаций
+NEXT_PUBLIC_EMAIL=<Ваш контактный адрес электронной почты>
+
+# Ссылки на сообщества и социальные сети
+NEXT_PUBLIC_TELEGRAM_LINK=<Ваша ссылка на Telegram>
+NEXT_PUBLIC_TWITTER_LINK=<Ваша ссылка на Twitter>
+NEXT_PUBLIC_DISCORD_LINK=<Ваша ссылка на Discord>
+NEXT_PUBLIC_INSTAGRAM_LINK=<Ваша ссылка на Instagram>
+NEXT_PUBLIC_LINKEDIN_LINK=<Ваша ссылка на LinkedIn>
+NEXT_PUBLIC_FACEBOOK_LINK=<Ваша ссылка на Facebook>
+NEXT_PUBLIC_GITHUB_LINK=<Ваша ссылка на GitHub>
+
+# Учетные данные пользователя по умолчанию (для первоначальной настройки или тестирования)
+NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Ваш адрес электронной почты пользователя по умолчанию>
+NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Ваш пароль пользователя по умолчанию>
+```
+
+Вы можете обратиться к [примеру файла окружения](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template) для просмотра структурированного образца файла.
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

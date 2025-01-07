@@ -1,0 +1,53 @@
+## Cài đặt Docker
+
+Chạy lệnh sau để cài đặt Docker:
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
+
+## Sử dụng Docker để khởi động dịch vụ
+
+Chạy lệnh sau để khởi động container:
+
+```bash
+docker run -d -p 3000:3000 \
+  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
+  -e NEXT_PUBLIC_SITE_URL=https://user.example.com \
+  -e NEXT_PUBLIC_API_URL=https://api.example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
+  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
+  --name ppanel-user-web \
+  ppanel/ppanel-user-web:latest
+```
+
+## Sử dụng Docker Compose để triển khai
+
+Tạo một tệp `docker-compose.yml` với nội dung như sau:
+
+```yaml
+version: '3'
+
+services:
+  ppanel-user-web:
+    image: ppanel/ppanel-user-web:latest
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
+      NEXT_PUBLIC_SITE_URL: https://user.example.com
+      NEXT_PUBLIC_API_URL: https://api.example.com
+      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
+      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
+```
+
+Khởi động dịch vụ:
+
+```bash
+docker compose up -d
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />

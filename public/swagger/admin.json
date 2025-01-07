@@ -1,0 +1,6831 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/admin/announcement/": {
+      "delete": {
+        "summary": "Delete announcement",
+        "operationId": "DeleteAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteAnnouncementRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/announcement"]
+      },
+      "post": {
+        "summary": "Create announcement",
+        "operationId": "CreateAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateAnnouncementRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/announcement"]
+      },
+      "put": {
+        "summary": "Update announcement",
+        "operationId": "UpdateAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAnnouncementRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/announcement"]
+      }
+    },
+    "/v1/admin/announcement/detail": {
+      "get": {
+        "summary": "Get announcement",
+        "operationId": "GetAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Announcement"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/announcement"]
+      }
+    },
+    "/v1/admin/announcement/list": {
+      "get": {
+        "summary": "Get announcement list",
+        "operationId": "GetAnnouncementList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAnnouncementListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "show",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/announcement"]
+      }
+    },
+    "/v1/admin/console/revenue": {
+      "get": {
+        "summary": "Query revenue statistics",
+        "operationId": "QueryRevenueStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RevenueStatisticsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/console"]
+      }
+    },
+    "/v1/admin/console/server": {
+      "get": {
+        "summary": "Query server total data",
+        "operationId": "QueryServerTotalData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ServerTotalDataResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/console"]
+      }
+    },
+    "/v1/admin/console/ticket": {
+      "get": {
+        "summary": "Query ticket wait reply",
+        "operationId": "QueryTicketWaitReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/TicketWaitRelpyResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/console"]
+      }
+    },
+    "/v1/admin/console/user": {
+      "get": {
+        "summary": "Query user statistics",
+        "operationId": "QueryUserStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserStatisticsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/console"]
+      }
+    },
+    "/v1/admin/coupon/": {
+      "delete": {
+        "summary": "Delete coupon",
+        "operationId": "DeleteCoupon",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteCouponRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/coupon"]
+      },
+      "post": {
+        "summary": "Create coupon",
+        "operationId": "CreateCoupon",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCouponRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/coupon"]
+      },
+      "put": {
+        "summary": "Update coupon",
+        "operationId": "UpdateCoupon",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateCouponRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/coupon"]
+      }
+    },
+    "/v1/admin/coupon/batch": {
+      "delete": {
+        "summary": "Batch delete coupon",
+        "operationId": "BatchDeleteCoupon",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteCouponRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/coupon"]
+      }
+    },
+    "/v1/admin/coupon/list": {
+      "get": {
+        "summary": "Get coupon list",
+        "operationId": "GetCouponList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetCouponListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscribe",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/coupon"]
+      }
+    },
+    "/v1/admin/document/": {
+      "delete": {
+        "summary": "Delete document",
+        "operationId": "DeleteDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteDocumentRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/document"]
+      },
+      "post": {
+        "summary": "Create document",
+        "operationId": "CreateDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/document"]
+      },
+      "put": {
+        "summary": "Update document",
+        "operationId": "UpdateDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateDocumentRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/document"]
+      }
+    },
+    "/v1/admin/document/batch": {
+      "delete": {
+        "summary": "Batch delete document",
+        "operationId": "BatchDeleteDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteDocumentRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/document"]
+      }
+    },
+    "/v1/admin/document/detail": {
+      "get": {
+        "summary": "Get document detail",
+        "operationId": "GetDocumentDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Document"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/document"]
+      }
+    },
+    "/v1/admin/document/list": {
+      "get": {
+        "summary": "Get document list",
+        "operationId": "GetDocumentList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetDocumentListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/document"]
+      }
+    },
+    "/v1/admin/order/": {
+      "post": {
+        "summary": "Create order",
+        "operationId": "CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/order"]
+      }
+    },
+    "/v1/admin/order/list": {
+      "get": {
+        "summary": "Get order list",
+        "operationId": "GetOrderList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetOrderListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          },
+          {
+            "name": "subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/order"]
+      }
+    },
+    "/v1/admin/order/status": {
+      "put": {
+        "summary": "Update order status",
+        "operationId": "UpdateOrderStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderStatusRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/order"]
+      }
+    },
+    "/v1/admin/payment/alipay_f2f": {
+      "get": {
+        "summary": "Get alipay f2f payment config",
+        "operationId": "GetAlipayF2FPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PaymentConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/payment"]
+      },
+      "put": {
+        "summary": "Update alipay f2f payment config",
+        "operationId": "UpdateAlipayF2FPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAlipayF2fRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/payment"]
+      }
+    },
+    "/v1/admin/payment/all": {
+      "get": {
+        "summary": "Get all payment config",
+        "operationId": "GetAllPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAllPaymentConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/payment"]
+      }
+    },
+    "/v1/admin/payment/epay": {
+      "get": {
+        "summary": "Get epay payment config",
+        "operationId": "GetEpayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PaymentConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/payment"]
+      },
+      "put": {
+        "summary": "Update epay payment config",
+        "operationId": "UpdateEpayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateEpayRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/payment"]
+      }
+    },
+    "/v1/admin/payment/stripe_alipay": {
+      "get": {
+        "summary": "Get stripe alipay payment config",
+        "operationId": "GetStripeAlipayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PaymentConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/payment"]
+      },
+      "put": {
+        "summary": "Update stripe alipay payment config",
+        "operationId": "UpdateStripeAlipayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateStripeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/payment"]
+      }
+    },
+    "/v1/admin/payment/stripe_wechat_pay": {
+      "get": {
+        "summary": "Get stripe wechat pay payment config",
+        "operationId": "GetStripeWeChatPayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PaymentConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/payment"]
+      },
+      "put": {
+        "summary": "Update stripe wechat pay payment config",
+        "operationId": "UpdateStripeWeChatPayPaymentConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateStripeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/payment"]
+      }
+    },
+    "/v1/admin/server/": {
+      "delete": {
+        "summary": "Delete node",
+        "operationId": "DeleteNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteNodeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      },
+      "post": {
+        "summary": "Create node",
+        "operationId": "CreateNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateNodeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      },
+      "put": {
+        "summary": "Update node",
+        "operationId": "UpdateNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateNodeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/batch": {
+      "delete": {
+        "summary": "Batch delete node",
+        "operationId": "BatchDeleteNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteNodeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/detail": {
+      "get": {
+        "summary": "Get node detail",
+        "operationId": "GetNodeDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Server"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/group": {
+      "delete": {
+        "summary": "Delete node group",
+        "operationId": "DeleteNodeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteNodeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      },
+      "post": {
+        "summary": "Create node group",
+        "operationId": "CreateNodeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateNodeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      },
+      "put": {
+        "summary": "Update node group",
+        "operationId": "UpdateNodeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateNodeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/group/batch": {
+      "delete": {
+        "summary": "Batch delete node group",
+        "operationId": "BatchDeleteNodeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteNodeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/group/list": {
+      "get": {
+        "summary": "Get node group list",
+        "operationId": "GetNodeGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetNodeGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/list": {
+      "get": {
+        "summary": "Get node list",
+        "operationId": "GetNodeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetNodeServerListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "group_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/server/sort": {
+      "post": {
+        "summary": "Node sort ",
+        "operationId": "NodeSort",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeSortRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/server"]
+      }
+    },
+    "/v1/admin/subscribe/": {
+      "delete": {
+        "summary": "Delete subscribe",
+        "operationId": "DeleteSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteSubscribeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      },
+      "post": {
+        "summary": "Create subscribe",
+        "operationId": "CreateSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSubscribeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      },
+      "put": {
+        "summary": "Update subscribe",
+        "operationId": "UpdateSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSubscribeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/batch": {
+      "delete": {
+        "summary": "Batch delete subscribe",
+        "operationId": "BatchDeleteSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteSubscribeRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/details": {
+      "get": {
+        "summary": "Get subscribe details",
+        "operationId": "GetSubscribeDetails",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Subscribe"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/group": {
+      "delete": {
+        "summary": "Delete subscribe group",
+        "operationId": "DeleteSubscribeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteSubscribeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      },
+      "post": {
+        "summary": "Create subscribe group",
+        "operationId": "CreateSubscribeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSubscribeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      },
+      "put": {
+        "summary": "Update subscribe group",
+        "operationId": "UpdateSubscribeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSubscribeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/group/batch": {
+      "delete": {
+        "summary": "Batch delete subscribe group",
+        "operationId": "BatchDeleteSubscribeGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteSubscribeGroupRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/group/list": {
+      "get": {
+        "summary": "Get subscribe group list",
+        "operationId": "GetSubscribeGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscribeGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/list": {
+      "get": {
+        "summary": "Get subscribe list",
+        "operationId": "GetSubscribeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscribeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "group_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/subscribe/sort": {
+      "post": {
+        "summary": "Subscribe sort",
+        "operationId": "SubscribeSort",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscribeSortRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/subscribe"]
+      }
+    },
+    "/v1/admin/system/application": {
+      "get": {
+        "summary": "Get application",
+        "operationId": "GetApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ApplicationResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "delete": {
+        "summary": "Delete application",
+        "operationId": "DeleteApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Delete application request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteApplicationRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      },
+      "post": {
+        "summary": "Create application",
+        "operationId": "CreateApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Create application request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateApplicationRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update application",
+        "operationId": "UpdateApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Update application request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateApplicationRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/currency_config": {
+      "get": {
+        "summary": "Get Currency Config",
+        "operationId": "GetCurrencyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CurrencyConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update Currency Config",
+        "operationId": "UpdateCurrencyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CurrencyConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/email_config": {
+      "get": {
+        "summary": "Get email smtp config",
+        "operationId": "GetEmailSmtpConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/EmailSmtpConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update email smtp config",
+        "operationId": "UpdateEmailSmtpConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailSmtpConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/invite_config": {
+      "get": {
+        "summary": "Get invite config",
+        "operationId": "GetInviteConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/InviteConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update invite config",
+        "operationId": "UpdateInviteConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/node_config": {
+      "get": {
+        "summary": "Get node config",
+        "operationId": "GetNodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/NodeConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update node config",
+        "operationId": "UpdateNodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/register_config": {
+      "get": {
+        "summary": "Get register config",
+        "operationId": "GetRegisterConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RegisterConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update register config",
+        "operationId": "UpdateRegisterConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/setting_telegram_bot": {
+      "post": {
+        "summary": "setting telegram bot",
+        "operationId": "SettingTelegramBot",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/site_config": {
+      "get": {
+        "summary": "Get site config",
+        "operationId": "GetSiteConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SiteConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update site config",
+        "operationId": "UpdateSiteConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/subscribe_config": {
+      "get": {
+        "summary": "Get subscribe config",
+        "operationId": "GetSubscribeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SubscribeConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update subscribe config",
+        "operationId": "UpdateSubscribeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscribeConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/subscribe_type": {
+      "get": {
+        "summary": "Get subscribe type",
+        "operationId": "GetSubscribeType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SubscribeType"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/telegram_config": {
+      "get": {
+        "summary": "Get Telegram Config",
+        "operationId": "GetTelegramConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/TelegramConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update Telegram Config",
+        "operationId": "UpdateTelegramConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelegramConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/test_email": {
+      "post": {
+        "summary": "Test email smtp",
+        "operationId": "TestEmailSmtp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Test email smtp request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEmailSmtpRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/tos_config": {
+      "get": {
+        "summary": "Get Team of Service Config",
+        "operationId": "GetTosConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/TosConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update Team of Service Config",
+        "operationId": "UpdateTosConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TosConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/system/verify_config": {
+      "get": {
+        "summary": "Get verify config",
+        "operationId": "GetVerifyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/VerifyConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/system"]
+      },
+      "put": {
+        "summary": "Update verify config",
+        "operationId": "UpdateVerifyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyConfig"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/system"]
+      }
+    },
+    "/v1/admin/ticket/": {
+      "put": {
+        "summary": "Update ticket status",
+        "operationId": "UpdateTicketStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTicketStatusRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/ticket"]
+      }
+    },
+    "/v1/admin/ticket/detail": {
+      "get": {
+        "summary": "Get ticket detail",
+        "operationId": "GetTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Ticket"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/ticket"]
+      }
+    },
+    "/v1/admin/ticket/follow": {
+      "post": {
+        "summary": "Create ticket follow",
+        "operationId": "CreateTicketFollow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateTicketFollowRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/ticket"]
+      }
+    },
+    "/v1/admin/ticket/list": {
+      "get": {
+        "summary": "Get ticket list",
+        "operationId": "GetTicketList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetTicketListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/ticket"]
+      }
+    },
+    "/v1/admin/tool/log": {
+      "get": {
+        "summary": "Get System Log",
+        "operationId": "GetSystemLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/tool"]
+      }
+    },
+    "/v1/admin/tool/restart": {
+      "get": {
+        "summary": "Restart System",
+        "operationId": "RestartSystem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/tool"]
+      }
+    },
+    "/v1/admin/user/": {
+      "delete": {
+        "summary": "Delete user",
+        "operationId": "DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create user",
+        "operationId": "CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update user",
+        "operationId": "UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/batch": {
+      "delete": {
+        "summary": "Batch delete user",
+        "operationId": "BatchDeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeleteUserRequest"
+            }
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/current": {
+      "get": {
+        "summary": "Current user",
+        "operationId": "CurrentUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/detail": {
+      "get": {
+        "summary": "Get user detail",
+        "operationId": "GetUserDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/list": {
+      "get": {
+        "summary": "Get user list",
+        "operationId": "GetUserList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ppanel/admin/user"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AlipayF2FConfig": {
+      "type": "object",
+      "properties": {
+        "app_id": {
+          "type": "string"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "invoice_name": {
+          "type": "string"
+        },
+        "sandbox": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AlipayF2FConfig",
+      "required": ["app_id", "private_key", "public_key", "invoice_name", "sandbox"]
+    },
+    "Announcement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Announcement",
+      "required": ["id", "title", "content", "show", "pinned", "popup", "created_at", "updated_at"]
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "subscribe_type": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "Application",
+      "required": ["id", "name", "platform", "subscribe_type", "icon", "url"]
+    },
+    "ApplicationResponse": {
+      "type": "object",
+      "properties": {
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "mac": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "linux": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "android": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "ios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      },
+      "title": "ApplicationResponse",
+      "required": ["windows", "mac", "linux", "android", "ios"]
+    },
+    "BatchDeleteCouponRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteCouponRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteDocumentRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteNodeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteNodeGroupRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteNodeRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteNodeRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteSubscribeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteSubscribeGroupRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteSubscribeRequest",
+      "required": ["ids"]
+    },
+    "BatchDeleteUserRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "BatchDeleteUserRequest",
+      "required": ["ids"]
+    },
+    "Coupon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "used_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Coupon",
+      "required": [
+        "id",
+        "name",
+        "code",
+        "count",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time",
+        "user_limit",
+        "subscribe",
+        "used_count",
+        "enable",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "CreateAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "title": "CreateAnnouncementRequest",
+      "required": ["title", "content"]
+    },
+    "CreateApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["windows", "mac", "linux", "android", "ios"]
+        },
+        "subscribe_type": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "CreateApplicationRequest",
+      "required": ["name", "platform", "subscribe_type", "icon", "url"]
+    },
+    "CreateCouponRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "used_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateCouponRequest",
+      "required": ["name", "type", "discount", "start_time", "expire_time"]
+    },
+    "CreateDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateDocumentRequest",
+      "required": ["title", "content", "show"]
+    },
+    "CreateNodeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "CreateNodeGroupRequest",
+      "required": ["name", "description"]
+    },
+    "CreateNodeRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateNodeRequest",
+      "required": [
+        "name",
+        "server_addr",
+        "enable_relay",
+        "relay_host",
+        "relay_port",
+        "speed_limit",
+        "traffic_ratio",
+        "group_id",
+        "protocol",
+        "config",
+        "enable",
+        "sort"
+      ]
+    },
+    "CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateOrderRequest",
+      "required": ["user_id", "type", "price", "amount", "fee_amount"]
+    },
+    "CreateSubscribeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "CreateSubscribeGroupRequest",
+      "required": ["name", "description"]
+    },
+    "CreateSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateSubscribeRequest",
+      "required": [
+        "name",
+        "description",
+        "unit_price",
+        "unit_time",
+        "discount",
+        "replacement",
+        "inventory",
+        "traffic",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "group_id",
+        "server_group",
+        "server",
+        "show",
+        "sell"
+      ]
+    },
+    "CreateTicketFollowRequest": {
+      "type": "object",
+      "properties": {
+        "ticket_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "title": "CreateTicketFollowRequest",
+      "required": ["ticket_id", "from", "type", "content"]
+    },
+    "CreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "referer_user": {
+          "type": "string"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateUserRequest",
+      "required": [
+        "email",
+        "password",
+        "product_id",
+        "duration",
+        "referer_user",
+        "refer_code",
+        "balance",
+        "is_admin"
+      ]
+    },
+    "CurrencyConfig": {
+      "type": "object",
+      "properties": {
+        "currency_unit": {
+          "type": "string"
+        },
+        "currency_symbol": {
+          "type": "string"
+        }
+      },
+      "title": "CurrencyConfig",
+      "required": ["currency_unit", "currency_symbol"]
+    },
+    "DeleteAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteAnnouncementRequest",
+      "required": ["id"]
+    },
+    "DeleteApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteApplicationRequest",
+      "required": ["id"]
+    },
+    "DeleteCouponRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteCouponRequest",
+      "required": ["id"]
+    },
+    "DeleteDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteDocumentRequest",
+      "required": ["id"]
+    },
+    "DeleteNodeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteNodeGroupRequest",
+      "required": ["id"]
+    },
+    "DeleteNodeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteNodeRequest",
+      "required": ["id"]
+    },
+    "DeleteSubscribeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteSubscribeGroupRequest",
+      "required": ["id"]
+    },
+    "DeleteSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteSubscribeRequest",
+      "required": ["id"]
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Document",
+      "required": ["id", "title", "content", "tags", "show", "created_at", "updated_at"]
+    },
+    "EmailSmtpConfig": {
+      "type": "object",
+      "properties": {
+        "email_smtp_host": {
+          "type": "string"
+        },
+        "email_smtp_port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email_smtp_user": {
+          "type": "string"
+        },
+        "email_smtp_pass": {
+          "type": "string"
+        },
+        "email_smtp_from": {
+          "type": "string"
+        },
+        "email_smtp_ssl": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "verify_email_template": {
+          "type": "string"
+        },
+        "maintenance_email_template": {
+          "type": "string"
+        },
+        "expiration_email_template": {
+          "type": "string"
+        }
+      },
+      "title": "EmailSmtpConfig",
+      "required": [
+        "email_smtp_host",
+        "email_smtp_port",
+        "email_smtp_user",
+        "email_smtp_pass",
+        "email_smtp_from",
+        "email_smtp_ssl",
+        "verify_email_template",
+        "maintenance_email_template",
+        "expiration_email_template"
+      ]
+    },
+    "EpayConfig": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "title": "EpayConfig",
+      "required": ["pid", "url", "key"]
+    },
+    "Follow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ticket_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Follow",
+      "required": ["id", "ticket_id", "from", "type", "content", "created_at"]
+    },
+    "GetAllPaymentConfigResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentConfig"
+          }
+        }
+      },
+      "title": "GetAllPaymentConfigResponse",
+      "required": ["list"]
+    },
+    "GetAnnouncementListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetAnnouncementListRequest",
+      "required": ["page", "size"]
+    },
+    "GetAnnouncementListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Announcement"
+          }
+        }
+      },
+      "title": "GetAnnouncementListResponse",
+      "required": ["total", "list"]
+    },
+    "GetAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetAnnouncementRequest",
+      "required": ["id"]
+    },
+    "GetCouponListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetCouponListRequest",
+      "required": ["page", "size"]
+    },
+    "GetCouponListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coupon"
+          }
+        }
+      },
+      "title": "GetCouponListResponse",
+      "required": ["total", "list"]
+    },
+    "GetDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetDetailRequest",
+      "required": ["id"]
+    },
+    "GetDocumentDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetDocumentDetailRequest",
+      "required": ["id"]
+    },
+    "GetDocumentListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetDocumentListRequest",
+      "required": ["page", "size"]
+    },
+    "GetDocumentListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        }
+      },
+      "title": "GetDocumentListResponse",
+      "required": ["total", "list"]
+    },
+    "GetNodeDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetNodeDetailRequest",
+      "required": ["id"]
+    },
+    "GetNodeGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerGroup"
+          }
+        }
+      },
+      "title": "GetNodeGroupListResponse",
+      "required": ["total", "list"]
+    },
+    "GetNodeServerListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetNodeServerListRequest",
+      "required": ["page", "size"]
+    },
+    "GetNodeServerListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          }
+        }
+      },
+      "title": "GetNodeServerListResponse",
+      "required": ["total", "list"]
+    },
+    "GetOrderListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetOrderListRequest",
+      "required": ["page", "size"]
+    },
+    "GetOrderListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      },
+      "title": "GetOrderListResponse",
+      "required": ["total", "list"]
+    },
+    "GetSubscribeDetailsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetSubscribeDetailsRequest",
+      "required": ["id"]
+    },
+    "GetSubscribeGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeGroup"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetSubscribeGroupListResponse",
+      "required": ["list", "total"]
+    },
+    "GetSubscribeListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetSubscribeListRequest",
+      "required": ["page", "size"]
+    },
+    "GetSubscribeListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscribe"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetSubscribeListResponse",
+      "required": ["list", "total"]
+    },
+    "GetTicketListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetTicketListRequest",
+      "required": ["page", "size"]
+    },
+    "GetTicketListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ticket"
+          }
+        }
+      },
+      "title": "GetTicketListResponse",
+      "required": ["total", "list"]
+    },
+    "GetTicketRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetTicketRequest",
+      "required": ["id"]
+    },
+    "GetUserListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetUserListRequest",
+      "required": ["page", "size"]
+    },
+    "GetUserListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      },
+      "title": "GetUserListResponse",
+      "required": ["total", "list"]
+    },
+    "Hysteria2": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hop_ports": {
+          "type": "string"
+        },
+        "hop_interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "obfs_password": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Hysteria2",
+      "required": ["port", "hop_ports", "hop_interval", "obfs_password", "security_config"]
+    },
+    "InviteConfig": {
+      "type": "object",
+      "properties": {
+        "forced_invite": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "InviteConfig",
+      "required": ["forced_invite", "referral_percentage", "only_first_purchase"]
+    },
+    "LogResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "object"
+        }
+      },
+      "title": "LogResponse",
+      "required": ["list"]
+    },
+    "NodeConfig": {
+      "type": "object",
+      "properties": {
+        "node_secret": {
+          "type": "string"
+        },
+        "node_pull_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "node_push_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeConfig",
+      "required": ["node_secret", "node_pull_interval", "node_push_interval"]
+    },
+    "NodeSortRequest": {
+      "type": "object",
+      "properties": {
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortItem"
+          }
+        }
+      },
+      "title": "NodeSortRequest",
+      "required": ["sort"]
+    },
+    "NodeStatus": {
+      "type": "object",
+      "properties": {
+        "online_users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineUser"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ServerStatus"
+        },
+        "last_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NodeStatus",
+      "required": ["online_users", "status", "last_at"]
+    },
+    "OnlineUser": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip": {
+          "type": "string"
+        }
+      },
+      "title": "OnlineUser",
+      "required": ["uid", "ip"]
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Order",
+      "required": [
+        "id",
+        "user_id",
+        "order_no",
+        "type",
+        "quantity",
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "method",
+        "fee_amount",
+        "trade_no",
+        "status",
+        "subscribe_id",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "OrderDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/Subscribe"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "OrderDetail",
+      "required": [
+        "id",
+        "user_id",
+        "order_no",
+        "type",
+        "quantity",
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "method",
+        "fee_amount",
+        "trade_no",
+        "status",
+        "subscribe_id",
+        "subscribe",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "OrdersStatistics": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "amount_total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_order_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_order_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrdersStatistics"
+          }
+        }
+      },
+      "title": "OrdersStatistics",
+      "required": ["amount_total", "new_order_amount", "renewal_order_amount"]
+    },
+    "PaymentConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "PaymentConfig",
+      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+    },
+    "RegisterConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trial": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RegisterConfig",
+      "required": [
+        "stop_register",
+        "enable_trial",
+        "enable_email_verify",
+        "enable_email_domain_suffix",
+        "email_domain_suffix_list",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
+      ]
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "状态码"
+        },
+        "msg": {
+          "type": "string",
+          "description": "消息"
+        },
+        "data": {
+          "type": "object",
+          "description": "数据"
+        }
+      }
+    },
+    "RevenueStatisticsResponse": {
+      "type": "object",
+      "properties": {
+        "today": {
+          "$ref": "#/definitions/OrdersStatistics"
+        },
+        "monthly": {
+          "$ref": "#/definitions/OrdersStatistics"
+        },
+        "all": {
+          "$ref": "#/definitions/OrdersStatistics"
+        }
+      },
+      "title": "RevenueStatisticsResponse",
+      "required": ["today", "monthly", "all"]
+    },
+    "SecurityConfig": {
+      "type": "object",
+      "properties": {
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "reality_server_addr": {
+          "type": "string"
+        },
+        "reality_server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_private_key": {
+          "type": "string"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
+        }
+      },
+      "title": "SecurityConfig",
+      "required": [
+        "sni",
+        "allow_insecure",
+        "fingerprint",
+        "reality_server_addr",
+        "reality_server_port",
+        "reality_private_key",
+        "reality_public_key",
+        "reality_short_id"
+      ]
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Server",
+      "required": [
+        "id",
+        "name",
+        "server_addr",
+        "enable_relay",
+        "relay_host",
+        "relay_port",
+        "speed_limit",
+        "traffic_ratio",
+        "group_id",
+        "protocol",
+        "config",
+        "enable",
+        "created_at",
+        "updated_at",
+        "status",
+        "sort"
+      ]
+    },
+    "ServerGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerGroup",
+      "required": ["id", "name", "description", "created_at", "updated_at"]
+    },
+    "ServerStatus": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "double"
+        },
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerStatus",
+      "required": ["cpu", "mem", "disk", "updated_at"]
+    },
+    "ServerTotalDataResponse": {
+      "type": "object",
+      "properties": {
+        "online_user_ips": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "online_servers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "offline_servers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "today_upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "today_download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "monthly_upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "monthly_download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_traffic_ranking_today": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrafficData"
+          }
+        },
+        "server_traffic_ranking_yesterday": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrafficData"
+          }
+        },
+        "user_traffic_ranking_today": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTrafficData"
+          }
+        },
+        "user_traffic_ranking_yesterday": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTrafficData"
+          }
+        }
+      },
+      "title": "ServerTotalDataResponse",
+      "required": [
+        "online_user_ips",
+        "online_servers",
+        "offline_servers",
+        "today_upload",
+        "today_download",
+        "monthly_upload",
+        "monthly_download",
+        "updated_at",
+        "server_traffic_ranking_today",
+        "server_traffic_ranking_yesterday",
+        "user_traffic_ranking_today",
+        "user_traffic_ranking_yesterday"
+      ]
+    },
+    "ServerTrafficData": {
+      "type": "object",
+      "properties": {
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerTrafficData",
+      "required": ["server_id", "name", "upload", "download"]
+    },
+    "Shadowsocks": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "server_key": {
+          "type": "string"
+        }
+      },
+      "title": "Shadowsocks",
+      "required": ["method", "port", "server_key"]
+    },
+    "SiteConfig": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "site_name": {
+          "type": "string"
+        },
+        "site_desc": {
+          "type": "string"
+        },
+        "site_logo": {
+          "type": "string"
+        }
+      },
+      "title": "SiteConfig",
+      "required": ["host", "site_name", "site_desc", "site_logo"]
+    },
+    "SortItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SortItem",
+      "required": ["id", "sort"]
+    },
+    "StripeConfig": {
+      "type": "object",
+      "properties": {
+        "public_key": {
+          "type": "string"
+        },
+        "secret_key": {
+          "type": "string"
+        },
+        "webhook_secret": {
+          "type": "string"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "StripeConfig",
+      "required": ["public_key", "secret_key", "webhook_secret", "payment"]
+    },
+    "Subscribe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Subscribe",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "unit_price",
+        "unit_time",
+        "discount",
+        "replacement",
+        "inventory",
+        "traffic",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "group_id",
+        "server_group",
+        "server",
+        "show",
+        "sell",
+        "sort",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "SubscribeConfig": {
+      "type": "object",
+      "properties": {
+        "single_model": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "subscribe_path": {
+          "type": "string"
+        },
+        "subscribe_domain": {
+          "type": "string"
+        },
+        "pan_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SubscribeConfig",
+      "required": ["single_model", "subscribe_path", "subscribe_domain", "pan_domain"]
+    },
+    "SubscribeDiscount": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeDiscount",
+      "required": ["quantity", "discount"]
+    },
+    "SubscribeGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeGroup",
+      "required": ["id", "name", "description", "created_at", "updated_at"]
+    },
+    "SubscribeSortRequest": {
+      "type": "object",
+      "properties": {
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortItem"
+          }
+        }
+      },
+      "title": "SubscribeSortRequest",
+      "required": ["sort"]
+    },
+    "SubscribeType": {
+      "type": "object",
+      "properties": {
+        "subscribe_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "SubscribeType",
+      "required": ["subscribe_types"]
+    },
+    "TelegramConfig": {
+      "type": "object",
+      "properties": {
+        "telegram_bot_token": {
+          "type": "string"
+        },
+        "telegram_group_url": {
+          "type": "string"
+        },
+        "telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "telegram_web_hook_domain": {
+          "type": "string"
+        }
+      },
+      "title": "TelegramConfig",
+      "required": [
+        "telegram_bot_token",
+        "telegram_group_url",
+        "telegram_notify",
+        "telegram_web_hook_domain"
+      ]
+    },
+    "TestEmailSmtpRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "TestEmailSmtpRequest",
+      "required": ["email"]
+    },
+    "Ticket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "follow": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Follow"
+          }
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Ticket",
+      "required": ["id", "title", "description", "user_id", "status", "created_at", "updated_at"]
+    },
+    "TicketWaitRelpyResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "TicketWaitRelpyResponse",
+      "required": ["count"]
+    },
+    "TosConfig": {
+      "type": "object",
+      "properties": {
+        "tos_content": {
+          "type": "string"
+        }
+      },
+      "title": "TosConfig",
+      "required": ["tos_content"]
+    },
+    "TransportConfig": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "service_name": {
+          "type": "string"
+        }
+      },
+      "title": "TransportConfig",
+      "required": ["path", "host", "service_name"]
+    },
+    "Trojan": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Trojan",
+      "required": ["port", "transport", "transport_config", "security", "security_config"]
+    },
+    "Tuic": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Tuic",
+      "required": ["port", "security_config"]
+    },
+    "UpdateAlipayF2fRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/AlipayF2FConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateAlipayF2fRequest",
+      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+    },
+    "UpdateAnnouncementEnableRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateAnnouncementEnableRequest",
+      "required": ["id", "enable"]
+    },
+    "UpdateAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateAnnouncementRequest",
+      "required": ["id", "title", "content", "show", "pinned", "popup"]
+    },
+    "UpdateApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "subscribe_type": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateApplicationRequest",
+      "required": ["id", "name", "subscribe_type", "icon", "url"]
+    },
+    "UpdateCouponRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "used_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateCouponRequest",
+      "required": ["id", "name", "type", "discount", "start_time", "expire_time"]
+    },
+    "UpdateDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateDocumentRequest",
+      "required": ["id", "title", "content", "show"]
+    },
+    "UpdateEpayRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/EpayConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateEpayRequest",
+      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+    },
+    "UpdateNodeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateNodeGroupRequest",
+      "required": ["id", "name", "description"]
+    },
+    "UpdateNodeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "enable_relay": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "relay_host": {
+          "type": "string"
+        },
+        "relay_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UpdateNodeRequest",
+      "required": [
+        "id",
+        "name",
+        "server_addr",
+        "enable_relay",
+        "relay_host",
+        "relay_port",
+        "speed_limit",
+        "traffic_ratio",
+        "group_id",
+        "protocol",
+        "config",
+        "enable",
+        "sort"
+      ]
+    },
+    "UpdateOrderStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "method": {
+          "type": "string"
+        },
+        "trade_no": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateOrderStatusRequest",
+      "required": ["id", "status"]
+    },
+    "UpdateStripeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/StripeConfig"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateStripeRequest",
+      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+    },
+    "UpdateSubscribeGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateSubscribeGroupRequest",
+      "required": ["id", "name", "description"]
+    },
+    "UpdateSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UpdateSubscribeRequest",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "unit_price",
+        "unit_time",
+        "discount",
+        "replacement",
+        "inventory",
+        "traffic",
+        "speed_limit",
+        "device_limit",
+        "quota",
+        "group_id",
+        "server_group",
+        "server",
+        "show",
+        "sell",
+        "sort"
+      ]
+    },
+    "UpdateTicketStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "UpdateTicketStatusRequest",
+      "required": ["id", "status"]
+    },
+    "UpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "valid_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateUserRequest",
+      "required": [
+        "id",
+        "email",
+        "password",
+        "avatar",
+        "balance",
+        "telegram",
+        "refer_code",
+        "referer_id",
+        "enable",
+        "is_admin",
+        "valid_email",
+        "enable_email_notify",
+        "enable_telegram_notify",
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify"
+      ]
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "valid_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deleted_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "is_del": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "User",
+      "required": [
+        "id",
+        "email",
+        "avatar",
+        "balance",
+        "telegram",
+        "refer_code",
+        "referer_id",
+        "enable",
+        "valid_email",
+        "enable_email_notify",
+        "enable_telegram_notify",
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "UserAffiliate": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "registered_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UserAffiliate",
+      "required": ["email", "avatar", "registered_at", "enable"]
+    },
+    "UserBalanceLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserBalanceLog",
+      "required": ["id", "user_id", "amount", "type", "order_id", "balance", "created_at"]
+    },
+    "UserStatistics": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "register": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_order_users": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_order_users": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserStatistics"
+          }
+        }
+      },
+      "title": "UserStatistics",
+      "required": ["register", "new_order_users", "renewal_order_users"]
+    },
+    "UserStatisticsResponse": {
+      "type": "object",
+      "properties": {
+        "today": {
+          "$ref": "#/definitions/UserStatistics"
+        },
+        "monthly": {
+          "$ref": "#/definitions/UserStatistics"
+        },
+        "all": {
+          "$ref": "#/definitions/UserStatistics"
+        }
+      },
+      "title": "UserStatisticsResponse",
+      "required": ["today", "monthly", "all"]
+    },
+    "UserSubscribe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/Subscribe"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "token": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribe",
+      "required": [
+        "id",
+        "user_id",
+        "order_id",
+        "subscribe_id",
+        "subscribe",
+        "start_time",
+        "expire_time",
+        "traffic",
+        "download",
+        "upload",
+        "token",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "UserTrafficData": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserTrafficData",
+      "required": ["user_id", "email", "upload", "download"]
+    },
+    "VerifyConfig": {
+      "type": "object",
+      "properties": {
+        "turnstile_site_key": {
+          "type": "string"
+        },
+        "turnstile_secret": {
+          "type": "string"
+        },
+        "enable_login_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_register_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_reset_password_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "VerifyConfig",
+      "required": [
+        "turnstile_site_key",
+        "turnstile_secret",
+        "enable_login_verify",
+        "enable_register_verify",
+        "enable_reset_password_verify"
+      ]
+    },
+    "Vless": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Vless",
+      "required": ["port", "flow", "transport", "transport_config", "security", "security_config"]
+    },
+    "Vmess": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "transport_config": {
+          "$ref": "#/definitions/TransportConfig"
+        },
+        "security": {
+          "type": "string"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "Vmess",
+      "required": ["port", "transport", "transport_config", "security", "security_config"]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

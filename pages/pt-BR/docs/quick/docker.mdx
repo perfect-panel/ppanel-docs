@@ -1,0 +1,29 @@
+# Guia de Implantação Rápida
+
+> **Considerações Antes da Implantação**
+>
+> - **A porta padrão do painel de gerenciamento é 8080**: Por favor, configure previamente a resolução de domínio ou assegure-se de ter um endereço IP disponível para completar a instalação do painel de gerenciamento e do painel do usuário sem problemas.
+> - Servidor: Para mais informações, consulte [Servidor](/pt-BR/docs/server/config).
+> - Painel de Gerenciamento: Para mais informações, consulte [Painel de Gerenciamento](/pt-BR/docs/admin/config).
+> - Painel do Usuário: Para mais informações, consulte [Painel do Usuário](/pt-BR/docs/user/config).
+
+## Implantação com Um Clique
+
+Use qualquer um dos comandos abaixo para implantar o PPanel com um clique, incluindo o servidor, o painel de gerenciamento e o painel do usuário:
+
+### Opção 1: Usando `curl`
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+### Opção 2: Usando `wget`
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
+```
+
+
+import Giscus from '@/components/giscus';
+
+<Giscus />
