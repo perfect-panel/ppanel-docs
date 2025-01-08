@@ -4378,6 +4378,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "git_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
         "is_admin": {
           "type": "boolean",
           "format": "boolean"
@@ -4392,6 +4396,7 @@
         "referer_user",
         "refer_code",
         "balance",
+        "git_amount",
         "is_admin"
       ]
     },
@@ -7140,6 +7145,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "git_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
         "telegram": {
           "type": "integer",
           "format": "int64"
@@ -7195,6 +7204,7 @@
         "password",
         "avatar",
         "balance",
+        "git_amount",
         "telegram",
         "refer_code",
         "referer_id",
