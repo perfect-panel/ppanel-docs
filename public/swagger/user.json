@@ -1963,7 +1963,6 @@
         "discount",
         "coupon",
         "coupon_discount",
-        "commission",
         "method",
         "fee_amount",
         "trade_no",
@@ -2065,7 +2064,6 @@
         "discount",
         "coupon",
         "coupon_discount",
-        "commission",
         "method",
         "fee_amount",
         "trade_no",
@@ -3440,7 +3438,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "deduction": {
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -3515,7 +3513,7 @@
         "avatar",
         "balance",
         "commission",
-        "deduction",
+        "gift_amount",
         "telegram",
         "refer_code",
         "referer_id",
