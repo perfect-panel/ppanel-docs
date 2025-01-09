@@ -947,6 +947,51 @@
         ]
       }
     },
+    "/v1/public/user/commission_log": {
+      "get": {
+        "summary": "Query User Commission Log",
+        "operationId": "QueryUserCommissionLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserCommissionLogListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/info": {
       "get": {
         "summary": "Query User Info",
@@ -1400,6 +1445,38 @@
       "title": "CloseOrderRequest",
       "required": [
         "orderNo"
+      ]
+    },
+    "CommissionLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CommissionLog",
+      "required": [
+        "id",
+        "user_id",
+        "order_no",
+        "amount",
+        "created_at"
       ]
     },
     "Coupon": {
@@ -2482,6 +2559,44 @@
         }
       },
       "title": "QueryUserBalanceLogListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "QueryUserCommissionLogListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryUserCommissionLogListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryUserCommissionLogListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommissionLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserCommissionLogListResponse",
       "required": [
         "list",
         "total"
