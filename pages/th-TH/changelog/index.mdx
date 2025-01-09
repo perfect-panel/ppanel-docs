@@ -1,0 +1,18 @@
+import { Callout, RemoteContent } from 'nextra/components'
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
+
+export async function getStaticProps() {
+  const url = `https://raw.githubusercontent.com/perfect-panel/ppanel-web/refs/heads/beta/CHANGELOG.md`
+  const response = await fetch(url)
+  const data = await response.text()
+  const dynamicMdx = await buildDynamicMDX(data, { defaultShowCopyCode: true })
+  return {
+    props: {
+      ...dynamicMdx
+    }
+  }
+}
+
+
+
+<RemoteContent components={{ Callout }} />
