@@ -4168,6 +4168,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
         "fee_amount": {
           "type": "integer",
           "format": "int64"
@@ -4193,6 +4197,7 @@
         "type",
         "price",
         "amount",
+        "commission",
         "fee_amount"
       ]
     },
@@ -4378,7 +4383,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "git_amount": {
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -4396,7 +4405,8 @@
         "referer_user",
         "refer_code",
         "balance",
-        "git_amount",
+        "commission",
+        "gift_amount",
         "is_admin"
       ]
     },
@@ -5382,7 +5392,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "deduction": {
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -5394,6 +5404,10 @@
           "type": "string"
         },
         "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commission": {
           "type": "integer",
           "format": "int64"
         },
@@ -5433,10 +5447,11 @@
         "quantity",
         "price",
         "amount",
-        "deduction",
+        "gift_amount",
         "discount",
         "coupon",
         "coupon_discount",
+        "commission",
         "method",
         "fee_amount",
         "trade_no",
@@ -5476,7 +5491,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "deduction": {
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -5488,6 +5503,10 @@
           "type": "string"
         },
         "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commission": {
           "type": "integer",
           "format": "int64"
         },
@@ -5530,10 +5549,11 @@
         "quantity",
         "price",
         "amount",
-        "deduction",
+        "gift_amount",
         "discount",
         "coupon",
         "coupon_discount",
+        "commission",
         "method",
         "fee_amount",
         "trade_no",
@@ -7145,7 +7165,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "git_amount": {
+        "commission": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -7204,7 +7228,8 @@
         "password",
         "avatar",
         "balance",
-        "git_amount",
+        "commission",
+        "gift_amount",
         "telegram",
         "refer_code",
         "referer_id",

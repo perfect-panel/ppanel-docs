@@ -983,7 +983,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "deduction": {
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -995,6 +995,10 @@
           "type": "string"
         },
         "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commission": {
           "type": "integer",
           "format": "int64"
         },
@@ -1034,10 +1038,11 @@
         "quantity",
         "price",
         "amount",
-        "deduction",
+        "gift_amount",
         "discount",
         "coupon",
         "coupon_discount",
+        "commission",
         "method",
         "fee_amount",
         "trade_no",
@@ -1077,7 +1082,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "deduction": {
+        "gift_amount": {
           "type": "integer",
           "format": "int64"
         },
@@ -1089,6 +1094,10 @@
           "type": "string"
         },
         "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commission": {
           "type": "integer",
           "format": "int64"
         },
@@ -1131,10 +1140,11 @@
         "quantity",
         "price",
         "amount",
-        "deduction",
+        "gift_amount",
         "discount",
         "coupon",
         "coupon_discount",
+        "commission",
         "method",
         "fee_amount",
         "trade_no",
