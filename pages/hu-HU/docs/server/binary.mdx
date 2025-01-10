@@ -1,41 +1,310 @@
 #### Előfeltételek
 
-- Mysql 5.7+ (ajánlott: 8.0)
-- Redis 6.0+ (ajánlott: 7.0)
+- Debian 12
 
-#### Bináris telepítés
+#### Nginx telepítése
 
-1. Határozza meg a rendszer architektúráját, és töltse le a megfelelő bináris fájlt
+Az Nginx telepítéséhez az hivatalos Nginx DEB forrást használjuk.
 
-Letöltési link: `https://github.com/perfect-panel/ppanel/releases`
+Szükséges szoftverek telepítése
 
-Példa: Rendszer: Linux amd64, Felhasználó: root, Jelenlegi könyvtár: /root
-
-- Bináris fájl letöltése
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
 ```
 
-- Bináris fájl kicsomagolása
+Hivatalos Nginx PGP kulcs hozzáadása
 
-```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 ```
 
-- Lépjen be a kicsomagolt könyvtárba
+Hivatalos Nginx forrás konfiguráció írása az nginx.list fájlba
 
-```shell
-cd ppanel-server-linux-amd64
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
 ```
 
-- Adjon végrehajtási jogosultságot a bináris fájlnak
+A hivatalos Nginx forrás prioritásának beállítása a rendszer beépített forrásai fölé
 
-```shell
-chmod +x ppanel
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
 ```
 
-- Hozzon létre systemd szolgáltatás fájlt
+APT gyorsítótár frissítése
+
+```bash
+apt update
+```
+
+Nginx telepítése
+
+```bash
+apt install nginx
+```
+
+Végül indítsa el az Nginx szolgáltatást és állítsa be automatikus indításra
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redis telepítése
+
+GPG kulcs importálása
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Hivatalos Redis forrás konfiguráció írása a redis.list fájlba
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+APT gyorsítótár frissítése
+
+```bash
+apt update
+```
+
+redis-server telepítése
+
+```bash
+apt install redis
+```
+
+Redis szolgáltatás indítása és automatikus indításra állítása
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDB telepítése
+
+A MariaDB egy teljes DEB tárolót kínál, hasonlóan az Nginx tárolóhoz, ezért szükség van a szükséges csomagok telepítésére és a GPG kulcs importálására.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Szerkesztse a `/etc/apt/sources.list.d/mariadb.sources` fájlt, és írja be a következő konfigurációt:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+APT gyorsítótár frissítése
+
+```bash
+apt update
+```
+
+MariaDB 11.4 telepítése
+
+```bash
+apt install mariadb-server
+```
+
+MariaDB szolgáltatás indítása és automatikus indításra állítása
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+MariaDB kezdeti beállításának futtatása
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanel telepítése
+
+1. MariaDB adatbázis konfigurálása
+
+### 1. Bejelentkezés a MariaDB-be
+
+```bash
+mariadb -u root -p
+```
+
+A MariaDB parancssori felületén hajtsa végre az alábbi parancsot egy új ppanel_db adatbázis létrehozásához, és állítsa be a karakterkódolást utf8mb4_unicode_ci-ra.
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Ezután hozzon létre egy helyi adatbázis felhasználót, és korlátozza a felhasználó jogosultságait az újonnan létrehozott adatbázisra, használva a ppanel nevet felhasználónévként és a ppanel-password-ot jelszóként.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Kilépés a MariaDB-ből
+
+```sql
+EXIT;
+```
+
+2. Nginx konfigurálása
+
+A `/etc/nginx/nginx.conf` fájlban a `user` értékét módosítsa
+
+```nginx
+user nginx;
+```
+
+A Nginx virtuális host konfigurációs fájl hozzáadása
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Ezután írja be a következő konfigurációt, ügyelve arra, hogy módosítsa a weboldal domain nevét és az SSL tanúsítvány fájlokat (különben hibaüzenetet kap):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Cserélje le a saját domain nevére
+
+    ssl_certificate /path/your/certs/example.crt;  # Cserélje le a saját tanúsítvány útvonalára
+    ssl_certificate_key /path/your/private/example.key;  # Cserélje le a saját privát kulcs útvonalára
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Ajánlott protokollok
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Ajánlott titkosítási algoritmusok
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Kezdete
+    set_real_ip_from 0.0.0.0/0;  # Minden Cloudflare IP cím megbízása
+    real_ip_header X-Forwarded-For;  # Az X-Forwarded-For fejléc használata a valódi IP cím megszerzéséhez
+    real_ip_recursive on;  # Az X-Forwarded-For fejlécben található több IP cím rekurzív feloldása
+    # cloudflare Vége
+
+    # Alapértelmezett proxy beállítások
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Proxy beállítása a háttérszolgáltatásra, ha a háttérszolgáltatás a 127.0.0.1:8080 címen található
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Statikus erőforrások gyorsítótárazásának beállítása
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP átirányítás HTTPS-re
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Cserélje le a saját domain nevére
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Nginx újraindítása
+
+```bash
+systemctl restart nginx
+```
+
+3. A rendszer architektúrájának meghatározása és a megfelelő bináris fájl letöltése
+
+Letöltési cím: `https://github.com/perfect-panel/ppanel/releases`
+
+Példa leírás: Rendszer: Debian amd64, Felhasználó: root, Jelenlegi könyvtár: /root
+
+- Letöltés
+
+```shell
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- Kicsomagolás
+
+```shell
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- Áthelyezés
+
+```shell
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
+```
+
+- A bináris fájl végrehajtási jogainak megadása
+
+```shell
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- ppanel.yaml konfigurációs fájl módosítása
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Szolgáltatás figyelési címe, módosítsa: 127.0.0.1
+Port: 8080 # Szolgáltatás figyelési portja, alapértelmezett: 8080
+Debug: false # Hibakeresési mód engedélyezése, alapértelmezett: false
+JwtAuth: # JWT hitelesítési konfiguráció
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Hozzáférési token kulcs, kérjük, módosítsa
+  AccessExpire: 604800 # Hozzáférési token lejárati ideje, másodpercben, alapértelmezett: 604800
+Logger: # Naplózási konfiguráció
+  FilePath: ./ppanel.log # Naplófájl elérési útja, alapértelmezett: ./ppanel.log
+  MaxSize: 50 # Naplófájl maximális mérete, MB-ban, alapértelmezett: 50
+  MaxBackup: 3 # Naplófájl maximális mentési száma, alapértelmezett: 3
+  MaxAge: 30 # Naplófájl maximális megőrzési ideje, napokban, alapértelmezett: 30
+  Compress: true # Naplófájlok tömörítése, alapértelmezett: true
+  Level: info # Naplózási szint, alapértelmezett: info, választható: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL cím, kötelező
+  Username: ppanel # MySQL felhasználónév, kötelező
+  Password: ppanel-password # MySQL jelszó, kötelező
+  Dbname: ppanel_db # MySQL adatbázis név, kötelező
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL alapértelmezett konfiguráció
+  MaxIdleConns: 10 # Maximális inaktív kapcsolatok száma, alapértelmezett: 10
+  MaxOpenConns: 100 # Maximális nyitott kapcsolatok száma, alapértelmezett: 100
+  LogMode: info # Naplózási szint, alapértelmezett: info, választható: debug, error, warn, info
+  LogZap: true # SQL naplózás zap használatával, alapértelmezett: true
+  SlowThreshold: 1000 # Lassú lekérdezési küszöb, milliszekundumban, alapértelmezett: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis cím, alapértelmezett:localhost:6379
+  Pass: '' # Redis jelszó, alapértelmezett: ""
+  DB: 0 # Redis adatbázis, alapértelmezett: 0
+
+Administer:
+  Email: admin@ppanel.dev # Adminisztrátori bejelentkezési e-mail, alapértelmezett: admin@ppanel.dev
+  Password: password # Adminisztrátori bejelentkezési jelszó, alapértelmezett: password
+```
+
+- systemd szolgáltatás fájl létrehozása
 
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
@@ -44,23 +313,23 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- Töltse újra a systemd szolgáltatásokat
+- systemd szolgáltatás újratöltése
 
 ```shell
 systemctl daemon-reload
 ```
 
-- Indítsa el a szolgáltatást
+- Szolgáltatás indítása
 
 ```shell
 systemctl start ppanel
@@ -68,7 +337,7 @@ systemctl start ppanel
 
 ##### Egyéb megjegyzések
 
-1. Telepítési útvonal: A bináris fájl a /root/ppanel-server-linux-amd64 könyvtárba lesz kicsomagolva.
+1. Telepítési útvonal: A bináris fájl végül a /usr/local/bin könyvtárba kerül
 
 2. systemd szolgáltatás:
 
@@ -80,68 +349,15 @@ systemctl start ppanel
    - Szolgáltatás állapot parancs: systemctl status ppanel
    - Szolgáltatás automatikus indítása: systemctl enable ppanel
 
-3. Az automatikus indítást a következő parancs segítségével állíthatja be:
+3. Az automatikus indítást a következő parancs segítségével állíthatja be
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Szolgáltatás napló: A szolgáltatás naplója alapértelmezés szerint a /root/ppanel-server-linux-amd64/ppanel.log fájlba kerül.
+4. Szolgáltatás naplója: A szolgáltatás naplója alapértelmezés szerint a /usr/local/bin/ppanel.log fájlba kerül
 
-5. A szolgáltatás naplója megtekinthető a `journalctl -u ppanel -f` paranccsal.
+5. A szolgáltatás naplója megtekinthető a `journalctl -u ppanel -f` paranccsal
 
-6. Ha a konfigurációs fájl üres vagy nem létezik, a szolgáltatás alapértelmezett konfigurációval indul, a konfigurációs fájl elérési útja: `./etc/ppanel.yaml`,
+6. Ha a konfigurációs fájl üres vagy nem létezik, a szolgáltatás az alapértelmezett konfigurációval indul, a konfigurációs fájl elérési útja: `./etc/ppanel.yaml`,
    kérjük, a `http://szerver_cím:8080/init` címen inicializálja a rendszer konfigurációját.
-
-#### NGINX fordított proxy konfiguráció
-
-Az alábbiakban egy fordított proxy konfigurációs példa található, amely a `ppanel` szolgáltatást az `api.ppanel.dev` domain alá irányítja.
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       #Nginx cache beállítása
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Ha Cloudflare proxy szolgáltatást használ, szükséges a felhasználó valódi IP-címének megszerzése. Kérjük, adja hozzá a következőket az Nginx konfigurációs fájl Http szakaszához:
-
-- Szükséges: **ngx_http_realip_module** modul, ellenőrizze az nginx -V parancs segítségével, hogy az nginx már tartalmazza-e ezt a modult, ha nem, akkor saját magának kell lefordítania.
-
-```nginx
-    # cloudflare Kezdete
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare Vége
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />

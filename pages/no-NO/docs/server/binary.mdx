@@ -1,41 +1,316 @@
 #### Forhåndssystemkrav
 
-- Mysql 5.7+ (anbefalt å bruke 8.0)
-- Redis 6.0+ (anbefalt å bruke 7.0)
+- Debian 12
 
-#### Binær installasjon
+#### Installere Nginx
 
-1. Bestem systemarkitektur og last ned de tilsvarende binærfilene
+For installasjonen av Nginx bruker vi den offisielle Nginx DEB-kilden.
+
+Installer nødvendige programmer
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Legg til den offisielle Nginx PGP-nøkkelen
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Skriv inn den offisielle Nginx-kildekonfigurasjonen i nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Sett den offisielle Nginx-kildens prioritet høyere enn systemets innebygde kilder
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Oppdater APT-cachen
+
+```bash
+apt update
+```
+
+Installer Nginx
+
+```bash
+apt install nginx
+```
+
+Til slutt, start Nginx-tjenesten og sett den til å starte ved oppstart
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Installere Redis
+
+Importer GPG-nøkkelen
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Skriv inn den offisielle Redis-kildekonfigurasjonen i redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Oppdater APT-cachen
+
+```bash
+apt update
+```
+
+Installer redis-server
+
+```bash
+apt install redis
+```
+
+Start Redis-tjenesten og sett den til å starte ved oppstart
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### Installere MariaDB
+
+MariaDB tilbyr et komplett DEB-repositorium, likt Nginx-repositoriet, så vi må installere nødvendige pakker og importere GPG-nøkkelen.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Rediger `/etc/apt/sources.list.d/mariadb.sources`-filen, og skriv inn følgende konfigurasjon:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Oppdater APT-cachen
+
+```bash
+apt update
+```
+
+Installer MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Start MariaDB-tjenesten og sett den til å starte ved oppstart
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Kjør den innledende konfigurasjonen for MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### Installere ppanel
+
+1. Konfigurer MariaDB-databasen
+
+### 1. Logg inn på MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+I MariaDB-kommandolinjegrensesnittet, kjør følgende kommando for å opprette en ny database ppanel_db, og sett tegnsettet til utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Deretter oppretter du en lokal databasebruker og begrenser brukerens rettigheter til den nyopprettede databasen, med ppanel som brukernavn og ppanel-password som passord.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Logg ut av MariaDB
+
+```sql
+EXIT;
+```
+
+2. Konfigurer Nginx
+
+Endre `user` i `/etc/nginx/nginx.conf` fra
+
+```nginx
+user nginx;
+```
+
+til
+
+```nginx
+user www-data;
+```
+
+Legg til Nginx virtuell vertskonfigurasjonsfil
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Skriv deretter inn følgende konfigurasjon, vær oppmerksom på å endre domenenavnet og SSL-sertifikatfilen (ellers vil det oppstå feil):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Erstatt med ditt domenenavn
+
+    ssl_certificate /path/your/certs/example.crt;  # Erstatt med din sertifikatbane
+    ssl_certificate_key /path/your/private/example.key;  # Erstatt med din private nøkkelbane
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Anbefalte protokoller
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Anbefalte krypteringssett
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Start
+    set_real_ip_from 0.0.0.0/0;  # Stol på alle IP-adresser fra Cloudflare
+    real_ip_header X-Forwarded-For;  # Bruk X-Forwarded-For-headeren for å få den virkelige IP-en
+    real_ip_recursive on;  # Rekursivt oppløse flere IP-er i X-Forwarded-For-headeren
+    # cloudflare SLUTT
+
+    # Standard proxy-innstillinger
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Konfigurer proxy til backend-tjenesten, hvis backend-tjenesten er på 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Sett statisk ressursbuffer
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP til HTTPS-omdirigering
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Erstatt med ditt domenenavn
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Start Nginx på nytt
+
+```bash
+systemctl restart nginx
+```
+
+3. Bestem systemarkitekturen og last ned de tilsvarende binærfilene
 
 Nedlastingsadresse: `https://github.com/perfect-panel/ppanel/releases`
 
-Eksempelbeskrivelse: System: Linux amd64, Bruker: root, Nåværende katalog: /root
+Eksempelbeskrivelse: System: Debian amd64, Bruker: root, Nåværende katalog: /root
 
-- Last ned binærfilen
+- Last ned
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Pakk ut binærfilen
+- Pakk ut
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Gå inn i den utpakkede katalogen
+- Flytt
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
 - Gi binærfilen kjøretilgang
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
 ```
 
-- Opprett systemd tjenestefil
+- Endre ppanel.yaml konfigurasjonsfilen
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Tjenestelyttende adresse, endre til: 127.0.0.1
+Port: 8080 # Tjenestelyttende port, standard: 8080
+Debug: false # Om debug-modus skal være aktivert, standard: false
+JwtAuth: # JWT-autentiseringskonfigurasjon
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Tilgangstoken-nøkkel, vennligst endre
+  AccessExpire: 604800 # Tilgangstoken utløpstid, i sekunder, standard: 604800
+Logger: # Loggkonfigurasjon
+  FilePath: ./ppanel.log # Loggfilbane, standard: ./ppanel.log
+  MaxSize: 50 # Maksimal størrelse på loggfilen, i MB, standard: 50
+  MaxBackup: 3 # Maksimalt antall sikkerhetskopier av loggfilen, standard: 3
+  MaxAge: 30 # Maksimal lagringstid for loggfilen, i dager, standard: 30
+  Compress: true # Om loggfilene skal komprimeres, standard: true
+  Level: info # Loggnivå, standard: info, valgfritt: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL-adresse, påkrevd
+  Username: ppanel # MySQL-brukernavn, påkrevd
+  Password: ppanel-password # MySQL-passord, påkrevd
+  Dbname: ppanel_db # MySQL-databasenavn, påkrevd
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # Standard MySQL-konfigurasjon
+  MaxIdleConns: 10 # Maksimalt antall inaktive tilkoblinger, standard: 10
+  MaxOpenConns: 100 # Maksimalt antall åpne tilkoblinger, standard: 100
+  LogMode: info # Loggnivå, standard: info, valgfritt: debug, error, warn, info
+  LogZap: true # Om zap-logg skal brukes for å registrere SQL, standard: true
+  SlowThreshold: 1000 # Terskel for langsomme spørringer, i millisekunder, standard: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis-adresse, standard:localhost:6379
+  Pass: '' # Redis-passord, standard: ""
+  DB: 0 # Redis-database, standard: 0
+
+Administer:
+  Email: admin@ppanel.dev # E-post for innlogging til administrasjon, standard: admin@ppanel.dev
+  Password: password # Passord for innlogging til administrasjon, standard: password
+```
+
+- Opprett systemd-tjenestefil
 
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
@@ -44,17 +319,17 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- Last inn systemd tjenesten på nytt
+- Last inn systemd-tjenesten på nytt
 
 ```shell
 systemctl daemon-reload
@@ -68,80 +343,26 @@ systemctl start ppanel
 
 ##### Andre merknader
 
-1. Installeringsti: Binærfilene vil bli pakket ut til /root/ppanel-server-linux-amd64 katalogen
+1. Installationsbane: Binærfilen flyttes til /usr/local/bin-katalogen
 
-2. systemd tjeneste:
+2. systemd-tjeneste:
 
    - Tjenestenavn: ppanel
    - Tjenestekonfigurasjonsfil: /etc/systemd/system/ppanel.service
    - Tjenestestartkommando: systemctl start ppanel
    - Tjenestestoppkommando: systemctl stop ppanel
-   - Tjenesterestartkommando: systemctl restart ppanel
+   - Tjenestestartkommando: systemctl restart ppanel
    - Tjenestestatuskommando: systemctl status ppanel
-   - Tjenesteautostart ved oppstart: systemctl enable ppanel
+   - Tjeneste ved oppstart: systemctl enable ppanel
 
-3. For å sette opp autostart ved oppstart kan du bruke følgende kommando
+3. For å sette opp automatisk oppstart kan du bruke følgende kommando
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Tjenestelogg: Tjenestelogg skrives som standard til /root/ppanel-server-linux-amd64/ppanel.log filen
+4. Tjenestelogg: Tjenestelogg skrives som standard til /usr/local/bin/ppanel.log-filen
 
 5. Du kan se tjenesteloggen med `journalctl -u ppanel -f`
 
-6. Når konfigurasjonsfilen er tom eller ikke eksisterer, vil tjenesten starte med standardkonfigurasjon, konfigurasjonsfilens sti er: `./etc/ppanel.yaml`,
-   vennligst initialiser systemkonfigurasjonen via `http://serveradresse:8080/init`
-
-#### NGINX omvendt proxy-konfigurasjon
-
-Her er et eksempel på omvendt proxy-konfigurasjon som proxyer `ppanel` tjenesten til `api.ppanel.dev` domenet
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       #Sett Nginx Cache
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Hvis du bruker Cloudflare proxy-tjeneste, må du få tak i den virkelige IP-adressen til brukeren. Vennligst legg til følgende i Nginx konfigurasjonsfil i Http-delen:
-
-- Avhengighet: **ngx_http_realip_module** modulen, bruk `nginx -V` kommandoen for å sjekke om nginx allerede er kompilert med denne modulen, hvis ikke, må du kompilere den selv.
-
-```nginx
-    # cloudflare Start
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare END
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />
+6. Når konfigurasjonsfilen er tom eller ikke eksisterer, vil tjenesten starte med standardkonfigurasjonen, konfigurasjonsfilens bane er: `./etc/ppanel.yaml`, vennligst initialiser systemkonfigurasjonen via `http://server-adresse:8080/init`

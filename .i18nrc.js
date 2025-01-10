@@ -30,11 +30,13 @@ module.exports = defineConfig({
   modelName: 'gpt-4o-mini',
   outputLocales: outputLocales,
   markdown: {
-    entry: ['./pages/zh-CN/**/*.mdx', './pages/zh-CN/**/*.ts'],
+    // entry: ['./pages/zh-CN/**/*.mdx', './pages/zh-CN/**/*.ts'],
+    entry: ['./pages/zh-CN/docs/quick/zeabur.mdx', './pages/zh-CN/docs/server/binary.mdx'],
     exclude: [
       './pages/zh-CN/index.mdx',
       './pages/zh-CN/docs/contributor.mdx',
       './pages/zh-CN/_meta.ts',
+      './pages/zh-CN/changelog',
     ],
     entryLocale: 'zh-CN',
     outputExtensions: (locale, config) => {

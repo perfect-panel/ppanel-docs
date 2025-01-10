@@ -110,6 +110,7 @@ apt update
 ```
 
 安装MariaDB 11.4
+
 ```bash
 apt install mariadb-server
 ```
@@ -126,7 +127,6 @@ systemctl enable mariadb
 ```bash
 mariadb-secure-installation
 ```
-
 
 #### 安装ppanel
 
@@ -151,11 +151,12 @@ CREATE USER 'ppanel'@'localhost';
 GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
 FLUSH PRIVILEGES;
 ```
+
 退出MariaDB
+
 ```sql
 EXIT;
 ```
-
 
 2.配置Nginx
 
@@ -267,6 +268,7 @@ sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```shell
 sudo chmod +x /usr/local/bin/ppanel
 ```
+
 - 修改 ppanel.yaml 配置文件
 
 ```bash
@@ -274,39 +276,40 @@ nano /usr/local/etc/ppanel/ppanel.yaml
 ```
 
 ```yaml
-Host: 127.0.0.1  # 服务监听地址, 修改为：1270.0.1
-Port: 8080  # 服务监听端口, 默认: 8080
-Debug: false  # 是否开启调试模式, 默认: false
-JwtAuth:  # JWT认证配置
-  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890==  # 访问令牌密钥, 请进行修改
-  AccessExpire: 604800  # 访问令牌过期时间,单位秒, 默认: 604800
-Logger:  # 日志配置
-  FilePath: ./ppanel.log  # 日志文件路径, 默认: ./ppanel.log
-  MaxSize: 50  # 日志文件最大大小, 单位MB, 默认: 50
-  MaxBackup: 3  # 日志文件最大备份数, 默认: 3
-  MaxAge: 30  # 日志文件最大保存时间,单位天, 默认: 30
-  Compress: true  # 是否压缩日志文件, 默认: true
-  Level: info  # 日志级别, 默认: info, 可选: debug, info, warn, error, panic, fatal
+Host: 127.0.0.1 # 服务监听地址, 修改为：1270.0.1
+Port: 8080 # 服务监听端口, 默认: 8080
+Debug: false # 是否开启调试模式, 默认: false
+JwtAuth: # JWT认证配置
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # 访问令牌密钥, 请进行修改
+  AccessExpire: 604800 # 访问令牌过期时间,单位秒, 默认: 604800
+Logger: # 日志配置
+  FilePath: ./ppanel.log # 日志文件路径, 默认: ./ppanel.log
+  MaxSize: 50 # 日志文件最大大小, 单位MB, 默认: 50
+  MaxBackup: 3 # 日志文件最大备份数, 默认: 3
+  MaxAge: 30 # 日志文件最大保存时间,单位天, 默认: 30
+  Compress: true # 是否压缩日志文件, 默认: true
+  Level: info # 日志级别, 默认: info, 可选: debug, info, warn, error, panic, fatal
 MySQL:
-  Addr: 127.0.0.1:3306  # MySQL地址, 必填
-  Username: ppanel  # MySQL用户名, 必填
-  Password: ppanel-password  # MySQL密码, 必填
-  Dbname: ppanel_db  # MySQL数据库名, 必填
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai  # MySQL配置默认值
-  MaxIdleConns: 10  # 最大空闲连接数, 默认: 10
-  MaxOpenConns: 100  # 最大打开连接数, 默认: 100
-  LogMode: info  # 日志级别, 默认: info, 可选: debug, error, warn, info
-  LogZap: true  # 是否使用zap日志记录sql, 默认: true
-  SlowThreshold: 1000  # 慢查询阈值,单位毫秒, 默认: 1000
+  Addr: 127.0.0.1:3306 # MySQL地址, 必填
+  Username: ppanel # MySQL用户名, 必填
+  Password: ppanel-password # MySQL密码, 必填
+  Dbname: ppanel_db # MySQL数据库名, 必填
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL配置默认值
+  MaxIdleConns: 10 # 最大空闲连接数, 默认: 10
+  MaxOpenConns: 100 # 最大打开连接数, 默认: 100
+  LogMode: info # 日志级别, 默认: info, 可选: debug, error, warn, info
+  LogZap: true # 是否使用zap日志记录sql, 默认: true
+  SlowThreshold: 1000 # 慢查询阈值,单位毫秒, 默认: 1000
 Redis:
-  Host: 127.0.0.1:6379  # Redis地址, 默认:localhost:6379
-  Pass: ""  # Redis密码, 默认: ""
-  DB: 0  # Redis数据库, 默认: 0
- 
+  Host: 127.0.0.1:6379 # Redis地址, 默认:localhost:6379
+  Pass: '' # Redis密码, 默认: ""
+  DB: 0 # Redis数据库, 默认: 0
+
 Administer:
-  Email: admin@ppanel.dev  # 后台登录邮箱, 默认: admin@ppanel.dev
-  Password: password  # 后台登录密码, 默认: password
+  Email: admin@ppanel.dev # 后台登录邮箱, 默认: admin@ppanel.dev
+  Password: password # 后台登录密码, 默认: password
 ```
+
 - 创建 systemd 服务文件
 
 ```shell
@@ -359,9 +362,6 @@ systemctl start ppanel
 5. 可通过 `journalctl -u ppanel -f` 查看服务日志
 6. 当配置文件为空或者不存在的情况下，服务会使用默认配置启动，配置文件路径为：`./etc/ppanel.yaml`，
    请通过`http://服务器地址:8080/init` 初始化系统配置
-
-
-
 
 import Giscus from '@/components/giscus';
 

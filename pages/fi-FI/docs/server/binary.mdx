@@ -1,38 +1,313 @@
-#### Esijärjestelmän vaatimukset
+#### Esijärjestelmävaatimukset
 
-- Mysql 5.7+ (suositellaan käytettäväksi 8.0)
-- Redis 6.0+ (suositellaan käytettäväksi 7.0)
+- Debian 12
 
-#### Binaarinen asennus
+#### Nginxin asennus
 
-1. Määritä järjestelmän arkkitehtuuri ja lataa vastaava binaaritiedosto
+Nginxin asentamiseen käytämme virallista Nginx DEB -lähdettä.
+
+Asenna tarvittavat ohjelmistot
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Lisää virallinen Nginx PGP-avain
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Kirjoita virallisen Nginx -lähteen konfiguraatio nginx.list -tiedostoon
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Aseta virallisen Nginx -lähteen prioriteetti korkeammaksi kuin järjestelmän sisäänrakennetun lähteen
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Päivitä APT-välimuisti
+
+```bash
+apt update
+```
+
+Asenna Nginx
+
+```bash
+apt install nginx
+```
+
+Lopuksi käynnistä Nginx-palvelu ja aseta se käynnistymään automaattisesti
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redis-asennus
+
+Tuo GPG-avain
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Kirjoita virallisen Redis -lähteen konfiguraatio redis.list -tiedostoon
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Päivitä APT-välimuisti
+
+```bash
+apt update
+```
+
+Asenna redis-server
+
+```bash
+apt install redis
+```
+
+Käynnistä Redis-palvelu ja aseta se käynnistymään automaattisesti
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDB:n asennus
+
+MariaDB tarjoaa täydellisen DEB-varaston, joka on samanlainen kuin Nginx-varasto, joten meidän on asennettava tarvittavat paketit ja tuoda GPG-avain.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Muokkaa `/etc/apt/sources.list.d/mariadb.sources` -tiedostoa ja kirjoita seuraava konfiguraatio:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Päivitä APT-välimuisti
+
+```bash
+apt update
+```
+
+Asenna MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Käynnistä MariaDB-palvelu ja aseta se käynnistymään automaattisesti
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Suorita MariaDB:n alkuasetukset
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanelin asennus
+
+1. MariaDB-tietokannan konfigurointi
+
+### 1. Kirjaudu MariaDB:hen
+
+```bash
+mariadb -u root -p
+```
+
+MariaDB:n komentoriviliittymässä suorita seuraava komento luodaksesi uusi tietokanta ppanel_db ja asettaaksesi merkistön utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Seuraavaksi luo paikallinen tietokantakäyttäjä ja rajoita tämän käyttäjän oikeudet juuri luotuun tietokantaan, käyttäen ppanel -käyttäjänimeä ja ppanel-password -salasanaa.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Poistu MariaDB:stä
+
+```sql
+EXIT;
+```
+
+2. Nginxin konfigurointi
+
+Muuta `/etc/nginx/nginx.conf` -tiedoston `user` seuraavaksi
+
+```nginx
+user nginx;
+```
+
+Muuta seuraavaksi
+
+```nginx
+user www-data;
+```
+
+Lisää Nginx virtuaalipalvelin -konfiguraatiotiedosto
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Kirjoita sitten seuraava konfiguraatio, muista vaihtaa verkkotunnus ja SSL-sertifikaattitiedosto (muuten tulee virhe):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Vaihda omaan verkkotunnukseesi
+
+    ssl_certificate /path/your/certs/example.crt;  # Vaihda omaan sertifikaattipolkuusi
+    ssl_certificate_key /path/your/private/example.key;  # Vaihda omaan yksityiseen avaimen polkuusi
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Suositellut protokollat
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Suositellut salausalgoritmit
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Aloitus
+    set_real_ip_from 0.0.0.0/0;  # Luota Cloudflaren kaikkiin IP-osoitteisiin
+    real_ip_header X-Forwarded-For;  # Käytä X-Forwarded-For -otsikkoa saadaksesi todellisen IP-osoitteen
+    real_ip_recursive on;  # Rekursiivinen X-Forwarded-For -otsikossa olevien useiden IP-osoitteiden ratkaisu
+    # cloudflare Loppu
+
+    # Oletusproksin asetukset
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Määritä proksin taustapalveluun, jos taustapalvelu on 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Aseta staattisten resurssien välimuisti
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP:stä HTTPS:ään uudelleenohjaus
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Vaihda omaan verkkotunnukseesi
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Käynnistä Nginx uudelleen
+
+```bash
+systemctl restart nginx
+```
+
+3. Määritä järjestelmän arkkitehtuuri ja lataa vastaavat binääritiedostot
 
 Latausosoite: `https://github.com/perfect-panel/ppanel/releases`
 
-Esimerkin selitys: Järjestelmä: Linux amd64, käyttäjä: root, nykyinen hakemisto: /root
+Esimerkkikuvaus: Järjestelmä: Debian amd64, Käyttäjä: root, Nykyinen hakemisto: /root
 
-- Lataa binaaritiedosto
+- Lataa
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Pura binaaritiedosto
+- Pura
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Siirry purettuun hakemistoon
+- Siirrä
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- Anna binaaritiedostolle suoritusoikeudet
+- Anna binääritiedostolle suoritusoikeudet
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- Muokkaa ppanel.yaml -konfiguraatiotiedostoa
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Palvelun kuunteluosoite, vaihda: 127.0.0.1
+Port: 8080 # Palvelun kuuntelusäie, oletus: 8080
+Debug: false # Onko virheenkorjaustila käytössä, oletus: false
+JwtAuth: # JWT-todennuskonfiguraatio
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Pääsytunnusavain, muokkaa
+  AccessExpire: 604800 # Pääsytunnuksen vanhenemisaika, yksikkö sekunteina, oletus: 604800
+Logger: # Lokituskonfiguraatio
+  FilePath: ./ppanel.log # Lokitiedoston polku, oletus: ./ppanel.log
+  MaxSize: 50 # Lokitiedoston enimmäiskoko, yksikkö MB, oletus: 50
+  MaxBackup: 3 # Lokitiedoston enimmäisvarastointimäärä, oletus: 3
+  MaxAge: 30 # Lokitiedoston enimmäissäilytysaika, yksikkö päivinä, oletus: 30
+  Compress: true # Onko lokitiedosto pakattu, oletus: true
+  Level: info # Lokitaso, oletus: info, vaihtoehdot: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL-osoite, pakollinen
+  Username: ppanel # MySQL-käyttäjänimi, pakollinen
+  Password: ppanel-password # MySQL-salasana, pakollinen
+  Dbname: ppanel_db # MySQL-tietokannan nimi, pakollinen
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL:n oletusasetukset
+  MaxIdleConns: 10 # Suurin tyhjien yhteyksien määrä, oletus: 10
+  MaxOpenConns: 100 # Suurin avoimien yhteyksien määrä, oletus: 100
+  LogMode: info # Lokitaso, oletus: info, vaihtoehdot: debug, error, warn, info
+  LogZap: true # Käytetäänkö zap-lokitus SQL:lle, oletus: true
+  SlowThreshold: 1000 # Hidas kyselyraja, yksikkö millisekunteina, oletus: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis-osoite, oletus:localhost:6379
+  Pass: '' # Redis-salasana, oletus: ""
+  DB: 0 # Redis-tietokanta, oletus: 0
+
+Administer:
+  Email: admin@ppanel.dev # Taustakirjautumisen sähköposti, oletus: admin@ppanel.dev
+  Password: password # Taustakirjautumisen salasana, oletus: password
 ```
 
 - Luo systemd-palvelutiedosto
@@ -44,17 +319,17 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- Lataa systemd-palvelut uudelleen
+- Lataa systemd-palvelu uudelleen
 
 ```shell
 systemctl daemon-reload
@@ -66,14 +341,14 @@ systemctl daemon-reload
 systemctl start ppanel
 ```
 
-##### Muuta huomioitavaa
+##### Muut huomiot
 
-1. Asennuspolku: Binaaritiedosto purkautuu hakemistoon /root/ppanel-server-linux-amd64
+1. Asennuspolku: Binääritiedosto siirretään lopulta /usr/local/bin -hakemistoon.
 
 2. systemd-palvelu:
 
    - Palvelun nimi: ppanel
-   - Palvelun konfigurointitiedosto: /etc/systemd/system/ppanel.service
+   - Palvelun konfiguraatiotiedosto: /etc/systemd/system/ppanel.service
    - Palvelun käynnistyskomento: systemctl start ppanel
    - Palvelun pysäytyskomento: systemctl stop ppanel
    - Palvelun uudelleenkäynnistyskomento: systemctl restart ppanel
@@ -86,62 +361,9 @@ systemctl start ppanel
    systemctl enable ppanel
    ```
 
-4. Palvelulokit: Palvelulokit tallennetaan oletuksena tiedostoon /root/ppanel-server-linux-amd64/ppanel.log
+4. Palvelulokit: Palvelulokit tulostuvat oletuksena /usr/local/bin/ppanel.log -tiedostoon.
 
-5. Voit tarkastella palvelulokeja komennolla `journalctl -u ppanel -f`
+5. Voit tarkastella palvelulokeja komennolla `journalctl -u ppanel -f`.
 
-6. Kun konfigurointitiedosto on tyhjää tai ei ole olemassa, palvelu käynnistyy oletusasetuksilla, konfigurointitiedoston polku on: `./etc/ppanel.yaml`,
-   käynnistä järjestelmän konfigurointi osoitteessa `http://palvelimen_osoite:8080/init`
-
-#### NGINX käänteinen proxy-konfigurointi
-
-Alla on esimerkki käänteisestä proxy-konfiguroinnista, joka ohjaa `ppanel`-palvelun `api.ppanel.dev`-domainiin
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Aseta Nginx välimuisti
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Jos käytät Cloudflare-proxypalvelua, sinun on saatava käyttäjän todellinen IP-osoite. Lisää Nginx-konfigurointitiedostoon Http-osioon:
-
-- Tarvitaan: **ngx_http_realip_module**-moduuli, tarkista komennolla nginx -V, onko nginx käännetty tämän moduulin kanssa, jos ei, sinun on käännettävä se itse.
-
-```nginx
-    # cloudflare Aloitus
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare LOPPU
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />
+6. Kun konfiguraatiotiedosto on tyhjää tai ei ole olemassa, palvelu käynnistyy oletusasetuksilla, konfiguraatiotiedoston polku on: `./etc/ppanel.yaml`,
+   käynnistä järjestelmän konfigurointi osoitteessa `http://palvelimen_osoite:8080/init`.

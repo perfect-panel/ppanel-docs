@@ -1,38 +1,313 @@
 #### Ön Gereksinimler
 
-- Mysql 5.7+ (8.0 kullanılması önerilir)
-- Redis 6.0+ (7.0 kullanılması önerilir)
+- Debian 12
 
-#### İkili Kurulum
+#### Nginx Kurulumu
 
-1. Sistem mimarisini belirleyin ve uygun ikili dosyayı indirin.
+Nginx'in kurulumu için resmi Nginx DEB deposunu kullanıyoruz.
+
+Gerekli yazılımları yükleyin
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Resmi Nginx PGP anahtarını ekleyin
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Resmi Nginx deposu yapılandırmasını nginx.list dosyasına yazın
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Resmi Nginx deposunun önceliğini sistemin yerleşik deposundan daha yüksek ayarlayın
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+APT önbelleğini güncelleyin
+
+```bash
+apt update
+```
+
+Nginx'i kurun
+
+```bash
+apt install nginx
+```
+
+Son olarak, Nginx hizmetini başlatın ve sistem açılışında otomatik başlatılacak şekilde ayarlayın
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redis Kurulumu
+
+GPG anahtarını içe aktarın
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Resmi Redis deposu yapılandırmasını redis.list dosyasına yazın
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+APT önbelleğini güncelleyin
+
+```bash
+apt update
+```
+
+redis-server'ı kurun
+
+```bash
+apt install redis
+```
+
+Redis hizmetini başlatın ve sistem açılışında otomatik başlatılacak şekilde ayarlayın
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDB Kurulumu
+
+MariaDB, Nginx deposuna benzer bir tam DEB deposu sunmaktadır, bu nedenle gerekli paketleri yüklememiz ve GPG anahtarını içe aktarmamız gerekiyor.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+`/etc/apt/sources.list.d/mariadb.sources` dosyasını düzenleyin ve aşağıdaki yapılandırmayı yazın:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+APT önbelleğini güncelleyin
+
+```bash
+apt update
+```
+
+MariaDB 11.4'ü kurun
+
+```bash
+apt install mariadb-server
+```
+
+MariaDB hizmetini başlatın ve sistem açılışında otomatik başlatılacak şekilde ayarlayın
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+MariaDB'nin ilk ayarlarını çalıştırın
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanel Kurulumu
+
+1. MariaDB veritabanını yapılandırın
+
+### 1. MariaDB'ye giriş yapın
+
+```bash
+mariadb -u root -p
+```
+
+MariaDB komut satırında, yeni bir ppanel_db veritabanı oluşturmak ve karakter setini utf8mb4_unicode_ci olarak ayarlamak için aşağıdaki komutu çalıştırın
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Ardından, yerel bir veritabanı kullanıcısı oluşturun ve bu kullanıcının izinlerini yeni oluşturulan veritabanı ile sınırlayın, kullanıcı adı olarak ppanel ve kullanıcı şifresi olarak ppanel-password kullanın.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+MariaDB'den çıkın
+
+```sql
+EXIT;
+```
+
+2. Nginx'i yapılandırın
+
+`/etc/nginx/nginx.conf` dosyasındaki `user` değerini
+
+```nginx
+user nginx;
+```
+
+şu şekilde değiştirin
+
+```nginx
+user www-data;
+```
+
+Nginx sanal ana bilgisayar yapılandırma dosyasını ekleyin
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Ardından aşağıdaki yapılandırmayı yazın, lütfen web sitesi alan adını ve SSL sertifika dosyasını değiştirin (aksi takdirde hata alırsınız):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Alan adınızı değiştirin
+
+    ssl_certificate /path/your/certs/example.crt;  # Sertifika yolunuzu değiştirin
+    ssl_certificate_key /path/your/private/example.key;  # Özel anahtar yolunuzu değiştirin
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Önerilen protokoller
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Önerilen şifreleme seti
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Başlangıç
+    set_real_ip_from 0.0.0.0/0;  # Cloudflare'ın tüm IP adreslerine güven
+    real_ip_header X-Forwarded-For;  # Gerçek IP'yi almak için X-Forwarded-For başlığını kullan
+    real_ip_recursive on;  # X-Forwarded-For başlığındaki birden fazla IP'yi özyinelemeli olarak çöz
+    # cloudflare Bitiş
+
+    # Varsayılan proxy ayarları
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Arka uç hizmetine proxy ayarlayın, arka uç hizmeti 127.0.0.1:8080'deyse
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Statik kaynak önbellek ayarları
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP'den HTTPS'ye yönlendirme
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Alan adınızı değiştirin
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Nginx'i yeniden başlatın
+
+```bash
+systemctl restart nginx
+```
+
+3. Sistem mimarisini belirleyin ve uygun ikili dosyayı indirin
 
 İndirme adresi: `https://github.com/perfect-panel/ppanel/releases`
 
-Örnek açıklama: Sistem: Linux amd64, Kullanıcı: root, Mevcut dizin: /root
+Örnek açıklama: Sistem: Debian amd64, Kullanıcı: root, Mevcut dizin: /root
 
-- İkili dosyayı indirin
+- İndirin
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- İkili dosyayı çıkarın
+- Çıkarın
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Çıkarılan dizine girin
+- Taşıyın
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
 - İkili dosyaya çalıştırma izni verin
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- ppanel.yaml yapılandırma dosyasını değiştirin
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Hizmet dinleme adresi, 127.0.0.1 olarak değiştirin
+Port: 8080 # Hizmet dinleme portu, varsayılan: 8080
+Debug: false # Hata ayıklama modunu açma, varsayılan: false
+JwtAuth: # JWT kimlik doğrulama yapılandırması
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Erişim belirteci anahtarı, lütfen değiştirin
+  AccessExpire: 604800 # Erişim belirteci süresi, birim saniye, varsayılan: 604800
+Logger: # Günlük yapılandırması
+  FilePath: ./ppanel.log # Günlük dosyası yolu, varsayılan: ./ppanel.log
+  MaxSize: 50 # Günlük dosyasının maksimum boyutu, birim MB, varsayılan: 50
+  MaxBackup: 3 # Günlük dosyasının maksimum yedek sayısı, varsayılan: 3
+  MaxAge: 30 # Günlük dosyasının maksimum saklama süresi, birim gün, varsayılan: 30
+  Compress: true # Günlük dosyalarını sıkıştırma, varsayılan: true
+  Level: info # Günlük seviyesi, varsayılan: info, seçenekler: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL adresi, zorunlu
+  Username: ppanel # MySQL kullanıcı adı, zorunlu
+  Password: ppanel-password # MySQL şifresi, zorunlu
+  Dbname: ppanel_db # MySQL veritabanı adı, zorunlu
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL varsayılan yapılandırması
+  MaxIdleConns: 10 # Maksimum boş bağlantı sayısı, varsayılan: 10
+  MaxOpenConns: 100 # Maksimum açık bağlantı sayısı, varsayılan: 100
+  LogMode: info # Günlük seviyesi, varsayılan: info, seçenekler: debug, error, warn, info
+  LogZap: true # SQL'yi kaydetmek için zap günlük kaydını kullanma, varsayılan: true
+  SlowThreshold: 1000 # Yavaş sorgu eşiği, birim milisaniye, varsayılan: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis adresi, varsayılan:localhost:6379
+  Pass: '' # Redis şifresi, varsayılan: ""
+  DB: 0 # Redis veritabanı, varsayılan: 0
+
+Administer:
+  Email: admin@ppanel.dev # Yönetim paneli giriş e-postası, varsayılan: admin@ppanel.dev
+  Password: password # Yönetim paneli giriş şifresi, varsayılan: password
 ```
 
 - systemd hizmet dosyası oluşturun
@@ -40,14 +315,14 @@ chmod +x ppanel
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
 [Unit]
-Description=PPANEL Sunucusu
+Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -68,79 +343,29 @@ systemctl start ppanel
 
 ##### Diğer Açıklamalar
 
-1. Kurulum yolu: İkili dosya /root/ppanel-server-linux-amd64 dizinine çıkarılacaktır.
+1. Kurulum yolu: İkili dosya nihayetinde /usr/local/bin dizinine taşınır.
 
 2. systemd hizmeti:
 
    - Hizmet adı: ppanel
    - Hizmet yapılandırma dosyası: /etc/systemd/system/ppanel.service
-   - Hizmeti başlatma komutu: systemctl start ppanel
+   - Hizmet başlatma komutu: systemctl start ppanel
    - Hizmeti durdurma komutu: systemctl stop ppanel
    - Hizmeti yeniden başlatma komutu: systemctl restart ppanel
    - Hizmet durumu komutu: systemctl status ppanel
-   - Hizmetin başlangıçta otomatik başlatılması: systemctl enable ppanel
+   - Hizmet açılışta otomatik başlatma: systemctl enable ppanel
 
-3. Başlangıçta otomatik başlatmayı ayarlamak için aşağıdaki komutu kullanabilirsiniz
+3. Açılışta otomatik başlatmayı ayarlamak için aşağıdaki komutu kullanabilirsiniz
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Hizmet günlükleri: Hizmet günlükleri varsayılan olarak /root/ppanel-server-linux-amd64/ppanel.log dosyasına yazılır.
+4. Hizmet günlükleri: Hizmet günlükleri varsayılan olarak /usr/local/bin/ppanel.log dosyasına yazılır.
 
-5. Hizmet günlüklerini görüntülemek için `journalctl -u ppanel -f` komutunu kullanabilirsiniz.
+5. Hizmet günlüklerini görmek için `journalctl -u ppanel -f` komutunu kullanabilirsiniz.
 
-6. Yapılandırma dosyası boş veya mevcut değilse, hizmet varsayılan yapılandırma ile başlatılacaktır. Yapılandırma dosyası yolu: `./etc/ppanel.yaml`,
-   Lütfen sistemi yapılandırmak için `http://sunucu_adresi:8080/init` adresini kullanın.
-
-#### NGINX Ters Proxy Yapılandırması
-
-Aşağıda, `ppanel` hizmetini `api.ppanel.dev` alan adına yönlendiren ters proxy yapılandırma örneği bulunmaktadır.
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Nginx Önbelleğini Ayarlayın
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Cloudflare proxy hizmetini kullanıyorsanız, kullanıcıların gerçek IP adreslerini almak için Nginx yapılandırma dosyasının Http bölümüne aşağıdakileri ekleyin:
-
-- Gereksinim: **ngx_http_realip_module** modülü, nginx -V komutunu kullanarak nginx'in bu modülü derleyip derlemediğini kontrol edin, eğer yoksa kendiniz derlemeniz gerekecek.
-
-```nginx
-    # cloudflare Başlangıcı
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare Bitişi
-```
-
+6. Yapılandırma dosyası boş veya mevcut değilse, hizmet varsayılan yapılandırma ile başlatılır, yapılandırma dosyası yolu: `./etc/ppanel.yaml`, lütfen `http://sunucu_adresi:8080/init` adresinden sistem yapılandırmasını başlatın.
 
 import Giscus from '@/components/giscus';
 

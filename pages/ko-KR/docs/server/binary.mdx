@@ -1,38 +1,307 @@
 #### 전제 시스템 요구 사항
 
-- Mysql 5.7+ (8.0 사용 권장)
-- Redis 6.0+ (7.0 사용 권장)
+- Debian 12
 
-#### 이진 파일 설치
+#### Nginx 설치
 
-1. 시스템 아키텍처를 확인하고 해당 이진 파일을 다운로드합니다.
+Nginx 설치를 위해 공식 Nginx DEB 저장소를 사용합니다.
+
+필요한 소프트웨어 설치
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+공식 Nginx PGP 키 추가
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+공식 Nginx 저장소 구성 작성하여 nginx.list에 추가
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+공식 Nginx 저장소의 우선 순위를 시스템 내장 저장소보다 높게 설정
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+APT 캐시 업데이트
+
+```bash
+apt update
+```
+
+Nginx 설치
+
+```bash
+apt install nginx
+```
+
+마지막으로, Nginx 서비스를 시작하고 부팅 시 자동 시작 설정
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redis 설치
+
+GPG 키 가져오기
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+공식 Redis 저장소 구성 작성하여 redis.list에 추가
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+APT 캐시 업데이트
+
+```bash
+apt update
+```
+
+redis-server 설치
+
+```bash
+apt install redis
+```
+
+Redis 서비스 시작 및 부팅 시 자동 시작 설정
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDB 설치
+
+MariaDB는 Nginx 저장소와 유사한 완전한 DEB 저장소를 제공합니다. 따라서 필요한 패키지를 설치하고 GPG 키를 가져와야 합니다.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+`/etc/apt/sources.list.d/mariadb.sources` 파일을 편집하고 다음 구성을 작성합니다:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+APT 캐시 업데이트
+
+```bash
+apt update
+```
+
+MariaDB 11.4 설치
+
+```bash
+apt install mariadb-server
+```
+
+MariaDB 서비스 시작 및 부팅 시 자동 시작 설정
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+MariaDB 초기 설정 실행
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanel 설치
+
+1. MariaDB 데이터베이스 구성
+
+### 1. MariaDB에 로그인
+
+```bash
+mariadb -u root -p
+```
+
+MariaDB 명령줄 인터페이스에서 다음 명령을 실행하여 새로운 데이터베이스 ppanel_db를 생성하고 문자 집합을 utf8mb4_unicode_ci로 설정합니다.
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+다음으로, 로컬 데이터베이스 사용자를 생성하고 해당 사용자의 권한을 새로 생성된 데이터베이스로 제한합니다. 사용자 이름은 ppanel, 비밀번호는 ppanel-password로 설정합니다.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+MariaDB에서 로그아웃
+
+```sql
+EXIT;
+```
+
+2. Nginx 구성
+
+`/etc/nginx/nginx.conf`의 `user`를 다음과 같이 변경합니다.
+
+```nginx
+user nginx;
+```
+
+Nginx 가상 호스트 구성 파일 추가
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+그런 다음 다음 구성을 작성합니다. 웹사이트 도메인과 SSL 인증서 파일을 변경하는 것을 잊지 마세요(그렇지 않으면 오류가 발생합니다):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # 당신의 도메인으로 교체
+
+    ssl_certificate /path/your/certs/example.crt;  # 당신의 인증서 경로로 교체
+    ssl_certificate_key /path/your/private/example.key;  # 당신의 개인 키 경로로 교체
+
+    ssl_protocols TLSv1.2 TLSv1.3; # 권장 프로토콜
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # 권장 암호화 스위트
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare 시작
+    set_real_ip_from 0.0.0.0/0;  # Cloudflare의 모든 IP 주소를 신뢰
+    real_ip_header X-Forwarded-For;  # X-Forwarded-For 헤더를 사용하여 실제 IP 가져오기
+    real_ip_recursive on;  # X-Forwarded-For 헤더의 여러 IP를 재귀적으로 해석
+    # cloudflare 종료
+
+    # 기본 프록시 설정
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # 백엔드 서비스로 프록시 구성, 백엔드 서비스가 127.0.0.1:8080에 있는 경우
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # 정적 리소스 캐시 설정
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP에서 HTTPS로 리디렉션
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # 당신의 도메인으로 교체
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Nginx 재시작
+
+```bash
+systemctl restart nginx
+```
+
+3. 시스템 아키텍처 확인 및 해당 이진 파일 다운로드
 
 다운로드 주소: `https://github.com/perfect-panel/ppanel/releases`
 
-예시 설명: 시스템: Linux amd64, 사용자: root, 현재 디렉토리: /root
+예시 설명: 시스템: Debian amd64, 사용자: root, 현재 디렉토리: /root
 
-- 이진 파일 다운로드
+- 다운로드
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- 이진 파일 압축 해제
+- 압축 해제
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- 압축 해제된 디렉토리로 이동
+- 이동
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
 - 이진 파일에 실행 권한 부여
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- ppanel.yaml 구성 파일 수정
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # 서비스 리스닝 주소, 127.0.0.1로 수정
+Port: 8080 # 서비스 리스닝 포트, 기본값: 8080
+Debug: false # 디버그 모드 활성화 여부, 기본값: false
+JwtAuth: # JWT 인증 구성
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # 액세스 토큰 비밀, 수정 필요
+  AccessExpire: 604800 # 액세스 토큰 만료 시간, 단위 초, 기본값: 604800
+Logger: # 로그 구성
+  FilePath: ./ppanel.log # 로그 파일 경로, 기본값: ./ppanel.log
+  MaxSize: 50 # 로그 파일 최대 크기, 단위 MB, 기본값: 50
+  MaxBackup: 3 # 로그 파일 최대 백업 수, 기본값: 3
+  MaxAge: 30 # 로그 파일 최대 보존 시간, 단위 일, 기본값: 30
+  Compress: true # 로그 파일 압축 여부, 기본값: true
+  Level: info # 로그 수준, 기본값: info, 선택 가능: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL 주소, 필수
+  Username: ppanel # MySQL 사용자 이름, 필수
+  Password: ppanel-password # MySQL 비밀번호, 필수
+  Dbname: ppanel_db # MySQL 데이터베이스 이름, 필수
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL 기본 구성
+  MaxIdleConns: 10 # 최대 유휴 연결 수, 기본값: 10
+  MaxOpenConns: 100 # 최대 열린 연결 수, 기본값: 100
+  LogMode: info # 로그 수준, 기본값: info, 선택 가능: debug, error, warn, info
+  LogZap: true # SQL 로그 기록에 zap 사용 여부, 기본값: true
+  SlowThreshold: 1000 # 느린 쿼리 임계값, 단위 밀리초, 기본값: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis 주소, 기본값: localhost:6379
+  Pass: '' # Redis 비밀번호, 기본값: ""
+  DB: 0 # Redis 데이터베이스, 기본값: 0
+
+Administer:
+  Email: admin@ppanel.dev # 백엔드 로그인 이메일, 기본값: admin@ppanel.dev
+  Password: password # 백엔드 로그인 비밀번호, 기본값: password
 ```
 
 - systemd 서비스 파일 생성
@@ -40,21 +309,21 @@ chmod +x ppanel
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
 [Unit]
-Description=PPANEL 서버
+Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- systemd 서비스 다시 로드
+- systemd 서비스 재로드
 
 ```shell
 systemctl daemon-reload
@@ -68,7 +337,7 @@ systemctl start ppanel
 
 ##### 기타 설명
 
-1. 설치 경로: 이진 파일은 /root/ppanel-server-linux-amd64 디렉토리에 압축 해제됩니다.
+1. 설치 경로: 이진 파일은 최종적으로 /usr/local/bin 디렉토리로 이동됩니다.
 
 2. systemd 서비스:
 
@@ -80,66 +349,18 @@ systemctl start ppanel
    - 서비스 상태 명령: systemctl status ppanel
    - 서비스 부팅 시 자동 시작: systemctl enable ppanel
 
-3. 부팅 시 자동 시작 설정은 다음 명령어로 가능합니다.
+3. 부팅 시 자동 시작 설정은 다음 명령으로 가능합니다.
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. 서비스 로그: 서비스 로그는 기본적으로 /root/ppanel-server-linux-amd64/ppanel.log 파일에 출력됩니다.
+4. 서비스 로그: 서비스 로그는 기본적으로 /usr/local/bin/ppanel.log 파일에 출력됩니다.
 
-5. `journalctl -u ppanel -f` 명령어로 서비스 로그를 확인할 수 있습니다.
+5. `journalctl -u ppanel -f`를 통해 서비스 로그를 확인할 수 있습니다.
 
-6. 구성 파일이 비어 있거나 존재하지 않는 경우, 서비스는 기본 구성으로 시작되며, 구성 파일 경로는 `./etc/ppanel.yaml`입니다. 시스템 구성을 초기화하려면 `http://서버주소:8080/init`를 통해 진행하십시오.
-
-#### NGINX 역방향 프록시 구성
-
-다음은 `ppanel` 서비스를 `api.ppanel.dev` 도메인으로 프록시하는 역방향 프록시 구성 예시입니다.
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Nginx 캐시 설정
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Cloudflare 프록시 서비스를 사용하는 경우, 사용자 실제 접근 IP를 가져와야 합니다. Nginx 구성 파일의 Http 섹션에 다음을 추가하십시오:
-
-- 필요 모듈: **ngx_http_realip_module** 모듈, `nginx -V` 명령어로 Nginx가 해당 모듈로 컴파일되었는지 확인하고, 없다면 직접 컴파일해야 합니다.
-
-```nginx
-    # cloudflare 시작
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare 종료
-```
-
+6. 구성 파일이 비어 있거나 존재하지 않는 경우, 서비스는 기본 구성으로 시작되며, 구성 파일 경로는 `./etc/ppanel.yaml`입니다.
+   시스템 구성을 초기화하려면 `http://서버주소:8080/init`를 통해 초기화하십시오.
 
 import Giscus from '@/components/giscus';
 

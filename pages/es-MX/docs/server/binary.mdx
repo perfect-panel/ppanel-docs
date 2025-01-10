@@ -1,41 +1,316 @@
 #### Requisitos del sistema
 
-- Mysql 5.7+ (se recomienda usar 8.0)
-- Redis 6.0+ (se recomienda usar 7.0)
+- Debian 12
 
-#### Instalación binaria
+#### Instalación de Nginx
 
-1. Determina la arquitectura del sistema y descarga el archivo binario correspondiente.
+Para la instalación de Nginx, utilizamos el repositorio DEB oficial de Nginx.
+
+Instalar el software necesario
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Agregar la clave PGP oficial de Nginx
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Escribir la configuración del repositorio oficial de Nginx en nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Configurar la prioridad del repositorio oficial de Nginx por encima de los repositorios del sistema
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Actualizar la caché de APT
+
+```bash
+apt update
+```
+
+Instalar Nginx
+
+```bash
+apt install nginx
+```
+
+Finalmente, iniciar el servicio de Nginx y configurarlo para que se inicie al arrancar
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Instalación de Redis
+
+Importar la clave GPG
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Escribir la configuración del repositorio oficial de Redis en redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Actualizar la caché de APT
+
+```bash
+apt update
+```
+
+Instalar redis-server
+
+```bash
+apt install redis
+```
+
+Iniciar el servicio de Redis y configurarlo para que se inicie al arrancar
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### Instalación de MariaDB
+
+MariaDB proporciona un repositorio DEB completo, similar al de Nginx, por lo que necesitamos instalar los paquetes necesarios e importar la clave GPG.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Editar el archivo `/etc/apt/sources.list.d/mariadb.sources` y escribir la siguiente configuración:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Actualizar la caché de APT
+
+```bash
+apt update
+```
+
+Instalar MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Iniciar el servicio de MariaDB y configurarlo para que se inicie al arrancar
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Ejecutar la configuración inicial de MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### Instalación de ppanel
+
+1. Configurar la base de datos de MariaDB
+
+### 1. Iniciar sesión en MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+En la interfaz de línea de comandos de MariaDB, ejecutar el siguiente comando para crear una nueva base de datos ppanel_db y establecer el conjunto de caracteres en utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+A continuación, crear un usuario de base de datos local y restringir los permisos de ese usuario a la base de datos recién creada, usando ppanel como nombre de usuario y ppanel-password como contraseña de usuario.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Salir de MariaDB
+
+```sql
+EXIT;
+```
+
+2. Configurar Nginx
+
+Cambiar el `user` en `/etc/nginx/nginx.conf` de
+
+```nginx
+user nginx;
+```
+
+a
+
+```nginx
+user www-data;
+```
+
+Agregar el archivo de configuración del host virtual de Nginx
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Luego escribir la siguiente configuración, asegurándose de cambiar el nombre de dominio del sitio web y la ruta del archivo del certificado SSL (de lo contrario, habrá un error):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Reemplazar con tu dominio
+
+    ssl_certificate /path/your/certs/example.crt;  # Reemplazar con la ruta de tu certificado
+    ssl_certificate_key /path/your/private/example.key;  # Reemplazar con la ruta de tu clave privada
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Protocolos recomendados
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Suites de cifrado recomendadas
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Inicio
+    set_real_ip_from 0.0.0.0/0;  # Confiar en todas las direcciones IP de Cloudflare
+    real_ip_header X-Forwarded-For;  # Usar el encabezado X-Forwarded-For para obtener la IP real
+    real_ip_recursive on;  # Resolver recursivamente múltiples IP en el encabezado X-Forwarded-For
+    # cloudflare Fin
+
+    # Configuración de proxy por defecto
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Configurar proxy a servicio backend, si el servicio backend está en 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Configurar caché de recursos estáticos
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# Redirección de HTTP a HTTPS
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Reemplazar con tu dominio
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Reiniciar Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. Determinar la arquitectura del sistema y descargar el archivo binario correspondiente
 
 Dirección de descarga: `https://github.com/perfect-panel/ppanel/releases`
 
-Ejemplo: Sistema: Linux amd64, Usuario: root, Directorio actual: /root
+Ejemplo: sistema: Debian amd64, usuario: root, directorio actual: /root
 
-- Descarga el archivo binario
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
-```
-
-- Descomprime el archivo binario
+- Descargar
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Entra en el directorio descomprimido
+- Descomprimir
 
 ```shell
-cd ppanel-server-linux-amd64
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Asigna permisos de ejecución al archivo binario
+- Mover
 
 ```shell
-chmod +x ppanel
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- Crea el archivo de servicio systemd
+- Otorgar permisos de ejecución al archivo binario
+
+```shell
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- Modificar el archivo de configuración ppanel.yaml
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Dirección de escucha del servicio, cambiar a: 127.0.0.1
+Port: 8080 # Puerto de escucha del servicio, por defecto: 8080
+Debug: false # Activar modo de depuración, por defecto: false
+JwtAuth: # Configuración de autenticación JWT
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Clave del token de acceso, por favor modifíquela
+  AccessExpire: 604800 # Tiempo de expiración del token de acceso, en segundos, por defecto: 604800
+Logger: # Configuración de registro
+  FilePath: ./ppanel.log # Ruta del archivo de registro, por defecto: ./ppanel.log
+  MaxSize: 50 # Tamaño máximo del archivo de registro, en MB, por defecto: 50
+  MaxBackup: 3 # Número máximo de copias de seguridad del archivo de registro, por defecto: 3
+  MaxAge: 30 # Tiempo máximo de conservación del archivo de registro, en días, por defecto: 30
+  Compress: true # Comprimir el archivo de registro, por defecto: true
+  Level: info # Nivel de registro, por defecto: info, opciones: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # Dirección de MySQL, obligatorio
+  Username: ppanel # Nombre de usuario de MySQL, obligatorio
+  Password: ppanel-password # Contraseña de MySQL, obligatorio
+  Dbname: ppanel_db # Nombre de la base de datos de MySQL, obligatorio
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # Valores de configuración predeterminados de MySQL
+  MaxIdleConns: 10 # Número máximo de conexiones inactivas, por defecto: 10
+  MaxOpenConns: 100 # Número máximo de conexiones abiertas, por defecto: 100
+  LogMode: info # Nivel de registro, por defecto: info, opciones: debug, error, warn, info
+  LogZap: true # Usar zap para registrar SQL, por defecto: true
+  SlowThreshold: 1000 # Umbral de consultas lentas, en milisegundos, por defecto: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Dirección de Redis, por defecto:localhost:6379
+  Pass: '' # Contraseña de Redis, por defecto: ""
+  DB: 0 # Base de datos de Redis, por defecto: 0
+
+Administer:
+  Email: admin@ppanel.dev # Correo electrónico de inicio de sesión en el backend, por defecto: admin@ppanel.dev
+  Password: password # Contraseña de inicio de sesión en el backend, por defecto: password
+```
+
+- Crear el archivo de servicio systemd
 
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
@@ -44,23 +319,23 @@ Description=Servidor PPANEL
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- Recarga el servicio systemd
+- Recargar el servicio systemd
 
 ```shell
 systemctl daemon-reload
 ```
 
-- Inicia el servicio
+- Iniciar el servicio
 
 ```shell
 systemctl start ppanel
@@ -68,7 +343,7 @@ systemctl start ppanel
 
 ##### Otras notas
 
-1. Ruta de instalación: El archivo binario se descomprimirá en el directorio /root/ppanel-server-linux-amd64.
+1. Ruta de instalación: el archivo binario se mueve finalmente al directorio /usr/local/bin
 
 2. Servicio systemd:
 
@@ -78,70 +353,17 @@ systemctl start ppanel
    - Comando para detener el servicio: systemctl stop ppanel
    - Comando para reiniciar el servicio: systemctl restart ppanel
    - Comando para verificar el estado del servicio: systemctl status ppanel
-   - Autostart del servicio: systemctl enable ppanel
+   - Configuración para iniciar el servicio al arrancar: systemctl enable ppanel
 
-3. Para habilitar el autostart al iniciar el sistema, puedes usar el siguiente comando:
+3. Para habilitar el inicio automático al arrancar, se puede usar el siguiente comando
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Registro del servicio: El registro del servicio se guarda por defecto en el archivo /root/ppanel-server-linux-amd64/ppanel.log.
+4. Registro del servicio: los registros del servicio se envían por defecto al archivo /usr/local/bin/ppanel.log
 
-5. Puedes ver el registro del servicio con `journalctl -u ppanel -f`.
+5. Se puede ver el registro del servicio con `journalctl -u ppanel -f`
 
-6. Cuando el archivo de configuración está vacío o no existe, el servicio se iniciará con la configuración predeterminada, cuya ruta es: `./etc/ppanel.yaml`.
-   Por favor, inicializa la configuración del sistema a través de `http://dirección_del_servidor:8080/init`.
-
-#### Configuración de proxy inverso NGINX
-
-A continuación se muestra un ejemplo de configuración de proxy inverso, que proxy el servicio `ppanel` al dominio `api.ppanel.dev`.
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Establecer caché de Nginx
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Si utilizas el servicio de proxy de Cloudflare, necesitarás obtener la IP real del usuario. Por favor, añade lo siguiente en la sección Http del archivo de configuración de Nginx:
-
-- Dependencia: **ngx_http_realip_module**, utiliza el comando nginx -V para verificar si Nginx ya ha sido compilado con este módulo; si no, necesitarás compilarlo tú mismo.
-
-```nginx
-    # cloudflare Inicio
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare Fin
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />
+6. Cuando el archivo de configuración está vacío o no existe, el servicio se iniciará con la configuración predeterminada, la ruta del archivo de configuración es: `./etc/ppanel.yaml`,
+   por favor inicialice la configuración del sistema a través de `http://dirección-del-servidor:8080/init`
