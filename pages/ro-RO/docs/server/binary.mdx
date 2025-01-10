@@ -1,41 +1,316 @@
 #### Cerințe preliminare ale sistemului
 
-- Mysql 5.7+ (se recomandă utilizarea versiunii 8.0)
-- Redis 6.0+ (se recomandă utilizarea versiunii 7.0)
+- Debian 12
 
-#### Instalare binară
+#### Instalare Nginx
 
-1. Determinați arhitectura sistemului și descărcați fișierul binar corespunzător
+Pentru instalarea Nginx, folosim sursa oficială DEB a Nginx.
+
+Instalarea software-ului necesar
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Adăugarea cheii PGP oficiale Nginx
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Scrierea configurației sursei oficiale Nginx în nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Setarea priorității sursei oficiale Nginx mai mare decât sursele încorporate ale sistemului
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Actualizarea cache-ului APT
+
+```bash
+apt update
+```
+
+Instalarea Nginx
+
+```bash
+apt install nginx
+```
+
+În final, porniți serviciul Nginx și setați-l să pornească la boot
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Instalare Redis
+
+Importarea cheii GPG
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Scrierea configurației sursei oficiale Redis în redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Actualizarea cache-ului APT
+
+```bash
+apt update
+```
+
+Instalarea redis-server
+
+```bash
+apt install redis
+```
+
+Pornirea serviciului Redis și setarea acestuia să pornească la boot
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### Instalare MariaDB
+
+MariaDB oferă un depozit DEB complet, similar cu depozitul Nginx, așa că trebuie să instalăm pachetele necesare și să importăm cheia GPG.
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Editați fișierul `/etc/apt/sources.list.d/mariadb.sources` și scrieți următoarea configurație:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Actualizarea cache-ului APT
+
+```bash
+apt update
+```
+
+Instalarea MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Pornirea serviciului MariaDB și setarea acestuia să pornească la boot
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Rularea configurării inițiale a MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### Instalare ppanel
+
+1. Configurarea bazei de date MariaDB
+
+### 1. Conectarea la MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+În interfața de linie de comandă MariaDB, executați următoarea comandă pentru a crea o nouă bază de date ppanel_db și a seta setul de caractere la utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Apoi, creați un utilizator local de bază de date și restricționați permisiunile acestuia la baza de date nou creată, folosind ppanel ca nume de utilizator și ppanel-password ca parolă a utilizatorului.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Ieșiți din MariaDB
+
+```sql
+EXIT;
+```
+
+2. Configurarea Nginx
+
+Modificați `user` din `/etc/nginx/nginx.conf` de la
+
+```nginx
+user nginx;
+```
+
+la
+
+```nginx
+user www-data;
+```
+
+Adăugați fișierul de configurare a gazdelor virtuale Nginx
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Apoi scrieți următoarea configurație, asigurându-vă că schimbați numele domeniului site-ului și fișierul certificat SSL (altfel va apărea o eroare):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Înlocuiți cu domeniul dvs.
+
+    ssl_certificate /path/your/certs/example.crt;  # Înlocuiți cu calea către certificatul dvs.
+    ssl_certificate_key /path/your/private/example.key;  # Înlocuiți cu calea către cheia dvs. privată.
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Protocoale recomandate
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Suite de criptare recomandate
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Început
+    set_real_ip_from 0.0.0.0/0;  # Încredere în toate adresele IP Cloudflare
+    real_ip_header X-Forwarded-For;  # Folosiți antetul X-Forwarded-For pentru a obține IP-ul real
+    real_ip_recursive on;  # Rezolvați recursiv mai multe IP-uri din antetul X-Forwarded-For
+    # cloudflare Sfârșit
+
+    # Setări implicite de proxy
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Configurați proxy-ul către serviciul backend, dacă serviciul backend este pe 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Setarea cache-ului pentru resursele statice
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# Redirecționare HTTP către HTTPS
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Înlocuiți cu domeniul dvs.
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Reporniți Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. Determinarea arhitecturii sistemului și descărcarea fișierelor binare corespunzătoare
 
 Adresa de descărcare: `https://github.com/perfect-panel/ppanel/releases`
 
-Exemplu de descriere: sistem: Linux amd64, utilizator: root, director curent: /root
+Exemplu de descriere: sistem: Debian amd64, utilizator: root, director curent: /root
 
-- Descărcați fișierul binar
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
-```
-
-- Dezarhivați fișierul binar
+- Descărcare
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Intrați în directorul dezarhivat
+- Dezarhivare
 
 ```shell
-cd ppanel-server-linux-amd64
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Acordați permisiuni de execuție fișierului binar
+- Mutare
 
 ```shell
-chmod +x ppanel
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- Creați fișierul de serviciu systemd
+- Acordarea permisiunilor de execuție fișierului binar
+
+```shell
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- Modificarea fișierului de configurare ppanel.yaml
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Adresa de ascultare a serviciului, modificați în: 127.0.0.1
+Port: 8080 # Portul de ascultare al serviciului, implicit: 8080
+Debug: false # Activarea modului de depanare, implicit: false
+JwtAuth: # Configurarea autentificării JWT
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Cheia token-ului de acces, vă rugăm să o modificați
+  AccessExpire: 604800 # Timpul de expirare al token-ului de acces, unitate în secunde, implicit: 604800
+Logger: # Configurarea jurnalului
+  FilePath: ./ppanel.log # Calea fișierului jurnal, implicit: ./ppanel.log
+  MaxSize: 50 # Dimensiunea maximă a fișierului jurnal, unitate MB, implicit: 50
+  MaxBackup: 3 # Numărul maxim de copii de rezervă ale fișierului jurnal, implicit: 3
+  MaxAge: 30 # Timpul maxim de păstrare a fișierului jurnal, unitate în zile, implicit: 30
+  Compress: true # Activarea compresiei fișierului jurnal, implicit: true
+  Level: info # Nivelul jurnalului, implicit: info, opțiuni: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # Adresa MySQL, obligatorie
+  Username: ppanel # Numele de utilizator MySQL, obligatorie
+  Password: ppanel-password # Parola MySQL, obligatorie
+  Dbname: ppanel_db # Numele bazei de date MySQL, obligatorie
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # Valori implicite de configurare MySQL
+  MaxIdleConns: 10 # Numărul maxim de conexiuni inactivate, implicit: 10
+  MaxOpenConns: 100 # Numărul maxim de conexiuni deschise, implicit: 100
+  LogMode: info # Nivelul jurnalului, implicit: info, opțiuni: debug, error, warn, info
+  LogZap: true # Activarea utilizării jurnalului zap pentru înregistrarea SQL, implicit: true
+  SlowThreshold: 1000 # Pragul pentru interogările lente, unitate în milisecunde, implicit: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Adresa Redis, implicit:localhost:6379
+  Pass: '' # Parola Redis, implicit: ""
+  DB: 0 # Baza de date Redis, implicit: 0
+
+Administer:
+  Email: admin@ppanel.dev # Email pentru autentificarea în backend, implicit: admin@ppanel.dev
+  Password: password # Parola pentru autentificarea în backend, implicit: password
+```
+
+- Crearea fișierului de serviciu systemd
 
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
@@ -44,31 +319,31 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- Reîncărcați serviciile systemd
+- Reîncărcarea serviciului systemd
 
 ```shell
 systemctl daemon-reload
 ```
 
-- Porniți serviciul
+- Pornirea serviciului
 
 ```shell
 systemctl start ppanel
 ```
 
-##### Alte informații
+##### Alte observații
 
-1. Calea de instalare: fișierul binar va fi dezarhivat în directorul /root/ppanel-server-linux-amd64
+1. Calea de instalare: fișierul binar este mutat în cele din urmă în directorul /usr/local/bin
 
 2. Serviciul systemd:
 
@@ -78,69 +353,20 @@ systemctl start ppanel
    - Comanda de oprire a serviciului: systemctl stop ppanel
    - Comanda de repornire a serviciului: systemctl restart ppanel
    - Comanda de stare a serviciului: systemctl status ppanel
-   - Activare la pornire: systemctl enable ppanel
+   - Activarea pornirii la boot: systemctl enable ppanel
 
-3. Activarea la pornire se poate face cu următoarea comandă
+3. Activarea pornirii la boot se poate face cu următoarea comandă
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Jurnalul serviciului: jurnalul serviciului este, în mod implicit, redirecționat către fișierul /root/ppanel-server-linux-amd64/ppanel.log
+4. Jurnalul serviciului: jurnalul serviciului este, în mod implicit, redirecționat către fișierul /usr/local/bin/ppanel.log
 
-5. Puteți vizualiza jurnalul serviciului folosind `journalctl -u ppanel -f`
+5. Puteți vizualiza jurnalul serviciului cu `journalctl -u ppanel -f`
 
-6. Atunci când fișierul de configurare este gol sau inexistent, serviciul va porni cu configurația implicită, iar calea fișierului de configurare este: `./etc/ppanel.yaml`,
+6. Când fișierul de configurare este gol sau inexistent, serviciul va porni cu configurația implicită, iar calea fișierului de configurare este: `./etc/ppanel.yaml`,
    vă rugăm să inițializați configurația sistemului prin `http://adresa-serverului:8080/init`
-
-#### Configurarea proxy-ului invers NGINX
-
-Iată un exemplu de configurare a proxy-ului invers, care redirecționează serviciul `ppanel` către domeniul `api.ppanel.dev`
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       #Setare cache Nginx
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Dacă utilizați serviciul de proxy Cloudflare, trebuie să obțineți IP-ul real al utilizatorului. Vă rugăm să adăugați în fișierul de configurare Nginx în secțiunea Http:
-
-- Necesită: **ngx_http_realip_module** modul, verificați dacă nginx a fost compilat cu acest modul folosind comanda nginx -V; dacă nu, va trebui să-l compilați singur.
-
-```nginx
-    # cloudflare Început
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare SFÂRȘIT
-```
-
 
 import Giscus from '@/components/giscus';
 

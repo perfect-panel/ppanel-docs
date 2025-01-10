@@ -1,38 +1,307 @@
 #### पूर्व प्रणाली आवश्यकताएँ
 
-- Mysql 5.7+ (8.0 का उपयोग करने की सिफारिश की जाती है)
-- Redis 6.0+ (7.0 का उपयोग करने की सिफारिश की जाती है)
+- Debian 12
 
-#### बाइनरी स्थापना
+#### Nginx स्थापित करें
 
-1. प्रणाली आर्किटेक्चर निर्धारित करें और संबंधित बाइनरी फ़ाइल डाउनलोड करें
+Nginx की स्थापना के लिए, हम आधिकारिक Nginx DEB स्रोत का उपयोग करते हैं।
 
-डाउनलोड लिंक: `https://github.com/perfect-panel/ppanel/releases`
+आवश्यक सॉफ़्टवेयर स्थापित करें
 
-उदाहरण विवरण: प्रणाली: Linux amd64, उपयोगकर्ता: root, वर्तमान निर्देशिका: /root
-
-- बाइनरी फ़ाइल डाउनलोड करें
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
 ```
 
-- बाइनरी फ़ाइल को अनज़िप करें
+आधिकारिक Nginx PGP कुंजी जोड़ें
 
-```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 ```
 
-- अनज़िप की गई निर्देशिका में जाएँ
+आधिकारिक Nginx स्रोत कॉन्फ़िगरेशन को nginx.list में लिखें
 
-```shell
-cd ppanel-server-linux-amd64
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
 ```
 
-- बाइनरी फ़ाइल को निष्पादन अधिकार दें
+आधिकारिक Nginx स्रोत की प्राथमिकता को सिस्टम के अंतर्निहित स्रोतों से अधिक सेट करें
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+APT कैश अपडेट करें
+
+```bash
+apt update
+```
+
+Nginx स्थापित करें
+
+```bash
+apt install nginx
+```
+
+अंत में, Nginx सेवा शुरू करें और इसे बूट पर स्वचालित रूप से प्रारंभ करने के लिए सेट करें
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redis स्थापित करें
+
+GPG कुंजी आयात करें
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+आधिकारिक Redis स्रोत कॉन्फ़िगरेशन को redis.list में लिखें
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+APT कैश अपडेट करें
+
+```bash
+apt update
+```
+
+redis-server स्थापित करें
+
+```bash
+apt install redis
+```
+
+Redis सेवा शुरू करें और इसे बूट पर स्वचालित रूप से प्रारंभ करने के लिए सेट करें
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDB स्थापित करें
+
+MariaDB एक पूर्ण DEB भंडार प्रदान करता है, जो Nginx भंडार के समान है, इसलिए हमें आवश्यक पैकेज स्थापित करने और GPG कुंजी आयात करने की आवश्यकता है
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+`/etc/apt/sources.list.d/mariadb.sources` फ़ाइल संपादित करें, और निम्नलिखित कॉन्फ़िगरेशन लिखें:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+APT कैश अपडेट करें
+
+```bash
+apt update
+```
+
+MariaDB 11.4 स्थापित करें
+
+```bash
+apt install mariadb-server
+```
+
+MariaDB सेवा शुरू करें और इसे बूट पर स्वचालित रूप से प्रारंभ करने के लिए सेट करें
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+MariaDB की प्रारंभिक सेटिंग चलाएँ
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanel स्थापित करें
+
+1. MariaDB डेटाबेस कॉन्फ़िगर करें
+
+### 1. MariaDB में लॉगिन करें
+
+```bash
+mariadb -u root -p
+```
+
+MariaDB कमांड लाइन इंटरफेस में, एक नया डेटाबेस ppanel_db बनाने के लिए निम्नलिखित कमांड चलाएँ, और चरित्र सेट को utf8mb4_unicode_ci पर सेट करें
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+इसके बाद, एक स्थानीय डेटाबेस उपयोगकर्ता बनाएं, और उस उपयोगकर्ता की अनुमतियों को नए बनाए गए डेटाबेस तक सीमित करें, ppanel को उपयोगकर्ता नाम के रूप में और ppanel-password को उपयोगकर्ता पासवर्ड के रूप में उपयोग करें।
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+MariaDB से बाहर निकलें
+
+```sql
+EXIT;
+```
+
+2. Nginx कॉन्फ़िगर करें
+
+`/etc/nginx/nginx.conf` में `user` को निम्नलिखित से बदलें
+
+```nginx
+user nginx;
+```
+
+Nginx वर्चुअल होस्ट कॉन्फ़िगरेशन फ़ाइल जोड़ें
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+फिर निम्नलिखित कॉन्फ़िगरेशन लिखें, कृपया वेबसाइट डोमेन और SSL प्रमाणपत्र फ़ाइल को बदलना न भूलें (अन्यथा त्रुटि होगी):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # अपने डोमेन से बदलें
+
+    ssl_certificate /path/your/certs/example.crt;  # अपने प्रमाणपत्र पथ से बदलें
+    ssl_certificate_key /path/your/private/example.key;  # अपने निजी कुंजी पथ से बदलें
+
+    ssl_protocols TLSv1.2 TLSv1.3; # अनुशंसित प्रोटोकॉल
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # अनुशंसित एन्क्रिप्शन सेट
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare प्रारंभ
+    set_real_ip_from 0.0.0.0/0;  # Cloudflare के सभी IP पते पर भरोसा करें
+    real_ip_header X-Forwarded-For;  # वास्तविक IP प्राप्त करने के लिए X-Forwarded-For हेडर का उपयोग करें
+    real_ip_recursive on;  # X-Forwarded-For हेडर में कई IP को पुनरावृत्त करें
+    # cloudflare समाप्त
+
+    # डिफ़ॉल्ट प्रॉक्सी सेटिंग्स
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # यदि बैकएंड सेवा 127.0.0.1:8080 पर है तो बैकएंड सेवा के लिए प्रॉक्सी कॉन्फ़िगर करें
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # स्थिर संसाधनों के लिए कैश सेट करें
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP से HTTPS पुनर्निर्देशन
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # अपने डोमेन से बदलें
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Nginx को पुनरारंभ करें
+
+```bash
+systemctl restart nginx
+```
+
+3. सिस्टम आर्किटेक्चर निर्धारित करें और संबंधित बाइनरी फ़ाइलें डाउनलोड करें
+
+डाउनलोड पता: `https://github.com/perfect-panel/ppanel/releases`
+
+उदाहरण विवरण: सिस्टम: Debian amd64, उपयोगकर्ता: root, वर्तमान निर्देशिका: /root
+
+- डाउनलोड करें
 
 ```shell
-chmod +x ppanel
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- अनज़िप करें
+
+```shell
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- स्थानांतरित करें
+
+```shell
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
+```
+
+- बाइनरी फ़ाइल को निष्पादन अनुमति दें
+
+```shell
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- ppanel.yaml कॉन्फ़िगरेशन फ़ाइल को संशोधित करें
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # सेवा सुनने का पता, बदलें: 127.0.0.1
+Port: 8080 # सेवा सुनने का पोर्ट, डिफ़ॉल्ट: 8080
+Debug: false # क्या डिबग मोड चालू है, डिफ़ॉल्ट: false
+JwtAuth: # JWT प्रमाणीकरण कॉन्फ़िगरेशन
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # एक्सेस टोकन कुंजी, कृपया संशोधित करें
+  AccessExpire: 604800 # एक्सेस टोकन की समाप्ति समय, सेकंड में, डिफ़ॉल्ट: 604800
+Logger: # लॉग कॉन्फ़िगरेशन
+  FilePath: ./ppanel.log # लॉग फ़ाइल का पथ, डिफ़ॉल्ट: ./ppanel.log
+  MaxSize: 50 # लॉग फ़ाइल का अधिकतम आकार, MB में, डिफ़ॉल्ट: 50
+  MaxBackup: 3 # लॉग फ़ाइल का अधिकतम बैकअप संख्या, डिफ़ॉल्ट: 3
+  MaxAge: 30 # लॉग फ़ाइल का अधिकतम संग्रहण समय, दिनों में, डिफ़ॉल्ट: 30
+  Compress: true # क्या लॉग फ़ाइल को संकुचित करें, डिफ़ॉल्ट: true
+  Level: info # लॉग स्तर, डिफ़ॉल्ट: info, वैकल्पिक: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL पता, अनिवार्य
+  Username: ppanel # MySQL उपयोगकर्ता नाम, अनिवार्य
+  Password: ppanel-password # MySQL पासवर्ड, अनिवार्य
+  Dbname: ppanel_db # MySQL डेटाबेस नाम, अनिवार्य
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL कॉन्फ़िगरेशन डिफ़ॉल्ट मान
+  MaxIdleConns: 10 # अधिकतम निष्क्रिय कनेक्शन संख्या, डिफ़ॉल्ट: 10
+  MaxOpenConns: 100 # अधिकतम खोले गए कनेक्शन संख्या, डिफ़ॉल्ट: 100
+  LogMode: info # लॉग स्तर, डिफ़ॉल्ट: info, वैकल्पिक: debug, error, warn, info
+  LogZap: true # क्या SQL लॉग रिकॉर्ड करने के लिए zap का उपयोग करें, डिफ़ॉल्ट: true
+  SlowThreshold: 1000 # धीमी क्वेरी थ्रेशोल्ड, मिलीसेकंड में, डिफ़ॉल्ट: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis पता, डिफ़ॉल्ट:localhost:6379
+  Pass: '' # Redis पासवर्ड, डिफ़ॉल्ट: ""
+  DB: 0 # Redis डेटाबेस, डिफ़ॉल्ट: 0
+
+Administer:
+  Email: admin@ppanel.dev # बैकएंड लॉगिन ईमेल, डिफ़ॉल्ट: admin@ppanel.dev
+  Password: password # बैकएंड लॉगिन पासवर्ड, डिफ़ॉल्ट: password
 ```
 
 - systemd सेवा फ़ाइल बनाएँ
@@ -44,10 +313,10 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -60,7 +329,7 @@ EOF
 systemctl daemon-reload
 ```
 
-- सेवा प्रारंभ करें
+- सेवा शुरू करें
 
 ```shell
 systemctl start ppanel
@@ -68,17 +337,17 @@ systemctl start ppanel
 
 ##### अन्य विवरण
 
-1. स्थापना पथ: बाइनरी फ़ाइलें /root/ppanel-server-linux-amd64 निर्देशिका में अनज़िप की जाएँगी
+1. स्थापना पथ: बाइनरी फ़ाइल अंततः /usr/local/bin निर्देशिका में स्थानांतरित की जाती है
 
 2. systemd सेवा:
 
-   - सेवा का नाम: ppanel
+   - सेवा नाम: ppanel
    - सेवा कॉन्फ़िगरेशन फ़ाइल: /etc/systemd/system/ppanel.service
    - सेवा प्रारंभ करने का आदेश: systemctl start ppanel
    - सेवा रोकने का आदेश: systemctl stop ppanel
-   - सेवा पुनः प्रारंभ करने का आदेश: systemctl restart ppanel
+   - सेवा पुनरारंभ करने का आदेश: systemctl restart ppanel
    - सेवा स्थिति आदेश: systemctl status ppanel
-   - सेवा को बूट पर स्वचालित रूप से प्रारंभ करने के लिए: systemctl enable ppanel
+   - सेवा बूट पर स्वचालित रूप से प्रारंभ करने का आदेश: systemctl enable ppanel
 
 3. बूट पर स्वचालित रूप से प्रारंभ करने के लिए निम्नलिखित आदेश का उपयोग करें
 
@@ -86,60 +355,12 @@ systemctl start ppanel
    systemctl enable ppanel
    ```
 
-4. सेवा लॉग: सेवा लॉग डिफ़ॉल्ट रूप से /root/ppanel-server-linux-amd64/ppanel.log फ़ाइल में आउटपुट होती है
+4. सेवा लॉग: सेवा लॉग डिफ़ॉल्ट रूप से /usr/local/bin/ppanel.log फ़ाइल में आउटपुट होता है
 
 5. सेवा लॉग देखने के लिए `journalctl -u ppanel -f` का उपयोग करें
 
-6. जब कॉन्फ़िगरेशन फ़ाइल खाली या अनुपस्थित होती है, तो सेवा डिफ़ॉल्ट कॉन्फ़िगरेशन के साथ प्रारंभ होती है, कॉन्फ़िगरेशन फ़ाइल का पथ है: `./etc/ppanel.yaml`। कृपया `http://सर्वर_पता:8080/init` के माध्यम से प्रणाली कॉन्फ़िगरेशन को प्रारंभ करें
-
-#### NGINX रिवर्स प्रॉक्सी कॉन्फ़िगरेशन
-
-यहाँ रिवर्स प्रॉक्सी कॉन्फ़िगरेशन का उदाहरण है, जो `ppanel` सेवा को `api.ppanel.dev` डोमेन पर प्रॉक्सी करता है
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       #Nginx कैश सेट करें
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-यदि आप Cloudflare प्रॉक्सी सेवा का उपयोग कर रहे हैं, तो आपको उपयोगकर्ता के वास्तविक आईपी को प्राप्त करने की आवश्यकता है। कृपया Nginx कॉन्फ़िगरेशन फ़ाइल में Http खंड में जोड़ें:
-
-- आवश्यक निर्भरता: **ngx_http_realip_module** मॉड्यूल, nginx -V कमांड का उपयोग करके देखें कि क्या nginx ने पहले से ही इस मॉड्यूल को संकलित किया है, यदि नहीं, तो आपको इसे स्वयं संकलित करना होगा।
-
-```nginx
-    # cloudflare प्रारंभ
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare समाप्त
-```
-
+6. जब कॉन्फ़िगरेशन फ़ाइल खाली या अनुपस्थित होती है, तो सेवा डिफ़ॉल्ट कॉन्फ़िगरेशन के साथ प्रारंभ होती है, कॉन्फ़िगरेशन फ़ाइल का पथ है: `./etc/ppanel.yaml`，
+   कृपया `http://server-address:8080/init` के माध्यम से सिस्टम कॉन्फ़िगरेशन प्रारंभ करें
 
 import Giscus from '@/components/giscus';
 

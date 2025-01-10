@@ -1,41 +1,310 @@
-#### 前提システム要件
+#### 前提条件
 
-- Mysql 5.7+（8.0の使用を推奨）
-- Redis 6.0+（7.0の使用を推奨）
+- Debian 12
 
-#### バイナリインストール
+#### Nginxのインストール
 
-1. システムアーキテクチャを確認し、対応するバイナリファイルをダウンロードします。
+Nginxのインストールには、公式のNginx DEBリポジトリを使用します。
+
+必要なソフトウェアをインストールします。
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+公式のNginx PGPキーを追加します。
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+公式のNginxリポジトリの設定をnginx.listに書き込みます。
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+公式のNginxリポジトリの優先度をシステムのデフォルトリポジトリよりも高く設定します。
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+APTキャッシュを更新します。
+
+```bash
+apt update
+```
+
+Nginxをインストールします。
+
+```bash
+apt install nginx
+```
+
+最後に、Nginxサービスを起動し、起動時に自動的に開始するように設定します。
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Redisのインストール
+
+GPGキーをインポートします。
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+公式のRedisリポジトリの設定をredis.listに書き込みます。
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+APTキャッシュを更新します。
+
+```bash
+apt update
+```
+
+redis-serverをインストールします。
+
+```bash
+apt install redis
+```
+
+Redisサービスを起動し、起動時に自動的に開始するように設定します。
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### MariaDBのインストール
+
+MariaDBは完全なDEBリポジトリを提供しており、Nginxリポジトリと似ています。そのため、必要なパッケージをインストールし、GPGキーをインポートする必要があります。
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+`/etc/apt/sources.list.d/mariadb.sources`ファイルを編集し、以下の設定を記入します。
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+APTキャッシュを更新します。
+
+```bash
+apt update
+```
+
+MariaDB 11.4をインストールします。
+
+```bash
+apt install mariadb-server
+```
+
+MariaDBサービスを起動し、起動時に自動的に開始するように設定します。
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+MariaDBの初期設定を実行します。
+
+```bash
+mariadb-secure-installation
+```
+
+#### ppanelのインストール
+
+1. MariaDBデータベースの設定
+
+### 1. MariaDBにログイン
+
+```bash
+mariadb -u root -p
+```
+
+MariaDBのコマンドラインインターフェースで、以下のコマンドを実行して新しいデータベースppanel_dbを作成し、文字セットをutf8mb4_unicode_ciに設定します。
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+次に、ローカルデータベースユーザーを作成し、そのユーザーの権限を新しく作成したデータベースに制限します。ユーザー名はppanel、パスワードはppanel-passwordとします。
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+MariaDBから退出します。
+
+```sql
+EXIT;
+```
+
+2. Nginxの設定
+
+`/etc/nginx/nginx.conf`の`user`を以下のように変更します。
+
+```nginx
+user nginx;
+```
+
+Nginxの仮想ホスト設定ファイルを追加します。
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+次に、以下の設定を記入します。ウェブサイトのドメイン名とSSL証明書ファイルを変更することを忘れないでください（そうしないとエラーが発生します）。
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # あなたのドメインに置き換えてください
+
+    ssl_certificate /path/your/certs/example.crt;  # あなたの証明書のパスに置き換えてください
+    ssl_certificate_key /path/your/private/example.key;  # あなたの秘密鍵のパスに置き換えてください
+
+    ssl_protocols TLSv1.2 TLSv1.3; # 推奨されるプロトコル
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # 推奨される暗号スイート
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare 開始
+    set_real_ip_from 0.0.0.0/0;  # CloudflareのすべてのIPアドレスを信頼
+    real_ip_header X-Forwarded-For;  # X-Forwarded-Forヘッダーを使用して実際のIPを取得
+    real_ip_recursive on;  # X-Forwarded-Forヘッダー内の複数のIPを再帰的に解析
+    # cloudflare 終了
+
+    # デフォルトのプロキシ設定
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # バックエンドサービスへのプロキシ設定、バックエンドサービスが127.0.0.1:8080にある場合
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # 静的リソースのキャッシュ設定
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTPからHTTPSへのリダイレクト
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # あなたのドメインに置き換えてください
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Nginxを再起動します。
+
+```bash
+systemctl restart nginx
+```
+
+3. システムアーキテクチャを確認し、対応するバイナリファイルをダウンロードします。
 
 ダウンロードリンク：`https://github.com/perfect-panel/ppanel/releases`
 
-例：システム：Linux amd64、ユーザー：root、現在のディレクトリ：/root
+例：システム：Debian amd64、ユーザー：root、現在のディレクトリ：/root
 
-- バイナリファイルをダウンロード
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
-```
-
-- バイナリファイルを解凍
+- ダウンロード
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- 解凍したディレクトリに移動
+- 解凍
 
 ```shell
-cd ppanel-server-linux-amd64
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- バイナリファイルに実行権限を付与
+- 移動
 
 ```shell
-chmod +x ppanel
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- systemd サービスファイルを作成
+- バイナリファイルに実行権限を付与します。
+
+```shell
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- ppanel.yaml設定ファイルを変更します。
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # サービスリスニングアドレス、変更：127.0.0.1
+Port: 8080 # サービスリスニングポート、デフォルト：8080
+Debug: false # デバッグモードを有効にするか、デフォルト：false
+JwtAuth: # JWT認証設定
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # アクセストークンの秘密鍵、変更してください
+  AccessExpire: 604800 # アクセストークンの有効期限、単位：秒、デフォルト：604800
+Logger: # ログ設定
+  FilePath: ./ppanel.log # ログファイルのパス、デフォルト：./ppanel.log
+  MaxSize: 50 # ログファイルの最大サイズ、単位：MB、デフォルト：50
+  MaxBackup: 3 # ログファイルの最大バックアップ数、デフォルト：3
+  MaxAge: 30 # ログファイルの最大保存期間、単位：日、デフォルト：30
+  Compress: true # ログファイルを圧縮するか、デフォルト：true
+  Level: info # ログレベル、デフォルト：info、オプション：debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQLアドレス、必須
+  Username: ppanel # MySQLユーザー名、必須
+  Password: ppanel-password # MySQLパスワード、必須
+  Dbname: ppanel_db # MySQLデータベース名、必須
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL設定のデフォルト値
+  MaxIdleConns: 10 # 最大アイドル接続数、デフォルト：10
+  MaxOpenConns: 100 # 最大オープン接続数、デフォルト：100
+  LogMode: info # ログレベル、デフォルト：info、オプション：debug, error, warn, info
+  LogZap: true # SQLのzapログ記録を使用するか、デフォルト：true
+  SlowThreshold: 1000 # スロークエリの閾値、単位：ミリ秒、デフォルト：1000
+Redis:
+  Host: 127.0.0.1:6379 # Redisアドレス、デフォルト：localhost:6379
+  Pass: '' # Redisパスワード、デフォルト： ""
+  DB: 0 # Redisデータベース、デフォルト：0
+
+Administer:
+  Email: admin@ppanel.dev # バックエンドログインメール、デフォルト：admin@ppanel.dev
+  Password: password # バックエンドログインパスワード、デフォルト：password
+```
+
+- systemdサービスファイルを作成します。
 
 ```shell
 $ cat > /etc/systemd/system/ppanel.service <<EOF
@@ -44,23 +313,23 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- systemd サービスを再読み込み
+- systemdサービスを再読み込みします。
 
 ```shell
 systemctl daemon-reload
 ```
 
-- サービスを起動
+- サービスを起動します。
 
 ```shell
 systemctl start ppanel
@@ -68,9 +337,9 @@ systemctl start ppanel
 
 ##### その他の説明
 
-1. インストールパス：バイナリファイルは /root/ppanel-server-linux-amd64 ディレクトリに解凍されます。
+1. インストールパス：バイナリファイルは最終的に/usr/local/binディレクトリに移動されます。
 
-2. systemd サービス：
+2. systemdサービス：
 
    - サービス名：ppanel
    - サービス設定ファイル：/etc/systemd/system/ppanel.service
@@ -80,67 +349,17 @@ systemctl start ppanel
    - サービス状態コマンド：systemctl status ppanel
    - サービスの自動起動：systemctl enable ppanel
 
-3. 自動起動の設定は以下のコマンドで行えます。
+3. 自動起動を設定するには、以下のコマンドを使用します。
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. サービスログ：サービスログはデフォルトで /root/ppanel-server-linux-amd64/ppanel.log ファイルに出力されます。
+4. サービスログ：サービスログはデフォルトで/usr/local/bin/ppanel.logファイルに出力されます。
 
-5. `journalctl -u ppanel -f` コマンドでサービスログを確認できます。
+5. `journalctl -u ppanel -f`を使用してサービスログを確認できます。
 
-6. 設定ファイルが空または存在しない場合、サービスはデフォルト設定で起動します。設定ファイルのパスは `./etc/ppanel.yaml` です。
-   システム設定を初期化するには、`http://サーバーアドレス:8080/init` にアクセスしてください。
-
-#### NGINX リバースプロキシ設定
-
-以下はリバースプロキシ設定の例で、`ppanel` サービスを `api.ppanel.dev` ドメインにプロキシします。
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Nginx キャッシュの設定
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Cloudflareのプロキシサービスを使用する場合、ユーザーの実際のアクセスIPを取得する必要があります。Nginx設定ファイルのHTTPセクションに以下を追加してください：
-
-- 必要な依存関係：**ngx_http_realip_module** モジュール。nginx -V コマンドでnginxがこのモジュールをコンパイルしているか確認し、無い場合は自分でコンパイルする必要があります。
-
-```nginx
-    # cloudflare 開始
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare 終了
-```
-
+6. 設定ファイルが空または存在しない場合、サービスはデフォルト設定で起動します。設定ファイルのパスは`./etc/ppanel.yaml`です。初期設定を行うには、`http://サーバーアドレス:8080/init`にアクセスしてください。
 
 import Giscus from '@/components/giscus';
 

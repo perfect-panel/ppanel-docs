@@ -1,38 +1,313 @@
 #### 前置系統要求
 
-- Mysql 5.7+ (建議使用8.0)
-- Redis 6.0+ (建議使用7.0)
+- Debian 12
 
-#### 二進制安裝
+#### 安裝 Nginx
 
-1. 確定系統架構，並下載對應的二進制文件
+對於 Nginx 的安裝，我們使用官方的 Nginx DEB 源
+
+安裝必要的軟件
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+添加官方 Nginx PGP 密鑰
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+將官方 Nginx 源配置寫入 nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+設置官方 Nginx 源的優先級高於系統內建源
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+更新 APT 緩存
+
+```bash
+apt update
+```
+
+安裝 Nginx
+
+```bash
+apt install nginx
+```
+
+最後，啟動 Nginx 服務並設置開機自啟
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### 安裝 Redis
+
+導入 GPG 密鑰
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+將官方 Redis 源配置寫入 redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+更新 APT 緩存
+
+```bash
+apt update
+```
+
+安裝 redis-server
+
+```bash
+apt install redis
+```
+
+啟動 Redis 服務並設置開機自啟
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### 安裝 MariaDB
+
+MariaDB 提供了一個完整的 DEB 倉庫，和 Nginx 倉庫類似，因此我們需要安裝必要的包並導入 GPG 密鑰
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+編輯 `/etc/apt/sources.list.d/mariadb.sources` 文件，並寫入以下配置:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+更新 APT 緩存
+
+```bash
+apt update
+```
+
+安裝 MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+啟動 MariaDB 服務並設置開機自啟
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+運行 MariaDB 的初始設置
+
+```bash
+mariadb-secure-installation
+```
+
+#### 安裝 ppanel
+
+1. 配置 MariaDB 數據庫
+
+### 1. 登錄到 MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+在 MariaDB 命令行界面中，執行以下命令來創建一個新的數據庫 ppanel_db，並設置字符集為 utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+接下來，創建一個本地數據庫用戶，並將該用戶的權限限制為新創建的數據庫，使用 ppanel 作為用戶名，ppanel-password 作為用戶密碼。
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+退出 MariaDB
+
+```sql
+EXIT;
+```
+
+2. 配置 Nginx
+
+將 `/etc/nginx/nginx.conf` 中的 `user` 從
+
+```nginx
+user nginx;
+```
+
+修改為
+
+```nginx
+user www-data;
+```
+
+添加 Nginx 虛擬主機配置文件
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+然後寫入以下配置，請注意更改網站域名和 SSL 證書文件（否則報錯）：
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # 替換為你的域名
+
+    ssl_certificate /path/your/certs/example.crt;  # 替換為你的證書路徑
+    ssl_certificate_key /path/your/private/example.key;  # 替換為你的私鑰路徑
+
+    ssl_protocols TLSv1.2 TLSv1.3; # 推薦使用的協議
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # 推薦的加密套件
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare 開始
+    set_real_ip_from 0.0.0.0/0;  # 信任 Cloudflare 所有 IP 地址
+    real_ip_header X-Forwarded-For;  # 使用 X-Forwarded-For 頭獲取真實 IP
+    real_ip_recursive on;  # 遞歸解析 X-Forwarded-For 頭中的多個 IP
+    # cloudflare 結束
+
+    # 默認代理設置
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # 配置代理到後端服務，如果後端服務在 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # 設置靜態資源緩存
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# HTTP 到 HTTPS 重定向
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # 替換為你的域名
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+重啟 Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. 確定系統架構，並下載對應的二進制文件
 
 下載地址：`https://github.com/perfect-panel/ppanel/releases`
 
-示例說明：系統：Linux amd64，使用者：root，當前目錄：/root
+示例說明：系統：Debian amd64，使用者：root，當前目錄：/root
 
-- 下載二進制文件
+- 下載
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- 解壓二進制文件
+- 解壓
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- 進入解壓後的目錄
+- 移動
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
 - 賦予二進制文件執行權限
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- 修改 ppanel.yaml 配置文件
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # 服務監聽地址, 修改為：127.0.0.1
+Port: 8080 # 服務監聽端口, 默認: 8080
+Debug: false # 是否開啟調試模式, 默認: false
+JwtAuth: # JWT 認證配置
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # 訪問令牌密鑰, 請進行修改
+  AccessExpire: 604800 # 訪問令牌過期時間, 單位秒, 默認: 604800
+Logger: # 日誌配置
+  FilePath: ./ppanel.log # 日誌文件路徑, 默認: ./ppanel.log
+  MaxSize: 50 # 日誌文件最大大小, 單位MB, 默認: 50
+  MaxBackup: 3 # 日誌文件最大備份數, 默認: 3
+  MaxAge: 30 # 日誌文件最大保存時間, 單位天, 默認: 30
+  Compress: true # 是否壓縮日誌文件, 默認: true
+  Level: info # 日誌級別, 默認: info, 可選: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # MySQL 地址, 必填
+  Username: ppanel # MySQL 用戶名, 必填
+  Password: ppanel-password # MySQL 密碼, 必填
+  Dbname: ppanel_db # MySQL 數據庫名, 必填
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL 配置默認值
+  MaxIdleConns: 10 # 最大空閒連接數, 默認: 10
+  MaxOpenConns: 100 # 最大打開連接數, 默認: 100
+  LogMode: info # 日誌級別, 默認: info, 可選: debug, error, warn, info
+  LogZap: true # 是否使用 zap 日誌記錄 sql, 默認: true
+  SlowThreshold: 1000 # 慢查詢閾值, 單位毫秒, 默認: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Redis 地址, 默認:localhost:6379
+  Pass: '' # Redis 密碼, 默認: ""
+  DB: 0 # Redis 數據庫, 默認: 0
+
+Administer:
+  Email: admin@ppanel.dev # 後台登錄郵箱, 默認: admin@ppanel.dev
+  Password: password # 後台登錄密碼, 默認: password
 ```
 
 - 創建 systemd 服務文件
@@ -44,10 +319,10 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -68,7 +343,7 @@ systemctl start ppanel
 
 ##### 其他說明
 
-1. 安裝路徑：二進制文件將解壓到 /root/ppanel-server-linux-amd64 目錄下
+1. 安裝路徑：二進制文件最終移動到 /usr/local/bin 目錄下
 
 2. systemd 服務：
 
@@ -86,61 +361,12 @@ systemctl start ppanel
    systemctl enable ppanel
    ```
 
-4. 服務日誌：服務日誌默認輸出到 /root/ppanel-server-linux-amd64/ppanel.log 文件中
+4. 服務日誌：服務日誌默認輸出到 /usr/local/bin/ppanel.log 文件中
 
 5. 可通過 `journalctl -u ppanel -f` 查看服務日誌
 
-6. 當配置文件為空或不存在的情況下，服務會使用默認配置啟動，配置文件路徑為：`./etc/ppanel.yaml`，
+6. 當配置文件為空或者不存在的情況下，服務會使用默認配置啟動，配置文件路徑為：`./etc/ppanel.yaml`，
    請通過`http://伺服器地址:8080/init` 初始化系統配置
-
-#### NGINX 反向代理配置
-
-以下是反向代理配置示例，將 `ppanel` 服務代理到 `api.ppanel.dev` 域名下
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       #設置 Nginx 緩存
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-如果使用 Cloudflare 代理服務，需要獲取到用戶真實訪問 IP。請在 Nginx 配置文件中 Http 段落中加入:
-
-- 需要依賴：**ngx_http_realip_module** 模塊，使用 nginx -V 命令查看 nginx 是否已經編譯該模塊，沒有的話需要自己編譯。
-
-```nginx
-    # cloudflare 開始
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare 結束
-```
-
 
 import Giscus from '@/components/giscus';
 

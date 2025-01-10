@@ -1,38 +1,313 @@
 #### Попередні системні вимоги
 
-- Mysql 5.7+ (рекомендується використовувати 8.0)
-- Redis 6.0+ (рекомендується використовувати 7.0)
+- Debian 12
 
-#### Бінарна установка
+#### Встановлення Nginx
 
-1. Визначте архітектуру системи та завантажте відповідні бінарні файли
+Для встановлення Nginx ми використовуємо офіційний DEB-репозиторій Nginx.
 
-Завантажити за адресою: `https://github.com/perfect-panel/ppanel/releases`
+Встановіть необхідне програмне забезпечення
 
-Приклад опису: система: Linux amd64, користувач: root, поточний каталог: /root
-
-- Завантажте бінарний файл
-
-```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
 ```
 
-- Розпакуйте бінарний файл
+Додайте офіційний PGP-ключ Nginx
 
-```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 ```
 
-- Перейдіть до розпакованого каталогу
+Запишіть конфігурацію офіційного репозиторію Nginx у файл nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Встановіть пріоритет офіційного репозиторію Nginx вище, ніж вбудованих системних репозиторіїв
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Оновіть кеш APT
+
+```bash
+apt update
+```
+
+Встановіть Nginx
+
+```bash
+apt install nginx
+```
+
+Нарешті, запустіть службу Nginx і налаштуйте автозапуск при завантаженні
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Встановлення Redis
+
+Імпортуйте GPG-ключ
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Запишіть конфігурацію офіційного репозиторію Redis у файл redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Оновіть кеш APT
+
+```bash
+apt update
+```
+
+Встановіть redis-server
+
+```bash
+apt install redis
+```
+
+Запустіть службу Redis і налаштуйте автозапуск при завантаженні
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### Встановлення MariaDB
+
+MariaDB надає повний DEB-репозиторій, подібно до репозиторію Nginx, тому нам потрібно встановити необхідні пакети та імпортувати GPG-ключ
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Редагуйте файл `/etc/apt/sources.list.d/mariadb.sources` і запишіть наступну конфігурацію:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Оновіть кеш APT
+
+```bash
+apt update
+```
+
+Встановіть MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Запустіть службу MariaDB і налаштуйте автозапуск при завантаженні
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Запустіть початкове налаштування MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### Встановлення ppanel
+
+1. Налаштування бази даних MariaDB
+
+### 1. Увійдіть до MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+У командному рядку MariaDB виконайте наступну команду, щоб створити нову базу даних ppanel_db і встановити набір символів на utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Далі створіть локального користувача бази даних і обмежте його права доступу до новоствореної бази даних, використовуючи ppanel як ім'я користувача та ppanel-password як пароль користувача.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Вийдіть з MariaDB
+
+```sql
+EXIT;
+```
+
+2. Налаштування Nginx
+
+Змініть `user` у файлі `/etc/nginx/nginx.conf` з
+
+```nginx
+user nginx;
+```
+
+на
+
+```nginx
+user www-data;
+```
+
+Додайте конфігураційний файл віртуального хоста Nginx
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Потім запишіть наступну конфігурацію, зверніть увагу на зміну доменного імені сайту та файлів SSL-сертифікатів (в іншому випадку буде помилка):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Змініть на ваше доменне ім'я
+
+    ssl_certificate /path/your/certs/example.crt;  # Змініть на ваш шлях до сертифіката
+    ssl_certificate_key /path/your/private/example.key;  # Змініть на ваш шлях до приватного ключа
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Рекомендуються протоколи
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Рекомендуються шифри
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Початок
+    set_real_ip_from 0.0.0.0/0;  # Довіряйте всім IP-адресам Cloudflare
+    real_ip_header X-Forwarded-For;  # Використовуйте заголовок X-Forwarded-For для отримання реальної IP-адреси
+    real_ip_recursive on;  # Рекурсивно розбирайте кілька IP-адрес у заголовку X-Forwarded-For
+    # cloudflare Кінець
+
+    # Налаштування проксі за замовчуванням
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Налаштування проксі до бекенд-сервісу, якщо бекенд-сервіс на 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Налаштування кешування статичних ресурсів
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# Перенаправлення HTTP на HTTPS
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Змініть на ваше доменне ім'я
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Перезапустіть Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. Визначте архітектуру системи та завантажте відповідні бінарні файли
+
+Посилання для завантаження: `https://github.com/perfect-panel/ppanel/releases`
+
+Приклад опису: система: Debian amd64, користувач: root, поточний каталог: /root
+
+- Завантажте
 
 ```shell
-cd ppanel-server-linux-amd64
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- Розпакуйте
+
+```shell
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
+```
+
+- Перемістіть
+
+```shell
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
 - Надати бінарному файлу права на виконання
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- Змініть файл конфігурації ppanel.yaml
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Адреса прослуховування служби, змініть на: 127.0.0.1
+Port: 8080 # Порт прослуховування служби, за замовчуванням: 8080
+Debug: false # Чи ввімкнено режим налагодження, за замовчуванням: false
+JwtAuth: # Налаштування JWT-аутентифікації
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Ключ токена доступу, будь ласка, змініть
+  AccessExpire: 604800 # Час дії токена доступу, одиниця секунд, за замовчуванням: 604800
+Logger: # Налаштування журналу
+  FilePath: ./ppanel.log # Шлях до файлу журналу, за замовчуванням: ./ppanel.log
+  MaxSize: 50 # Максимальний розмір файлу журналу, одиниця МБ, за замовчуванням: 50
+  MaxBackup: 3 # Максимальна кількість резервних копій файлу журналу, за замовчуванням: 3
+  MaxAge: 30 # Максимальний час зберігання файлу журналу, одиниця днів, за замовчуванням: 30
+  Compress: true # Чи стискати файли журналу, за замовчуванням: true
+  Level: info # Рівень журналу, за замовчуванням: info, можливі: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # Адреса MySQL, обов'язково
+  Username: ppanel # Ім'я користувача MySQL, обов'язково
+  Password: ppanel-password # Пароль MySQL, обов'язково
+  Dbname: ppanel_db # Назва бази даних MySQL, обов'язково
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # Значення за замовчуванням конфігурації MySQL
+  MaxIdleConns: 10 # Максимальна кількість бездіяльних з'єднань, за замовчуванням: 10
+  MaxOpenConns: 100 # Максимальна кількість відкритих з'єднань, за замовчуванням: 100
+  LogMode: info # Рівень журналу, за замовчуванням: info, можливі: debug, error, warn, info
+  LogZap: true # Чи використовувати запис sql журналу zap, за замовчуванням: true
+  SlowThreshold: 1000 # Поріг повільного запиту, одиниця мілісекунд, за замовчуванням: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Адреса Redis, за замовчуванням:localhost:6379
+  Pass: '' # Пароль Redis, за замовчуванням: ""
+  DB: 0 # База даних Redis, за замовчуванням: 0
+
+Administer:
+  Email: admin@ppanel.dev # Електронна пошта для входу в адмінку, за замовчуванням: admin@ppanel.dev
+  Password: password # Пароль для входу в адмінку, за замовчуванням: password
 ```
 
 - Створіть файл служби systemd
@@ -44,10 +319,10 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -68,80 +343,27 @@ systemctl start ppanel
 
 ##### Інші примітки
 
-1. Шлях установки: бінарний файл буде розпакований у каталозі /root/ppanel-server-linux-amd64
+1. Шлях встановлення: бінарний файл в кінцевому підсумку переміщується до каталогу /usr/local/bin
 
 2. Служба systemd:
 
    - Назва служби: ppanel
    - Файл конфігурації служби: /etc/systemd/system/ppanel.service
-   - Команда для запуску служби: systemctl start ppanel
-   - Команда для зупинки служби: systemctl stop ppanel
-   - Команда для перезапуску служби: systemctl restart ppanel
-   - Команда для перевірки статусу служби: systemctl status ppanel
+   - Команда запуску служби: systemctl start ppanel
+   - Команда зупинки служби: systemctl stop ppanel
+   - Команда перезапуску служби: systemctl restart ppanel
+   - Команда перевірки статусу служби: systemctl status ppanel
    - Автозапуск служби при завантаженні: systemctl enable ppanel
 
-3. Для налаштування автозапуску можна використати наступну команду
+3. Для налаштування автозапуску можна використовувати наступну команду
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Логи служби: логи служби за замовчуванням виводяться у файл /root/ppanel-server-linux-amd64/ppanel.log
+4. Журнал служби: журнали служби за замовчуванням виводяться у файл /usr/local/bin/ppanel.log
 
-5. Логи служби можна переглянути за допомогою `journalctl -u ppanel -f`
+5. Ви можете переглянути журнали служби за допомогою `journalctl -u ppanel -f`
 
-6. Якщо файл конфігурації порожній або не існує, служба буде запущена з конфігурацією за замовчуванням, шлях до файлу конфігурації: `./etc/ppanel.yaml`,
-   будь ласка, використайте `http://адреса_сервера:8080/init` для ініціалізації системної конфігурації
-
-#### Конфігурація зворотного проксі NGINX
-
-Нижче наведено приклад конфігурації зворотного проксі, який проксіює службу `ppanel` на домен `api.ppanel.dev`
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Налаштування кешу Nginx
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Якщо ви використовуєте послуги проксі Cloudflare, потрібно отримати реальну IP-адресу користувача. Будь ласка, додайте в конфігураційний файл Nginx у розділі Http:
-
-- Потрібно залежати від: **ngx_http_realip_module** модуля, використовуйте команду nginx -V, щоб перевірити, чи вже скомпільовано цей модуль, якщо ні, потрібно скомпілювати самостійно.
-
-```nginx
-    # cloudflare Початок
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare Кінець
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />
+6. Коли файл конфігурації порожній або не існує, служба буде запущена з конфігурацією за замовчуванням, шлях до файлу конфігурації: `./etc/ppanel.yaml`,
+   будь ласка, ініціалізуйте системну конфігурацію через `http://адреса-сервера:8080/init`

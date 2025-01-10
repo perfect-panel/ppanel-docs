@@ -1,38 +1,313 @@
 #### Požadavky na systém
 
-- Mysql 5.7+ (doporučeno 8.0)
-- Redis 6.0+ (doporučeno 7.0)
+- Debian 12
 
-#### Instalace z binárního souboru
+#### Instalace Nginx
 
-1. Určete architekturu systému a stáhněte odpovídající binární soubor
+Pro instalaci Nginx používáme oficiální DEB repozitář Nginx.
+
+Nainstalujte potřebný software
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+Přidejte oficiální PGP klíč Nginx
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+Zapište konfiguraci oficiálního repozitáře Nginx do nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+Nastavte prioritu oficiálního repozitáře Nginx nad systémovými repozitáři
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+Aktualizujte APT cache
+
+```bash
+apt update
+```
+
+Nainstalujte Nginx
+
+```bash
+apt install nginx
+```
+
+Nakonec spusťte službu Nginx a nastavte ji na automatické spuštění při startu
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### Instalace Redis
+
+Importujte GPG klíč
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+Zapište konfiguraci oficiálního repozitáře Redis do redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+Aktualizujte APT cache
+
+```bash
+apt update
+```
+
+Nainstalujte redis-server
+
+```bash
+apt install redis
+```
+
+Spusťte službu Redis a nastavte ji na automatické spuštění při startu
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### Instalace MariaDB
+
+MariaDB poskytuje kompletní DEB repozitář, podobně jako repozitář Nginx, proto musíme nainstalovat potřebné balíčky a importovat GPG klíč
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+Upravte soubor `/etc/apt/sources.list.d/mariadb.sources` a zapište následující konfiguraci:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+Aktualizujte APT cache
+
+```bash
+apt update
+```
+
+Nainstalujte MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+Spusťte službu MariaDB a nastavte ji na automatické spuštění při startu
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+Proveďte počáteční nastavení MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### Instalace ppanel
+
+1. Konfigurace databáze MariaDB
+
+### 1. Přihlaste se do MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+V příkazovém rozhraní MariaDB proveďte následující příkaz pro vytvoření nové databáze ppanel_db a nastavte znakový kód na utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Dále vytvořte místního uživatele databáze a omezte jeho oprávnění na nově vytvořenou databázi, použijte ppanel jako uživatelské jméno a ppanel-password jako heslo uživatele.
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+Odhlaste se z MariaDB
+
+```sql
+EXIT;
+```
+
+2. Konfigurace Nginx
+
+Změňte `user` v `/etc/nginx/nginx.conf` z
+
+```nginx
+user nginx;
+```
+
+na
+
+```nginx
+user www-data;
+```
+
+Přidejte konfigurační soubor virtuálního hostitele Nginx
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+Poté zapište následující konfiguraci, nezapomeňte změnit doménu webu a cestu k SSL certifikátu (jinak dojde k chybě):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # Nahraďte svou doménou
+
+    ssl_certificate /path/your/certs/example.crt;  # Nahraďte svou cestou k certifikátu
+    ssl_certificate_key /path/your/private/example.key;  # Nahraďte svou cestou k soukromému klíči
+
+    ssl_protocols TLSv1.2 TLSv1.3; # Doporučené protokoly
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # Doporučené šifrovací sady
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare Start
+    set_real_ip_from 0.0.0.0/0;  # Důvěřujte všem IP adresám Cloudflare
+    real_ip_header X-Forwarded-For;  # Použijte hlavičku X-Forwarded-For pro získání skutečné IP
+    real_ip_recursive on;  # Rekurzivně analyzujte více IP v hlavičce X-Forwarded-For
+    # cloudflare END
+
+    # Výchozí proxy nastavení
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # Konfigurace proxy na backendovou službu, pokud je backendová služba na 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # Nastavení cache pro statické zdroje
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# Přesměrování HTTP na HTTPS
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # Nahraďte svou doménou
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+Restartujte Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. Určete architekturu systému a stáhněte odpovídající binární soubory
 
 Stahovací adresa: `https://github.com/perfect-panel/ppanel/releases`
 
-Příklad: systém: Linux amd64, uživatel: root, aktuální adresář: /root
+Příklad: Systém: Debian amd64, uživatel: root, aktuální adresář: /root
 
-- Stáhněte binární soubor
+- Stáhněte
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Rozbalte binární soubor
+- Rozbalte
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- Přejděte do rozbaleného adresáře
+- Přesuňte
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- Přiřaďte binárnímu souboru práva pro spuštění
+- Přiřaďte spouštěcí oprávnění binárnímu souboru
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- Upravte konfigurační soubor ppanel.yaml
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # Adresa pro naslouchání služby, změňte na: 127.0.0.1
+Port: 8080 # Port pro naslouchání služby, výchozí: 8080
+Debug: false # Zda povolit režim ladění, výchozí: false
+JwtAuth: # Konfigurace JWT autentizace
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # Klíč pro přístupový token, prosím změňte
+  AccessExpire: 604800 # Doba platnosti přístupového tokenu, v sekundách, výchozí: 604800
+Logger: # Konfigurace protokolování
+  FilePath: ./ppanel.log # Cesta k protokolovacímu souboru, výchozí: ./ppanel.log
+  MaxSize: 50 # Maximální velikost protokolovacího souboru, v MB, výchozí: 50
+  MaxBackup: 3 # Maximální počet záloh protokolovacího souboru, výchozí: 3
+  MaxAge: 30 # Maximální doba uchovávání protokolovacího souboru, v dnech, výchozí: 30
+  Compress: true # Zda komprimovat protokolovací soubor, výchozí: true
+  Level: info # Úroveň protokolování, výchozí: info, volitelné: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # Adresa MySQL, povinné
+  Username: ppanel # Uživatelské jméno MySQL, povinné
+  Password: ppanel-password # Heslo MySQL, povinné
+  Dbname: ppanel_db # Název databáze MySQL, povinné
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # Výchozí hodnoty konfigurace MySQL
+  MaxIdleConns: 10 # Maximální počet nečinných připojení, výchozí: 10
+  MaxOpenConns: 100 # Maximální počet otevřených připojení, výchozí: 100
+  LogMode: info # Úroveň protokolování, výchozí: info, volitelné: debug, error, warn, info
+  LogZap: true # Zda používat zap pro protokolování SQL, výchozí: true
+  SlowThreshold: 1000 # Prahová hodnota pro pomalé dotazy, v milisekundách, výchozí: 1000
+Redis:
+  Host: 127.0.0.1:6379 # Adresa Redis, výchozí: localhost:6379
+  Pass: '' # Heslo Redis, výchozí: ""
+  DB: 0 # Databáze Redis, výchozí: 0
+
+Administer:
+  Email: admin@ppanel.dev # E-mail pro přihlášení do administrace, výchozí: admin@ppanel.dev
+  Password: password # Heslo pro přihlášení do administrace, výchozí: password
 ```
 
 - Vytvořte soubor služby systemd
@@ -44,10 +319,10 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -68,7 +343,7 @@ systemctl start ppanel
 
 ##### Další poznámky
 
-1. Cesta k instalaci: binární soubor bude rozbalen do adresáře /root/ppanel-server-linux-amd64
+1. Cesta k instalaci: binární soubory jsou nakonec přesunuty do adresáře /usr/local/bin
 
 2. Služba systemd:
 
@@ -80,67 +355,18 @@ systemctl start ppanel
    - Příkaz pro kontrolu stavu služby: systemctl status ppanel
    - Automatické spuštění služby při startu: systemctl enable ppanel
 
-3. Automatické spuštění při startu lze nastavit pomocí následujícího příkazu
+3. Automatické spuštění služby lze nastavit pomocí následujícího příkazu
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. Logy služby: logy služby se ve výchozím nastavení ukládají do souboru /root/ppanel-server-linux-amd64/ppanel.log
+4. Protokol služby: protokol služby se ve výchozím nastavení ukládá do souboru /usr/local/bin/ppanel.log
 
-5. Logy služby lze zobrazit pomocí `journalctl -u ppanel -f`
+5. Pro zobrazení protokolu služby můžete použít `journalctl -u ppanel -f`
 
-6. Pokud je konfigurační soubor prázdný nebo neexistuje, služba se spustí s výchozími nastaveními, cesta k konfiguračnímu souboru je: `./etc/ppanel.yaml`,
-   prosím, inicializujte systémovou konfiguraci pomocí `http://server_adresa:8080/init`
-
-#### Konfigurace reverzního proxy NGINX
-
-Níže je uveden příklad konfigurace reverzního proxy, který proxy službu `ppanel` na doménu `api.ppanel.dev`
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # Nastavení cache Nginx
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-Pokud používáte službu Cloudflare, je třeba získat skutečnou IP adresu uživatele. Přidejte do konfiguračního souboru Nginx v části Http následující:
-
-- Je třeba mít závislost: **ngx_http_realip_module**, použijte příkaz nginx -V pro zjištění, zda je tento modul již zkompilován. Pokud ne, je třeba ho zkompilovat.
-
-```nginx
-    # cloudflare Start
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare END
-```
-
+6. Pokud je konfigurační soubor prázdný nebo neexistuje, služba se spustí s výchozí konfigurací, cesta k konfiguračnímu souboru je: `./etc/ppanel.yaml`,
+   prosím, použijte `http://server-address:8080/init` pro inicializaci systémové konfigurace
 
 import Giscus from '@/components/giscus';
 

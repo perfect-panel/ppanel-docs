@@ -1,38 +1,313 @@
 #### ข้อกำหนดระบบเบื้องต้น
 
-- Mysql 5.7+ (แนะนำให้ใช้ 8.0)
-- Redis 6.0+ (แนะนำให้ใช้ 7.0)
+- Debian 12
 
-#### การติดตั้งแบบไบนารี
+#### ติดตั้ง Nginx
 
-1. ตรวจสอบสถาปัตยกรรมของระบบและดาวน์โหลดไฟล์ไบนารีที่ตรงกัน
+สำหรับการติดตั้ง Nginx เราจะใช้แหล่ง DEB อย่างเป็นทางการของ Nginx
+
+ติดตั้งซอฟต์แวร์ที่จำเป็น
+
+```bash
+apt install curl wget gnupg2 ca-certificates lsb-release sudo
+```
+
+เพิ่มกุญแจ PGP ของ Nginx อย่างเป็นทางการ
+
+```bash
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+```
+
+เขียนการกำหนดค่าแหล่ง Nginx อย่างเป็นทางการลงใน nginx.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+```
+
+ตั้งค่าความสำคัญของแหล่ง Nginx อย่างเป็นทางการให้สูงกว่าระบบในตัว
+
+```bash
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
+```
+
+อัปเดตแคช APT
+
+```bash
+apt update
+```
+
+ติดตั้ง Nginx
+
+```bash
+apt install nginx
+```
+
+สุดท้าย เริ่มบริการ Nginx และตั้งค่าให้เริ่มอัตโนมัติเมื่อบูต
+
+```bash
+systemctl start nginx
+systemctl enable nginx
+```
+
+#### ติดตั้ง Redis
+
+นำเข้ากุญแจ GPG
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+```
+
+เขียนการกำหนดค่าแหล่ง Redis อย่างเป็นทางการลงใน redis.list
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+อัปเดตแคช APT
+
+```bash
+apt update
+```
+
+ติดตั้ง redis-server
+
+```bash
+apt install redis
+```
+
+เริ่มบริการ Redis และตั้งค่าให้เริ่มอัตโนมัติเมื่อบูต
+
+```bash
+systemctl start redis-server
+systemctl enable redis-server
+```
+
+#### ติดตั้ง MariaDB
+
+MariaDB มีคลัง DEB ที่สมบูรณ์แบบ ซึ่งคล้ายกับคลัง Nginx ดังนั้นเราจึงต้องติดตั้งแพ็คเกจที่จำเป็นและนำเข้ากุญแจ GPG
+
+```bash
+apt install apt-transport-https curl
+mkdir -p /etc/apt/keyrings
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+```
+
+แก้ไขไฟล์ `/etc/apt/sources.list.d/mariadb.sources` และเขียนการกำหนดค่าดังต่อไปนี้:
+
+```
+X-Repolib-Name: MariaDB
+Types: deb
+URIs: https://deb.mariadb.org/11.4/debian
+Suites: bookworm
+Components: main
+Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+```
+
+อัปเดตแคช APT
+
+```bash
+apt update
+```
+
+ติดตั้ง MariaDB 11.4
+
+```bash
+apt install mariadb-server
+```
+
+เริ่มบริการ MariaDB และตั้งค่าให้เริ่มอัตโนมัติเมื่อบูต
+
+```bash
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+ดำเนินการตั้งค่าเริ่มต้นของ MariaDB
+
+```bash
+mariadb-secure-installation
+```
+
+#### ติดตั้ง ppanel
+
+1. กำหนดค่าฐานข้อมูล MariaDB
+
+### 1. เข้าสู่ระบบ MariaDB
+
+```bash
+mariadb -u root -p
+```
+
+ในหน้าต่างคำสั่งของ MariaDB ให้ดำเนินการตามคำสั่งต่อไปนี้เพื่อสร้างฐานข้อมูลใหม่ชื่อ ppanel_db และตั้งค่าชุดอักขระเป็น utf8mb4_unicode_ci
+
+```sql
+CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+ถัดไป สร้างผู้ใช้ฐานข้อมูลท้องถิ่นและจำกัดสิทธิ์ของผู้ใช้ไปยังฐานข้อมูลที่สร้างขึ้นใหม่ โดยใช้ ppanel เป็นชื่อผู้ใช้ และ ppanel-password เป็นรหัสผ่านของผู้ใช้
+
+```sql
+CREATE USER 'ppanel'@'localhost';
+GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+FLUSH PRIVILEGES;
+```
+
+ออกจาก MariaDB
+
+```sql
+EXIT;
+```
+
+2. กำหนดค่า Nginx
+
+เปลี่ยน `user` ใน `/etc/nginx/nginx.conf` จาก
+
+```nginx
+user nginx;
+```
+
+เป็น
+
+```nginx
+user www-data;
+```
+
+เพิ่มไฟล์การกำหนดค่าผู้ให้บริการเสมือน Nginx
+
+```bash
+nano /etc/nginx/conf.d/website-domain-you-set.conf
+```
+
+จากนั้นเขียนการกำหนดค่าต่อไปนี้ โปรดเปลี่ยนชื่อโดเมนเว็บไซต์และไฟล์ใบรับรอง SSL (มิฉะนั้นจะเกิดข้อผิดพลาด):
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name api.example.com *.example.com;   # เปลี่ยนเป็นชื่อโดเมนของคุณ
+
+    ssl_certificate /path/your/certs/example.crt;  # เปลี่ยนเป็นเส้นทางใบรับรองของคุณ
+    ssl_certificate_key /path/your/private/example.key;  # เปลี่ยนเป็นเส้นทางคีย์ส่วนตัวของคุณ
+
+    ssl_protocols TLSv1.2 TLSv1.3; # โปรโตคอลที่แนะนำให้ใช้
+    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # ชุดเข้ารหัสที่แนะนำ
+    ssl_prefer_server_ciphers on;
+
+    # cloudflare เริ่มต้น
+    set_real_ip_from 0.0.0.0/0;  # เชื่อถือ IP ทั้งหมดจาก Cloudflare
+    real_ip_header X-Forwarded-For;  # ใช้หัว X-Forwarded-For เพื่อรับ IP ที่แท้จริง
+    real_ip_recursive on;  # แยกวิเคราะห์หัว X-Forwarded-For ที่มีหลาย IP
+    # cloudflare สิ้นสุด
+
+    # การตั้งค่าตัวแทนเริ่มต้น
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_http_version 1.1;
+
+        add_header X-Cache $upstream_cache_status;
+
+        # กำหนดค่าตัวแทนไปยังบริการด้านหลัง หากบริการด้านหลังอยู่ที่ 127.0.0.1:8080
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    # ตั้งค่าการแคชทรัพยากรสถิต
+    location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+
+# การเปลี่ยนเส้นทาง HTTP ไปยัง HTTPS
+server {
+    listen 80;
+    server_name api.example.com *.example.com;  # เปลี่ยนเป็นชื่อโดเมนของคุณ
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+รีสตาร์ท Nginx
+
+```bash
+systemctl restart nginx
+```
+
+3. ตรวจสอบสถาปัตยกรรมของระบบและดาวน์โหลดไฟล์ไบนารีที่ตรงกัน
 
 ที่อยู่ดาวน์โหลด: `https://github.com/perfect-panel/ppanel/releases`
 
-ตัวอย่างคำอธิบาย: ระบบ: Linux amd64, ผู้ใช้: root, ไดเรกทอรีปัจจุบัน: /root
+คำอธิบายตัวอย่าง: ระบบ: Debian amd64, ผู้ใช้: root, ไดเรกทอรีปัจจุบัน: /root
 
-- ดาวน์โหลดไฟล์ไบนารี
+- ดาวน์โหลด
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-linux-amd64.tar.gz
+wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- แตกไฟล์ไบนารี
+- แตกไฟล์
 
 ```shell
-tar -zxvf ppanel-server-linux-amd64.tar.gz
+tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
 ```
 
-- เข้าสู่ไดเรกทอรีที่แตกไฟล์แล้ว
+- ย้าย
 
 ```shell
-cd ppanel-server-linux-amd64
+sudo mv ppanel-server /usr/local/bin/ppanel
+sudo mkdir -p /usr/local/etc/ppanel
+sudo mv ./etc/ppanel.yaml /usr/local/etc/ppanel/
 ```
 
-- มอบสิทธิ์การใช้งานให้กับไฟล์ไบนารี
+- มอบสิทธิ์การดำเนินการให้กับไฟล์ไบนารี
 
 ```shell
-chmod +x ppanel
+sudo chmod +x /usr/local/bin/ppanel
+```
+
+- แก้ไขไฟล์การกำหนดค่า ppanel.yaml
+
+```bash
+nano /usr/local/etc/ppanel/ppanel.yaml
+```
+
+```yaml
+Host: 127.0.0.1 # ที่อยู่ที่บริการฟัง, เปลี่ยนเป็น: 127.0.0.1
+Port: 8080 # พอร์ตที่บริการฟัง, ค่าเริ่มต้น: 8080
+Debug: false # เปิดโหมดดีบักหรือไม่, ค่าเริ่มต้น: false
+JwtAuth: # การกำหนดค่า JWT
+  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # รหัสลับสำหรับโทเค็นการเข้าถึง, โปรดแก้ไข
+  AccessExpire: 604800 # เวลาหมดอายุของโทเค็นการเข้าถึง, หน่วยเป็นวินาที, ค่าเริ่มต้น: 604800
+Logger: # การกำหนดค่าบันทึก
+  FilePath: ./ppanel.log # เส้นทางไฟล์บันทึก, ค่าเริ่มต้น: ./ppanel.log
+  MaxSize: 50 # ขนาดสูงสุดของไฟล์บันทึก, หน่วยเป็น MB, ค่าเริ่มต้น: 50
+  MaxBackup: 3 # จำนวนการสำรองไฟล์บันทึกสูงสุด, ค่าเริ่มต้น: 3
+  MaxAge: 30 # เวลาการเก็บรักษาไฟล์บันทึกสูงสุด, หน่วยเป็นวัน, ค่าเริ่มต้น: 30
+  Compress: true # บีบอัดไฟล์บันทึกหรือไม่, ค่าเริ่มต้น: true
+  Level: info # ระดับบันทึก, ค่าเริ่มต้น: info, ตัวเลือก: debug, info, warn, error, panic, fatal
+MySQL:
+  Addr: 127.0.0.1:3306 # ที่อยู่ MySQL, จำเป็นต้องกรอก
+  Username: ppanel # ชื่อผู้ใช้ MySQL, จำเป็นต้องกรอก
+  Password: ppanel-password # รหัสผ่าน MySQL, จำเป็นต้องกรอก
+  Dbname: ppanel_db # ชื่อฐานข้อมูล MySQL, จำเป็นต้องกรอก
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # ค่าการกำหนดค่า MySQL เริ่มต้น
+  MaxIdleConns: 10 # จำนวนการเชื่อมต่อที่ว่างสูงสุด, ค่าเริ่มต้น: 10
+  MaxOpenConns: 100 # จำนวนการเชื่อมต่อที่เปิดสูงสุด, ค่าเริ่มต้น: 100
+  LogMode: info # ระดับบันทึก, ค่าเริ่มต้น: info, ตัวเลือก: debug, error, warn, info
+  LogZap: true # ใช้การบันทึก sql ด้วย zap หรือไม่, ค่าเริ่มต้น: true
+  SlowThreshold: 1000 # เกณฑ์การค้นหาช้า, หน่วยเป็นมิลลิวินาที, ค่าเริ่มต้น: 1000
+Redis:
+  Host: 127.0.0.1:6379 # ที่อยู่ Redis, ค่าเริ่มต้น:localhost:6379
+  Pass: '' # รหัสผ่าน Redis, ค่าเริ่มต้น: ""
+  DB: 0 # ฐานข้อมูล Redis, ค่าเริ่มต้น: 0
+
+Administer:
+  Email: admin@ppanel.dev # อีเมลเข้าสู่ระบบแผงควบคุม, ค่าเริ่มต้น: admin@ppanel.dev
+  Password: password # รหัสผ่านเข้าสู่ระบบแผงควบคุม, ค่าเริ่มต้น: password
 ```
 
 - สร้างไฟล์บริการ systemd
@@ -44,10 +319,10 @@ Description=PPANEL Server
 After=network.target
 
 [Service]
-ExecStart=/root/ppanel-server-linux-amd64/ppanel
+ExecStart=/usr/local/bin/ppanel run --config /usr/local/etc/ppanel/ppanel.yaml
 Restart=always
 User=root
-WorkingDirectory=/root/ppanel-server-linux-amd64
+WorkingDirectory=/usr/local/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -68,7 +343,7 @@ systemctl start ppanel
 
 ##### คำอธิบายเพิ่มเติม
 
-1. เส้นทางการติดตั้ง: ไฟล์ไบนารีจะถูกแตกไปที่ไดเรกทอรี /root/ppanel-server-linux-amd64
+1. เส้นทางการติดตั้ง: ไฟล์ไบนารีจะถูกย้ายไปยังไดเรกทอรี /usr/local/bin
 
 2. บริการ systemd:
 
@@ -77,70 +352,17 @@ systemctl start ppanel
    - คำสั่งเริ่มบริการ: systemctl start ppanel
    - คำสั่งหยุดบริการ: systemctl stop ppanel
    - คำสั่งรีสตาร์ทบริการ: systemctl restart ppanel
-   - คำสั่งสถานะบริการ: systemctl status ppanel
-   - เปิดใช้งานบริการเมื่อบูต: systemctl enable ppanel
+   - คำสั่งตรวจสอบสถานะบริการ: systemctl status ppanel
+   - ตั้งค่าให้เริ่มอัตโนมัติเมื่อบูต: systemctl enable ppanel
 
-3. การตั้งค่าให้เปิดใช้งานเมื่อบูตสามารถทำได้โดยใช้คำสั่งต่อไปนี้
+3. การตั้งค่าให้เริ่มอัตโนมัติเมื่อบูตสามารถทำได้โดยใช้คำสั่งต่อไปนี้
 
    ```shell
    systemctl enable ppanel
    ```
 
-4. บันทึกบริการ: บันทึกบริการจะถูกส่งออกไปยังไฟล์ /root/ppanel-server-linux-amd64/ppanel.log โดยค่าเริ่มต้น
+4. บันทึกบริการ: บันทึกบริการจะถูกส่งออกไปยังไฟล์ /usr/local/bin/ppanel.log โดยค่าเริ่มต้น
 
 5. สามารถดูบันทึกบริการได้โดยใช้ `journalctl -u ppanel -f`
 
-6. เมื่อไฟล์กำหนดค่าเป็นค่าว่างหรือไม่มีอยู่ บริการจะใช้การกำหนดค่าเริ่มต้นในการเริ่มต้น โดยเส้นทางไฟล์กำหนดค่าคือ: `./etc/ppanel.yaml` กรุณาใช้ `http://ที่อยู่เซิร์ฟเวอร์:8080/init` เพื่อเริ่มต้นการกำหนดค่าระบบ
-
-#### การกำหนดค่าการทำงานของ NGINX
-
-ต่อไปนี้คือตัวอย่างการกำหนดค่าการทำงานของ NGINX เพื่อทำการพร็อกซี่บริการ `ppanel` ไปยังโดเมน `api.ppanel.dev`
-
-```nginx
-server {
-    listen 80;
-    server_name ppanel.dev;
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_http_version 1.1;
-
-        add_header X-Cache $upstream_cache_status;
-
-       # ตั้งค่าแคชของ Nginx
-
-        set $static_filezbsQiET1 0;
-        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
-        {
-            set $static_filezbsQiET1 1;
-            expires 1m;
-            }
-        if ( $static_filezbsQiET1 = 0 )
-        {
-            add_header Cache-Control no-cache;
-        }
-    }
-}
-```
-
-หากใช้บริการพร็อกซี่ของ Cloudflare จำเป็นต้องรับ IP ที่แท้จริงของผู้ใช้ กรุณาเพิ่มในส่วน Http ของไฟล์กำหนดค่า Nginx:
-
-- ต้องพึ่งพา: **ngx_http_realip_module** โมดูล, ใช้คำสั่ง nginx -V เพื่อตรวจสอบว่า Nginx ได้ถูกคอมไพล์โมดูลนี้หรือไม่ หากไม่มีก็ต้องคอมไพล์เอง
-
-```nginx
-    # cloudflare เริ่มต้น
-    set_real_ip_from 0.0.0.0/0;
-    real_ip_header  X-Forwarded-For;
-    real_ip_recursive on;
-    # cloudflare สิ้นสุด
-```
-
-
-import Giscus from '@/components/giscus';
-
-<Giscus />
+6. เมื่อไฟล์กำหนดค่าเป็นค่าว่างหรือไม่มีอยู่ บริการจะเริ่มต้นด้วยการกำหนดค่าเริ่มต้น โดยเส้นทางไฟล์กำหนดค่าคือ: `./etc/ppanel.yaml` โปรดใช้ `http://ที่อยู่เซิร์ฟเวอร์:8080/init` เพื่อเริ่มต้นการกำหนดค่าระบบ
