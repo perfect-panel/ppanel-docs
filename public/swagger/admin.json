@@ -2308,6 +2308,236 @@
         ]
       }
     },
+    "/v1/admin/sys/config/common": {
+      "get": {
+        "summary": "get common config",
+        "operationId": "GetCommonConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CommonConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      },
+      "post": {
+        "summary": "set common config",
+        "operationId": "SetCommonConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommonConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      }
+    },
+    "/v1/admin/sys/config/email": {
+      "get": {
+        "summary": "get sms config",
+        "operationId": "GetEmailConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/EmailConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      },
+      "post": {
+        "summary": "set email config",
+        "operationId": "SetEmailConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      }
+    },
+    "/v1/admin/sys/config/sms": {
+      "get": {
+        "summary": "get sms config",
+        "operationId": "GetSmsConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SmsConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      },
+      "post": {
+        "summary": "set sms config",
+        "operationId": "SetSmsConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmsConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      }
+    },
+    "/v1/admin/sys/config/sms/platform_list": {
+      "get": {
+        "summary": "get sms platform list",
+        "operationId": "GetSmsPlatformList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/string"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/sys"
+        ]
+      }
+    },
     "/v1/admin/system/application": {
       "get": {
         "summary": "Get application",
@@ -4040,6 +4270,39 @@
         "ids"
       ]
     },
+    "CommonConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trial": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CommonConfig",
+      "required": [
+        "stop_register",
+        "enable_trial",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
+      ]
+    },
     "Coupon": {
       "type": "object",
       "properties": {
@@ -4768,6 +5031,70 @@
         "show",
         "created_at",
         "updated_at"
+      ]
+    },
+    "EmailConfig": {
+      "type": "object",
+      "properties": {
+        "email_smtp_host": {
+          "type": "string"
+        },
+        "email_smtp_port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email_smtp_user": {
+          "type": "string"
+        },
+        "email_smtp_pass": {
+          "type": "string"
+        },
+        "email_smtp_from": {
+          "type": "string"
+        },
+        "email_smtp_ssl": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        },
+        "verify_email_template": {
+          "type": "string"
+        },
+        "maintenance_email_template": {
+          "type": "string"
+        },
+        "expiration_email_template": {
+          "type": "string"
+        },
+        "Enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "EmailConfig",
+      "required": [
+        "email_smtp_host",
+        "email_smtp_port",
+        "email_smtp_user",
+        "email_smtp_pass",
+        "email_smtp_from",
+        "email_smtp_ssl",
+        "enable_email_verify",
+        "enable_email_domain_suffix",
+        "email_domain_suffix_list",
+        "verify_email_template",
+        "maintenance_email_template",
+        "expiration_email_template"
       ]
     },
     "EmailSmtpConfig": {
@@ -5940,6 +6267,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "enable_telephone_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "enable_email_domain_suffix": {
           "type": "boolean",
           "format": "boolean"
@@ -5965,6 +6296,7 @@
         "stop_register",
         "enable_trial",
         "enable_email_verify",
+        "enable_telephone_verify",
         "enable_email_domain_suffix",
         "email_domain_suffix_list",
         "enable_ip_register_limit",
@@ -6434,6 +6766,51 @@
         "created_at"
       ]
     },
+    "SmsConfig": {
+      "type": "object",
+      "properties": {
+        "apiUrl": {
+          "type": "string"
+        },
+        "apiForeignUrl": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "templateCode": {
+          "type": "string"
+        },
+        "templateParam": {
+          "type": "string"
+        },
+        "Enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SmsConfig",
+      "required": [
+        "apiUrl",
+        "apiForeignUrl",
+        "key",
+        "secret",
+        "region",
+        "template",
+        "templateCode",
+        "templateParam",
+        "platform"
+      ]
+    },
     "SortItem": {
       "type": "object",
       "properties": {
@@ -6713,6 +7090,11 @@
       "required": [
         "subscribe_types"
       ]
+    },
+    "SystemConfigRequest": {
+      "type": "object",
+      "properties": {},
+      "title": "SystemConfigRequest"
     },
     "TelegramConfig": {
       "type": "object",

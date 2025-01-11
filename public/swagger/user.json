@@ -1530,6 +1530,39 @@
         "created_at"
       ]
     },
+    "CommonConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trial": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CommonConfig",
+      "required": [
+        "stop_register",
+        "enable_trial",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
+      ]
+    },
     "Coupon": {
       "type": "object",
       "properties": {
@@ -1708,6 +1741,70 @@
         "show",
         "created_at",
         "updated_at"
+      ]
+    },
+    "EmailConfig": {
+      "type": "object",
+      "properties": {
+        "email_smtp_host": {
+          "type": "string"
+        },
+        "email_smtp_port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email_smtp_user": {
+          "type": "string"
+        },
+        "email_smtp_pass": {
+          "type": "string"
+        },
+        "email_smtp_from": {
+          "type": "string"
+        },
+        "email_smtp_ssl": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_email_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        },
+        "verify_email_template": {
+          "type": "string"
+        },
+        "maintenance_email_template": {
+          "type": "string"
+        },
+        "expiration_email_template": {
+          "type": "string"
+        },
+        "Enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "EmailConfig",
+      "required": [
+        "email_smtp_host",
+        "email_smtp_port",
+        "email_smtp_user",
+        "email_smtp_pass",
+        "email_smtp_from",
+        "email_smtp_ssl",
+        "enable_email_verify",
+        "enable_email_domain_suffix",
+        "email_domain_suffix_list",
+        "verify_email_template",
+        "maintenance_email_template",
+        "expiration_email_template"
       ]
     },
     "EmailSmtpConfig": {
@@ -2717,6 +2814,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "enable_telephone_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "enable_email_domain_suffix": {
           "type": "boolean",
           "format": "boolean"
@@ -2742,6 +2843,7 @@
         "stop_register",
         "enable_trial",
         "enable_email_verify",
+        "enable_telephone_verify",
         "enable_email_domain_suffix",
         "email_domain_suffix_list",
         "enable_ip_register_limit",
@@ -3075,6 +3177,51 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "SmsConfig": {
+      "type": "object",
+      "properties": {
+        "apiUrl": {
+          "type": "string"
+        },
+        "apiForeignUrl": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "templateCode": {
+          "type": "string"
+        },
+        "templateParam": {
+          "type": "string"
+        },
+        "Enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "SmsConfig",
+      "required": [
+        "apiUrl",
+        "apiForeignUrl",
+        "key",
+        "secret",
+        "region",
+        "template",
+        "templateCode",
+        "templateParam",
+        "platform"
       ]
     },
     "SortItem": {
