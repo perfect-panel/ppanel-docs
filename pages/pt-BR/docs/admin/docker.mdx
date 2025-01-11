@@ -17,8 +17,8 @@ docker run -d -p 3000:3000 \
   -e NEXT_PUBLIC_API_URL=https://api.exemplo.com \
   -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=usuario@exemplo.com \
   -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=senha123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+  --name ppanel-admin-web \
+  ppanel/ppanel-admin-web:latest
 ```
 
 ## Usando o Docker Compose para implantar
@@ -29,7 +29,7 @@ Crie um arquivo `docker-compose.yml` com o seguinte conteúdo:
 version: '3'
 
 services:
-  ppanel-user-web:
+  ppanel-admin-web:
     image: ppanel/ppanel-admin-web:latest
     ports:
       - '3000:3000'

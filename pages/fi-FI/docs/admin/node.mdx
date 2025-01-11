@@ -7,10 +7,10 @@ Hanki koodi virallisesta GitHub-repositoriosta:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Purkaa tiedosto
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Siirry koodihakemistoon
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Määritä ympäristömuuttujat
@@ -39,7 +39,7 @@ module.exports = {
 };
 ```
 
-## Käynnistä palvelu PM2:llä
+## Käynnistä palvelu PM2:lla
 
 ```bash
 pm2 start ecosystem.config.js
@@ -52,13 +52,13 @@ pm2 startup
 - **Node.js käynnistys**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Bun käynnistys**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -75,7 +75,7 @@ pm2 list
 
 ### **4.2 Selaimella pääsy**
 
-Käy osoitteessa `http://<palvelimesi IP>:3000` varmistaaksesi palvelun toiminnan.
+Käy osoitteessa `http://<palvelimesi IP>:3000` vahvistaaksesi palvelun toiminnan.
 
 ---
 
@@ -86,19 +86,19 @@ Käy osoitteessa `http://<palvelimesi IP>:3000` varmistaaksesi palvelun toiminna
 - Pysäytä palvelu:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Käynnistä palvelu uudelleen:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Poista palvelu:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

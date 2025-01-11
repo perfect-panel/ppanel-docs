@@ -1,21 +1,21 @@
 ## Download Code
 
-Get the code from the official GitHub repository:
+Obtain the code from the official GitHub repository:
 
 ```bash
 # Download the latest version of the code
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Extract the files
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Navigate to the code directory
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Configure Environment Variables
 
-Create the `apps/admin/.env` file and add the necessary environment variables (refer to the environment variable configuration above).
+Create the `apps/admin/.env` file and add the necessary environment variables (refer to the environment variable configuration mentioned above).
 
 ## Configure PM2
 
@@ -39,7 +39,7 @@ module.exports = {
 };
 ```
 
-## Start the Service with PM2
+## Start the Service Using PM2
 
 ```bash
 pm2 start ecosystem.config.js
@@ -47,18 +47,18 @@ pm2 save
 pm2 startup
 ```
 
-## Start the Service with Node.js or Bun
+## Start the Service Using Node.js or Bun
 
 - **Starting with Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Starting with Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ Visit `http://<Your Server IP>:3000` to verify the service is running.
 - Stop the service:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Restart the service:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Delete the service:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

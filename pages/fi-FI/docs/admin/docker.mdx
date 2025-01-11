@@ -1,6 +1,6 @@
 ## Dockerin asentaminen
 
-Suorita seuraava komento asentaaksesi Dockerin:
+Suorita seuraava komento asentaaksesi Docker:
 
 ```bash
 curl -fsSL https://get.docker.com | bash
@@ -17,11 +17,11 @@ docker run -d -p 3000:3000 \
   -e NEXT_PUBLIC_API_URL=https://api.esimerkki.com \
   -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=kayttaja@esimerkki.com \
   -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=salasana123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+  --name ppanel-admin-web \
+  ppanel/ppanel-admin-web:latest
 ```
 
-## Docker Composen käyttäminen käyttöönotossa
+## Docker Compose -työkalun käyttäminen
 
 Luo `docker-compose.yml` -tiedosto, jonka sisältö on seuraava:
 
@@ -29,7 +29,7 @@ Luo `docker-compose.yml` -tiedosto, jonka sisältö on seuraava:
 version: '3'
 
 services:
-  ppanel-user-web:
+  ppanel-admin-web:
     image: ppanel/ppanel-admin-web:latest
     ports:
       - '3000:3000'

@@ -31,7 +31,7 @@ module.exports = defineConfig({
   outputLocales: outputLocales,
   markdown: {
     // entry: ['./pages/zh-CN/**/*.mdx', './pages/zh-CN/**/*.ts'],
-    entry: ['./pages/zh-CN/docs/quick/zeabur.mdx', './pages/zh-CN/docs/server/binary.mdx'],
+    entry: ['./pages/zh-CN/docs/admin/docker.mdx', './pages/zh-CN/docs/admin/node.mdx'],
     exclude: [
       './pages/zh-CN/index.mdx',
       './pages/zh-CN/docs/contributor.mdx',

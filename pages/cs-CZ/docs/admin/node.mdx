@@ -1,16 +1,16 @@
-## Stažení kódu
+## Stáhnout kód
 
-Stáhněte si kód z oficiálního úložiště GitHub:
+Získejte kód z oficiálního GitHub repozitáře:
 
 ```bash
-# Stáhněte nejnovější verzi kódu
+# Stáhnout nejnovější verzi kódu
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
-# Rozbalte soubory
-tar -xzvf ppanel-user-web.tar.gz
+# Rozbalit soubor
+tar -xzvf ppanel-admin-web.tar.gz
 
-# Přejděte do adresáře s kódem
-cd ppanel-user-web
+# Přesunout se do adresáře s kódem
+cd ppanel-admin-web
 ```
 
 ## Konfigurace proměnných prostředí
@@ -52,13 +52,13 @@ pm2 startup
 - **Spuštění pomocí Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Spuštění pomocí Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -75,7 +75,7 @@ pm2 list
 
 ### **4.2 Přístup přes prohlížeč**
 
-Otevřete `http://<IP vašeho serveru>:3000`, abyste ověřili, že služba běží.
+Navštivte `http://<vaše IP serveru>:3000` pro ověření stavu služby.
 
 ---
 
@@ -86,19 +86,19 @@ Otevřete `http://<IP vašeho serveru>:3000`, abyste ověřili, že služba bě�
 - Zastavení služby:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Restartování služby:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
-- Odstranění služby:
+- Smazání služby:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

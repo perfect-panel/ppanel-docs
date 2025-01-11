@@ -7,15 +7,15 @@
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # استخراج فایل
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # وارد دایرکتوری کد شوید
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## پیکربندی متغیرهای محیطی
 
-فایل `apps/admin/.env` را ایجاد کرده و متغیرهای محیطی لازم را اضافه کنید (به پیکربندی متغیرهای محیطی در بالا مراجعه کنید).
+فایل `apps/admin/.env` را ایجاد کرده و متغیرهای محیطی لازم را اضافه کنید (به پیکربندی متغیرهای محیطی در متن بالا مراجعه کنید).
 
 ## پیکربندی PM2
 
@@ -52,13 +52,13 @@ pm2 startup
 - **راه‌اندازی با Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **راه‌اندازی با Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ pm2 list
 - توقف سرویس:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - راه‌اندازی مجدد سرویس:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - حذف سرویس:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

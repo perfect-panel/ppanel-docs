@@ -7,10 +7,10 @@ Laden Sie den Code aus dem offiziellen GitHub-Repository herunter:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Datei entpacken
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # In das Codeverzeichnis wechseln
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Umgebungsvariablen konfigurieren
@@ -52,13 +52,13 @@ pm2 startup
 - **Start mit Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Start mit Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ Besuchen Sie `http://<Ihre Server-IP>:3000`, um den Status des Dienstes zu über
 - Dienst stoppen:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Dienst neu starten:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Dienst löschen:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

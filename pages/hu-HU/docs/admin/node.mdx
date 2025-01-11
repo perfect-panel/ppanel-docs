@@ -7,10 +7,10 @@ A hivatalos GitHub tárolóból szerezze be a kódot:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Fájl kicsomagolása
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Belépés a kód könyvtárába
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Környezeti változók konfigurálása
@@ -52,13 +52,13 @@ pm2 startup
 - **Node.js indítás**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Bun indítás**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -75,7 +75,7 @@ pm2 list
 
 ### **4.2 Böngésző hozzáférés**
 
-Látogasson el a `http://<az Ön szerver IP-címe>:3000` címre a szolgáltatás működésének ellenőrzéséhez.
+Látogasson el a `http://<az Ön szerver IP címe>:3000` címre a szolgáltatás működésének ellenőrzéséhez.
 
 ---
 
@@ -86,19 +86,19 @@ Látogasson el a `http://<az Ön szerver IP-címe>:3000` címre a szolgáltatás
 - Szolgáltatás leállítása:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Szolgáltatás újraindítása:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Szolgáltatás törlése:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

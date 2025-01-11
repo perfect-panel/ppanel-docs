@@ -7,10 +7,10 @@
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # 解压文件
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # 进入代码目录
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## 配置环境变量
@@ -52,13 +52,13 @@ pm2 startup
 - **Node.js 启动**：
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Bun 启动**：
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ pm2 list
 - 停止服务：
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - 重启服务：
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - 删除服务：
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

@@ -7,10 +7,10 @@ Lấy mã nguồn từ kho GitHub chính thức:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Giải nén tệp
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Vào thư mục mã nguồn
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Cấu hình biến môi trường
@@ -52,13 +52,13 @@ pm2 startup
 - **Khởi động bằng Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Khởi động bằng Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ Truy cập `http://<Địa chỉ IP máy chủ của bạn>:3000` để xác min
 - Dừng dịch vụ:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Khởi động lại dịch vụ:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Xóa dịch vụ:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

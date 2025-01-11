@@ -7,10 +7,10 @@ Resmi GitHub deposundan kodu alın:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Dosyayı çıkarın
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Kod dizinine girin
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Ortam Değişkenlerini Yapılandırma
@@ -52,13 +52,13 @@ pm2 startup
 - **Node.js ile başlatma**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Bun ile başlatma**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ pm2 list
 - Servisi durdurma:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Servisi yeniden başlatma:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Servisi silme:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

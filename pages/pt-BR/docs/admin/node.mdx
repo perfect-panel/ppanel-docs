@@ -7,10 +7,10 @@ Obtenha o código do repositório oficial do GitHub:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Descompactar o arquivo
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Entrar no diretório do código
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Configurar Variáveis de Ambiente
@@ -27,7 +27,7 @@ module.exports = {
     {
       name: 'ppanel-admin-web',
       script: 'apps/admin/server.js',
-      interpreter: 'bun', // pode ser alterado para node
+      interpreter: 'bun', // Pode ser alterado para node
       watch: true,
       instances: 'max',
       exec_mode: 'cluster',
@@ -49,16 +49,16 @@ pm2 startup
 
 ## Usar Node.js ou Bun para Iniciar o Serviço
 
-- **Início com Node.js**:
+- **Iniciar com Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
-- **Início com Bun**:
+- **Iniciar com Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -86,19 +86,19 @@ Acesse `http://<Seu IP do Servidor>:3000` para verificar o estado do serviço.
 - Parar o serviço:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Reiniciar o serviço:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Deletar o serviço:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

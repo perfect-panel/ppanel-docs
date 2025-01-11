@@ -7,15 +7,15 @@
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Розпакуйте файл
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Перейдіть до каталогу з кодом
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Налаштування змінних середовища
 
-Створіть файл `apps/admin/.env` і додайте необхідні змінні середовища (посилання на налаштування змінних середовища вище).
+Створіть файл `apps/admin/.env` і додайте необхідні змінні середовища (посилаючись на попереднє налаштування змінних середовища).
 
 ## Налаштування PM2
 
@@ -52,13 +52,13 @@ pm2 startup
 - **Запуск через Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Запуск через Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -75,7 +75,7 @@ pm2 list
 
 ### **4.2 Доступ через браузер**
 
-Перейдіть за адресою `http://<Ваш IP-адреса сервера>:3000`, щоб перевірити стан роботи сервісу.
+Перейдіть за адресою `http://<Ваш IP сервера>:3000`, щоб перевірити стан роботи сервісу.
 
 ---
 
@@ -86,19 +86,19 @@ pm2 list
 - Зупинити сервіс:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Перезапустити сервіс:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Видалити сервіс:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

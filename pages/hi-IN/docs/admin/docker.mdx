@@ -6,9 +6,9 @@ Docker स्थापित करने के लिए निम्नलि
 curl -fsSL https://get.docker.com | bash
 ```
 
-## Docker का उपयोग करके सेवा शुरू करें
+## Docker का उपयोग करके सेवा प्रारंभ करें
 
-कंटेनर शुरू करने के लिए निम्नलिखित कमांड चलाएँ:
+कंटेनर प्रारंभ करने के लिए निम्नलिखित कमांड चलाएँ:
 
 ```bash
 docker run -d -p 3000:3000 \
@@ -17,19 +17,19 @@ docker run -d -p 3000:3000 \
   -e NEXT_PUBLIC_API_URL=https://api.example.com \
   -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
   -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+  --name ppanel-admin-web \
+  ppanel/ppanel-admin-web:latest
 ```
 
 ## Docker Compose का उपयोग करके तैनाती करें
 
-एक `docker-compose.yml` फ़ाइल बनाएं, जिसमें निम्नलिखित सामग्री हो:
+एक `docker-compose.yml` फ़ाइल बनाएँ, जिसमें निम्नलिखित सामग्री हो:
 
 ```yaml
 version: '3'
 
 services:
-  ppanel-user-web:
+  ppanel-admin-web:
     image: ppanel/ppanel-admin-web:latest
     ports:
       - '3000:3000'
@@ -41,7 +41,7 @@ services:
       NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
 ```
 
-सेवा शुरू करें:
+सेवा प्रारंभ करें:
 
 ```bash
 docker compose up -d

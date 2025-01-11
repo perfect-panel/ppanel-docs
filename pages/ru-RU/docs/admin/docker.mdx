@@ -17,8 +17,8 @@ docker run -d -p 3000:3000 \
   -e NEXT_PUBLIC_API_URL=https://api.example.com \
   -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
   -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+  --name ppanel-admin-web \
+  ppanel/ppanel-admin-web:latest
 ```
 
 ## Развертывание с помощью Docker Compose
@@ -29,7 +29,7 @@ docker run -d -p 3000:3000 \
 version: '3'
 
 services:
-  ppanel-user-web:
+  ppanel-admin-web:
     image: ppanel/ppanel-admin-web:latest
     ports:
       - '3000:3000'

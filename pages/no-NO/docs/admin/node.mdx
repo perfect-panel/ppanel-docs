@@ -7,19 +7,19 @@ Hent koden fra det offisielle GitHub-repositoriet:
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # Pakk ut filen
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # Gå inn i kodekatalogen
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## Konfigurer miljøvariabler
 
-Opprett filen `apps/admin/.env` og legg til nødvendige miljøvariabler (se ovenfor for konfigurasjon av miljøvariabler).
+Opprett `apps/admin/.env`-filen og legg til nødvendige miljøvariabler (se ovenfor for konfigurasjon av miljøvariabler).
 
 ## Konfigurer PM2
 
-Opprett filen `ecosystem.config.js` med følgende innhold:
+Opprett `ecosystem.config.js`-filen med følgende innhold:
 
 ```javascript
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
     {
       name: 'ppanel-admin-web',
       script: 'apps/admin/server.js',
-      interpreter: 'bun', // Kan endres til node
+      interpreter: 'bun', // kan endres til node
       watch: true,
       instances: 'max',
       exec_mode: 'cluster',
@@ -52,18 +52,18 @@ pm2 startup
 - **Start med Node.js**:
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Start med Bun**:
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
 
-## **4. Verifiser distribusjon**
+## **4. Verifiser distribusjonen**
 
 ### **4.1 PM2 tjenestestatus**
 
@@ -86,19 +86,19 @@ Besøk `http://<din server IP>:3000` for å verifisere at tjenesten kjører.
 - Stopp tjenesten:
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - Start tjenesten på nytt:
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - Slett tjenesten:
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';

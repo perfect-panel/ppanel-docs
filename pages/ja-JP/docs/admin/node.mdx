@@ -7,10 +7,10 @@
 curl -LO https://github.com/perfect-panel/ppanel-web/releases/download/v1.0.0/ppanel-admin-web.tar.gz
 
 # ファイルを解凍
-tar -xzvf ppanel-user-web.tar.gz
+tar -xzvf ppanel-admin-web.tar.gz
 
 # コードディレクトリに移動
-cd ppanel-user-web
+cd ppanel-admin-web
 ```
 
 ## 環境変数の設定
@@ -52,13 +52,13 @@ pm2 startup
 - **Node.js での起動**：
 
   ```bash
-  node apps/user/server.js
+  node apps/admin/server.js
   ```
 
 - **Bun での起動**：
 
   ```bash
-  bun apps/user/server.js
+  bun apps/admin/server.js
   ```
 
 ---
@@ -75,7 +75,7 @@ pm2 list
 
 ### **4.2 ブラウザでのアクセス**
 
-`http://<あなたのサーバー IP>:3000` にアクセスして、サービスの稼働状況を確認します。
+`http://<あなたのサーバー IP>:3000` にアクセスしてサービスの稼働状況を確認します。
 
 ---
 
@@ -86,19 +86,19 @@ pm2 list
 - サービスを停止：
 
   ```bash
-  pm2 stop ppanel-user-web
+  pm2 stop ppanel-admin-web
   ```
 
 - サービスを再起動：
 
   ```bash
-  pm2 restart ppanel-user-web
+  pm2 restart ppanel-admin-web
   ```
 
 - サービスを削除：
 
   ```bash
-  pm2 delete ppanel-user-web
+  pm2 delete ppanel-admin-web
   ```
 
 import Giscus from '@/components/giscus';
