@@ -7300,7 +7300,7 @@
     "EmailConfig": {
       "type": "object",
       "properties": {
-        "enable": {
+        "enabled": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -7347,7 +7347,7 @@
       },
       "title": "EmailConfig",
       "required": [
-        "enable",
+        "enabled",
         "email_smtp_host",
         "email_smtp_port",
         "email_smtp_user",
@@ -10005,7 +10005,7 @@
     "SmsConfig": {
       "type": "object",
       "properties": {
-        "enable": {
+        "enabled": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -10036,7 +10036,7 @@
       },
       "title": "SmsConfig",
       "required": [
-        "enable",
+        "enabled",
         "apiUrl",
         "apiForeignUrl",
         "key",
