@@ -5036,6 +5036,10 @@
     "EmailConfig": {
       "type": "object",
       "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "email_smtp_host": {
           "type": "string"
         },
@@ -5075,14 +5079,11 @@
         },
         "expiration_email_template": {
           "type": "string"
-        },
-        "Enable": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
       "title": "EmailConfig",
       "required": [
+        "enable",
         "email_smtp_host",
         "email_smtp_port",
         "email_smtp_user",
@@ -6769,6 +6770,10 @@
     "SmsConfig": {
       "type": "object",
       "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "apiUrl": {
           "type": "string"
         },
@@ -6792,14 +6797,11 @@
         },
         "templateParam": {
           "type": "string"
-        },
-        "Enable": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
       "title": "SmsConfig",
       "required": [
+        "enable",
         "apiUrl",
         "apiForeignUrl",
         "key",
