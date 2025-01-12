@@ -1661,6 +1661,94 @@
         ]
       }
     },
+    "/v1/admin/sms/list": {
+      "get": {
+        "summary": "Get sms list",
+        "operationId": "GetSmsList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSmsListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "telephone",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/sms"
+        ]
+      }
+    },
+    "/v1/admin/sms/send": {
+      "post": {
+        "summary": "Send sms",
+        "operationId": "SendSms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendSmsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/sms"
+        ]
+      }
+    },
     "/v1/admin/subscribe/": {
       "delete": {
         "summary": "Delete subscribe",
@@ -5113,6 +5201,47 @@
         "list"
       ]
     },
+    "GetSmsListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "title": "GetSmsListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetSmsListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sms"
+          }
+        }
+      },
+      "title": "GetSmsListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "GetSubscribeDetailsRequest": {
       "type": "object",
       "properties": {
@@ -5865,6 +5994,26 @@
         "reality_short_id"
       ]
     },
+    "SendSmsRequest": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "title": "SendSmsRequest",
+      "required": [
+        "content",
+        "area_code",
+        "telephone"
+      ]
+    },
     "Server": {
       "type": "object",
       "properties": {
@@ -6164,6 +6313,44 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "Sms": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "areaCode": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Sms",
+      "required": [
+        "id",
+        "content",
+        "platform",
+        "areaCode",
+        "telephone",
+        "status",
+        "created_at"
       ]
     },
     "SmsConfig": {
