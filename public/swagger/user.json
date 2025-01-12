@@ -4,9 +4,16 @@
     "title": "",
     "version": ""
   },
-  "schemes": ["http", "https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/v1/public/announcement/list": {
       "get": {
@@ -62,7 +69,9 @@
             "format": "boolean"
           }
         ],
-        "tags": ["ppanel/public/announcement"]
+        "tags": [
+          "ppanel/public/announcement"
+        ]
       }
     },
     "/v1/public/document/detail": {
@@ -98,7 +107,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/public/document"]
+        "tags": [
+          "ppanel/public/document"
+        ]
       }
     },
     "/v1/public/document/list": {
@@ -125,7 +136,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/document"]
+        "tags": [
+          "ppanel/public/document"
+        ]
       }
     },
     "/v1/public/order/checkout": {
@@ -162,7 +175,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/close": {
@@ -197,7 +212,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/detail": {
@@ -232,7 +249,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/list": {
@@ -275,7 +294,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/pre": {
@@ -312,7 +333,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/purchase": {
@@ -349,7 +372,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/recharge": {
@@ -386,7 +411,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/renewal": {
@@ -423,7 +450,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/reset": {
@@ -460,7 +489,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/payment/methods": {
@@ -487,7 +518,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/payment"]
+        "tags": [
+          "ppanel/public/payment"
+        ]
       }
     },
     "/v1/public/sms/send": {
@@ -532,8 +565,13 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/public/sms"],
-        "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
+        "tags": [
+          "ppanel/public/sms"
+        ],
+        "consumes": [
+          "multipart/form-data",
+          "application/x-www-form-urlencoded"
+        ]
       }
     },
     "/v1/public/subscribe/application/config": {
@@ -560,7 +598,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/subscribe/group/list": {
@@ -587,7 +627,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/subscribe/list": {
@@ -614,7 +656,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/ticket/": {
@@ -649,7 +693,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       },
       "put": {
         "summary": "Update ticket status",
@@ -682,7 +728,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/detail": {
@@ -718,7 +766,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/follow": {
@@ -753,7 +803,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/list": {
@@ -809,7 +861,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/user/affiliate/count": {
@@ -836,7 +890,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/affiliate/list": {
@@ -879,7 +935,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/balance_log": {
@@ -906,7 +964,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/bind_telegram": {
@@ -933,7 +993,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/commission_log": {
@@ -976,7 +1038,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/info": {
@@ -1003,7 +1067,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/notify": {
@@ -1038,7 +1104,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/notify_setting": {
@@ -1073,7 +1141,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/password": {
@@ -1108,7 +1178,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/subscribe": {
@@ -1135,7 +1207,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unbind_telegram": {
@@ -1160,7 +1234,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unsubscribe": {
@@ -1195,7 +1271,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unsubscribe/pre": {
@@ -1232,7 +1310,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     }
   },
@@ -1272,7 +1352,16 @@
         }
       },
       "title": "Announcement",
-      "required": ["id", "title", "content", "show", "pinned", "popup", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show",
+        "pinned",
+        "popup",
+        "created_at",
+        "updated_at"
+      ]
     },
     "Application": {
       "type": "object",
@@ -1298,7 +1387,14 @@
         }
       },
       "title": "Application",
-      "required": ["id", "name", "platform", "subscribe_type", "icon", "url"]
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "subscribe_type",
+        "icon",
+        "url"
+      ]
     },
     "ApplicationResponse": {
       "type": "object",
@@ -1335,7 +1431,13 @@
         }
       },
       "title": "ApplicationResponse",
-      "required": ["windows", "mac", "linux", "android", "ios"]
+      "required": [
+        "windows",
+        "mac",
+        "linux",
+        "android",
+        "ios"
+      ]
     },
     "BindTelegramResponse": {
       "type": "object",
@@ -1349,7 +1451,10 @@
         }
       },
       "title": "BindTelegramResponse",
-      "required": ["url", "expired_at"]
+      "required": [
+        "url",
+        "expired_at"
+      ]
     },
     "CheckoutOrderRequest": {
       "type": "object",
@@ -1359,7 +1464,9 @@
         }
       },
       "title": "CheckoutOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "CheckoutOrderResponse": {
       "type": "object",
@@ -1375,7 +1482,9 @@
         }
       },
       "title": "CheckoutOrderResponse",
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "CloseOrderRequest": {
       "type": "object",
@@ -1385,7 +1494,9 @@
         }
       },
       "title": "CloseOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "CommissionLog": {
       "type": "object",
@@ -1411,7 +1522,13 @@
         }
       },
       "title": "CommissionLog",
-      "required": ["id", "user_id", "order_no", "amount", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "order_no",
+        "amount",
+        "created_at"
+      ]
     },
     "CommonConfig": {
       "type": "object",
@@ -1544,7 +1661,12 @@
         }
       },
       "title": "CreateUserTicketFollowRequest",
-      "required": ["ticket_id", "from", "type", "content"]
+      "required": [
+        "ticket_id",
+        "from",
+        "type",
+        "content"
+      ]
     },
     "CreateUserTicketRequest": {
       "type": "object",
@@ -1557,7 +1679,10 @@
         }
       },
       "title": "CreateUserTicketRequest",
-      "required": ["title", "description"]
+      "required": [
+        "title",
+        "description"
+      ]
     },
     "CurrencyConfig": {
       "type": "object",
@@ -1570,7 +1695,10 @@
         }
       },
       "title": "CurrencyConfig",
-      "required": ["currency_unit", "currency_symbol"]
+      "required": [
+        "currency_unit",
+        "currency_symbol"
+      ]
     },
     "Document": {
       "type": "object",
@@ -1605,7 +1733,15 @@
         }
       },
       "title": "Document",
-      "required": ["id", "title", "content", "tags", "show", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "tags",
+        "show",
+        "created_at",
+        "updated_at"
+      ]
     },
     "EmailSmtpConfig": {
       "type": "object",
@@ -1680,7 +1816,14 @@
         }
       },
       "title": "Follow",
-      "required": ["id", "ticket_id", "from", "type", "content", "created_at"]
+      "required": [
+        "id",
+        "ticket_id",
+        "from",
+        "type",
+        "content",
+        "created_at"
+      ]
     },
     "GetAvailablePaymentMethodsResponse": {
       "type": "object",
@@ -1693,7 +1836,9 @@
         }
       },
       "title": "GetAvailablePaymentMethodsResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetUserTicketDetailRequest": {
       "type": "object",
@@ -1704,7 +1849,9 @@
         }
       },
       "title": "GetUserTicketDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetUserTicketListRequest": {
       "type": "object",
@@ -1726,7 +1873,10 @@
         }
       },
       "title": "GetUserTicketListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetUserTicketListResponse": {
       "type": "object",
@@ -1743,7 +1893,10 @@
         }
       },
       "title": "GetUserTicketListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "Hysteria2": {
       "type": "object",
@@ -1767,7 +1920,13 @@
         }
       },
       "title": "Hysteria2",
-      "required": ["port", "hop_ports", "hop_interval", "obfs_password", "security_config"]
+      "required": [
+        "port",
+        "hop_ports",
+        "hop_interval",
+        "obfs_password",
+        "security_config"
+      ]
     },
     "InviteConfig": {
       "type": "object",
@@ -1786,7 +1945,11 @@
         }
       },
       "title": "InviteConfig",
-      "required": ["forced_invite", "referral_percentage", "only_first_purchase"]
+      "required": [
+        "forced_invite",
+        "referral_percentage",
+        "only_first_purchase"
+      ]
     },
     "NodeConfig": {
       "type": "object",
@@ -1804,7 +1967,11 @@
         }
       },
       "title": "NodeConfig",
-      "required": ["node_secret", "node_pull_interval", "node_push_interval"]
+      "required": [
+        "node_secret",
+        "node_pull_interval",
+        "node_push_interval"
+      ]
     },
     "NodeRelay": {
       "type": "object",
@@ -1821,7 +1988,11 @@
         }
       },
       "title": "NodeRelay",
-      "required": ["host", "port", "prefix"]
+      "required": [
+        "host",
+        "port",
+        "prefix"
+      ]
     },
     "NodeStatus": {
       "type": "object",
@@ -1841,7 +2012,11 @@
         }
       },
       "title": "NodeStatus",
-      "required": ["online_users", "status", "last_at"]
+      "required": [
+        "online_users",
+        "status",
+        "last_at"
+      ]
     },
     "OnlineUser": {
       "type": "object",
@@ -1855,7 +2030,10 @@
         }
       },
       "title": "OnlineUser",
-      "required": ["uid", "ip"]
+      "required": [
+        "uid",
+        "ip"
+      ]
     },
     "Order": {
       "type": "object",
@@ -2097,7 +2275,14 @@
         }
       },
       "title": "PaymentConfig",
-      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "PreOrderResponse": {
       "type": "object",
@@ -2149,7 +2334,9 @@
         }
       },
       "title": "PreRenewalOrderResponse",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "PreUnsubscribeRequest": {
       "type": "object",
@@ -2160,7 +2347,9 @@
         }
       },
       "title": "PreUnsubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "PreUnsubscribeResponse": {
       "type": "object",
@@ -2171,7 +2360,9 @@
         }
       },
       "title": "PreUnsubscribeResponse",
-      "required": ["deduction_amount"]
+      "required": [
+        "deduction_amount"
+      ]
     },
     "PurchaseOrderRequest": {
       "type": "object",
@@ -2192,7 +2383,11 @@
         }
       },
       "title": "PurchaseOrderRequest",
-      "required": ["subscribe_id", "quantity", "payment"]
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "PurchaseOrderResponse": {
       "type": "object",
@@ -2202,7 +2397,9 @@
         }
       },
       "title": "PurchaseOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryAnnouncementRequest": {
       "type": "object",
@@ -2225,7 +2422,12 @@
         }
       },
       "title": "QueryAnnouncementRequest",
-      "required": ["page", "size", "pinned", "popup"]
+      "required": [
+        "page",
+        "size",
+        "pinned",
+        "popup"
+      ]
     },
     "QueryAnnouncementResponse": {
       "type": "object",
@@ -2242,7 +2444,10 @@
         }
       },
       "title": "QueryAnnouncementResponse",
-      "required": ["total", "announcements"]
+      "required": [
+        "total",
+        "announcements"
+      ]
     },
     "QueryDocumentDetailRequest": {
       "type": "object",
@@ -2253,7 +2458,9 @@
         }
       },
       "title": "QueryDocumentDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "QueryDocumentListResponse": {
       "type": "object",
@@ -2270,7 +2477,10 @@
         }
       },
       "title": "QueryDocumentListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QueryOrderDetailRequest": {
       "type": "object",
@@ -2280,7 +2490,9 @@
         }
       },
       "title": "QueryOrderDetailRequest",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryOrderListRequest": {
       "type": "object",
@@ -2295,7 +2507,10 @@
         }
       },
       "title": "QueryOrderListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryOrderListResponse": {
       "type": "object",
@@ -2312,7 +2527,10 @@
         }
       },
       "title": "QueryOrderListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QuerySubscribeGroupListResponse": {
       "type": "object",
@@ -2329,7 +2547,10 @@
         }
       },
       "title": "QuerySubscribeGroupListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QuerySubscribeListResponse": {
       "type": "object",
@@ -2346,7 +2567,10 @@
         }
       },
       "title": "QuerySubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserAffiliateCountResponse": {
       "type": "object",
@@ -2361,7 +2585,10 @@
         }
       },
       "title": "QueryUserAffiliateCountResponse",
-      "required": ["registers", "total_commission"]
+      "required": [
+        "registers",
+        "total_commission"
+      ]
     },
     "QueryUserAffiliateListRequest": {
       "type": "object",
@@ -2376,7 +2603,10 @@
         }
       },
       "title": "QueryUserAffiliateListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryUserAffiliateListResponse": {
       "type": "object",
@@ -2393,7 +2623,10 @@
         }
       },
       "title": "QueryUserAffiliateListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserBalanceLogListResponse": {
       "type": "object",
@@ -2410,7 +2643,10 @@
         }
       },
       "title": "QueryUserBalanceLogListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserCommissionLogListRequest": {
       "type": "object",
@@ -2425,7 +2661,10 @@
         }
       },
       "title": "QueryUserCommissionLogListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryUserCommissionLogListResponse": {
       "type": "object",
@@ -2442,7 +2681,10 @@
         }
       },
       "title": "QueryUserCommissionLogListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserSubscribeListResponse": {
       "type": "object",
@@ -2459,7 +2701,10 @@
         }
       },
       "title": "QueryUserSubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "RechargeOrderRequest": {
       "type": "object",
@@ -2473,7 +2718,10 @@
         }
       },
       "title": "RechargeOrderRequest",
-      "required": ["amount", "payment"]
+      "required": [
+        "amount",
+        "payment"
+      ]
     },
     "RechargeOrderResponse": {
       "type": "object",
@@ -2483,7 +2731,9 @@
         }
       },
       "title": "RechargeOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "RegisterConfig": {
       "type": "object",
@@ -2556,7 +2806,11 @@
         }
       },
       "title": "RenewalOrderRequest",
-      "required": ["user_subscribe_id", "quantity", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "RenewalOrderResponse": {
       "type": "object",
@@ -2566,7 +2820,9 @@
         }
       },
       "title": "RenewalOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "ResetTrafficOrderRequest": {
       "type": "object",
@@ -2580,7 +2836,10 @@
         }
       },
       "title": "ResetTrafficOrderRequest",
-      "required": ["user_subscribe_id", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "payment"
+      ]
     },
     "ResetTrafficOrderResponse": {
       "type": "object",
@@ -2590,7 +2849,9 @@
         }
       },
       "title": "ResetTrafficOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "Response": {
       "type": "object",
@@ -2665,7 +2926,11 @@
         }
       },
       "title": "SendSmsRequest",
-      "required": ["content", "areaCode", "telephone"]
+      "required": [
+        "content",
+        "areaCode",
+        "telephone"
+      ]
     },
     "Server": {
       "type": "object",
@@ -2769,7 +3034,13 @@
         }
       },
       "title": "ServerGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
     },
     "ServerStatus": {
       "type": "object",
@@ -2792,7 +3063,12 @@
         }
       },
       "title": "ServerStatus",
-      "required": ["cpu", "mem", "disk", "updated_at"]
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
+      ]
     },
     "Shadowsocks": {
       "type": "object",
@@ -2809,7 +3085,11 @@
         }
       },
       "title": "Shadowsocks",
-      "required": ["method", "port", "server_key"]
+      "required": [
+        "method",
+        "port",
+        "server_key"
+      ]
     },
     "SiteConfig": {
       "type": "object",
@@ -2828,55 +3108,60 @@
         }
       },
       "title": "SiteConfig",
-      "required": ["host", "site_name", "site_desc", "site_logo"]
+      "required": [
+        "host",
+        "site_name",
+        "site_desc",
+        "site_logo"
+      ]
     },
     "SmsConfig": {
       "type": "object",
       "properties": {
-        "smsEnabled": {
+        "sms_enabled": {
           "type": "boolean",
           "format": "boolean"
         },
-        "smsApiUrl": {
+        "sms_api_url": {
           "type": "string"
         },
-        "smsApiForeignUrl": {
+        "sms_api_foreign_url": {
           "type": "string"
         },
-        "smsKey": {
+        "sms_key": {
           "type": "string"
         },
-        "smsSecret": {
+        "sms_secret": {
           "type": "string"
         },
-        "smsRegion": {
+        "sms_region": {
           "type": "string"
         },
-        "smsTemplate": {
+        "sms_template": {
           "type": "string"
         },
-        "smsTemplateCode": {
+        "sms_template_code": {
           "type": "string"
         },
-        "smsTemplateParam": {
+        "sms_template_param": {
           "type": "string"
         },
-        "smsPlatform": {
+        "sms_platform": {
           "type": "string"
         }
       },
       "title": "SmsConfig",
       "required": [
-        "smsEnabled",
-        "smsApiUrl",
-        "smsApiForeignUrl",
-        "smsKey",
-        "smsSecret",
-        "smsRegion",
-        "smsTemplate",
-        "smsTemplateCode",
-        "smsTemplateParam",
-        "smsPlatform"
+        "sms_enabled",
+        "sms_api_url",
+        "sms_api_foreign_url",
+        "sms_key",
+        "sms_secret",
+        "sms_region",
+        "sms_template",
+        "sms_template_code",
+        "sms_template_param",
+        "sms_platform"
       ]
     },
     "SortItem": {
@@ -2892,7 +3177,10 @@
         }
       },
       "title": "SortItem",
-      "required": ["id", "sort"]
+      "required": [
+        "id",
+        "sort"
+      ]
     },
     "StripePayment": {
       "type": "object",
@@ -2908,7 +3196,11 @@
         }
       },
       "title": "StripePayment",
-      "required": ["method", "client_secret", "publishable_key"]
+      "required": [
+        "method",
+        "client_secret",
+        "publishable_key"
+      ]
     },
     "Subscribe": {
       "type": "object",
@@ -3062,7 +3354,12 @@
         }
       },
       "title": "SubscribeConfig",
-      "required": ["single_model", "subscribe_path", "subscribe_domain", "pan_domain"]
+      "required": [
+        "single_model",
+        "subscribe_path",
+        "subscribe_domain",
+        "pan_domain"
+      ]
     },
     "SubscribeDiscount": {
       "type": "object",
@@ -3077,7 +3374,10 @@
         }
       },
       "title": "SubscribeDiscount",
-      "required": ["quantity", "discount"]
+      "required": [
+        "quantity",
+        "discount"
+      ]
     },
     "SubscribeGroup": {
       "type": "object",
@@ -3102,7 +3402,13 @@
         }
       },
       "title": "SubscribeGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
     },
     "SubscribeType": {
       "type": "object",
@@ -3115,7 +3421,9 @@
         }
       },
       "title": "SubscribeType",
-      "required": ["subscribe_types"]
+      "required": [
+        "subscribe_types"
+      ]
     },
     "TelegramConfig": {
       "type": "object",
@@ -3179,7 +3487,15 @@
         }
       },
       "title": "Ticket",
-      "required": ["id", "title", "description", "user_id", "status", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "description",
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
     },
     "TimePeriod": {
       "type": "object",
@@ -3196,7 +3512,11 @@
         }
       },
       "title": "TimePeriod",
-      "required": ["start_time", "end_time", "multiplier"]
+      "required": [
+        "start_time",
+        "end_time",
+        "multiplier"
+      ]
     },
     "TosConfig": {
       "type": "object",
@@ -3206,7 +3526,9 @@
         }
       },
       "title": "TosConfig",
-      "required": ["tos_content"]
+      "required": [
+        "tos_content"
+      ]
     },
     "TransportConfig": {
       "type": "object",
@@ -3222,7 +3544,11 @@
         }
       },
       "title": "TransportConfig",
-      "required": ["path", "host", "service_name"]
+      "required": [
+        "path",
+        "host",
+        "service_name"
+      ]
     },
     "Trojan": {
       "type": "object",
@@ -3245,7 +3571,13 @@
         }
       },
       "title": "Trojan",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "Tuic": {
       "type": "object",
@@ -3259,7 +3591,10 @@
         }
       },
       "title": "Tuic",
-      "required": ["port", "security_config"]
+      "required": [
+        "port",
+        "security_config"
+      ]
     },
     "UnsubscribeRequest": {
       "type": "object",
@@ -3270,7 +3605,9 @@
         }
       },
       "title": "UnsubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "UpdateUserNotifyRequest": {
       "type": "object",
@@ -3317,7 +3654,11 @@
         }
       },
       "title": "UpdateUserNotifySettingRequet",
-      "required": ["telegram", "enable_email_notify", "enable_telegram_notify"]
+      "required": [
+        "telegram",
+        "enable_email_notify",
+        "enable_telegram_notify"
+      ]
     },
     "UpdateUserPasswordRequest": {
       "type": "object",
@@ -3327,7 +3668,9 @@
         }
       },
       "title": "UpdateUserPasswordRequest",
-      "required": ["password"]
+      "required": [
+        "password"
+      ]
     },
     "UpdateUserTicketStatusRequest": {
       "type": "object",
@@ -3342,7 +3685,10 @@
         }
       },
       "title": "UpdateUserTicketStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "User": {
       "type": "object",
@@ -3475,7 +3821,12 @@
         }
       },
       "title": "UserAffiliate",
-      "required": ["email", "avatar", "registered_at", "enable"]
+      "required": [
+        "email",
+        "avatar",
+        "registered_at",
+        "enable"
+      ]
     },
     "UserBalanceLog": {
       "type": "object",
@@ -3510,7 +3861,15 @@
         }
       },
       "title": "UserBalanceLog",
-      "required": ["id", "user_id", "amount", "type", "order_id", "balance", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "amount",
+        "type",
+        "order_id",
+        "balance",
+        "created_at"
+      ]
     },
     "UserSubscribe": {
       "type": "object",
@@ -3648,7 +4007,14 @@
         }
       },
       "title": "Vless",
-      "required": ["port", "flow", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "flow",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "Vmess": {
       "type": "object",
@@ -3671,7 +4037,13 @@
         }
       },
       "title": "Vmess",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     }
   },
   "securityDefinitions": {
