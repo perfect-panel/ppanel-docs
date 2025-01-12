@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'Frontend frissítési napló',
 };
 
 export default meta;

@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'Etusivun päivityslogi',
 };
 
 export default meta;

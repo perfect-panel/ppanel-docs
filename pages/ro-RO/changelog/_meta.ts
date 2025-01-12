@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'Jurnal de actualizări Frontend',
 };
 
 export default meta;
