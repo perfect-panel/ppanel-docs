@@ -232,6 +232,236 @@
         ]
       }
     },
+    "/v1/admin/authentication/config/common": {
+      "get": {
+        "summary": "get common config",
+        "operationId": "GetCommonConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CommonConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      },
+      "post": {
+        "summary": "set common config",
+        "operationId": "SetCommonConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommonConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      }
+    },
+    "/v1/admin/authentication/config/email": {
+      "get": {
+        "summary": "get sms config",
+        "operationId": "GetEmailConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/EmailConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      },
+      "post": {
+        "summary": "set email config",
+        "operationId": "SetEmailConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      }
+    },
+    "/v1/admin/authentication/config/sms": {
+      "get": {
+        "summary": "get sms config",
+        "operationId": "GetSmsConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SmsConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      },
+      "post": {
+        "summary": "set sms config",
+        "operationId": "SetSmsConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmsConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      }
+    },
+    "/v1/admin/authentication/config/sms/platform_list": {
+      "get": {
+        "summary": "get sms platform list",
+        "operationId": "GetSmsPlatformList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/string"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authentication"
+        ]
+      }
+    },
     "/v1/admin/console/revenue": {
       "get": {
         "summary": "Query revenue statistics",
@@ -2305,236 +2535,6 @@
         ],
         "tags": [
           "ppanel/admin/subscribe"
-        ]
-      }
-    },
-    "/v1/admin/sys/config/common": {
-      "get": {
-        "summary": "get common config",
-        "operationId": "GetCommonConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/CommonConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      },
-      "post": {
-        "summary": "set common config",
-        "operationId": "SetCommonConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommonConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      }
-    },
-    "/v1/admin/sys/config/email": {
-      "get": {
-        "summary": "get sms config",
-        "operationId": "GetEmailConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/EmailConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      },
-      "post": {
-        "summary": "set email config",
-        "operationId": "SetEmailConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmailConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      }
-    },
-    "/v1/admin/sys/config/sms": {
-      "get": {
-        "summary": "get sms config",
-        "operationId": "GetSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/SmsConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      },
-      "post": {
-        "summary": "set sms config",
-        "operationId": "SetSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "platform",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SmsConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/sys"
-        ]
-      }
-    },
-    "/v1/admin/sys/config/sms/platform_list": {
-      "get": {
-        "summary": "get sms platform list",
-        "operationId": "GetSmsPlatformList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/string"
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/sys"
         ]
       }
     },
