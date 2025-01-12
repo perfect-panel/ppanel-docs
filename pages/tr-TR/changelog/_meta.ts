@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'Ön Uç Güncelleme Günlüğü',
 };
 
 export default meta;

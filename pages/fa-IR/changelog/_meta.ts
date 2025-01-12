@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'گزارش تغییرات فرانت‌اند',
 };
 
 export default meta;

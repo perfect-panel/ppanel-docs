@@ -1,5 +1,5 @@
 const meta = {
-  index: 'CHANGELOG',
+  index: 'Frontend Update Log',
 };
 
 export default meta;
