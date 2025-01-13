@@ -1606,6 +1606,12 @@
             "format": "int32"
           },
           {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "group_id",
             "in": "query",
             "required": false,
@@ -7637,6 +7643,9 @@
         "size": {
           "type": "integer",
           "format": "int32"
+        },
+        "tag": {
+          "type": "string"
         },
         "group_id": {
           "type": "integer",
