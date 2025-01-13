@@ -1718,43 +1718,6 @@
         ]
       }
     },
-    "/v1/admin/sms/send": {
-      "post": {
-        "summary": "Send sms",
-        "operationId": "SendSms",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SendSmsRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/sms"
-        ]
-      }
-    },
     "/v1/admin/subscribe/": {
       "delete": {
         "summary": "Delete subscribe",
@@ -3100,6 +3063,43 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/TestEmailSmtpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
+    "/v1/admin/system/test_sms": {
+      "post": {
+        "summary": "Test sms send",
+        "operationId": "TestSmsSend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendSmsRequest"
             }
           }
         ],
