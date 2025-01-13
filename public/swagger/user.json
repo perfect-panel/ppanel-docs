@@ -2830,6 +2830,12 @@
           "type": "integer",
           "format": "int64"
         },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "name": {
           "type": "string"
         },
@@ -2886,6 +2892,7 @@
       "title": "Server",
       "required": [
         "id",
+        "tags",
         "name",
         "server_addr",
         "relay_mode",

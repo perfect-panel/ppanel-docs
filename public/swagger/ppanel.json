@@ -6643,6 +6643,12 @@
         "name": {
           "type": "string"
         },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "server_addr": {
           "type": "string"
         },
@@ -6685,6 +6691,7 @@
       "title": "CreateNodeRequest",
       "required": [
         "name",
+        "tags",
         "server_addr",
         "relay_mode",
         "relay_node",
@@ -9332,6 +9339,12 @@
           "type": "integer",
           "format": "int64"
         },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "name": {
           "type": "string"
         },
@@ -9388,6 +9401,7 @@
       "title": "Server",
       "required": [
         "id",
+        "tags",
         "name",
         "server_addr",
         "relay_mode",
@@ -10938,6 +10952,12 @@
           "type": "integer",
           "format": "int64"
         },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "name": {
           "type": "string"
         },
@@ -10983,6 +11003,7 @@
       "title": "UpdateNodeRequest",
       "required": [
         "id",
+        "tags",
         "name",
         "server_addr",
         "relay_mode",
