@@ -7663,7 +7663,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Subscribe"
+            "$ref": "#/definitions/SubscribeItem"
           }
         },
         "total": {
@@ -9834,6 +9834,120 @@
         "description",
         "created_at",
         "updated_at"
+      ]
+    },
+    "SubscribeItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction_ratio": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "allow_deduction": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reset_cycle": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_reset": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sold": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeItem",
+      "required": [
+        "sold"
       ]
     },
     "SubscribeSortRequest": {
