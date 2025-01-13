@@ -181,6 +181,52 @@
         ]
       }
     },
+    "/v1/auth/login/telephone/code": {
+      "post": {
+        "summary": "User Telephone login",
+        "operationId": "TelephoneCodeLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "telephone code login request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelephoneCodeLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
     "/v1/auth/register": {
       "post": {
         "summary": "User register",
@@ -1582,17 +1628,12 @@
         },
         "telephone_area_code": {
           "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
         }
       },
       "title": "SendSmsCodeRequest",
       "required": [
         "telephone",
-        "telephone_area_code",
-        "type"
+        "telephone_area_code"
       ]
     },
     "Server": {
@@ -2117,6 +2158,29 @@
       "title": "TelephoneCheckUserResponse",
       "required": [
         "exist"
+      ]
+    },
+    "TelephoneCodeLoginRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
+        "telephone_code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneCodeLoginRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code",
+        "telephone_code"
       ]
     },
     "TelephoneLoginRequest": {
