@@ -1859,6 +1859,18 @@
         },
         "sms_platform": {
           "type": "string"
+        },
+        "sms_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_expire_time": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "SmsConfig",
@@ -1872,7 +1884,10 @@
         "sms_template",
         "sms_template_code",
         "sms_template_param",
-        "sms_platform"
+        "sms_platform",
+        "sms_limit",
+        "sms_interval",
+        "sms_expire_time"
       ]
     },
     "SortItem": {
