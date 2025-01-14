@@ -1495,6 +1495,9 @@
         "ip_register_limit_duration": {
           "type": "integer",
           "format": "int64"
+        },
+        "sms": {
+          "$ref": "#/definitions/SmsAuthenticateConfig"
         }
       },
       "title": "RegisterConfig",
@@ -1506,7 +1509,8 @@
         "email_domain_suffix_list",
         "enable_ip_register_limit",
         "ip_register_limit",
-        "ip_register_limit_duration"
+        "ip_register_limit_duration",
+        "sms"
       ]
     },
     "ResetPasswordRequest": {
@@ -1824,6 +1828,34 @@
         "site_name",
         "site_desc",
         "site_logo"
+      ]
+    },
+    "SmsAuthenticateConfig": {
+      "type": "object",
+      "properties": {
+        "sms_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sms_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_expire_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SmsAuthenticateConfig",
+      "required": [
+        "sms_enabled",
+        "sms_limit",
+        "sms_interval",
+        "sms_expire_time"
       ]
     },
     "SmsConfig": {
@@ -2435,6 +2467,12 @@
         "email": {
           "type": "string"
         },
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
         "avatar": {
           "type": "string"
         },
@@ -2518,6 +2556,8 @@
       "required": [
         "id",
         "email",
+        "telephone",
+        "telephone_area_code",
         "avatar",
         "balance",
         "commission",

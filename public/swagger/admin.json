@@ -5914,6 +5914,9 @@
         "ip_register_limit_duration": {
           "type": "integer",
           "format": "int64"
+        },
+        "sms": {
+          "$ref": "#/definitions/SmsAuthenticateConfig"
         }
       },
       "title": "RegisterConfig",
@@ -5925,7 +5928,8 @@
         "email_domain_suffix_list",
         "enable_ip_register_limit",
         "ip_register_limit",
-        "ip_register_limit_duration"
+        "ip_register_limit_duration",
+        "sms"
       ]
     },
     "Response": {
@@ -6373,6 +6377,34 @@
         "created_at"
       ]
     },
+    "SmsAuthenticateConfig": {
+      "type": "object",
+      "properties": {
+        "sms_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sms_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_expire_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SmsAuthenticateConfig",
+      "required": [
+        "sms_enabled",
+        "sms_limit",
+        "sms_interval",
+        "sms_expire_time"
+      ]
+    },
     "SmsConfig": {
       "type": "object",
       "properties": {
@@ -6437,13 +6469,33 @@
         "sms_expire_time"
       ]
     },
+    "SmsPlatformInfo": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "platform_url": {
+          "type": "string"
+        },
+        "platform_field_description": {
+          "type": "object"
+        }
+      },
+      "title": "SmsPlatformInfo",
+      "required": [
+        "platform",
+        "platform_url",
+        "platform_field_description"
+      ]
+    },
     "SmsPlatformResponse": {
       "type": "object",
       "properties": {
         "list": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SmsPlatformInfo"
           }
         }
       },
@@ -7659,6 +7711,12 @@
         "password": {
           "type": "string"
         },
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
         "avatar": {
           "type": "string"
         },
@@ -7727,6 +7785,8 @@
         "id",
         "email",
         "password",
+        "telephone",
+        "telephone_area_code",
         "avatar",
         "balance",
         "commission",
@@ -7753,6 +7813,12 @@
           "format": "int64"
         },
         "email": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
           "type": "string"
         },
         "avatar": {
@@ -7838,6 +7904,8 @@
       "required": [
         "id",
         "email",
+        "telephone",
+        "telephone_area_code",
         "avatar",
         "balance",
         "commission",
