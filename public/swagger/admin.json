@@ -4828,6 +4828,10 @@
     "EmailSmtpConfig": {
       "type": "object",
       "properties": {
+        "email_enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "email_smtp_host": {
           "type": "string"
         },
@@ -4871,6 +4875,7 @@
       },
       "title": "EmailSmtpConfig",
       "required": [
+        "email_enable",
         "email_smtp_host",
         "email_smtp_port",
         "email_smtp_user",
