@@ -6938,6 +6938,12 @@
         "email": {
           "type": "string"
         },
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
         "password": {
           "type": "string"
         },
@@ -6975,6 +6981,8 @@
       "title": "CreateUserRequest",
       "required": [
         "email",
+        "telephone",
+        "telephone_area_code",
         "password",
         "product_id",
         "duration",
@@ -9852,19 +9860,10 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "sms_api_url": {
-          "type": "string"
-        },
-        "sms_api_foreign_url": {
-          "type": "string"
-        },
         "sms_key": {
           "type": "string"
         },
         "sms_secret": {
-          "type": "string"
-        },
-        "sms_region": {
           "type": "string"
         },
         "sms_template": {
@@ -9895,11 +9894,8 @@
       "title": "SmsConfig",
       "required": [
         "sms_enabled",
-        "sms_api_url",
-        "sms_api_foreign_url",
         "sms_key",
         "sms_secret",
-        "sms_region",
         "sms_template",
         "sms_template_code",
         "sms_template_param",
