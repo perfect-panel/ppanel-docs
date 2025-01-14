@@ -6184,6 +6184,26 @@
         "ios"
       ]
     },
+    "AuthConfig": {
+      "type": "object",
+      "properties": {
+        "sms": {
+          "$ref": "#/definitions/SmsAuthenticateConfig"
+        },
+        "email": {
+          "$ref": "#/definitions/EmailAuthticateConfig"
+        },
+        "register": {
+          "$ref": "#/definitions/RegisterConfig"
+        }
+      },
+      "title": "AuthConfig",
+      "required": [
+        "sms",
+        "email",
+        "register"
+      ]
+    },
     "BatchDeleteCouponRequest": {
       "type": "object",
       "properties": {
@@ -7256,6 +7276,28 @@
         "sign_type"
       ]
     },
+    "EmailAuthticateConfig": {
+      "type": "object",
+      "properties": {
+        "email_enable_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_enable_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
+        }
+      },
+      "title": "EmailAuthticateConfig",
+      "required": [
+        "email_enable_verify",
+        "email_enable_domain_suffix",
+        "email_domain_suffix_list"
+      ]
+    },
     "EmailSmtpConfig": {
       "type": "object",
       "properties": {
@@ -7287,6 +7329,17 @@
         },
         "expiration_email_template": {
           "type": "string"
+        },
+        "email_enable_verify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_enable_domain_suffix": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "email_domain_suffix_list": {
+          "type": "string"
         }
       },
       "title": "EmailSmtpConfig",
@@ -7299,7 +7352,10 @@
         "email_smtp_ssl",
         "verify_email_template",
         "maintenance_email_template",
-        "expiration_email_template"
+        "expiration_email_template",
+        "email_enable_verify",
+        "email_enable_domain_suffix",
+        "email_domain_suffix_list"
       ]
     },
     "EpayConfig": {
@@ -7578,8 +7634,8 @@
         "verify": {
           "$ref": "#/definitions/VeifyConfig"
         },
-        "register": {
-          "$ref": "#/definitions/RegisterConfig"
+        "auth": {
+          "$ref": "#/definitions/AuthConfig"
         },
         "invite": {
           "$ref": "#/definitions/InviteConfig"
@@ -7595,7 +7651,7 @@
       "required": [
         "site",
         "verify",
-        "register",
+        "auth",
         "invite",
         "currency",
         "subscribe"
@@ -9088,17 +9144,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "enable_email_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_domain_suffix_list": {
-          "type": "string"
-        },
         "enable_ip_register_limit": {
           "type": "boolean",
           "format": "boolean"
@@ -9110,22 +9155,15 @@
         "ip_register_limit_duration": {
           "type": "integer",
           "format": "int64"
-        },
-        "sms": {
-          "$ref": "#/definitions/SmsAuthenticateConfig"
         }
       },
       "title": "RegisterConfig",
       "required": [
         "stop_register",
         "enable_trial",
-        "enable_email_verify",
-        "enable_email_domain_suffix",
-        "email_domain_suffix_list",
         "enable_ip_register_limit",
         "ip_register_limit",
-        "ip_register_limit_duration",
-        "sms"
+        "ip_register_limit_duration"
       ]
     },
     "RenewalOrderRequest": {
