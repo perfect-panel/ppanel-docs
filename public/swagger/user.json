@@ -2840,6 +2840,12 @@
             "type": "string"
           }
         },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -2897,6 +2903,8 @@
       "required": [
         "id",
         "tags",
+        "country",
+        "city",
         "name",
         "server_addr",
         "relay_mode",

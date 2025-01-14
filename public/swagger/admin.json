@@ -4273,6 +4273,12 @@
             "type": "string"
           }
         },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
         "server_addr": {
           "type": "string"
         },
@@ -4316,6 +4322,8 @@
       "required": [
         "name",
         "tags",
+        "country",
+        "city",
         "server_addr",
         "relay_mode",
         "relay_node",
@@ -6052,6 +6060,12 @@
             "type": "string"
           }
         },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -6109,6 +6123,8 @@
       "required": [
         "id",
         "tags",
+        "country",
+        "city",
         "name",
         "server_addr",
         "relay_mode",
@@ -7400,6 +7416,12 @@
             "type": "string"
           }
         },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -7446,6 +7468,8 @@
       "required": [
         "id",
         "tags",
+        "country",
+        "city",
         "name",
         "server_addr",
         "relay_mode",
