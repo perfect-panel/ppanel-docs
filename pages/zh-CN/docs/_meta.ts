@@ -19,6 +19,12 @@ const meta = {
     title: '统一部署',
   },
   'quick': '快速部署',
+
+  '-- Third-party': {
+    type: 'separator',
+    title: '第三方教程',
+  },
+  'third': '第三方教程',
 };
 
 export default meta;
