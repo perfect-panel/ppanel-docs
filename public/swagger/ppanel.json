@@ -4,9 +4,16 @@
     "title": "",
     "version": ""
   },
-  "schemes": ["http", "https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/v1/admin/announcement/": {
       "delete": {
@@ -40,7 +47,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       },
       "post": {
         "summary": "Create announcement",
@@ -73,7 +82,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       },
       "put": {
         "summary": "Update announcement",
@@ -106,7 +117,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/announcement/detail": {
@@ -142,7 +155,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/announcement/list": {
@@ -212,7 +227,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/console/revenue": {
@@ -239,7 +256,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/server": {
@@ -266,7 +285,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/ticket": {
@@ -293,7 +314,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/user": {
@@ -320,7 +343,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/coupon/": {
@@ -355,7 +380,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       },
       "post": {
         "summary": "Create coupon",
@@ -388,7 +415,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       },
       "put": {
         "summary": "Update coupon",
@@ -421,7 +450,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/coupon/batch": {
@@ -456,7 +487,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/coupon/list": {
@@ -512,7 +545,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/document/": {
@@ -547,7 +582,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       },
       "post": {
         "summary": "Create document",
@@ -580,7 +617,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       },
       "put": {
         "summary": "Update document",
@@ -613,7 +652,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/batch": {
@@ -648,7 +689,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/detail": {
@@ -675,7 +718,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/list": {
@@ -730,7 +775,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/order/": {
@@ -765,7 +812,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/order/list": {
@@ -835,7 +884,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/order/status": {
@@ -870,7 +921,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/payment/alipay_f2f": {
@@ -897,7 +950,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "put": {
         "summary": "Update alipay f2f payment config",
@@ -930,7 +985,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/all": {
@@ -957,7 +1014,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/epay": {
@@ -984,7 +1043,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "put": {
         "summary": "Update epay payment config",
@@ -1017,7 +1078,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/stripe_alipay": {
@@ -1044,7 +1107,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "put": {
         "summary": "Update stripe alipay payment config",
@@ -1077,7 +1142,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/stripe_wechat_pay": {
@@ -1104,7 +1171,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "put": {
         "summary": "Update stripe wechat pay payment config",
@@ -1137,7 +1206,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/server/": {
@@ -1172,7 +1243,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "post": {
         "summary": "Create node",
@@ -1205,7 +1278,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "put": {
         "summary": "Update node",
@@ -1238,7 +1313,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/batch": {
@@ -1273,7 +1350,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/detail": {
@@ -1309,7 +1388,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group": {
@@ -1344,7 +1425,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "post": {
         "summary": "Create node group",
@@ -1377,7 +1460,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "put": {
         "summary": "Update node group",
@@ -1410,7 +1495,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group/batch": {
@@ -1445,7 +1532,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group/list": {
@@ -1472,7 +1561,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/list": {
@@ -1515,6 +1606,12 @@
             "format": "int32"
           },
           {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "group_id",
             "in": "query",
             "required": false,
@@ -1528,7 +1625,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/sort": {
@@ -1563,114 +1662,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
-      }
-    },
-    "/v1/admin/sms/config": {
-      "get": {
-        "summary": "Get sms config",
-        "operationId": "GetSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetSmsConfigRespone"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": ["ppanel/admin/sms"]
-      },
-      "post": {
-        "summary": "Set sms config",
-        "operationId": "SetSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "apiUrl",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "apiForeignUrl",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "secret",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "region",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "template",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "templateCode",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "templateParam",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "platform",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": ["ppanel/admin/sms"],
-        "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/sms/list": {
@@ -1719,37 +1713,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/sms"]
-      }
-    },
-    "/v1/admin/sms/platform": {
-      "get": {
-        "summary": "Get platform list",
-        "operationId": "GetSmsPlatformList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/string"
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": ["ppanel/admin/sms"]
+        "tags": [
+          "ppanel/admin/sms"
+        ]
       }
     },
     "/v1/admin/subscribe/": {
@@ -1784,7 +1750,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "post": {
         "summary": "Create subscribe",
@@ -1817,7 +1785,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "put": {
         "summary": "Update subscribe",
@@ -1850,7 +1820,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/batch": {
@@ -1885,7 +1857,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/details": {
@@ -1921,7 +1895,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group": {
@@ -1956,7 +1932,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "post": {
         "summary": "Create subscribe group",
@@ -1989,7 +1967,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "put": {
         "summary": "Update subscribe group",
@@ -2022,7 +2002,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group/batch": {
@@ -2057,7 +2039,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group/list": {
@@ -2084,7 +2068,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/list": {
@@ -2140,7 +2126,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/sort": {
@@ -2175,7 +2163,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/system/application": {
@@ -2202,7 +2192,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "delete": {
         "summary": "Delete application",
@@ -2236,7 +2228,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "post": {
         "summary": "Create application",
@@ -2270,7 +2264,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update application",
@@ -2304,7 +2300,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/currency_config": {
@@ -2331,7 +2329,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Currency Config",
@@ -2364,7 +2364,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/email_config": {
@@ -2391,7 +2393,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update email smtp config",
@@ -2424,7 +2428,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/get_node_multiplier": {
@@ -2451,7 +2457,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/invite_config": {
@@ -2478,7 +2486,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update invite config",
@@ -2511,7 +2521,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/node_config": {
@@ -2538,7 +2550,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update node config",
@@ -2571,7 +2585,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/register_config": {
@@ -2598,7 +2614,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update register config",
@@ -2631,7 +2649,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/set_node_multiplier": {
@@ -2667,7 +2687,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/setting_telegram_bot": {
@@ -2692,7 +2714,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/site_config": {
@@ -2719,7 +2743,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update site config",
@@ -2752,7 +2778,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/sms_config": {
@@ -2779,7 +2807,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Get sms config",
@@ -2804,69 +2834,17 @@
         },
         "parameters": [
           {
-            "name": "smsEnabled",
-            "in": "formData",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "smsApiUrl",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsApiForeignUrl",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsKey",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsSecret",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsRegion",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsTemplate",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsTemplateCode",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsTemplateParam",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "smsPlatform",
-            "in": "formData",
-            "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/SmsConfig"
+            }
           }
         ],
-        "tags": ["ppanel/admin/system"],
-        "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/sms_platform": {
@@ -2885,10 +2863,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/string"
-                      }
+                      "$ref": "#/definitions/SmsPlatformResponse"
                     }
                   }
                 }
@@ -2896,7 +2871,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/subscribe_config": {
@@ -2923,7 +2900,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update subscribe config",
@@ -2956,7 +2935,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/subscribe_type": {
@@ -2983,7 +2964,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/telegram_config": {
@@ -3010,7 +2993,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Telegram Config",
@@ -3043,7 +3028,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/test_email": {
@@ -3079,7 +3066,46 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
+    "/v1/admin/system/test_sms": {
+      "post": {
+        "summary": "Test sms send",
+        "operationId": "TestSmsSend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendSmsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/tos_config": {
@@ -3106,7 +3132,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Team of Service Config",
@@ -3139,7 +3167,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/verify_config": {
@@ -3166,7 +3196,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update verify config",
@@ -3199,7 +3231,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/ticket/": {
@@ -3234,7 +3268,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/detail": {
@@ -3270,7 +3306,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/follow": {
@@ -3305,7 +3343,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/list": {
@@ -3368,7 +3408,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/tool/log": {
@@ -3395,7 +3437,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/tool"]
+        "tags": [
+          "ppanel/admin/tool"
+        ]
       }
     },
     "/v1/admin/tool/restart": {
@@ -3420,7 +3464,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/tool"]
+        "tags": [
+          "ppanel/admin/tool"
+        ]
       }
     },
     "/v1/admin/user/": {
@@ -3454,7 +3500,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3492,7 +3540,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3530,7 +3580,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3570,7 +3622,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3602,7 +3656,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3643,7 +3699,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3697,7 +3755,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3737,7 +3797,46 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/auth"]
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/check/telephone": {
+      "get": {
+        "summary": "Check user telephone is exist",
+        "operationId": "CheckUserTelephone",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/TelephoneCheckUserResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "telephone",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
       }
     },
     "/v1/auth/login": {
@@ -3781,7 +3880,101 @@
             }
           }
         ],
-        "tags": ["ppanel/auth"]
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/login/telephone": {
+      "post": {
+        "summary": "User Telephone login",
+        "operationId": "TelephoneLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "login request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelephoneLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/login/telephone/code": {
+      "post": {
+        "summary": "User Telephone login",
+        "operationId": "TelephoneCodeLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "telephone code login request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelephoneCodeLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
       }
     },
     "/v1/auth/register": {
@@ -3825,7 +4018,55 @@
             }
           }
         ],
-        "tags": ["ppanel/auth"]
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/register/telephone": {
+      "post": {
+        "summary": "User Telephone register",
+        "operationId": "TelephoneUserRegister",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "User login response",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelephoneRegisterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
       }
     },
     "/v1/auth/reset": {
@@ -3869,7 +4110,55 @@
             }
           }
         ],
-        "tags": ["ppanel/auth"]
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/reset/telephone": {
+      "post": {
+        "summary": "Reset password",
+        "operationId": "TelephoneResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "User login response",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TelephoneResetPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
       }
     },
     "/v1/common/send_code": {
@@ -3907,7 +4196,48 @@
             }
           }
         ],
-        "tags": ["ppanel/common"]
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
+    "/v1/common/send_sms_code": {
+      "post": {
+        "summary": "Get sms verification code",
+        "operationId": "SendSmsCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SendCodeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendSmsCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/common"
+        ]
       }
     },
     "/v1/common/site/config": {
@@ -3934,7 +4264,9 @@
             }
           }
         },
-        "tags": ["ppanel/common"]
+        "tags": [
+          "ppanel/common"
+        ]
       }
     },
     "/v1/common/site/stat": {
@@ -3961,7 +4293,9 @@
             }
           }
         },
-        "tags": ["ppanel/common"]
+        "tags": [
+          "ppanel/common"
+        ]
       }
     },
     "/v1/common/site/subscribe": {
@@ -3988,7 +4322,9 @@
             }
           }
         },
-        "tags": ["ppanel/common"]
+        "tags": [
+          "ppanel/common"
+        ]
       }
     },
     "/v1/common/site/tos": {
@@ -4015,7 +4351,9 @@
             }
           }
         },
-        "tags": ["ppanel/common"]
+        "tags": [
+          "ppanel/common"
+        ]
       }
     },
     "/v1/notify/alipay": {
@@ -4042,7 +4380,9 @@
             }
           }
         },
-        "tags": ["ppanel/notify"]
+        "tags": [
+          "ppanel/notify"
+        ]
       }
     },
     "/v1/notify/epay": {
@@ -4130,7 +4470,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/notify"]
+        "tags": [
+          "ppanel/notify"
+        ]
       }
     },
     "/v1/notify/stripe": {
@@ -4155,7 +4497,9 @@
             }
           }
         },
-        "tags": ["ppanel/notify"]
+        "tags": [
+          "ppanel/notify"
+        ]
       }
     },
     "/v1/public/announcement/list": {
@@ -4212,7 +4556,9 @@
             "format": "boolean"
           }
         ],
-        "tags": ["ppanel/public/announcement"]
+        "tags": [
+          "ppanel/public/announcement"
+        ]
       }
     },
     "/v1/public/document/detail": {
@@ -4248,7 +4594,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/public/document"]
+        "tags": [
+          "ppanel/public/document"
+        ]
       }
     },
     "/v1/public/document/list": {
@@ -4275,7 +4623,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/document"]
+        "tags": [
+          "ppanel/public/document"
+        ]
       }
     },
     "/v1/public/order/checkout": {
@@ -4312,7 +4662,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/close": {
@@ -4347,7 +4699,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/detail": {
@@ -4382,7 +4736,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/list": {
@@ -4425,7 +4781,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/pre": {
@@ -4462,7 +4820,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/purchase": {
@@ -4499,7 +4859,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/recharge": {
@@ -4536,7 +4898,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/renewal": {
@@ -4573,7 +4937,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/order/reset": {
@@ -4610,7 +4976,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/order"]
+        "tags": [
+          "ppanel/public/order"
+        ]
       }
     },
     "/v1/public/payment/methods": {
@@ -4637,53 +5005,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/payment"]
-      }
-    },
-    "/v1/public/sms/send": {
-      "post": {
-        "summary": "Send sms",
-        "operationId": "SendSms",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "content",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "areaCode",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "telephone",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": ["ppanel/public/sms"],
-        "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
+        "tags": [
+          "ppanel/public/payment"
+        ]
       }
     },
     "/v1/public/subscribe/application/config": {
@@ -4710,7 +5034,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/subscribe/group/list": {
@@ -4737,7 +5063,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/subscribe/list": {
@@ -4764,7 +5092,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/subscribe"]
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
       }
     },
     "/v1/public/ticket/": {
@@ -4799,7 +5129,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       },
       "put": {
         "summary": "Update ticket status",
@@ -4832,7 +5164,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/detail": {
@@ -4868,7 +5202,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/follow": {
@@ -4903,7 +5239,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/ticket/list": {
@@ -4959,7 +5297,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/public/ticket"]
+        "tags": [
+          "ppanel/public/ticket"
+        ]
       }
     },
     "/v1/public/user/affiliate/count": {
@@ -4986,7 +5326,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/affiliate/list": {
@@ -5029,7 +5371,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/balance_log": {
@@ -5056,7 +5400,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/bind_telegram": {
@@ -5083,7 +5429,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/commission_log": {
@@ -5126,7 +5474,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/info": {
@@ -5153,7 +5503,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/notify": {
@@ -5188,7 +5540,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/notify_setting": {
@@ -5223,7 +5577,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/password": {
@@ -5258,7 +5614,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/subscribe": {
@@ -5285,7 +5643,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unbind_telegram": {
@@ -5310,7 +5670,9 @@
             }
           }
         },
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unsubscribe": {
@@ -5345,7 +5707,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/public/user/unsubscribe/pre": {
@@ -5382,7 +5746,9 @@
             }
           }
         ],
-        "tags": ["ppanel/public/user"]
+        "tags": [
+          "ppanel/public/user"
+        ]
       }
     },
     "/v1/server/config": {
@@ -5430,7 +5796,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/server"]
+        "tags": [
+          "ppanel/server"
+        ]
       }
     },
     "/v1/server/online": {
@@ -5484,7 +5852,9 @@
             }
           }
         ],
-        "tags": ["ppanel/server"]
+        "tags": [
+          "ppanel/server"
+        ]
       }
     },
     "/v1/server/push": {
@@ -5538,7 +5908,9 @@
             }
           }
         ],
-        "tags": ["ppanel/server"]
+        "tags": [
+          "ppanel/server"
+        ]
       }
     },
     "/v1/server/status": {
@@ -5592,7 +5964,9 @@
             }
           }
         ],
-        "tags": ["ppanel/server"]
+        "tags": [
+          "ppanel/server"
+        ]
       }
     },
     "/v1/server/user": {
@@ -5640,7 +6014,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/server"]
+        "tags": [
+          "ppanel/server"
+        ]
       }
     }
   },
@@ -5666,7 +6042,13 @@
         }
       },
       "title": "AlipayF2FConfig",
-      "required": ["app_id", "private_key", "public_key", "invoice_name", "sandbox"]
+      "required": [
+        "app_id",
+        "private_key",
+        "public_key",
+        "invoice_name",
+        "sandbox"
+      ]
     },
     "AlipayNotifyResponse": {
       "type": "object",
@@ -5676,7 +6058,9 @@
         }
       },
       "title": "AlipayNotifyResponse",
-      "required": ["return_code"]
+      "required": [
+        "return_code"
+      ]
     },
     "Announcement": {
       "type": "object",
@@ -5713,7 +6097,16 @@
         }
       },
       "title": "Announcement",
-      "required": ["id", "title", "content", "show", "pinned", "popup", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show",
+        "pinned",
+        "popup",
+        "created_at",
+        "updated_at"
+      ]
     },
     "Application": {
       "type": "object",
@@ -5739,7 +6132,14 @@
         }
       },
       "title": "Application",
-      "required": ["id", "name", "platform", "subscribe_type", "icon", "url"]
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "subscribe_type",
+        "icon",
+        "url"
+      ]
     },
     "ApplicationResponse": {
       "type": "object",
@@ -5776,7 +6176,13 @@
         }
       },
       "title": "ApplicationResponse",
-      "required": ["windows", "mac", "linux", "android", "ios"]
+      "required": [
+        "windows",
+        "mac",
+        "linux",
+        "android",
+        "ios"
+      ]
     },
     "BatchDeleteCouponRequest": {
       "type": "object",
@@ -5790,7 +6196,9 @@
         }
       },
       "title": "BatchDeleteCouponRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteDocumentRequest": {
       "type": "object",
@@ -5804,7 +6212,9 @@
         }
       },
       "title": "BatchDeleteDocumentRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteNodeGroupRequest": {
       "type": "object",
@@ -5818,7 +6228,9 @@
         }
       },
       "title": "BatchDeleteNodeGroupRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteNodeRequest": {
       "type": "object",
@@ -5832,7 +6244,9 @@
         }
       },
       "title": "BatchDeleteNodeRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteSubscribeGroupRequest": {
       "type": "object",
@@ -5846,7 +6260,9 @@
         }
       },
       "title": "BatchDeleteSubscribeGroupRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteSubscribeRequest": {
       "type": "object",
@@ -5860,7 +6276,9 @@
         }
       },
       "title": "BatchDeleteSubscribeRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteUserRequest": {
       "type": "object",
@@ -5874,7 +6292,9 @@
         }
       },
       "title": "BatchDeleteUserRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BindTelegramResponse": {
       "type": "object",
@@ -5888,7 +6308,10 @@
         }
       },
       "title": "BindTelegramResponse",
-      "required": ["url", "expired_at"]
+      "required": [
+        "url",
+        "expired_at"
+      ]
     },
     "CheckUserRequest": {
       "type": "object",
@@ -5898,7 +6321,9 @@
         }
       },
       "title": "CheckUserRequest",
-      "required": ["email"]
+      "required": [
+        "email"
+      ]
     },
     "CheckUserResponse": {
       "type": "object",
@@ -5909,7 +6334,9 @@
         }
       },
       "title": "CheckUserResponse",
-      "required": ["exist"]
+      "required": [
+        "exist"
+      ]
     },
     "CheckoutOrderRequest": {
       "type": "object",
@@ -5919,7 +6346,9 @@
         }
       },
       "title": "CheckoutOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "CheckoutOrderResponse": {
       "type": "object",
@@ -5935,7 +6364,9 @@
         }
       },
       "title": "CheckoutOrderResponse",
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "CloseOrderRequest": {
       "type": "object",
@@ -5945,7 +6376,9 @@
         }
       },
       "title": "CloseOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "CommissionLog": {
       "type": "object",
@@ -5971,39 +6404,12 @@
         }
       },
       "title": "CommissionLog",
-      "required": ["id", "user_id", "order_no", "amount", "created_at"]
-    },
-    "CommonConfig": {
-      "type": "object",
-      "properties": {
-        "stop_register": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trial": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_ip_register_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "ip_register_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_register_limit_duration": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "CommonConfig",
       "required": [
-        "stop_register",
-        "enable_trial",
-        "enable_ip_register_limit",
-        "ip_register_limit",
-        "ip_register_limit_duration"
+        "id",
+        "user_id",
+        "order_no",
+        "amount",
+        "created_at"
       ]
     },
     "Coupon": {
@@ -6096,7 +6502,10 @@
         }
       },
       "title": "CreateAnnouncementRequest",
-      "required": ["title", "content"]
+      "required": [
+        "title",
+        "content"
+      ]
     },
     "CreateApplicationRequest": {
       "type": "object",
@@ -6106,7 +6515,13 @@
         },
         "platform": {
           "type": "string",
-          "enum": ["windows", "mac", "linux", "android", "ios"]
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios"
+          ]
         },
         "subscribe_type": {
           "type": "string"
@@ -6119,7 +6534,13 @@
         }
       },
       "title": "CreateApplicationRequest",
-      "required": ["name", "platform", "subscribe_type", "icon", "url"]
+      "required": [
+        "name",
+        "platform",
+        "subscribe_type",
+        "icon",
+        "url"
+      ]
     },
     "CreateCouponRequest": {
       "type": "object",
@@ -6171,7 +6592,13 @@
         }
       },
       "title": "CreateCouponRequest",
-      "required": ["name", "type", "discount", "start_time", "expire_time"]
+      "required": [
+        "name",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time"
+      ]
     },
     "CreateDocumentRequest": {
       "type": "object",
@@ -6194,7 +6621,11 @@
         }
       },
       "title": "CreateDocumentRequest",
-      "required": ["title", "content", "show"]
+      "required": [
+        "title",
+        "content",
+        "show"
+      ]
     },
     "CreateNodeGroupRequest": {
       "type": "object",
@@ -6207,13 +6638,22 @@
         }
       },
       "title": "CreateNodeGroupRequest",
-      "required": ["name", "description"]
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "CreateNodeRequest": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "server_addr": {
           "type": "string"
@@ -6257,6 +6697,7 @@
       "title": "CreateNodeRequest",
       "required": [
         "name",
+        "tags",
         "server_addr",
         "relay_mode",
         "relay_node",
@@ -6327,7 +6768,14 @@
         }
       },
       "title": "CreateOrderRequest",
-      "required": ["user_id", "type", "price", "amount", "commission", "fee_amount"]
+      "required": [
+        "user_id",
+        "type",
+        "price",
+        "amount",
+        "commission",
+        "fee_amount"
+      ]
     },
     "CreateSubscribeGroupRequest": {
       "type": "object",
@@ -6340,7 +6788,10 @@
         }
       },
       "title": "CreateSubscribeGroupRequest",
-      "required": ["name", "description"]
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "CreateSubscribeRequest": {
       "type": "object",
@@ -6474,7 +6925,12 @@
         }
       },
       "title": "CreateTicketFollowRequest",
-      "required": ["ticket_id", "from", "type", "content"]
+      "required": [
+        "ticket_id",
+        "from",
+        "type",
+        "content"
+      ]
     },
     "CreateUserRequest": {
       "type": "object",
@@ -6549,7 +7005,12 @@
         }
       },
       "title": "CreateUserTicketFollowRequest",
-      "required": ["ticket_id", "from", "type", "content"]
+      "required": [
+        "ticket_id",
+        "from",
+        "type",
+        "content"
+      ]
     },
     "CreateUserTicketRequest": {
       "type": "object",
@@ -6562,7 +7023,10 @@
         }
       },
       "title": "CreateUserTicketRequest",
-      "required": ["title", "description"]
+      "required": [
+        "title",
+        "description"
+      ]
     },
     "CurrencyConfig": {
       "type": "object",
@@ -6575,7 +7039,10 @@
         }
       },
       "title": "CurrencyConfig",
-      "required": ["currency_unit", "currency_symbol"]
+      "required": [
+        "currency_unit",
+        "currency_symbol"
+      ]
     },
     "DeleteAnnouncementRequest": {
       "type": "object",
@@ -6586,7 +7053,9 @@
         }
       },
       "title": "DeleteAnnouncementRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteApplicationRequest": {
       "type": "object",
@@ -6597,7 +7066,9 @@
         }
       },
       "title": "DeleteApplicationRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteCouponRequest": {
       "type": "object",
@@ -6608,7 +7079,9 @@
         }
       },
       "title": "DeleteCouponRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteDocumentRequest": {
       "type": "object",
@@ -6619,7 +7092,9 @@
         }
       },
       "title": "DeleteDocumentRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteNodeGroupRequest": {
       "type": "object",
@@ -6630,7 +7105,9 @@
         }
       },
       "title": "DeleteNodeGroupRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteNodeRequest": {
       "type": "object",
@@ -6641,7 +7118,9 @@
         }
       },
       "title": "DeleteNodeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteSubscribeGroupRequest": {
       "type": "object",
@@ -6652,7 +7131,9 @@
         }
       },
       "title": "DeleteSubscribeGroupRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteSubscribeRequest": {
       "type": "object",
@@ -6663,7 +7144,9 @@
         }
       },
       "title": "DeleteSubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "Document": {
       "type": "object",
@@ -6698,7 +7181,15 @@
         }
       },
       "title": "Document",
-      "required": ["id", "title", "content", "tags", "show", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "tags",
+        "show",
+        "created_at",
+        "updated_at"
+      ]
     },
     "EPayNotifyRequest": {
       "type": "object",
@@ -6809,7 +7300,11 @@
         }
       },
       "title": "EpayConfig",
-      "required": ["pid", "url", "key"]
+      "required": [
+        "pid",
+        "url",
+        "key"
+      ]
     },
     "Follow": {
       "type": "object",
@@ -6838,7 +7333,14 @@
         }
       },
       "title": "Follow",
-      "required": ["id", "ticket_id", "from", "type", "content", "created_at"]
+      "required": [
+        "id",
+        "ticket_id",
+        "from",
+        "type",
+        "content",
+        "created_at"
+      ]
     },
     "GetAllPaymentConfigResponse": {
       "type": "object",
@@ -6851,7 +7353,9 @@
         }
       },
       "title": "GetAllPaymentConfigResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetAnnouncementListRequest": {
       "type": "object",
@@ -6881,7 +7385,10 @@
         }
       },
       "title": "GetAnnouncementListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetAnnouncementListResponse": {
       "type": "object",
@@ -6898,7 +7405,10 @@
         }
       },
       "title": "GetAnnouncementListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetAnnouncementRequest": {
       "type": "object",
@@ -6909,7 +7419,9 @@
         }
       },
       "title": "GetAnnouncementRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetAvailablePaymentMethodsResponse": {
       "type": "object",
@@ -6922,7 +7434,9 @@
         }
       },
       "title": "GetAvailablePaymentMethodsResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetCouponListRequest": {
       "type": "object",
@@ -6944,7 +7458,10 @@
         }
       },
       "title": "GetCouponListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetCouponListResponse": {
       "type": "object",
@@ -6961,7 +7478,10 @@
         }
       },
       "title": "GetCouponListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetDetailRequest": {
       "type": "object",
@@ -6972,7 +7492,9 @@
         }
       },
       "title": "GetDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetDocumentDetailRequest": {
       "type": "object",
@@ -6983,7 +7505,9 @@
         }
       },
       "title": "GetDocumentDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetDocumentListRequest": {
       "type": "object",
@@ -7004,7 +7528,10 @@
         }
       },
       "title": "GetDocumentListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetDocumentListResponse": {
       "type": "object",
@@ -7021,7 +7548,10 @@
         }
       },
       "title": "GetDocumentListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetGlobalConfigResponse": {
       "type": "object",
@@ -7046,7 +7576,14 @@
         }
       },
       "title": "GetGlobalConfigResponse",
-      "required": ["site", "verify", "register", "invite", "currency", "subscribe"]
+      "required": [
+        "site",
+        "verify",
+        "register",
+        "invite",
+        "currency",
+        "subscribe"
+      ]
     },
     "GetNodeDetailRequest": {
       "type": "object",
@@ -7057,7 +7594,9 @@
         }
       },
       "title": "GetNodeDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetNodeGroupListResponse": {
       "type": "object",
@@ -7074,7 +7613,10 @@
         }
       },
       "title": "GetNodeGroupListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetNodeMultiplierResponse": {
       "type": "object",
@@ -7087,7 +7629,9 @@
         }
       },
       "title": "GetNodeMultiplierResponse",
-      "required": ["periods"]
+      "required": [
+        "periods"
+      ]
     },
     "GetNodeServerListRequest": {
       "type": "object",
@@ -7100,6 +7644,9 @@
           "type": "integer",
           "format": "int32"
         },
+        "tag": {
+          "type": "string"
+        },
         "group_id": {
           "type": "integer",
           "format": "int64"
@@ -7109,7 +7656,10 @@
         }
       },
       "title": "GetNodeServerListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetNodeServerListResponse": {
       "type": "object",
@@ -7126,7 +7676,10 @@
         }
       },
       "title": "GetNodeServerListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetOrderListRequest": {
       "type": "object",
@@ -7156,7 +7709,10 @@
         }
       },
       "title": "GetOrderListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetOrderListResponse": {
       "type": "object",
@@ -7173,7 +7729,10 @@
         }
       },
       "title": "GetOrderListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetServerConfigRequest": {
       "type": "object",
@@ -7205,7 +7764,11 @@
         }
       },
       "title": "GetServerConfigResponse",
-      "required": ["basic", "protocol", "config"]
+      "required": [
+        "basic",
+        "protocol",
+        "config"
+      ]
     },
     "GetServerUserListRequest": {
       "type": "object",
@@ -7234,50 +7797,8 @@
         }
       },
       "title": "GetServerUserListResponse",
-      "required": ["users"]
-    },
-    "GetSmsConfigRespone": {
-      "type": "object",
-      "properties": {
-        "apiUrl": {
-          "type": "string"
-        },
-        "apiForeignUrl": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        },
-        "secret": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "template": {
-          "type": "string"
-        },
-        "templateCode": {
-          "type": "string"
-        },
-        "templateParam": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        }
-      },
-      "title": "GetSmsConfigRespone",
       "required": [
-        "apiUrl",
-        "apiForeignUrl",
-        "key",
-        "secret",
-        "region",
-        "template",
-        "templateCode",
-        "templateParam",
-        "platform"
+        "users"
       ]
     },
     "GetSmsListRequest": {
@@ -7296,7 +7817,10 @@
         }
       },
       "title": "GetSmsListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetSmsListResponse": {
       "type": "object",
@@ -7313,7 +7837,10 @@
         }
       },
       "title": "GetSmsListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetStatResponse": {
       "type": "object",
@@ -7338,7 +7865,12 @@
         }
       },
       "title": "GetStatResponse",
-      "required": ["user", "node", "country", "protocol"]
+      "required": [
+        "user",
+        "node",
+        "country",
+        "protocol"
+      ]
     },
     "GetSubscribeDetailsRequest": {
       "type": "object",
@@ -7349,7 +7881,9 @@
         }
       },
       "title": "GetSubscribeDetailsRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetSubscribeGroupListResponse": {
       "type": "object",
@@ -7366,7 +7900,10 @@
         }
       },
       "title": "GetSubscribeGroupListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetSubscribeListRequest": {
       "type": "object",
@@ -7388,7 +7925,10 @@
         }
       },
       "title": "GetSubscribeListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetSubscribeListResponse": {
       "type": "object",
@@ -7396,7 +7936,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Subscribe"
+            "$ref": "#/definitions/SubscribeItem"
           }
         },
         "total": {
@@ -7405,7 +7945,10 @@
         }
       },
       "title": "GetSubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetSubscriptionResponse": {
       "type": "object",
@@ -7418,7 +7961,9 @@
         }
       },
       "title": "GetSubscriptionResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetTicketListRequest": {
       "type": "object",
@@ -7444,7 +7989,10 @@
         }
       },
       "title": "GetTicketListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetTicketListResponse": {
       "type": "object",
@@ -7461,7 +8009,10 @@
         }
       },
       "title": "GetTicketListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetTicketRequest": {
       "type": "object",
@@ -7472,7 +8023,9 @@
         }
       },
       "title": "GetTicketRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetTosResponse": {
       "type": "object",
@@ -7482,7 +8035,9 @@
         }
       },
       "title": "GetTosResponse",
-      "required": ["tos_content"]
+      "required": [
+        "tos_content"
+      ]
     },
     "GetUserListRequest": {
       "type": "object",
@@ -7500,7 +8055,10 @@
         }
       },
       "title": "GetUserListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetUserListResponse": {
       "type": "object",
@@ -7517,7 +8075,10 @@
         }
       },
       "title": "GetUserListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetUserTicketDetailRequest": {
       "type": "object",
@@ -7528,7 +8089,9 @@
         }
       },
       "title": "GetUserTicketDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetUserTicketListRequest": {
       "type": "object",
@@ -7550,7 +8113,10 @@
         }
       },
       "title": "GetUserTicketListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetUserTicketListResponse": {
       "type": "object",
@@ -7567,7 +8133,10 @@
         }
       },
       "title": "GetUserTicketListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "Hysteria2": {
       "type": "object",
@@ -7591,7 +8160,13 @@
         }
       },
       "title": "Hysteria2",
-      "required": ["port", "hop_ports", "hop_interval", "obfs_password", "security_config"]
+      "required": [
+        "port",
+        "hop_ports",
+        "hop_interval",
+        "obfs_password",
+        "security_config"
+      ]
     },
     "InviteConfig": {
       "type": "object",
@@ -7610,7 +8185,11 @@
         }
       },
       "title": "InviteConfig",
-      "required": ["forced_invite", "referral_percentage", "only_first_purchase"]
+      "required": [
+        "forced_invite",
+        "referral_percentage",
+        "only_first_purchase"
+      ]
     },
     "LogResponse": {
       "type": "object",
@@ -7620,7 +8199,9 @@
         }
       },
       "title": "LogResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "LoginResponse": {
       "type": "object",
@@ -7630,7 +8211,9 @@
         }
       },
       "title": "LoginResponse",
-      "required": ["token"]
+      "required": [
+        "token"
+      ]
     },
     "NodeConfig": {
       "type": "object",
@@ -7648,7 +8231,11 @@
         }
       },
       "title": "NodeConfig",
-      "required": ["node_secret", "node_pull_interval", "node_push_interval"]
+      "required": [
+        "node_secret",
+        "node_pull_interval",
+        "node_push_interval"
+      ]
     },
     "NodeRelay": {
       "type": "object",
@@ -7665,7 +8252,11 @@
         }
       },
       "title": "NodeRelay",
-      "required": ["host", "port", "prefix"]
+      "required": [
+        "host",
+        "port",
+        "prefix"
+      ]
     },
     "NodeSortRequest": {
       "type": "object",
@@ -7678,7 +8269,9 @@
         }
       },
       "title": "NodeSortRequest",
-      "required": ["sort"]
+      "required": [
+        "sort"
+      ]
     },
     "NodeStatus": {
       "type": "object",
@@ -7698,7 +8291,11 @@
         }
       },
       "title": "NodeStatus",
-      "required": ["online_users", "status", "last_at"]
+      "required": [
+        "online_users",
+        "status",
+        "last_at"
+      ]
     },
     "OnlineUser": {
       "type": "object",
@@ -7712,7 +8309,10 @@
         }
       },
       "title": "OnlineUser",
-      "required": ["uid", "ip"]
+      "required": [
+        "uid",
+        "ip"
+      ]
     },
     "OnlineUsersRequest": {
       "type": "object",
@@ -7725,7 +8325,9 @@
         }
       },
       "title": "OnlineUsersRequest",
-      "required": ["users"]
+      "required": [
+        "users"
+      ]
     },
     "Order": {
       "type": "object",
@@ -7953,7 +8555,11 @@
         }
       },
       "title": "OrdersStatistics",
-      "required": ["amount_total", "new_order_amount", "renewal_order_amount"]
+      "required": [
+        "amount_total",
+        "new_order_amount",
+        "renewal_order_amount"
+      ]
     },
     "PaymentConfig": {
       "type": "object",
@@ -7995,7 +8601,14 @@
         }
       },
       "title": "PaymentConfig",
-      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "PreOrderResponse": {
       "type": "object",
@@ -8047,7 +8660,9 @@
         }
       },
       "title": "PreRenewalOrderResponse",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "PreUnsubscribeRequest": {
       "type": "object",
@@ -8058,7 +8673,9 @@
         }
       },
       "title": "PreUnsubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "PreUnsubscribeResponse": {
       "type": "object",
@@ -8069,7 +8686,9 @@
         }
       },
       "title": "PreUnsubscribeResponse",
-      "required": ["deduction_amount"]
+      "required": [
+        "deduction_amount"
+      ]
     },
     "PurchaseOrderRequest": {
       "type": "object",
@@ -8090,7 +8709,11 @@
         }
       },
       "title": "PurchaseOrderRequest",
-      "required": ["subscribe_id", "quantity", "payment"]
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "PurchaseOrderResponse": {
       "type": "object",
@@ -8100,7 +8723,9 @@
         }
       },
       "title": "PurchaseOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryAnnouncementRequest": {
       "type": "object",
@@ -8123,7 +8748,12 @@
         }
       },
       "title": "QueryAnnouncementRequest",
-      "required": ["page", "size", "pinned", "popup"]
+      "required": [
+        "page",
+        "size",
+        "pinned",
+        "popup"
+      ]
     },
     "QueryAnnouncementResponse": {
       "type": "object",
@@ -8140,7 +8770,10 @@
         }
       },
       "title": "QueryAnnouncementResponse",
-      "required": ["total", "announcements"]
+      "required": [
+        "total",
+        "announcements"
+      ]
     },
     "QueryDocumentDetailRequest": {
       "type": "object",
@@ -8151,7 +8784,9 @@
         }
       },
       "title": "QueryDocumentDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "QueryDocumentListResponse": {
       "type": "object",
@@ -8168,7 +8803,10 @@
         }
       },
       "title": "QueryDocumentListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QueryOrderDetailRequest": {
       "type": "object",
@@ -8178,7 +8816,9 @@
         }
       },
       "title": "QueryOrderDetailRequest",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryOrderListRequest": {
       "type": "object",
@@ -8193,7 +8833,10 @@
         }
       },
       "title": "QueryOrderListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryOrderListResponse": {
       "type": "object",
@@ -8210,7 +8853,10 @@
         }
       },
       "title": "QueryOrderListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QuerySubscribeGroupListResponse": {
       "type": "object",
@@ -8227,7 +8873,10 @@
         }
       },
       "title": "QuerySubscribeGroupListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QuerySubscribeListResponse": {
       "type": "object",
@@ -8244,7 +8893,10 @@
         }
       },
       "title": "QuerySubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserAffiliateCountResponse": {
       "type": "object",
@@ -8259,7 +8911,10 @@
         }
       },
       "title": "QueryUserAffiliateCountResponse",
-      "required": ["registers", "total_commission"]
+      "required": [
+        "registers",
+        "total_commission"
+      ]
     },
     "QueryUserAffiliateListRequest": {
       "type": "object",
@@ -8274,7 +8929,10 @@
         }
       },
       "title": "QueryUserAffiliateListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryUserAffiliateListResponse": {
       "type": "object",
@@ -8291,7 +8949,10 @@
         }
       },
       "title": "QueryUserAffiliateListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserBalanceLogListResponse": {
       "type": "object",
@@ -8308,7 +8969,10 @@
         }
       },
       "title": "QueryUserBalanceLogListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserCommissionLogListRequest": {
       "type": "object",
@@ -8323,7 +8987,10 @@
         }
       },
       "title": "QueryUserCommissionLogListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryUserCommissionLogListResponse": {
       "type": "object",
@@ -8340,7 +9007,10 @@
         }
       },
       "title": "QueryUserCommissionLogListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserSubscribeListResponse": {
       "type": "object",
@@ -8357,7 +9027,10 @@
         }
       },
       "title": "QueryUserSubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "RechargeOrderRequest": {
       "type": "object",
@@ -8371,7 +9044,10 @@
         }
       },
       "title": "RechargeOrderRequest",
-      "required": ["amount", "payment"]
+      "required": [
+        "amount",
+        "payment"
+      ]
     },
     "RechargeOrderResponse": {
       "type": "object",
@@ -8381,7 +9057,9 @@
         }
       },
       "title": "RechargeOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "RegisterConfig": {
       "type": "object",
@@ -8395,10 +9073,6 @@
           "format": "boolean"
         },
         "enable_email_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telephone_verify": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -8427,7 +9101,6 @@
         "stop_register",
         "enable_trial",
         "enable_email_verify",
-        "enable_telephone_verify",
         "enable_email_domain_suffix",
         "email_domain_suffix_list",
         "enable_ip_register_limit",
@@ -8454,7 +9127,11 @@
         }
       },
       "title": "RenewalOrderRequest",
-      "required": ["user_subscribe_id", "quantity", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "RenewalOrderResponse": {
       "type": "object",
@@ -8464,7 +9141,9 @@
         }
       },
       "title": "RenewalOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "ResetPasswordRequest": {
       "type": "object",
@@ -8483,7 +9162,10 @@
         }
       },
       "title": "ResetPasswordRequest",
-      "required": ["email", "password"]
+      "required": [
+        "email",
+        "password"
+      ]
     },
     "ResetTrafficOrderRequest": {
       "type": "object",
@@ -8497,7 +9179,10 @@
         }
       },
       "title": "ResetTrafficOrderRequest",
-      "required": ["user_subscribe_id", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "payment"
+      ]
     },
     "ResetTrafficOrderResponse": {
       "type": "object",
@@ -8507,7 +9192,9 @@
         }
       },
       "title": "ResetTrafficOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "Response": {
       "type": "object",
@@ -8540,7 +9227,11 @@
         }
       },
       "title": "RevenueStatisticsResponse",
-      "required": ["today", "monthly", "all"]
+      "required": [
+        "today",
+        "monthly",
+        "all"
+      ]
     },
     "SecurityConfig": {
       "type": "object",
@@ -8596,7 +9287,10 @@
         }
       },
       "title": "SendCodeRequest",
-      "required": ["email", "type"]
+      "required": [
+        "email",
+        "type"
+      ]
     },
     "SendCodeResponse": {
       "type": "object",
@@ -8607,7 +9301,25 @@
         }
       },
       "title": "SendCodeResponse",
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
+    },
+    "SendSmsCodeRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        }
+      },
+      "title": "SendSmsCodeRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code"
+      ]
     },
     "SendSmsRequest": {
       "type": "object",
@@ -8615,7 +9327,7 @@
         "content": {
           "type": "string"
         },
-        "areaCode": {
+        "area_code": {
           "type": "string"
         },
         "telephone": {
@@ -8623,7 +9335,11 @@
         }
       },
       "title": "SendSmsRequest",
-      "required": ["content", "areaCode", "telephone"]
+      "required": [
+        "content",
+        "area_code",
+        "telephone"
+      ]
     },
     "Server": {
       "type": "object",
@@ -8631,6 +9347,12 @@
         "id": {
           "type": "integer",
           "format": "int64"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "name": {
           "type": "string"
@@ -8688,6 +9410,7 @@
       "title": "Server",
       "required": [
         "id",
+        "tags",
         "name",
         "server_addr",
         "relay_mode",
@@ -8717,7 +9440,10 @@
         }
       },
       "title": "ServerBasic",
-      "required": ["push_interval", "pull_interval"]
+      "required": [
+        "push_interval",
+        "pull_interval"
+      ]
     },
     "ServerCommon": {
       "type": "object",
@@ -8734,7 +9460,11 @@
         }
       },
       "title": "ServerCommon",
-      "required": ["protocol", "server_id", "secret_key"]
+      "required": [
+        "protocol",
+        "server_id",
+        "secret_key"
+      ]
     },
     "ServerGroup": {
       "type": "object",
@@ -8759,7 +9489,13 @@
         }
       },
       "title": "ServerGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
     },
     "ServerPushStatusRequest": {
       "type": "object",
@@ -8782,7 +9518,12 @@
         }
       },
       "title": "ServerPushStatusRequest",
-      "required": ["cpu", "mem", "disk", "updated_at"]
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
+      ]
     },
     "ServerPushUserTrafficRequest": {
       "type": "object",
@@ -8795,7 +9536,9 @@
         }
       },
       "title": "ServerPushUserTrafficRequest",
-      "required": ["traffic"]
+      "required": [
+        "traffic"
+      ]
     },
     "ServerStatus": {
       "type": "object",
@@ -8818,7 +9561,12 @@
         }
       },
       "title": "ServerStatus",
-      "required": ["cpu", "mem", "disk", "updated_at"]
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
+      ]
     },
     "ServerTotalDataResponse": {
       "type": "object",
@@ -8916,7 +9664,12 @@
         }
       },
       "title": "ServerTrafficData",
-      "required": ["server_id", "name", "upload", "download"]
+      "required": [
+        "server_id",
+        "name",
+        "upload",
+        "download"
+      ]
     },
     "ServerUser": {
       "type": "object",
@@ -8938,7 +9691,12 @@
         }
       },
       "title": "ServerUser",
-      "required": ["id", "uuid", "speed_limit", "device_limit"]
+      "required": [
+        "id",
+        "uuid",
+        "speed_limit",
+        "device_limit"
+      ]
     },
     "SetNodeMultiplierRequest": {
       "type": "object",
@@ -8951,50 +9709,8 @@
         }
       },
       "title": "SetNodeMultiplierRequest",
-      "required": ["periods"]
-    },
-    "SetSmsConfigRequest": {
-      "type": "object",
-      "properties": {
-        "apiUrl": {
-          "type": "string"
-        },
-        "apiForeignUrl": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        },
-        "secret": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "template": {
-          "type": "string"
-        },
-        "templateCode": {
-          "type": "string"
-        },
-        "templateParam": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        }
-      },
-      "title": "SetSmsConfigRequest",
       "required": [
-        "apiUrl",
-        "apiForeignUrl",
-        "key",
-        "secret",
-        "region",
-        "template",
-        "templateCode",
-        "templateParam",
-        "platform"
+        "periods"
       ]
     },
     "Shadowsocks": {
@@ -9012,7 +9728,11 @@
         }
       },
       "title": "Shadowsocks",
-      "required": ["method", "port", "server_key"]
+      "required": [
+        "method",
+        "port",
+        "server_key"
+      ]
     },
     "ShadowsocksProtocol": {
       "type": "object",
@@ -9026,7 +9746,10 @@
         }
       },
       "title": "ShadowsocksProtocol",
-      "required": ["port", "method"]
+      "required": [
+        "port",
+        "method"
+      ]
     },
     "SiteConfig": {
       "type": "object",
@@ -9045,7 +9768,12 @@
         }
       },
       "title": "SiteConfig",
-      "required": ["host", "site_name", "site_desc", "site_logo"]
+      "required": [
+        "host",
+        "site_name",
+        "site_desc",
+        "site_logo"
+      ]
     },
     "Sms": {
       "type": "object",
@@ -9075,55 +9803,93 @@
         }
       },
       "title": "Sms",
-      "required": ["id", "content", "platform", "areaCode", "telephone", "status", "created_at"]
+      "required": [
+        "id",
+        "content",
+        "platform",
+        "areaCode",
+        "telephone",
+        "status",
+        "created_at"
+      ]
     },
     "SmsConfig": {
       "type": "object",
       "properties": {
-        "smsEnabled": {
+        "sms_enabled": {
           "type": "boolean",
           "format": "boolean"
         },
-        "smsApiUrl": {
+        "sms_api_url": {
           "type": "string"
         },
-        "smsApiForeignUrl": {
+        "sms_api_foreign_url": {
           "type": "string"
         },
-        "smsKey": {
+        "sms_key": {
           "type": "string"
         },
-        "smsSecret": {
+        "sms_secret": {
           "type": "string"
         },
-        "smsRegion": {
+        "sms_region": {
           "type": "string"
         },
-        "smsTemplate": {
+        "sms_template": {
           "type": "string"
         },
-        "smsTemplateCode": {
+        "sms_template_code": {
           "type": "string"
         },
-        "smsTemplateParam": {
+        "sms_template_param": {
           "type": "string"
         },
-        "smsPlatform": {
+        "sms_platform": {
           "type": "string"
+        },
+        "sms_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sms_expire_time": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "SmsConfig",
       "required": [
-        "smsEnabled",
-        "smsApiUrl",
-        "smsApiForeignUrl",
-        "smsKey",
-        "smsSecret",
-        "smsRegion",
-        "smsTemplate",
-        "smsTemplateCode",
-        "smsTemplateParam",
-        "smsPlatform"
+        "sms_enabled",
+        "sms_api_url",
+        "sms_api_foreign_url",
+        "sms_key",
+        "sms_secret",
+        "sms_region",
+        "sms_template",
+        "sms_template_code",
+        "sms_template_param",
+        "sms_platform",
+        "sms_limit",
+        "sms_interval",
+        "sms_expire_time"
+      ]
+    },
+    "SmsPlatformResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "SmsPlatformResponse",
+      "required": [
+        "list"
       ]
     },
     "SortItem": {
@@ -9139,7 +9905,10 @@
         }
       },
       "title": "SortItem",
-      "required": ["id", "sort"]
+      "required": [
+        "id",
+        "sort"
+      ]
     },
     "StripeConfig": {
       "type": "object",
@@ -9158,7 +9927,12 @@
         }
       },
       "title": "StripeConfig",
-      "required": ["public_key", "secret_key", "webhook_secret", "payment"]
+      "required": [
+        "public_key",
+        "secret_key",
+        "webhook_secret",
+        "payment"
+      ]
     },
     "StripePayment": {
       "type": "object",
@@ -9174,7 +9948,11 @@
         }
       },
       "title": "StripePayment",
-      "required": ["method", "client_secret", "publishable_key"]
+      "required": [
+        "method",
+        "client_secret",
+        "publishable_key"
+      ]
     },
     "Subscribe": {
       "type": "object",
@@ -9328,7 +10106,12 @@
         }
       },
       "title": "SubscribeConfig",
-      "required": ["single_model", "subscribe_path", "subscribe_domain", "pan_domain"]
+      "required": [
+        "single_model",
+        "subscribe_path",
+        "subscribe_domain",
+        "pan_domain"
+      ]
     },
     "SubscribeDiscount": {
       "type": "object",
@@ -9343,7 +10126,10 @@
         }
       },
       "title": "SubscribeDiscount",
-      "required": ["quantity", "discount"]
+      "required": [
+        "quantity",
+        "discount"
+      ]
     },
     "SubscribeGroup": {
       "type": "object",
@@ -9368,7 +10154,127 @@
         }
       },
       "title": "SubscribeGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "SubscribeItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit_time": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeDiscount"
+          }
+        },
+        "replacement": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inventory": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_group": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "server": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "show": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sell": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "deduction_ratio": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "allow_deduction": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reset_cycle": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewal_reset": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sold": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeItem",
+      "required": [
+        "sold"
+      ]
     },
     "SubscribeSortRequest": {
       "type": "object",
@@ -9381,7 +10287,9 @@
         }
       },
       "title": "SubscribeSortRequest",
-      "required": ["sort"]
+      "required": [
+        "sort"
+      ]
     },
     "SubscribeType": {
       "type": "object",
@@ -9394,7 +10302,9 @@
         }
       },
       "title": "SubscribeType",
-      "required": ["subscribe_types"]
+      "required": [
+        "subscribe_types"
+      ]
     },
     "TelegramConfig": {
       "type": "object",
@@ -9421,6 +10331,129 @@
         "telegram_web_hook_domain"
       ]
     },
+    "TelephoneCheckUserRequest": {
+      "type": "object",
+      "properties": {
+        "telephone_area_code": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneCheckUserRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code"
+      ]
+    },
+    "TelephoneCheckUserResponse": {
+      "type": "object",
+      "properties": {
+        "exist": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "TelephoneCheckUserResponse",
+      "required": [
+        "exist"
+      ]
+    },
+    "TelephoneCodeLoginRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
+        "telephone_code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneCodeLoginRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code",
+        "telephone_code"
+      ]
+    },
+    "TelephoneLoginRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneLoginRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code",
+        "password"
+      ]
+    },
+    "TelephoneRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "telephone_area_code": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "invite": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneRegisterRequest",
+      "required": [
+        "telephone",
+        "telephone_area_code",
+        "password"
+      ]
+    },
+    "TelephoneResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "telephone": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "TelephoneResetPasswordRequest",
+      "required": [
+        "telephone",
+        "password"
+      ]
+    },
     "TestEmailSmtpRequest": {
       "type": "object",
       "properties": {
@@ -9429,7 +10462,9 @@
         }
       },
       "title": "TestEmailSmtpRequest",
-      "required": ["email"]
+      "required": [
+        "email"
+      ]
     },
     "Ticket": {
       "type": "object",
@@ -9468,7 +10503,15 @@
         }
       },
       "title": "Ticket",
-      "required": ["id", "title", "description", "user_id", "status", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "description",
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
     },
     "TicketWaitRelpyResponse": {
       "type": "object",
@@ -9479,7 +10522,9 @@
         }
       },
       "title": "TicketWaitRelpyResponse",
-      "required": ["count"]
+      "required": [
+        "count"
+      ]
     },
     "TimePeriod": {
       "type": "object",
@@ -9496,7 +10541,11 @@
         }
       },
       "title": "TimePeriod",
-      "required": ["start_time", "end_time", "multiplier"]
+      "required": [
+        "start_time",
+        "end_time",
+        "multiplier"
+      ]
     },
     "TosConfig": {
       "type": "object",
@@ -9506,7 +10555,9 @@
         }
       },
       "title": "TosConfig",
-      "required": ["tos_content"]
+      "required": [
+        "tos_content"
+      ]
     },
     "TransportConfig": {
       "type": "object",
@@ -9522,7 +10573,11 @@
         }
       },
       "title": "TransportConfig",
-      "required": ["path", "host", "service_name"]
+      "required": [
+        "path",
+        "host",
+        "service_name"
+      ]
     },
     "Trojan": {
       "type": "object",
@@ -9545,7 +10600,13 @@
         }
       },
       "title": "Trojan",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "TrojanProtocol": {
       "type": "object",
@@ -9572,7 +10633,14 @@
         }
       },
       "title": "TrojanProtocol",
-      "required": ["host", "port", "enable_tls", "tls_config", "network", "transport"]
+      "required": [
+        "host",
+        "port",
+        "enable_tls",
+        "tls_config",
+        "network",
+        "transport"
+      ]
     },
     "Tuic": {
       "type": "object",
@@ -9586,7 +10654,10 @@
         }
       },
       "title": "Tuic",
-      "required": ["port", "security_config"]
+      "required": [
+        "port",
+        "security_config"
+      ]
     },
     "UnsubscribeRequest": {
       "type": "object",
@@ -9597,7 +10668,9 @@
         }
       },
       "title": "UnsubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "UpdateAlipayF2fRequest": {
       "type": "object",
@@ -9639,7 +10712,14 @@
         }
       },
       "title": "UpdateAlipayF2fRequest",
-      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "UpdateAnnouncementEnableRequest": {
       "type": "object",
@@ -9654,7 +10734,10 @@
         }
       },
       "title": "UpdateAnnouncementEnableRequest",
-      "required": ["id", "enable"]
+      "required": [
+        "id",
+        "enable"
+      ]
     },
     "UpdateAnnouncementRequest": {
       "type": "object",
@@ -9683,7 +10766,14 @@
         }
       },
       "title": "UpdateAnnouncementRequest",
-      "required": ["id", "title", "content", "show", "pinned", "popup"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show",
+        "pinned",
+        "popup"
+      ]
     },
     "UpdateApplicationRequest": {
       "type": "object",
@@ -9706,7 +10796,13 @@
         }
       },
       "title": "UpdateApplicationRequest",
-      "required": ["id", "name", "subscribe_type", "icon", "url"]
+      "required": [
+        "id",
+        "name",
+        "subscribe_type",
+        "icon",
+        "url"
+      ]
     },
     "UpdateCouponRequest": {
       "type": "object",
@@ -9762,7 +10858,14 @@
         }
       },
       "title": "UpdateCouponRequest",
-      "required": ["id", "name", "type", "discount", "start_time", "expire_time"]
+      "required": [
+        "id",
+        "name",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time"
+      ]
     },
     "UpdateDocumentRequest": {
       "type": "object",
@@ -9789,7 +10892,12 @@
         }
       },
       "title": "UpdateDocumentRequest",
-      "required": ["id", "title", "content", "show"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show"
+      ]
     },
     "UpdateEpayRequest": {
       "type": "object",
@@ -9831,7 +10939,14 @@
         }
       },
       "title": "UpdateEpayRequest",
-      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "UpdateNodeGroupRequest": {
       "type": "object",
@@ -9848,7 +10963,11 @@
         }
       },
       "title": "UpdateNodeGroupRequest",
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "UpdateNodeRequest": {
       "type": "object",
@@ -9856,6 +10975,12 @@
         "id": {
           "type": "integer",
           "format": "int64"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "name": {
           "type": "string"
@@ -9902,6 +11027,7 @@
       "title": "UpdateNodeRequest",
       "required": [
         "id",
+        "tags",
         "name",
         "server_addr",
         "relay_mode",
@@ -9934,7 +11060,10 @@
         }
       },
       "title": "UpdateOrderStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "UpdateStripeRequest": {
       "type": "object",
@@ -9976,7 +11105,14 @@
         }
       },
       "title": "UpdateStripeRequest",
-      "required": ["id", "name", "mark", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "UpdateSubscribeGroupRequest": {
       "type": "object",
@@ -9993,7 +11129,11 @@
         }
       },
       "title": "UpdateSubscribeGroupRequest",
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "UpdateSubscribeRequest": {
       "type": "object",
@@ -10131,7 +11271,10 @@
         }
       },
       "title": "UpdateTicketStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "UpdateUserNotifyRequest": {
       "type": "object",
@@ -10178,7 +11321,11 @@
         }
       },
       "title": "UpdateUserNotifySettingRequet",
-      "required": ["telegram", "enable_email_notify", "enable_telegram_notify"]
+      "required": [
+        "telegram",
+        "enable_email_notify",
+        "enable_telegram_notify"
+      ]
     },
     "UpdateUserPasswordRequest": {
       "type": "object",
@@ -10188,7 +11335,9 @@
         }
       },
       "title": "UpdateUserPasswordRequest",
-      "required": ["password"]
+      "required": [
+        "password"
+      ]
     },
     "UpdateUserRequest": {
       "type": "object",
@@ -10302,7 +11451,10 @@
         }
       },
       "title": "UpdateUserTicketStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "User": {
       "type": "object",
@@ -10435,7 +11587,12 @@
         }
       },
       "title": "UserAffiliate",
-      "required": ["email", "avatar", "registered_at", "enable"]
+      "required": [
+        "email",
+        "avatar",
+        "registered_at",
+        "enable"
+      ]
     },
     "UserBalanceLog": {
       "type": "object",
@@ -10470,7 +11627,15 @@
         }
       },
       "title": "UserBalanceLog",
-      "required": ["id", "user_id", "amount", "type", "order_id", "balance", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "amount",
+        "type",
+        "order_id",
+        "balance",
+        "created_at"
+      ]
     },
     "UserLoginRequest": {
       "type": "object",
@@ -10486,7 +11651,10 @@
         }
       },
       "title": "UserLoginRequest",
-      "required": ["email", "password"]
+      "required": [
+        "email",
+        "password"
+      ]
     },
     "UserRegisterRequest": {
       "type": "object",
@@ -10508,7 +11676,10 @@
         }
       },
       "title": "UserRegisterRequest",
-      "required": ["email", "password"]
+      "required": [
+        "email",
+        "password"
+      ]
     },
     "UserStatistics": {
       "type": "object",
@@ -10536,7 +11707,11 @@
         }
       },
       "title": "UserStatistics",
-      "required": ["register", "new_order_users", "renewal_order_users"]
+      "required": [
+        "register",
+        "new_order_users",
+        "renewal_order_users"
+      ]
     },
     "UserStatisticsResponse": {
       "type": "object",
@@ -10552,7 +11727,11 @@
         }
       },
       "title": "UserStatisticsResponse",
-      "required": ["today", "monthly", "all"]
+      "required": [
+        "today",
+        "monthly",
+        "all"
+      ]
     },
     "UserSubscribe": {
       "type": "object",
@@ -10652,7 +11831,11 @@
         }
       },
       "title": "UserTraffic",
-      "required": ["uid", "upload", "download"]
+      "required": [
+        "uid",
+        "upload",
+        "download"
+      ]
     },
     "UserTrafficData": {
       "type": "object",
@@ -10674,7 +11857,12 @@
         }
       },
       "title": "UserTrafficData",
-      "required": ["user_id", "email", "upload", "download"]
+      "required": [
+        "user_id",
+        "email",
+        "upload",
+        "download"
+      ]
     },
     "VeifyConfig": {
       "type": "object",
@@ -10758,7 +11946,14 @@
         }
       },
       "title": "Vless",
-      "required": ["port", "flow", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "flow",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "VlessProtocol": {
       "type": "object",
@@ -10787,7 +11982,15 @@
         }
       },
       "title": "VlessProtocol",
-      "required": ["host", "port", "network", "transport", "security", "security_config", "xtls"]
+      "required": [
+        "host",
+        "port",
+        "network",
+        "transport",
+        "security",
+        "security_config",
+        "xtls"
+      ]
     },
     "Vmess": {
       "type": "object",
@@ -10810,7 +12013,13 @@
         }
       },
       "title": "Vmess",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "VmessProtocol": {
       "type": "object",
@@ -10837,7 +12046,14 @@
         }
       },
       "title": "VmessProtocol",
-      "required": ["host", "port", "enable_tls", "tls_config", "network", "transport"]
+      "required": [
+        "host",
+        "port",
+        "enable_tls",
+        "tls_config",
+        "network",
+        "transport"
+      ]
     }
   },
   "securityDefinitions": {
