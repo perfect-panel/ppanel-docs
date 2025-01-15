@@ -1682,6 +1682,10 @@
     "EmailAuthticateConfig": {
       "type": "object",
       "properties": {
+        "email_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "email_enable_verify": {
           "type": "boolean",
           "format": "boolean"
@@ -1696,6 +1700,7 @@
       },
       "title": "EmailAuthticateConfig",
       "required": [
+        "email_enabled",
         "email_enable_verify",
         "email_enable_domain_suffix",
         "email_domain_suffix_list"
