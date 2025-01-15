@@ -1662,6 +1662,9 @@
     "SendCodeResponse": {
       "type": "object",
       "properties": {
+        "code": {
+          "type": "string"
+        },
         "status": {
           "type": "boolean",
           "format": "boolean"
@@ -2339,6 +2342,9 @@
         "telephone": {
           "type": "string"
         },
+        "telephone_area_code": {
+          "type": "string"
+        },
         "password": {
           "type": "string"
         },
@@ -2352,6 +2358,7 @@
       "title": "TelephoneResetPasswordRequest",
       "required": [
         "telephone",
+        "telephone_area_code",
         "password"
       ]
     },
