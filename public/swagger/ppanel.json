@@ -3791,44 +3791,19 @@
         },
         "parameters": [
           {
-            "name": "email",
+            "name": "method",
             "in": "query",
             "required": true,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/check/telephone": {
-      "get": {
-        "summary": "Check user telephone is exist",
-        "operationId": "CheckUserTelephone",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/TelephoneCheckUserResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
+          },
           {
-            "name": "telephone",
+            "name": "account",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "areaCode",
             "in": "query",
             "required": true,
             "type": "string"
@@ -3885,98 +3860,6 @@
         ]
       }
     },
-    "/v1/auth/login/telephone": {
-      "post": {
-        "summary": "User Telephone login",
-        "operationId": "TelephoneLogin",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "login request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneLoginRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/login/telephone/code": {
-      "post": {
-        "summary": "User Telephone login",
-        "operationId": "TelephoneCodeLogin",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "telephone code login request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneCodeLoginRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
     "/v1/auth/register": {
       "post": {
         "summary": "User register",
@@ -4023,52 +3906,6 @@
         ]
       }
     },
-    "/v1/auth/register/telephone": {
-      "post": {
-        "summary": "User Telephone register",
-        "operationId": "TelephoneUserRegister",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneRegisterRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
     "/v1/auth/reset": {
       "post": {
         "summary": "Reset password",
@@ -4107,52 +3944,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResetPasswordRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/reset/telephone": {
-      "post": {
-        "summary": "Reset password",
-        "operationId": "TelephoneResetPassword",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneResetPasswordRequest"
             }
           }
         ],
@@ -6336,13 +6127,21 @@
     "CheckUserRequest": {
       "type": "object",
       "properties": {
-        "email": {
+        "method": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
+        },
+        "areaCode": {
           "type": "string"
         }
       },
       "title": "CheckUserRequest",
       "required": [
-        "email"
+        "method",
+        "account",
+        "areaCode"
       ]
     },
     "CheckUserResponse": {
@@ -9216,10 +9015,16 @@
     "ResetPasswordRequest": {
       "type": "object",
       "properties": {
-        "email": {
+        "method": {
+          "type": "string"
+        },
+        "account": {
           "type": "string"
         },
         "password": {
+          "type": "string"
+        },
+        "areaCode": {
           "type": "string"
         },
         "code": {
@@ -9231,8 +9036,10 @@
       },
       "title": "ResetPasswordRequest",
       "required": [
-        "email",
-        "password"
+        "method",
+        "account",
+        "password",
+        "areaCode"
       ]
     },
     "ResetTrafficOrderRequest": {
@@ -9363,6 +9170,9 @@
     "SendCodeResponse": {
       "type": "object",
       "properties": {
+        "code": {
+          "type": "string"
+        },
         "status": {
           "type": "boolean",
           "format": "boolean"
@@ -10441,129 +10251,6 @@
         "telegram_group_url",
         "telegram_notify",
         "telegram_web_hook_domain"
-      ]
-    },
-    "TelephoneCheckUserRequest": {
-      "type": "object",
-      "properties": {
-        "telephone_area_code": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneCheckUserRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code"
-      ]
-    },
-    "TelephoneCheckUserResponse": {
-      "type": "object",
-      "properties": {
-        "exist": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "TelephoneCheckUserResponse",
-      "required": [
-        "exist"
-      ]
-    },
-    "TelephoneCodeLoginRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "telephone_code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneCodeLoginRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code",
-        "telephone_code"
-      ]
-    },
-    "TelephoneLoginRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneLoginRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code",
-        "password"
-      ]
-    },
-    "TelephoneRegisterRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "invite": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneRegisterRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code",
-        "password"
-      ]
-    },
-    "TelephoneResetPasswordRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneResetPasswordRequest",
-      "required": [
-        "telephone",
-        "password"
       ]
     },
     "TestEmailSmtpRequest": {
@@ -11776,10 +11463,16 @@
     "UserLoginRequest": {
       "type": "object",
       "properties": {
-        "email": {
+        "method": {
+          "type": "string"
+        },
+        "account": {
           "type": "string"
         },
         "password": {
+          "type": "string"
+        },
+        "area_code": {
           "type": "string"
         },
         "cf_token": {
@@ -11788,20 +11481,28 @@
       },
       "title": "UserLoginRequest",
       "required": [
-        "email",
-        "password"
+        "method",
+        "account",
+        "password",
+        "area_code"
       ]
     },
     "UserRegisterRequest": {
       "type": "object",
       "properties": {
-        "email": {
+        "method": {
+          "type": "string"
+        },
+        "account": {
           "type": "string"
         },
         "password": {
           "type": "string"
         },
         "invite": {
+          "type": "string"
+        },
+        "areaCode": {
           "type": "string"
         },
         "code": {
@@ -11813,8 +11514,10 @@
       },
       "title": "UserRegisterRequest",
       "required": [
-        "email",
-        "password"
+        "method",
+        "account",
+        "password",
+        "areaCode"
       ]
     },
     "UserStatistics": {
