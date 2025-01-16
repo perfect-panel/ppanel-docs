@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image'; 
 import { cn } from '@/lib/utils'; 
-import Link from 'next/link';
 interface LinkItem {
   name: string;
   logo: string;
@@ -35,7 +34,7 @@ const ExternalLink: React.FC<{ className?: string }> = ({className}) => {
             height={50}
             className="mr-4"
           />
-          <CardContent>
+          <CardContent className='flex items-center p-0'>
             <a
               href={item.url}
               target="_blank"

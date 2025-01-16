@@ -25,6 +25,11 @@ const meta = {
     title: '第三方教程',
   },
   'third': '第三方教程',
+  '-- third-app': {
+    type: 'separator',
+    title: '第三方应用',
+  },
+  'recommended-resources': '资源推荐',
 };
 
 export default meta;
