@@ -232,6 +232,265 @@
         ]
       }
     },
+    "/v1/admin/app/config": {
+      "get": {
+        "summary": "get app config",
+        "operationId": "GetAppConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      },
+      "put": {
+        "summary": "update app config",
+        "operationId": "UpdateAppConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      }
+    },
+    "/v1/admin/app/version": {
+      "delete": {
+        "summary": "delete app version",
+        "operationId": "DeleteAppVersionInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteAppVersionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      },
+      "post": {
+        "summary": "create app version",
+        "operationId": "CreateAppVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateAppVersionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      },
+      "put": {
+        "summary": "update app version",
+        "operationId": "UpdateAppVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAppVersionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      }
+    },
+    "/v1/admin/app/version_default": {
+      "put": {
+        "summary": "set default app version",
+        "operationId": "SetDefaultAppVersionInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultAppVersionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      }
+    },
+    "/v1/admin/app/version_list": {
+      "get": {
+        "summary": "query app version info",
+        "operationId": "GetAppVersionList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAppVersionListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "os",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/app"
+        ]
+      }
+    },
     "/v1/admin/console/revenue": {
       "get": {
         "summary": "Query revenue statistics",
@@ -3842,6 +4101,72 @@
         "updated_at"
       ]
     },
+    "AppConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "describe": {
+          "type": "string"
+        },
+        "startup_picture": {
+          "type": "string"
+        },
+        "startup_picture_skip_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AppConfig",
+      "required": [
+        "name",
+        "domains",
+        "describe",
+        "startup_picture",
+        "startup_picture_skip_time"
+      ]
+    },
+    "AppVersion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "os": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "download_url": {
+          "type": "string"
+        },
+        "describe": {
+          "type": "string"
+        },
+        "default_version": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppVersion",
+      "required": [
+        "id",
+        "os",
+        "version",
+        "download_url",
+        "describe",
+        "default_version"
+      ]
+    },
     "Application": {
       "type": "object",
       "properties": {
@@ -4143,6 +4468,30 @@
       "required": [
         "title",
         "content"
+      ]
+    },
+    "CreateAppVersionRequest": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "download_url": {
+          "type": "string"
+        },
+        "describe": {
+          "type": "string"
+        }
+      },
+      "title": "CreateAppVersionRequest",
+      "required": [
+        "os",
+        "version",
+        "download_url",
+        "describe"
       ]
     },
     "CreateApplicationRequest": {
@@ -4656,6 +5005,19 @@
         "currency_symbol"
       ]
     },
+    "DefaultAppVersionRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DefaultAppVersionRequest",
+      "required": [
+        "id"
+      ]
+    },
     "DeleteAnnouncementRequest": {
       "type": "object",
       "properties": {
@@ -4665,6 +5027,19 @@
         }
       },
       "title": "DeleteAnnouncementRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DeleteAppVersionRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteAppVersionRequest",
       "required": [
         "id"
       ]
@@ -5030,6 +5405,47 @@
       "title": "GetAnnouncementRequest",
       "required": [
         "id"
+      ]
+    },
+    "GetAppVersionListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "os": {
+          "type": "string"
+        }
+      },
+      "title": "GetAppVersionListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetAppVersionListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppVersion"
+          }
+        }
+      },
+      "title": "GetAppVersionListResponse",
+      "required": [
+        "total",
+        "list"
       ]
     },
     "GetCouponListRequest": {
@@ -7255,6 +7671,35 @@
         "show",
         "pinned",
         "popup"
+      ]
+    },
+    "UpdateAppVersionRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "os": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "download_url": {
+          "type": "string"
+        },
+        "describe": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateAppVersionRequest",
+      "required": [
+        "id",
+        "os",
+        "version",
+        "download_url",
+        "describe"
       ]
     },
     "UpdateApplicationRequest": {
