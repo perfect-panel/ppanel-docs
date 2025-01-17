@@ -5,7 +5,8 @@ export async function getStaticProps() {
   const url = `https://raw.githubusercontent.com/perfect-panel/ppanel-web/refs/heads/beta/CHANGELOG.md`;
   const response = await fetch(url);
   const data = await response.text();
-  const dynamicMdx = await buildDynamicMDX(data, { defaultShowCopyCode: true });
+  const formattedData = data.replace(/# Changelog/g, '').replace(/# /g, '## ');
+  const dynamicMdx = await buildDynamicMDX(formattedData, { defaultShowCopyCode: true });
   return {
     props: {
       ...dynamicMdx,
