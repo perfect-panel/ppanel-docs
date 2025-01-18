@@ -4430,6 +4430,9 @@
         },
         "subscribe_type": {
           "type": "string"
+        },
+        "platform": {
+          "$ref": "#/definitions/ApplicationPlatform"
         }
       },
       "title": "CreateApplicationRequest",
@@ -4437,7 +4440,8 @@
         "icon",
         "name",
         "description",
-        "subscribe_type"
+        "subscribe_type",
+        "platform"
       ]
     },
     "CreateApplicationVersionRequest": {
@@ -7590,6 +7594,9 @@
         },
         "subscribe_type": {
           "type": "string"
+        },
+        "platform": {
+          "$ref": "#/definitions/ApplicationPlatform"
         }
       },
       "title": "UpdateApplicationRequest",
@@ -7598,7 +7605,8 @@
         "icon",
         "name",
         "description",
-        "subscribe_type"
+        "subscribe_type",
+        "platform"
       ]
     },
     "UpdateApplicationVersionRequest": {
