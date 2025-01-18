@@ -1438,7 +1438,7 @@
         "description": {
           "type": "string"
         },
-        "subscription_protocol": {
+        "subscribe_type": {
           "type": "string"
         },
         "platform": {
@@ -1451,7 +1451,7 @@
         "name",
         "icon",
         "description",
-        "subscription_protocol",
+        "subscribe_type",
         "platform"
       ]
     },
