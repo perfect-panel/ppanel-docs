@@ -365,10 +365,10 @@
         ]
       }
     },
-    "/v1/common/app/info": {
+    "/v1/common/application": {
       "get": {
         "summary": "Get Tos Content",
-        "operationId": "GetAppInfo",
+        "operationId": "GetApplication",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -381,7 +381,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetAppInfoResponse"
+                      "$ref": "#/definitions/GetAppcationResponse"
                     }
                   }
                 }
@@ -637,72 +637,6 @@
         "updated_at"
       ]
     },
-    "AppConfig": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "domains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "describe": {
-          "type": "string"
-        },
-        "startup_picture": {
-          "type": "string"
-        },
-        "startup_picture_skip_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "AppConfig",
-      "required": [
-        "name",
-        "domains",
-        "describe",
-        "startup_picture",
-        "startup_picture_skip_time"
-      ]
-    },
-    "AppVersion": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "os": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "download_url": {
-          "type": "string"
-        },
-        "describe": {
-          "type": "string"
-        },
-        "default_version": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "AppVersion",
-      "required": [
-        "id",
-        "os",
-        "version",
-        "download_url",
-        "describe",
-        "default_version"
-      ]
-    },
     "Application": {
       "type": "object",
       "properties": {
@@ -730,6 +664,30 @@
         "name",
         "description",
         "subscribe_type"
+      ]
+    },
+    "ApplicationConfig": {
+      "type": "object",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startup_picture": {
+          "type": "string"
+        },
+        "startup_picture_skip_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ApplicationConfig",
+      "required": [
+        "domains",
+        "startup_picture",
+        "startup_picture_skip_time"
       ]
     },
     "ApplicationPlatform": {
@@ -1163,23 +1121,23 @@
         "created_at"
       ]
     },
-    "GetAppInfoResponse": {
+    "GetAppcationResponse": {
       "type": "object",
       "properties": {
         "config": {
-          "$ref": "#/definitions/AppConfig"
+          "$ref": "#/definitions/ApplicationConfig"
         },
-        "versions": {
+        "applications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AppVersion"
+            "$ref": "#/definitions/ApplicationResponseInfo"
           }
         }
       },
-      "title": "GetAppInfoResponse",
+      "title": "GetAppcationResponse",
       "required": [
         "config",
-        "versions"
+        "applications"
       ]
     },
     "GetGlobalConfigResponse": {
