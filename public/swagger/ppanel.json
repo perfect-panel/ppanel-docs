@@ -4105,6 +4105,153 @@
         ]
       }
     },
+    "/v1/auth/oauth/callback/apple": {
+      "post": {
+        "summary": "Apple Login Callback",
+        "operationId": "AppleLoginCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
+    "/v1/auth/oauth/callback/facebook": {
+      "get": {
+        "summary": "Facebook Login Callback",
+        "operationId": "FacebookLoginCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
+    "/v1/auth/oauth/callback/google": {
+      "get": {
+        "summary": "Google Login Callback",
+        "operationId": "GoogleLoginCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
+    "/v1/auth/oauth/callback/telegram": {
+      "get": {
+        "summary": "Telegram Login Callback",
+        "operationId": "TelegramLoginCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
+    "/v1/auth/oauth/login": {
+      "post": {
+        "summary": "OAuth login",
+        "operationId": "OAuthLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OAuthLoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAthLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
     "/v1/auth/register": {
       "post": {
         "summary": "User register",
@@ -8698,6 +8845,31 @@
         "online_users",
         "status",
         "last_at"
+      ]
+    },
+    "OAthLoginRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "google, facebook, apple, telegram, github etc."
+        }
+      },
+      "title": "OAthLoginRequest",
+      "required": [
+        "method"
+      ]
+    },
+    "OAuthLoginResponse": {
+      "type": "object",
+      "properties": {
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "OAuthLoginResponse",
+      "required": [
+        "redirect"
       ]
     },
     "OnlineUser": {
