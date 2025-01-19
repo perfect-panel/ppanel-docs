@@ -2121,6 +2121,10 @@
         },
         "redirect": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "OAuthConfig",
@@ -2131,7 +2135,8 @@
         "key_id",
         "client_id",
         "client_secret",
-        "redirect"
+        "redirect",
+        "enabled"
       ]
     },
     "OnlineUser": {

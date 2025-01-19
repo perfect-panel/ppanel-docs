@@ -9161,6 +9161,10 @@
         },
         "redirect": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "OAuthConfig",
@@ -9171,7 +9175,8 @@
         "key_id",
         "client_id",
         "client_secret",
-        "redirect"
+        "redirect",
+        "enabled"
       ]
     },
     "OAuthCreateRequest": {
@@ -9201,6 +9206,10 @@
         "client_secret": {
           "type": "string"
         },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "redirect": {
           "type": "string"
         }
@@ -9212,6 +9221,7 @@
         "key_id",
         "client_id",
         "client_secret",
+        "enabled",
         "redirect"
       ]
     },
