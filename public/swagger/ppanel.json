@@ -4214,6 +4214,99 @@
         ]
       }
     },
+    "/v1/app/user/account": {
+      "delete": {
+        "summary": "Delete Account",
+        "operationId": "DeleteAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/info": {
+      "get": {
+        "summary": "query user info",
+        "operationId": "QueryUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserInfoResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/password": {
+      "put": {
+        "summary": "Update Password ",
+        "operationId": "UpdatePassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePasswordRequeset"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
     "/v1/auth/check": {
       "get": {
         "summary": "Check user is exist",
@@ -6761,15 +6854,11 @@
       "properties": {
         "token": {
           "type": "string"
-        },
-        "user_info": {
-          "type": "string"
         }
       },
       "title": "AppAuthRespone",
       "required": [
-        "token",
-        "user_info"
+        "token"
       ]
     },
     "Application": {
@@ -12179,6 +12268,22 @@
         "status"
       ]
     },
+    "UpdatePasswordRequeset": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        }
+      },
+      "title": "UpdatePasswordRequeset",
+      "required": [
+        "password",
+        "new_password"
+      ]
+    },
     "UpdateStripeRequest": {
       "type": "object",
       "properties": {
@@ -12767,10 +12872,34 @@
         "created_at"
       ]
     },
-    "UserInfo": {
+    "UserInfoResponse": {
       "type": "object",
-      "properties": {},
-      "title": "UserInfo"
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "title": "UserInfoResponse",
+      "required": [
+        "id",
+        "email",
+        "avatar",
+        "area_code",
+        "telephone"
+      ]
     },
     "UserLoginRequest": {
       "type": "object",
