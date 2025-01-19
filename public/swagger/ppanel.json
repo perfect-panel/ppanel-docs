@@ -4236,6 +4236,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteAccountRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/app/user"
         ]
@@ -7968,6 +7978,25 @@
       "required": [
         "currency_unit",
         "currency_symbol"
+      ]
+    },
+    "DeleteAccountRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "email",
+            "telephone"
+          ]
+        },
+        "Code": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteAccountRequest",
+      "required": [
+        "method"
       ]
     },
     "DeleteAnnouncementRequest": {
