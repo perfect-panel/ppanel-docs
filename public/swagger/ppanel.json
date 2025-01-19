@@ -4038,6 +4038,45 @@
         ]
       }
     },
+    "/v1/app/auth/check": {
+      "post": {
+        "summary": "Check Account",
+        "operationId": "Check",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthCheckResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthCheckRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
     "/v1/app/auth/login": {
       "post": {
         "summary": "Login",
@@ -6646,11 +6685,49 @@
         "updated_at"
       ]
     },
+    "AppAuthCheckRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "email",
+            "telephone"
+          ]
+        },
+        "account": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        }
+      },
+      "title": "AppAuthCheckRequest",
+      "required": [
+        "method",
+        "account",
+        "area_code"
+      ]
+    },
+    "AppAuthCheckResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppAuthCheckResponse"
+    },
     "AppAuthRequest": {
       "type": "object",
       "properties": {
         "method": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "email",
+            "telephone"
+          ]
         },
         "account": {
           "type": "string"
@@ -6659,6 +6736,9 @@
           "type": "string"
         },
         "code": {
+          "type": "string"
+        },
+        "area_code": {
           "type": "string"
         },
         "cf_token": {
@@ -6670,7 +6750,8 @@
         "method",
         "account",
         "password",
-        "code"
+        "code",
+        "area_code"
       ]
     },
     "AppAuthRespone": {
