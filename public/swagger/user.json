@@ -1344,6 +1344,10 @@
     "ApplicationConfig": {
       "type": "object",
       "properties": {
+        "encryption": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "domains": {
           "type": "array",
           "items": {
@@ -1360,6 +1364,7 @@
       },
       "title": "ApplicationConfig",
       "required": [
+        "encryption",
         "domains",
         "startup_picture",
         "startup_picture_skip_time"
