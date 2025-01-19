@@ -2764,6 +2764,105 @@
         ]
       }
     },
+    "/v1/admin/system/oauth_config": {
+      "get": {
+        "summary": "Get OAuth config",
+        "operationId": "GetOAuthConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OAuthQueryResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      },
+      "post": {
+        "summary": "OAuth create config",
+        "operationId": "OAuthCreateConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAuthCreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      },
+      "put": {
+        "summary": "Update oauth config",
+        "operationId": "UpdateOAuthConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAuthConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/register_config": {
       "get": {
         "summary": "Get register config",
@@ -3936,6 +4035,141 @@
           {
             "apiKey": []
           }
+        ]
+      }
+    },
+    "/v1/app/auth/login": {
+      "post": {
+        "summary": "Login",
+        "operationId": "Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
+    "/v1/app/auth/register": {
+      "post": {
+        "summary": "Register",
+        "operationId": "Register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
+    "/v1/app/auth/reset_password": {
+      "post": {
+        "summary": "Reset Password",
+        "operationId": "ResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
         ]
       }
     },
@@ -6412,6 +6646,49 @@
         "updated_at"
       ]
     },
+    "AppAuthRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "AppAuthRequest",
+      "required": [
+        "method",
+        "account",
+        "password",
+        "code"
+      ]
+    },
+    "AppAuthRespone": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "user_info": {
+          "type": "string"
+        }
+      },
+      "title": "AppAuthRespone",
+      "required": [
+        "token",
+        "user_info"
+      ]
+    },
     "Application": {
       "type": "object",
       "properties": {
@@ -8860,6 +9137,84 @@
         "method"
       ]
     },
+    "OAuthConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "key_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "OAuthConfig",
+      "required": [
+        "id",
+        "platform",
+        "team_id",
+        "key_id",
+        "client_id",
+        "client_secret",
+        "redirect"
+      ]
+    },
+    "OAuthCreateRequest": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": [
+            "github",
+            "google",
+            "apple",
+            "qq",
+            "wechat",
+            "telegram",
+            "facebook"
+          ]
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "key_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "OAuthCreateRequest",
+      "required": [
+        "platform",
+        "team_id",
+        "key_id",
+        "client_id",
+        "client_secret",
+        "redirect"
+      ]
+    },
     "OAuthLoginResponse": {
       "type": "object",
       "properties": {
@@ -8870,6 +9225,21 @@
       "title": "OAuthLoginResponse",
       "required": [
         "redirect"
+      ]
+    },
+    "OAuthQueryResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuthConfig"
+          }
+        }
+      },
+      "title": "OAuthQueryResponse",
+      "required": [
+        "list"
       ]
     },
     "OnlineUser": {
@@ -12304,6 +12674,11 @@
         "balance",
         "created_at"
       ]
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {},
+      "title": "UserInfo"
     },
     "UserLoginRequest": {
       "type": "object",

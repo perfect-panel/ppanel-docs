@@ -2097,6 +2097,43 @@
         "last_at"
       ]
     },
+    "OAuthConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "key_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "OAuthConfig",
+      "required": [
+        "id",
+        "platform",
+        "team_id",
+        "key_id",
+        "client_id",
+        "client_secret",
+        "redirect"
+      ]
+    },
     "OnlineUser": {
       "type": "object",
       "properties": {
