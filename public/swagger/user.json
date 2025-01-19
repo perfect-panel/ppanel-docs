@@ -2102,7 +2102,7 @@
         "last_at"
       ]
     },
-    "OAuthConfig": {
+    "OAuthMethod": {
       "type": "object",
       "properties": {
         "id": {
@@ -2110,28 +2110,10 @@
           "format": "int64"
         },
         "platform": {
-          "type": "string",
-          "enum": [
-            "github",
-            "google",
-            "apple",
-            "qq",
-            "wechat",
-            "telegram",
-            "facebook"
-          ]
-        },
-        "team_id": {
           "type": "string"
         },
-        "key_id": {
-          "type": "string"
-        },
-        "client_id": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
+        "config": {
+          "type": "object"
         },
         "redirect": {
           "type": "string"
@@ -2139,18 +2121,25 @@
         "enabled": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
         }
       },
-      "title": "OAuthConfig",
+      "title": "OAuthMethod",
       "required": [
         "id",
         "platform",
-        "team_id",
-        "key_id",
-        "client_id",
-        "client_secret",
+        "config",
         "redirect",
-        "enabled"
+        "enabled",
+        "created_at",
+        "updated_at"
       ]
     },
     "OnlineUser": {

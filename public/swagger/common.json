@@ -1526,57 +1526,6 @@
         "method"
       ]
     },
-    "OAuthConfig": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
-          "type": "string",
-          "enum": [
-            "github",
-            "google",
-            "apple",
-            "qq",
-            "wechat",
-            "telegram",
-            "facebook"
-          ]
-        },
-        "team_id": {
-          "type": "string"
-        },
-        "key_id": {
-          "type": "string"
-        },
-        "client_id": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
-        },
-        "redirect": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "OAuthConfig",
-      "required": [
-        "id",
-        "platform",
-        "team_id",
-        "key_id",
-        "client_id",
-        "client_secret",
-        "redirect",
-        "enabled"
-      ]
-    },
     "OAuthLoginResponse": {
       "type": "object",
       "properties": {
@@ -1587,6 +1536,46 @@
       "title": "OAuthLoginResponse",
       "required": [
         "redirect"
+      ]
+    },
+    "OAuthMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "redirect": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "OAuthMethod",
+      "required": [
+        "id",
+        "platform",
+        "config",
+        "redirect",
+        "enabled",
+        "created_at",
+        "updated_at"
       ]
     },
     "OnlineUser": {

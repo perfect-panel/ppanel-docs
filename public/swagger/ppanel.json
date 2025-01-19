@@ -2764,9 +2764,46 @@
         ]
       }
     },
+    "/v1/admin/system/oauth/platform": {
+      "get": {
+        "summary": "Get OAuth Config By Platform",
+        "operationId": "GetOAuthByPlatform",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OAuthMethod"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/oauth_config": {
       "get": {
-        "summary": "Get OAuth config",
+        "summary": "Get oauth config",
         "operationId": "GetOAuthConfig",
         "responses": {
           "200": {
@@ -2780,7 +2817,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/OAuthQueryResponse"
+                      "$ref": "#/definitions/GetOAuthConfigResponse"
                     }
                   }
                 }
@@ -2788,41 +2825,6 @@
             }
           }
         },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      },
-      "post": {
-        "summary": "OAuth create config",
-        "operationId": "OAuthCreateConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OAuthCreateRequest"
-            }
-          }
-        ],
         "tags": [
           "ppanel/admin/system"
         ]
@@ -2854,7 +2856,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OAuthConfig"
+              "$ref": "#/definitions/UpdateOAuthConfig"
             }
           }
         ],
@@ -8594,6 +8596,33 @@
         "list"
       ]
     },
+    "GetOAuthByPlatformRequest": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string"
+        }
+      },
+      "title": "GetOAuthByPlatformRequest",
+      "required": [
+        "platform"
+      ]
+    },
+    "GetOAuthConfigResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuthMethod"
+          }
+        }
+      },
+      "title": "GetOAuthConfigResponse",
+      "required": [
+        "list"
+      ]
+    },
     "GetOrderListRequest": {
       "type": "object",
       "properties": {
@@ -9223,103 +9252,6 @@
         "method"
       ]
     },
-    "OAuthConfig": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
-          "type": "string",
-          "enum": [
-            "github",
-            "google",
-            "apple",
-            "qq",
-            "wechat",
-            "telegram",
-            "facebook"
-          ]
-        },
-        "team_id": {
-          "type": "string"
-        },
-        "key_id": {
-          "type": "string"
-        },
-        "client_id": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
-        },
-        "redirect": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "OAuthConfig",
-      "required": [
-        "id",
-        "platform",
-        "team_id",
-        "key_id",
-        "client_id",
-        "client_secret",
-        "redirect",
-        "enabled"
-      ]
-    },
-    "OAuthCreateRequest": {
-      "type": "object",
-      "properties": {
-        "platform": {
-          "type": "string",
-          "enum": [
-            "github",
-            "google",
-            "apple",
-            "qq",
-            "wechat",
-            "telegram",
-            "facebook"
-          ]
-        },
-        "team_id": {
-          "type": "string"
-        },
-        "key_id": {
-          "type": "string"
-        },
-        "client_id": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "redirect": {
-          "type": "string"
-        }
-      },
-      "title": "OAuthCreateRequest",
-      "required": [
-        "platform",
-        "team_id",
-        "key_id",
-        "client_id",
-        "client_secret",
-        "enabled",
-        "redirect"
-      ]
-    },
     "OAuthLoginResponse": {
       "type": "object",
       "properties": {
@@ -9332,19 +9264,44 @@
         "redirect"
       ]
     },
-    "OAuthQueryResponse": {
+    "OAuthMethod": {
       "type": "object",
       "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OAuthConfig"
-          }
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "redirect": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
         }
       },
-      "title": "OAuthQueryResponse",
+      "title": "OAuthMethod",
       "required": [
-        "list"
+        "id",
+        "platform",
+        "config",
+        "redirect",
+        "enabled",
+        "created_at",
+        "updated_at"
       ]
     },
     "OnlineUser": {
@@ -12166,6 +12123,36 @@
         "config",
         "enable",
         "sort"
+      ]
+    },
+    "UpdateOAuthConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "redirect": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateOAuthConfig",
+      "required": [
+        "id",
+        "platform",
+        "config",
+        "redirect",
+        "enabled"
       ]
     },
     "UpdateOrderStatusRequest": {
