@@ -8672,6 +8672,12 @@
         },
         "subscribe": {
           "$ref": "#/definitions/SubscribeConfig"
+        },
+        "oauth_methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "GetGlobalConfigResponse",
@@ -8681,7 +8687,8 @@
         "auth",
         "invite",
         "currency",
-        "subscribe"
+        "subscribe",
+        "oauth_methods"
       ]
     },
     "GetNodeDetailRequest": {
@@ -9445,11 +9452,15 @@
         "method": {
           "type": "string",
           "description": "google, facebook, apple, telegram, github etc."
+        },
+        "redirect": {
+          "type": "string"
         }
       },
       "title": "OAthLoginRequest",
       "required": [
-        "method"
+        "method",
+        "redirect"
       ]
     },
     "OAuthLoginResponse": {
