@@ -281,6 +281,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/auth/oauth"
         ]
@@ -1431,6 +1445,22 @@
       "title": "GetTosResponse",
       "required": [
         "tos_content"
+      ]
+    },
+    "GoogleLoginCallbackRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "title": "GoogleLoginCallbackRequest",
+      "required": [
+        "code",
+        "state"
       ]
     },
     "Hysteria2": {
