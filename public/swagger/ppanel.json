@@ -4505,8 +4505,32 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "code",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id_token",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/auth/oauth"
+        ],
+        "consumes": [
+          "multipart/form-data",
+          "application/x-www-form-urlencoded"
         ]
       }
     },
@@ -6869,6 +6893,26 @@
       "title": "AppAuthRespone",
       "required": [
         "token"
+      ]
+    },
+    "AppleLoginCallbackRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "id_token": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "title": "AppleLoginCallbackRequest",
+      "required": [
+        "code",
+        "id_token",
+        "state"
       ]
     },
     "Application": {
