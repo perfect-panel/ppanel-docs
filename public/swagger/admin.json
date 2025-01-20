@@ -4149,6 +4149,13 @@
     "ApplicationConfig": {
       "type": "object",
       "properties": {
+        "app_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "app_key": {
+          "type": "string"
+        },
         "encryption": {
           "type": "boolean",
           "format": "boolean"
@@ -4169,6 +4176,8 @@
       },
       "title": "ApplicationConfig",
       "required": [
+        "app_id",
+        "app_key",
         "encryption",
         "domains",
         "startup_picture",
