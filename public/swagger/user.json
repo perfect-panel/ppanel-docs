@@ -1348,12 +1348,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "app_key": {
+        "encryption_key": {
           "type": "string"
         },
-        "encryption": {
-          "type": "boolean",
-          "format": "boolean"
+        "encryption_method": {
+          "type": "string"
         },
         "domains": {
           "type": "array",
@@ -1372,8 +1371,8 @@
       "title": "ApplicationConfig",
       "required": [
         "app_id",
-        "app_key",
-        "encryption",
+        "encryption_key",
+        "encryption_method",
         "domains",
         "startup_picture",
         "startup_picture_skip_time"
