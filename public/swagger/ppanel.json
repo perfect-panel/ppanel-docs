@@ -4668,6 +4668,45 @@
         ]
       }
     },
+    "/v1/auth/oauth/login/token": {
+      "post": {
+        "summary": "OAuth login get token",
+        "operationId": "OAuthLoginGetToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAuthLoginGetTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth/oauth"
+        ]
+      }
+    },
     "/v1/auth/register": {
       "post": {
         "summary": "User register",
@@ -9461,6 +9500,23 @@
       "required": [
         "method",
         "redirect"
+      ]
+    },
+    "OAuthLoginGetTokenRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "google, facebook, apple, telegram, github etc."
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "OAuthLoginGetTokenRequest",
+      "required": [
+        "method",
+        "code"
       ]
     },
     "OAuthLoginResponse": {
