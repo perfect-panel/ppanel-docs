@@ -1665,14 +1665,14 @@
           "type": "string",
           "description": "google, facebook, apple, telegram, github etc."
         },
-        "code": {
-          "type": "string"
+        "callback": {
+          "type": "object"
         }
       },
       "title": "OAuthLoginGetTokenRequest",
       "required": [
         "method",
-        "code"
+        "callback"
       ]
     },
     "OAuthLoginResponse": {
