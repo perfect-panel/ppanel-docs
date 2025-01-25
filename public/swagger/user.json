@@ -4018,6 +4018,53 @@
         "created_at"
       ]
     },
+    "UserDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_number": {
+          "type": "string"
+        },
+        "online": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "last_online": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserDevice",
+      "required": [
+        "id",
+        "user_id",
+        "device_number",
+        "online",
+        "last_online",
+        "enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "UserSubscribe": {
       "type": "object",
       "properties": {

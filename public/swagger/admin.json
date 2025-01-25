@@ -3984,6 +3984,88 @@
         ]
       }
     },
+    "/v1/admin/user/device": {
+      "delete": {
+        "summary": "Delete user device",
+        "operationId": "DeleteUserDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteUserDeivceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "User device",
+        "operationId": "UpdaeUserDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDevice"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/admin/user/list": {
       "get": {
         "summary": "Get user list",
@@ -5189,6 +5271,19 @@
         }
       },
       "title": "DeleteSubscribeRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DeleteUserDeivceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteUserDeivceRequest",
       "required": [
         "id"
       ]
@@ -8641,6 +8736,53 @@
         "order_id",
         "balance",
         "created_at"
+      ]
+    },
+    "UserDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_number": {
+          "type": "string"
+        },
+        "online": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "last_online": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserDevice",
+      "required": [
+        "id",
+        "user_id",
+        "device_number",
+        "online",
+        "last_online",
+        "enabled",
+        "created_at",
+        "updated_at"
       ]
     },
     "UserStatistics": {
