@@ -4305,7 +4305,7 @@
     "/v1/app/node/list": {
       "get": {
         "summary": "Get Node list",
-        "operationId": "GetNode",
+        "operationId": "GetNodeList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -6513,6 +6513,33 @@
                     "data": {
                       "$ref": "#/definitions/QueryUserSubscribeListResponse"
                     }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/subscribe_reset": {
+      "put": {
+        "summary": "Reset User Subscribe Address",
+        "operationId": "ResetUserSubcribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
                   }
                 }
               ]
@@ -9624,6 +9651,100 @@
         "node_push_interval"
       ]
     },
+    "NodeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "relay_mode": {
+          "type": "string"
+        },
+        "relay_node": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "city": {
+          "type": "string"
+        },
+        "config": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "expire_time": {
+          "type": "string"
+        }
+      },
+      "title": "NodeInfo",
+      "required": [
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "relay_mode",
+        "relay_node",
+        "server_addr",
+        "speed_limit",
+        "tags",
+        "traffic",
+        "traffic_ratio",
+        "upload",
+        "city",
+        "config",
+        "country",
+        "created_at",
+        "download",
+        "start_time",
+        "expire_time"
+      ]
+    },
     "NodeRelay": {
       "type": "object",
       "properties": {
@@ -9651,7 +9772,7 @@
         "list": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NodeInfo"
           }
         }
       },
