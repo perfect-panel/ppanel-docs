@@ -1518,6 +1518,22 @@
         "register"
       ]
     },
+    "AuthMethod": {
+      "type": "object",
+      "properties": {
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        }
+      },
+      "title": "AuthMethod",
+      "required": [
+        "auth_type",
+        "auth_identifier"
+      ]
+    },
     "BindTelegramResponse": {
       "type": "object",
       "properties": {

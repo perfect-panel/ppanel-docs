@@ -4302,6 +4302,35 @@
         ]
       }
     },
+    "/v1/app/node/list": {
+      "get": {
+        "summary": "Get Node list",
+        "operationId": "GetNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/NodeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/node"
+        ]
+      }
+    },
     "/v1/app/user/account": {
       "delete": {
         "summary": "Delete Account",
@@ -7315,6 +7344,22 @@
         "register"
       ]
     },
+    "AuthMethod": {
+      "type": "object",
+      "properties": {
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        }
+      },
+      "title": "AuthMethod",
+      "required": [
+        "auth_type",
+        "auth_identifier"
+      ]
+    },
     "BatchDeleteCouponRequest": {
       "type": "object",
       "properties": {
@@ -9598,6 +9643,21 @@
         "host",
         "port",
         "prefix"
+      ]
+    },
+    "NodeResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "NodeResponse",
+      "required": [
+        "list"
       ]
     },
     "NodeSortRequest": {
@@ -13275,6 +13335,12 @@
           "items": {
             "$ref": "#/definitions/UserDevice"
           }
+        },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethod"
+          }
         }
       },
       "title": "UserInfoResponse",
@@ -13284,7 +13350,8 @@
         "avatar",
         "area_code",
         "telephone",
-        "devices"
+        "devices",
+        "auth_methods"
       ]
     },
     "UserLoginRequest": {
