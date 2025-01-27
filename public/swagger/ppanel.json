@@ -8308,13 +8308,14 @@
             "telephone"
           ]
         },
-        "Code": {
+        "code": {
           "type": "string"
         }
       },
       "title": "DeleteAccountRequest",
       "required": [
-        "method"
+        "method",
+        "code"
       ]
     },
     "DeleteAnnouncementRequest": {
