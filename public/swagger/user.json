@@ -1266,33 +1266,6 @@
         ]
       }
     },
-    "/v1/public/user/subscribe_reset": {
-      "put": {
-        "summary": "Reset User Subscribe Address",
-        "operationId": "ResetUserSubcribe",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/public/user"
-        ]
-      }
-    },
     "/v1/public/user/subscribe_token": {
       "put": {
         "summary": "Reset User Subscribe Token",
