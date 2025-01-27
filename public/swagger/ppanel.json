@@ -6730,6 +6730,43 @@
         ]
       }
     },
+    "/v1/public/user/subscribe_token": {
+      "put": {
+        "summary": "Reset User Subscribe Token",
+        "operationId": "ResetUserSubscribeToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetUserSubscribeTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/unbind_oauth": {
       "post": {
         "summary": "Unbind OAuth",
@@ -11119,6 +11156,19 @@
       "title": "ResetTrafficOrderResponse",
       "required": [
         "order_no"
+      ]
+    },
+    "ResetUserSubscribeTokenRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetUserSubscribeTokenRequest",
+      "required": [
+        "user_subscribe_id"
       ]
     },
     "Response": {
