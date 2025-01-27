@@ -1171,6 +1171,35 @@
         ]
       }
     },
+    "/v1/public/user/oauth_methods": {
+      "get": {
+        "summary": "Get OAuth Methods",
+        "operationId": "GetOAuthMethods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetOAuthMethodsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/password": {
       "put": {
         "summary": "Update User Password",
@@ -1259,6 +1288,43 @@
             }
           }
         },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/unbind_oauth": {
+      "post": {
+        "summary": "Unbind OAuth",
+        "operationId": "UnbindOAuth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnbindOAuthRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/public/user"
         ]
@@ -3916,6 +3982,18 @@
       "required": [
         "port",
         "security_config"
+      ]
+    },
+    "UnbindOAuthRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        }
+      },
+      "title": "UnbindOAuthRequest",
+      "required": [
+        "method"
       ]
     },
     "UnsubscribeRequest": {
