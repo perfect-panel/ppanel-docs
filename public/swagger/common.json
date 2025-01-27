@@ -2977,15 +2977,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "email": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
         "avatar": {
           "type": "string"
         },
@@ -3048,6 +3039,12 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethod"
+          }
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -3068,9 +3065,6 @@
       "title": "User",
       "required": [
         "id",
-        "email",
-        "telephone",
-        "telephone_area_code",
         "avatar",
         "balance",
         "commission",
@@ -3086,6 +3080,7 @@
         "enable_login_notify",
         "enable_subscribe_notify",
         "enable_trade_notify",
+        "auth_methods",
         "created_at",
         "updated_at"
       ]

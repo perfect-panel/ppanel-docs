@@ -3865,6 +3865,80 @@
         ]
       }
     },
+    "/v1/admin/user/auth_method": {
+      "get": {
+        "summary": "Get user auth method",
+        "operationId": "GetUserAuthMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserAuthMethodResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create user auth method",
+        "operationId": "CreateUserAuthMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserAuthMethodRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/admin/user/batch": {
       "delete": {
         "summary": "Batch delete user",
@@ -8178,6 +8252,27 @@
         "content"
       ]
     },
+    "CreateUserAuthMethodRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        }
+      },
+      "title": "CreateUserAuthMethodRequest",
+      "required": [
+        "user_id",
+        "auth_type",
+        "auth_identifier"
+      ]
+    },
     "CreateUserRequest": {
       "type": "object",
       "properties": {
@@ -9436,6 +9531,34 @@
       "title": "GetTosResponse",
       "required": [
         "tos_content"
+      ]
+    },
+    "GetUserAuthMethodRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserAuthMethodRequest",
+      "required": [
+        "user_id"
+      ]
+    },
+    "GetUserAuthMethodResponse": {
+      "type": "object",
+      "properties": {
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethod"
+          }
+        }
+      },
+      "title": "GetUserAuthMethodResponse",
+      "required": [
+        "auth_methods"
       ]
     },
     "GetUserListRequest": {
@@ -13079,16 +13202,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "email": {
-          "type": "string"
-        },
         "password": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
           "type": "string"
         },
         "avatar": {
@@ -13125,10 +13239,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "valid_email": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "enable_email_notify": {
           "type": "boolean",
           "format": "boolean"
@@ -13157,10 +13267,7 @@
       "title": "UpdateUserRequest",
       "required": [
         "id",
-        "email",
         "password",
-        "telephone",
-        "telephone_area_code",
         "avatar",
         "balance",
         "commission",
@@ -13170,7 +13277,6 @@
         "referer_id",
         "enable",
         "is_admin",
-        "valid_email",
         "enable_email_notify",
         "enable_telegram_notify",
         "enable_balance_notify",
@@ -13204,15 +13310,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "email": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
         "avatar": {
           "type": "string"
         },
@@ -13275,6 +13372,12 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethod"
+          }
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -13295,9 +13398,6 @@
       "title": "User",
       "required": [
         "id",
-        "email",
-        "telephone",
-        "telephone_area_code",
         "avatar",
         "balance",
         "commission",
@@ -13313,6 +13413,7 @@
         "enable_login_notify",
         "enable_subscribe_notify",
         "enable_trade_notify",
+        "auth_methods",
         "created_at",
         "updated_at"
       ]
