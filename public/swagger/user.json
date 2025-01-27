@@ -918,6 +918,82 @@
         ]
       }
     },
+    "/v1/public/user/bind_oauth": {
+      "post": {
+        "summary": "Bind OAuth",
+        "operationId": "BindOAuth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/BindOAuthResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindOAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/bind_oauth/callback": {
+      "post": {
+        "summary": "Bind OAuth Callback",
+        "operationId": "BindOAuthCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindOAuthCallbackRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/bind_telegram": {
       "get": {
         "summary": "Bind Telegram",
@@ -1553,12 +1629,61 @@
         },
         "auth_identifier": {
           "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "AuthMethod",
       "required": [
         "auth_type",
-        "auth_identifier"
+        "auth_identifier",
+        "verified"
+      ]
+    },
+    "BindOAuthCallbackRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "callback": {
+          "type": "object"
+        }
+      },
+      "title": "BindOAuthCallbackRequest",
+      "required": [
+        "method",
+        "callback"
+      ]
+    },
+    "BindOAuthRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "BindOAuthRequest",
+      "required": [
+        "method",
+        "redirect"
+      ]
+    },
+    "BindOAuthResponse": {
+      "type": "object",
+      "properties": {
+        "redirect": {
+          "type": "string"
+        }
+      },
+      "title": "BindOAuthResponse",
+      "required": [
+        "redirect"
       ]
     },
     "BindTelegramResponse": {
@@ -1973,6 +2098,21 @@
       "title": "GetAvailablePaymentMethodsResponse",
       "required": [
         "list"
+      ]
+    },
+    "GetOAuthMethodsResponse": {
+      "type": "object",
+      "properties": {
+        "methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethod"
+          }
+        }
+      },
+      "title": "GetOAuthMethodsResponse",
+      "required": [
+        "methods"
       ]
     },
     "GetUserTicketDetailRequest": {

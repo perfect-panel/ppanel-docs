@@ -1095,12 +1095,17 @@
         },
         "auth_identifier": {
           "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "AuthMethod",
       "required": [
         "auth_type",
-        "auth_identifier"
+        "auth_identifier",
+        "verified"
       ]
     },
     "CheckUserRequest": {
