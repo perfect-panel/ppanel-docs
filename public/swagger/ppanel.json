@@ -1630,6 +1630,142 @@
         ]
       }
     },
+    "/v1/admin/server/rule_group": {
+      "delete": {
+        "summary": "Delete rule group",
+        "operationId": "DeleteRuleGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteRuleGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      },
+      "post": {
+        "summary": "Create rule group",
+        "operationId": "CreateRuleGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRuleGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      },
+      "put": {
+        "summary": "Update rule group",
+        "operationId": "UpdateRuleGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/rule_group_list": {
+      "get": {
+        "summary": "Get rule group list",
+        "operationId": "GetRuleGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetRuleGroupResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/server/sort": {
       "post": {
         "summary": "Node sort ",
@@ -8589,6 +8725,31 @@
         "fee_amount"
       ]
     },
+    "CreateRuleGroupRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateRuleGroupRequest",
+      "required": [
+        "name",
+        "icon",
+        "description",
+        "enable"
+      ]
+    },
     "CreateSubscribeGroupRequest": {
       "type": "object",
       "properties": {
@@ -8992,6 +9153,19 @@
         }
       },
       "title": "DeleteNodeRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DeleteRuleGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteRuleGroupRequest",
       "required": [
         "id"
       ]
@@ -9730,6 +9904,26 @@
         }
       },
       "title": "GetOrderListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "GetRuleGroupResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerRuleGroup"
+          }
+        }
+      },
+      "title": "GetRuleGroupResponse",
       "required": [
         "total",
         "list"
@@ -11990,6 +12184,46 @@
         "traffic"
       ]
     },
+    "ServerRuleGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerRuleGroup",
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "enable",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "ServerStatus": {
       "type": "object",
       "properties": {
@@ -13694,6 +13928,36 @@
       "required": [
         "password",
         "new_password"
+      ]
+    },
+    "UpdateRuleGroupRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateRuleGroupRequest",
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "enable"
       ]
     },
     "UpdateStripeRequest": {

@@ -3422,6 +3422,46 @@
         "updated_at"
       ]
     },
+    "ServerRuleGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerRuleGroup",
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "enable",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "ServerStatus": {
       "type": "object",
       "properties": {
