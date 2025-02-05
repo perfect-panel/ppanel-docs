@@ -4668,6 +4668,45 @@
         ]
       }
     },
+    "/v1/app/auth/config": {
+      "post": {
+        "summary": "GetAppConfig",
+        "operationId": "GetAppConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppConfigRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
     "/v1/app/auth/login": {
       "post": {
         "summary": "Login",
@@ -4819,7 +4858,36 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/NodeResponse"
+                      "$ref": "#/definitions/UserSubscbribeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/node"
+        ]
+      }
+    },
+    "/v1/app/node/rule_group_list": {
+      "get": {
+        "summary": "Get rule group list",
+        "operationId": "GetRuleGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetRuleGroupListResponse"
                     }
                   }
                 }
@@ -7678,8 +7746,19 @@
         "account": {
           "type": "string"
         },
-        "device_number": {
+        "imei": {
           "type": "string"
+        },
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
         },
         "area_code": {
           "type": "string"
@@ -7689,7 +7768,8 @@
       "required": [
         "method",
         "account",
-        "device_number",
+        "imei",
+        "user_agent",
         "area_code"
       ]
     },
@@ -7720,8 +7800,19 @@
         "password": {
           "type": "string"
         },
-        "device_number": {
+        "imei": {
           "type": "string"
+        },
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
         },
         "code": {
           "type": "string"
@@ -7738,7 +7829,8 @@
         "method",
         "account",
         "password",
-        "device_number",
+        "imei",
+        "user_agent",
         "code",
         "area_code"
       ]
@@ -7753,6 +7845,92 @@
       "title": "AppAuthRespone",
       "required": [
         "token"
+      ]
+    },
+    "AppConfigRequest": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        }
+      },
+      "title": "AppConfigRequest",
+      "required": [
+        "os"
+      ]
+    },
+    "AppConfigResponse": {
+      "type": "object",
+      "properties": {
+        "encryption_key": {
+          "type": "string"
+        },
+        "encryption_method": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startup_picture": {
+          "type": "string"
+        },
+        "startup_picture_skip_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "applications": {
+          "$ref": "#/definitions/AppInfo"
+        }
+      },
+      "title": "AppConfigResponse",
+      "required": [
+        "encryption_key",
+        "encryption_method",
+        "domains",
+        "startup_picture",
+        "startup_picture_skip_time",
+        "applications"
+      ]
+    },
+    "AppInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "version_description": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppInfo",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "url",
+        "version",
+        "version_description",
+        "is_default"
       ]
     },
     "AppSendCodeRequest": {
@@ -9053,7 +9231,8 @@
           "type": "string",
           "enum": [
             "email",
-            "telephone"
+            "telephone",
+            "device"
           ]
         },
         "code": {
@@ -9909,6 +10088,26 @@
         "list"
       ]
     },
+    "GetRuleGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerRuleGroup"
+          }
+        }
+      },
+      "title": "GetRuleGroupListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "GetRuleGroupResponse": {
       "type": "object",
       "properties": {
@@ -10676,100 +10875,6 @@
         "node_push_interval"
       ]
     },
-    "NodeInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "double"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "city": {
-          "type": "string"
-        },
-        "config": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "start_time": {
-          "type": "string"
-        },
-        "expire_time": {
-          "type": "string"
-        }
-      },
-      "title": "NodeInfo",
-      "required": [
-        "id",
-        "name",
-        "uuid",
-        "protocol",
-        "relay_mode",
-        "relay_node",
-        "server_addr",
-        "speed_limit",
-        "tags",
-        "traffic",
-        "traffic_ratio",
-        "upload",
-        "city",
-        "config",
-        "country",
-        "created_at",
-        "download",
-        "start_time",
-        "expire_time"
-      ]
-    },
     "NodeRelay": {
       "type": "object",
       "properties": {
@@ -10789,21 +10894,6 @@
         "host",
         "port",
         "prefix"
-      ]
-    },
-    "NodeResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeInfo"
-          }
-        }
-      },
-      "title": "NodeResponse",
-      "required": [
-        "list"
       ]
     },
     "NodeSortRequest": {
@@ -14540,14 +14630,13 @@
           "type": "integer",
           "format": "int64"
         },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
+        "ip": {
           "type": "string"
         },
-        "device_number": {
+        "imei": {
+          "type": "string"
+        },
+        "user_agent": {
           "type": "string"
         },
         "online": {
@@ -14557,10 +14646,6 @@
         "enabled": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "last_online": {
-          "type": "integer",
-          "format": "int64"
         },
         "created_at": {
           "type": "integer",
@@ -14574,12 +14659,11 @@
       "title": "UserDevice",
       "required": [
         "id",
-        "user_id",
-        "platform",
-        "device_number",
+        "ip",
+        "imei",
+        "user_agent",
         "online",
         "enabled",
-        "last_online",
         "created_at",
         "updated_at"
       ]
@@ -14721,6 +14805,124 @@
         "today",
         "monthly",
         "all"
+      ]
+    },
+    "UserSubscbribeNodeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "relay_mode": {
+          "type": "string"
+        },
+        "relay_node": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "city": {
+          "type": "string"
+        },
+        "config": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscbribeNodeInfo",
+      "required": [
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "relay_mode",
+        "relay_node",
+        "server_addr",
+        "speed_limit",
+        "tags",
+        "traffic",
+        "traffic_ratio",
+        "upload",
+        "city",
+        "config",
+        "country",
+        "created_at",
+        "download"
+      ]
+    },
+    "UserSubscbribeResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "expire_time": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscbribeNodeInfo"
+          }
+        }
+      },
+      "title": "UserSubscbribeResponse",
+      "required": [
+        "id",
+        "name",
+        "start_time",
+        "expire_time",
+        "list"
       ]
     },
     "UserSubscribe": {

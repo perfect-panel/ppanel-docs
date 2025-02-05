@@ -9672,14 +9672,13 @@
           "type": "integer",
           "format": "int64"
         },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
+        "ip": {
           "type": "string"
         },
-        "device_number": {
+        "imei": {
+          "type": "string"
+        },
+        "user_agent": {
           "type": "string"
         },
         "online": {
@@ -9689,10 +9688,6 @@
         "enabled": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "last_online": {
-          "type": "integer",
-          "format": "int64"
         },
         "created_at": {
           "type": "integer",
@@ -9706,12 +9701,11 @@
       "title": "UserDevice",
       "required": [
         "id",
-        "user_id",
-        "platform",
-        "device_number",
+        "ip",
+        "imei",
+        "user_agent",
         "online",
         "enabled",
-        "last_online",
         "created_at",
         "updated_at"
       ]
