@@ -4398,6 +4398,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "platform": {
+          "type": "string"
+        },
         "device_number": {
           "type": "string"
         },
@@ -4426,6 +4429,7 @@
       "required": [
         "id",
         "user_id",
+        "platform",
         "device_number",
         "online",
         "enabled",
