@@ -7850,13 +7850,21 @@
     "AppConfigRequest": {
       "type": "object",
       "properties": {
-        "os": {
-          "type": "string"
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
         }
       },
       "title": "AppConfigRequest",
       "required": [
-        "os"
+        "user_agent"
       ]
     },
     "AppConfigResponse": {
