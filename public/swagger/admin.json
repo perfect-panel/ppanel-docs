@@ -6779,7 +6779,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserSubscribe"
+            "$ref": "#/definitions/Subscribe"
           }
         },
         "total": {
