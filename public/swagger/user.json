@@ -4303,6 +4303,42 @@
         "updated_at"
       ]
     },
+    "UserLoginLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "login_ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserLoginLog",
+      "required": [
+        "id",
+        "user_id",
+        "login_ip",
+        "user_agent",
+        "success",
+        "created_at"
+      ]
+    },
     "UserSubscribe": {
       "type": "object",
       "properties": {
@@ -4382,6 +4418,46 @@
         "status",
         "created_at",
         "updated_at"
+      ]
+    },
+    "UserSubscribeLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "token": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribeLog",
+      "required": [
+        "id",
+        "user_id",
+        "user_subscribe_id",
+        "token",
+        "ip",
+        "user_agent",
+        "created_at"
       ]
     },
     "VerifyConfig": {
