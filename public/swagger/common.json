@@ -1071,7 +1071,7 @@
       "type": "object",
       "properties": {
         "sms": {
-          "$ref": "#/definitions/SmsAuthenticateConfig"
+          "$ref": "#/definitions/MobileAuthenticateConfig"
         },
         "email": {
           "$ref": "#/definitions/EmailAuthticateConfig"
@@ -1087,25 +1087,30 @@
         "register"
       ]
     },
-    "AuthMethod": {
+    "AuthMethodConfig": {
       "type": "object",
       "properties": {
-        "auth_type": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
           "type": "string"
         },
-        "auth_identifier": {
-          "type": "string"
+        "config": {
+          "$ref": "#/definitions/mapstringinterface"
         },
-        "verified": {
+        "enabled": {
           "type": "boolean",
           "format": "boolean"
         }
       },
-      "title": "AuthMethod",
+      "title": "AuthMethodConfig",
       "required": [
-        "auth_type",
-        "auth_identifier",
-        "verified"
+        "id",
+        "method",
+        "config",
+        "enabled"
       ]
     },
     "CheckUserRequest": {
@@ -1274,93 +1279,28 @@
     "EmailAuthticateConfig": {
       "type": "object",
       "properties": {
-        "email_enabled": {
+        "enable": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_enable_verify": {
+        "enable_verify": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_enable_domain_suffix": {
+        "enable_domain_suffix": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_domain_suffix_list": {
+        "domain_suffix_list": {
           "type": "string"
         }
       },
       "title": "EmailAuthticateConfig",
       "required": [
-        "email_enabled",
-        "email_enable_verify",
-        "email_enable_domain_suffix",
-        "email_domain_suffix_list"
-      ]
-    },
-    "EmailSmtpConfig": {
-      "type": "object",
-      "properties": {
-        "email_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_smtp_host": {
-          "type": "string"
-        },
-        "email_smtp_port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email_smtp_user": {
-          "type": "string"
-        },
-        "email_smtp_pass": {
-          "type": "string"
-        },
-        "email_smtp_from": {
-          "type": "string"
-        },
-        "email_smtp_ssl": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "verify_email_template": {
-          "type": "string"
-        },
-        "maintenance_email_template": {
-          "type": "string"
-        },
-        "expiration_email_template": {
-          "type": "string"
-        },
-        "email_enable_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_enable_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_domain_suffix_list": {
-          "type": "string"
-        }
-      },
-      "title": "EmailSmtpConfig",
-      "required": [
-        "email_enabled",
-        "email_smtp_host",
-        "email_smtp_port",
-        "email_smtp_user",
-        "email_smtp_pass",
-        "email_smtp_from",
-        "email_smtp_ssl",
-        "verify_email_template",
-        "maintenance_email_template",
-        "expiration_email_template",
-        "email_enable_verify",
-        "email_enable_domain_suffix",
-        "email_domain_suffix_list"
+        "enable",
+        "enable_verify",
+        "enable_domain_suffix",
+        "domain_suffix_list"
       ]
     },
     "Follow": {
@@ -1595,6 +1535,34 @@
         "token"
       ]
     },
+    "MobileAuthenticateConfig": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MobileAuthenticateConfig",
+      "required": [
+        "enable",
+        "limit",
+        "interval",
+        "expire_time"
+      ]
+    },
     "NodeConfig": {
       "type": "object",
       "properties": {
@@ -1706,46 +1674,6 @@
       "title": "OAuthLoginResponse",
       "required": [
         "redirect"
-      ]
-    },
-    "OAuthMethod": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "redirect": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "OAuthMethod",
-      "required": [
-        "id",
-        "platform",
-        "config",
-        "redirect",
-        "enabled",
-        "created_at",
-        "updated_at"
       ]
     },
     "OnlineUser": {
@@ -2415,86 +2343,6 @@
         "site_logo"
       ]
     },
-    "SmsAuthenticateConfig": {
-      "type": "object",
-      "properties": {
-        "sms_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sms_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_expire_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SmsAuthenticateConfig",
-      "required": [
-        "sms_enabled",
-        "sms_limit",
-        "sms_interval",
-        "sms_expire_time"
-      ]
-    },
-    "SmsConfig": {
-      "type": "object",
-      "properties": {
-        "sms_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sms_key": {
-          "type": "string"
-        },
-        "sms_secret": {
-          "type": "string"
-        },
-        "sms_template": {
-          "type": "string"
-        },
-        "sms_template_code": {
-          "type": "string"
-        },
-        "sms_template_param": {
-          "type": "string"
-        },
-        "sms_platform": {
-          "type": "string"
-        },
-        "sms_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_expire_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SmsConfig",
-      "required": [
-        "sms_enabled",
-        "sms_key",
-        "sms_secret",
-        "sms_template",
-        "sms_template_code",
-        "sms_template_param",
-        "sms_platform",
-        "sms_limit",
-        "sms_interval",
-        "sms_expire_time"
-      ]
-    },
     "SortItem": {
       "type": "object",
       "properties": {
@@ -3130,7 +2978,7 @@
         "auth_methods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthMethod"
+            "$ref": "#/definitions/UserAuthMethod"
           }
         },
         "user_devices": {
@@ -3206,6 +3054,27 @@
         "enable"
       ]
     },
+    "UserAuthMethod": {
+      "type": "object",
+      "properties": {
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UserAuthMethod",
+      "required": [
+        "auth_type",
+        "auth_identifier",
+        "verified"
+      ]
+    },
     "UserBalanceLog": {
       "type": "object",
       "properties": {
@@ -3256,18 +3125,20 @@
           "type": "integer",
           "format": "int64"
         },
-        "ip": {
-          "type": "string"
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
         },
-        "imei": {
-          "type": "string"
-        },
-        "user_agent": {
+        "device_number": {
           "type": "string"
         },
         "online": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "last_online": {
+          "type": "integer",
+          "format": "int64"
         },
         "enabled": {
           "type": "boolean",
@@ -3285,10 +3156,10 @@
       "title": "UserDevice",
       "required": [
         "id",
-        "ip",
-        "imei",
-        "user_agent",
+        "user_id",
+        "device_number",
         "online",
+        "last_online",
         "enabled",
         "created_at",
         "updated_at"

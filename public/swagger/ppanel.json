@@ -232,6 +232,242 @@
         ]
       }
     },
+    "/v1/admin/auth-method/config": {
+      "get": {
+        "summary": "Get auth method config",
+        "operationId": "GetAuthMethodConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AuthMethodConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "method",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      },
+      "put": {
+        "summary": "Update auth method config",
+        "operationId": "UpdateAuthMethodConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AuthMethodConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdataAuthMethodConfigRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
+    "/v1/admin/auth-method/email_platform": {
+      "get": {
+        "summary": "Get email support platform",
+        "operationId": "GetEmailPlatform",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PlatformResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
+    "/v1/admin/auth-method/list": {
+      "get": {
+        "summary": "Get auth method list",
+        "operationId": "GetAuthMethodList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAuthMethodListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
+    "/v1/admin/auth-method/sms_platform": {
+      "get": {
+        "summary": "Get sms support platform",
+        "operationId": "GetSmsPlatform",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PlatformResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
+    "/v1/admin/auth-method/test_email_send": {
+      "post": {
+        "summary": "Test email send",
+        "operationId": "TestEmailSend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Test email smtp request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEmailSendRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
+    "/v1/admin/auth-method/test_sms_send": {
+      "post": {
+        "summary": "Test sms send",
+        "operationId": "TestSmsSend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestSmsSendRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
+      }
+    },
     "/v1/admin/console/revenue": {
       "get": {
         "summary": "Query revenue statistics",
@@ -2679,70 +2915,6 @@
         ]
       }
     },
-    "/v1/admin/system/email_config": {
-      "get": {
-        "summary": "Get email smtp config",
-        "operationId": "GetEmailSmtpConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/EmailSmtpConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      },
-      "put": {
-        "summary": "Update email smtp config",
-        "operationId": "UpdateEmailSmtpConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmailSmtpConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
     "/v1/admin/system/get_node_multiplier": {
       "get": {
         "summary": "Get Node Multiplier",
@@ -2892,107 +3064,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/NodeConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/oauth/platform": {
-      "get": {
-        "summary": "Get OAuth Config By Platform",
-        "operationId": "GetOAuthByPlatform",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/OAuthMethod"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "platform",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/oauth_config": {
-      "get": {
-        "summary": "Get oauth config",
-        "operationId": "GetOAuthConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetOAuthConfigResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      },
-      "put": {
-        "summary": "Update oauth config",
-        "operationId": "UpdateOAuthConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateOAuthConfig"
             }
           }
         ],
@@ -3194,99 +3265,6 @@
         ]
       }
     },
-    "/v1/admin/system/sms_config": {
-      "get": {
-        "summary": "Get sms config",
-        "operationId": "GetSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/SmsConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      },
-      "put": {
-        "summary": "Get sms config",
-        "operationId": "UpdateSmsConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SmsConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/sms_platform": {
-      "get": {
-        "summary": "Get sms config",
-        "operationId": "GetSmsPlatform",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/SmsPlatformResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
     "/v1/admin/system/subscribe_config": {
       "get": {
         "summary": "Get subscribe config",
@@ -3436,81 +3414,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/TelegramConfig"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/test_email": {
-      "post": {
-        "summary": "Test email smtp",
-        "operationId": "TestEmailSmtp",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": "Test email smtp request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TestEmailSmtpRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/test_sms": {
-      "post": {
-        "summary": "Test sms send",
-        "operationId": "TestSmsSend",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SendSmsRequest"
             }
           }
         ],
@@ -8194,7 +8097,7 @@
       "type": "object",
       "properties": {
         "sms": {
-          "$ref": "#/definitions/SmsAuthenticateConfig"
+          "$ref": "#/definitions/MobileAuthenticateConfig"
         },
         "email": {
           "$ref": "#/definitions/EmailAuthticateConfig"
@@ -8210,25 +8113,30 @@
         "register"
       ]
     },
-    "AuthMethod": {
+    "AuthMethodConfig": {
       "type": "object",
       "properties": {
-        "auth_type": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
           "type": "string"
         },
-        "auth_identifier": {
-          "type": "string"
+        "config": {
+          "$ref": "#/definitions/mapstringinterface"
         },
-        "verified": {
+        "enabled": {
           "type": "boolean",
           "format": "boolean"
         }
       },
-      "title": "AuthMethod",
+      "title": "AuthMethodConfig",
       "required": [
-        "auth_type",
-        "auth_identifier",
-        "verified"
+        "id",
+        "method",
+        "config",
+        "enabled"
       ]
     },
     "BatchDeleteCouponRequest": {
@@ -9491,93 +9399,28 @@
     "EmailAuthticateConfig": {
       "type": "object",
       "properties": {
-        "email_enabled": {
+        "enable": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_enable_verify": {
+        "enable_verify": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_enable_domain_suffix": {
+        "enable_domain_suffix": {
           "type": "boolean",
           "format": "boolean"
         },
-        "email_domain_suffix_list": {
+        "domain_suffix_list": {
           "type": "string"
         }
       },
       "title": "EmailAuthticateConfig",
       "required": [
-        "email_enabled",
-        "email_enable_verify",
-        "email_enable_domain_suffix",
-        "email_domain_suffix_list"
-      ]
-    },
-    "EmailSmtpConfig": {
-      "type": "object",
-      "properties": {
-        "email_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_smtp_host": {
-          "type": "string"
-        },
-        "email_smtp_port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "email_smtp_user": {
-          "type": "string"
-        },
-        "email_smtp_pass": {
-          "type": "string"
-        },
-        "email_smtp_from": {
-          "type": "string"
-        },
-        "email_smtp_ssl": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "verify_email_template": {
-          "type": "string"
-        },
-        "maintenance_email_template": {
-          "type": "string"
-        },
-        "expiration_email_template": {
-          "type": "string"
-        },
-        "email_enable_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_enable_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "email_domain_suffix_list": {
-          "type": "string"
-        }
-      },
-      "title": "EmailSmtpConfig",
-      "required": [
-        "email_enabled",
-        "email_smtp_host",
-        "email_smtp_port",
-        "email_smtp_user",
-        "email_smtp_pass",
-        "email_smtp_from",
-        "email_smtp_ssl",
-        "verify_email_template",
-        "maintenance_email_template",
-        "expiration_email_template",
-        "email_enable_verify",
-        "email_enable_domain_suffix",
-        "email_domain_suffix_list"
+        "enable",
+        "enable_verify",
+        "enable_domain_suffix",
+        "domain_suffix_list"
       ]
     },
     "EpayConfig": {
@@ -9734,6 +9577,33 @@
       "required": [
         "config",
         "applications"
+      ]
+    },
+    "GetAuthMethodConfigRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        }
+      },
+      "title": "GetAuthMethodConfigRequest",
+      "required": [
+        "method"
+      ]
+    },
+    "GetAuthMethodListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthMethodConfig"
+          }
+        }
+      },
+      "title": "GetAuthMethodListResponse",
+      "required": [
+        "list"
       ]
     },
     "GetAvailablePaymentMethodsResponse": {
@@ -10001,40 +9871,13 @@
         "list"
       ]
     },
-    "GetOAuthByPlatformRequest": {
-      "type": "object",
-      "properties": {
-        "platform": {
-          "type": "string"
-        }
-      },
-      "title": "GetOAuthByPlatformRequest",
-      "required": [
-        "platform"
-      ]
-    },
-    "GetOAuthConfigResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OAuthMethod"
-          }
-        }
-      },
-      "title": "GetOAuthConfigResponse",
-      "required": [
-        "list"
-      ]
-    },
     "GetOAuthMethodsResponse": {
       "type": "object",
       "properties": {
         "methods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthMethod"
+            "$ref": "#/definitions/UserAuthMethod"
           }
         }
       },
@@ -10234,7 +10077,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sms"
+            "$ref": "#/definitions/SMS"
           }
         }
       },
@@ -10460,7 +10303,7 @@
         "auth_methods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthMethod"
+            "$ref": "#/definitions/UserAuthMethod"
           }
         }
       },
@@ -10861,6 +10704,34 @@
         "token"
       ]
     },
+    "MobileAuthenticateConfig": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MobileAuthenticateConfig",
+      "required": [
+        "enable",
+        "limit",
+        "interval",
+        "expire_time"
+      ]
+    },
     "NodeConfig": {
       "type": "object",
       "properties": {
@@ -10987,46 +10858,6 @@
       "title": "OAuthLoginResponse",
       "required": [
         "redirect"
-      ]
-    },
-    "OAuthMethod": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "redirect": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "OAuthMethod",
-      "required": [
-        "id",
-        "platform",
-        "config",
-        "redirect",
-        "enabled",
-        "created_at",
-        "updated_at"
       ]
     },
     "OnlineUser": {
@@ -11340,6 +11171,41 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "PlatformInfo": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "platform_url": {
+          "type": "string"
+        },
+        "platform_field_description": {
+          "type": "object"
+        }
+      },
+      "title": "PlatformInfo",
+      "required": [
+        "platform",
+        "platform_url",
+        "platform_field_description"
+      ]
+    },
+    "PlatformResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformInfo"
+          }
+        }
+      },
+      "title": "PlatformResponse",
+      "required": [
+        "list"
       ]
     },
     "PreOrderResponse": {
@@ -11964,6 +11830,44 @@
         "all"
       ]
     },
+    "SMS": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "areaCode": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SMS",
+      "required": [
+        "id",
+        "content",
+        "platform",
+        "areaCode",
+        "telephone",
+        "status",
+        "created_at"
+      ]
+    },
     "SecurityConfig": {
       "type": "object",
       "properties": {
@@ -12053,26 +11957,6 @@
       "required": [
         "telephone",
         "telephone_area_code"
-      ]
-    },
-    "SendSmsRequest": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string"
-        },
-        "area_code": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        }
-      },
-      "title": "SendSmsRequest",
-      "required": [
-        "content",
-        "area_code",
-        "telephone"
       ]
     },
     "Server": {
@@ -12555,159 +12439,6 @@
         "site_name",
         "site_desc",
         "site_logo"
-      ]
-    },
-    "Sms": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "areaCode": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Sms",
-      "required": [
-        "id",
-        "content",
-        "platform",
-        "areaCode",
-        "telephone",
-        "status",
-        "created_at"
-      ]
-    },
-    "SmsAuthenticateConfig": {
-      "type": "object",
-      "properties": {
-        "sms_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sms_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_expire_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SmsAuthenticateConfig",
-      "required": [
-        "sms_enabled",
-        "sms_limit",
-        "sms_interval",
-        "sms_expire_time"
-      ]
-    },
-    "SmsConfig": {
-      "type": "object",
-      "properties": {
-        "sms_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sms_key": {
-          "type": "string"
-        },
-        "sms_secret": {
-          "type": "string"
-        },
-        "sms_template": {
-          "type": "string"
-        },
-        "sms_template_code": {
-          "type": "string"
-        },
-        "sms_template_param": {
-          "type": "string"
-        },
-        "sms_platform": {
-          "type": "string"
-        },
-        "sms_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sms_expire_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SmsConfig",
-      "required": [
-        "sms_enabled",
-        "sms_key",
-        "sms_secret",
-        "sms_template",
-        "sms_template_code",
-        "sms_template_param",
-        "sms_platform",
-        "sms_limit",
-        "sms_interval",
-        "sms_expire_time"
-      ]
-    },
-    "SmsPlatformInfo": {
-      "type": "object",
-      "properties": {
-        "platform": {
-          "type": "string"
-        },
-        "platform_url": {
-          "type": "string"
-        },
-        "platform_field_description": {
-          "type": "object"
-        }
-      },
-      "title": "SmsPlatformInfo",
-      "required": [
-        "platform",
-        "platform_url",
-        "platform_field_description"
-      ]
-    },
-    "SmsPlatformResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SmsPlatformInfo"
-          }
-        }
-      },
-      "title": "SmsPlatformResponse",
-      "required": [
-        "list"
       ]
     },
     "SortItem": {
@@ -13257,16 +12988,32 @@
         "password"
       ]
     },
-    "TestEmailSmtpRequest": {
+    "TestEmailSendRequest": {
       "type": "object",
       "properties": {
         "email": {
           "type": "string"
         }
       },
-      "title": "TestEmailSmtpRequest",
+      "title": "TestEmailSendRequest",
       "required": [
         "email"
+      ]
+    },
+    "TestSmsSendRequest": {
+      "type": "object",
+      "properties": {
+        "area_code": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        }
+      },
+      "title": "TestSmsSendRequest",
+      "required": [
+        "area_code",
+        "telephone"
       ]
     },
     "Ticket": {
@@ -13528,6 +13275,32 @@
       "title": "UnsubscribeRequest",
       "required": [
         "id"
+      ]
+    },
+    "UpdataAuthMethodConfigRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdataAuthMethodConfigRequest",
+      "required": [
+        "id",
+        "method",
+        "config",
+        "enabled"
       ]
     },
     "UpdateAlipayF2fRequest": {
@@ -13956,36 +13729,6 @@
         "config",
         "enable",
         "sort"
-      ]
-    },
-    "UpdateOAuthConfig": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "redirect": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateOAuthConfig",
-      "required": [
-        "id",
-        "platform",
-        "config",
-        "redirect",
-        "enabled"
       ]
     },
     "UpdateOrderStatusRequest": {
@@ -14512,7 +14255,7 @@
         "auth_methods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthMethod"
+            "$ref": "#/definitions/UserAuthMethod"
           }
         },
         "user_devices": {
@@ -14588,6 +14331,27 @@
         "enable"
       ]
     },
+    "UserAuthMethod": {
+      "type": "object",
+      "properties": {
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UserAuthMethod",
+      "required": [
+        "auth_type",
+        "auth_identifier",
+        "verified"
+      ]
+    },
     "UserBalanceLog": {
       "type": "object",
       "properties": {
@@ -14638,18 +14402,20 @@
           "type": "integer",
           "format": "int64"
         },
-        "ip": {
-          "type": "string"
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
         },
-        "imei": {
-          "type": "string"
-        },
-        "user_agent": {
+        "device_number": {
           "type": "string"
         },
         "online": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "last_online": {
+          "type": "integer",
+          "format": "int64"
         },
         "enabled": {
           "type": "boolean",
@@ -14667,10 +14433,10 @@
       "title": "UserDevice",
       "required": [
         "id",
-        "ip",
-        "imei",
-        "user_agent",
+        "user_id",
+        "device_number",
         "online",
+        "last_online",
         "enabled",
         "created_at",
         "updated_at"
@@ -14704,7 +14470,7 @@
         "auth_methods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AuthMethod"
+            "$ref": "#/definitions/UserAuthMethod"
           }
         }
       },
