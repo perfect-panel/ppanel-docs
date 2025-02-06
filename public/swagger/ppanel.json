@@ -4332,6 +4332,86 @@
             "apiKey": []
           }
         ]
+      },
+      "post": {
+        "summary": "Create user subcribe",
+        "operationId": "CreateUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update user subcribe",
+        "operationId": "UpdateUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     },
     "/v1/admin/user/subscribe/device": {
@@ -9080,6 +9160,39 @@
         "commission",
         "gift_amount",
         "is_admin"
+      ]
+    },
+    "CreateUserSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reset_time": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateUserSubscribeRequest",
+      "required": [
+        "user_id",
+        "expired_at",
+        "reset_time",
+        "traffic",
+        "subscribe_id"
       ]
     },
     "CreateUserTicketFollowRequest": {
@@ -14163,6 +14276,34 @@
         "enable_login_notify",
         "enable_subscribe_notify",
         "enable_trade_notify"
+      ]
+    },
+    "UpdateUserSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reset_time": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UpdateUserSubscribeRequest",
+      "required": [
+        "id",
+        "traffic",
+        "reset_time",
+        "expired_at"
       ]
     },
     "UpdateUserTicketStatusRequest": {
