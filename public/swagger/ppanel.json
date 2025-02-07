@@ -3862,46 +3862,6 @@
             "apiKey": []
           }
         ]
-      },
-      "put": {
-        "summary": "Update user",
-        "operationId": "UpdateUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateUserRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/user"
-        ],
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
       }
     },
     "/v1/admin/user/auth_method": {
@@ -3928,6 +3888,46 @@
             }
           }
         },
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete user auth method",
+        "operationId": "DeleteUserAuthMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteUserAuthMethodRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/admin/user"
         ],
@@ -3965,6 +3965,48 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateUserAuthMethodRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/basic": {
+      "put": {
+        "summary": "Update user basic info",
+        "operationId": "UpdateUserBasicInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserBasiceInfoRequest"
             }
           }
         ],
@@ -4322,6 +4364,48 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/notify": {
+      "put": {
+        "summary": "Update user notify setting",
+        "operationId": "UpdateUserNotifySetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserNotifySettingRequest"
+            }
           }
         ],
         "tags": [
@@ -9551,6 +9635,23 @@
         "id"
       ]
     },
+    "DeleteUserAuthMethodRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "auth_type": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteUserAuthMethodRequest",
+      "required": [
+        "user_id",
+        "auth_type"
+      ]
+    },
     "DeleteUserDeivceRequest": {
       "type": "object",
       "properties": {
@@ -14390,73 +14491,10 @@
         "status"
       ]
     },
-    "UpdateUserNotifyRequest": {
+    "UpdateUserBasiceInfoRequest": {
       "type": "object",
       "properties": {
-        "enable_balance_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_login_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_subscribe_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trade_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateUserNotifyRequest",
-      "required": [
-        "enable_balance_notify",
-        "enable_login_notify",
-        "enable_subscribe_notify",
-        "enable_trade_notify"
-      ]
-    },
-    "UpdateUserNotifySettingRequet": {
-      "type": "object",
-      "properties": {
-        "telegram": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateUserNotifySettingRequet",
-      "required": [
-        "telegram",
-        "enable_email_notify",
-        "enable_telegram_notify"
-      ]
-    },
-    "UpdateUserPasswordRequest": {
-      "type": "object",
-      "properties": {
-        "password": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateUserPasswordRequest",
-      "required": [
-        "password"
-      ]
-    },
-    "UpdateUserRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
+        "user_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -14496,6 +14534,57 @@
         "is_admin": {
           "type": "boolean",
           "format": "boolean"
+        }
+      },
+      "title": "UpdateUserBasiceInfoRequest",
+      "required": [
+        "user_id",
+        "password",
+        "avatar",
+        "balance",
+        "commission",
+        "gift_amount",
+        "telegram",
+        "refer_code",
+        "referer_id",
+        "enable",
+        "is_admin"
+      ]
+    },
+    "UpdateUserNotifyRequest": {
+      "type": "object",
+      "properties": {
+        "enable_balance_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_login_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_subscribe_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_trade_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateUserNotifyRequest",
+      "required": [
+        "enable_balance_notify",
+        "enable_login_notify",
+        "enable_subscribe_notify",
+        "enable_trade_notify"
+      ]
+    },
+    "UpdateUserNotifySettingRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
         },
         "enable_email_notify": {
           "type": "boolean",
@@ -14522,25 +14611,50 @@
           "format": "boolean"
         }
       },
-      "title": "UpdateUserRequest",
+      "title": "UpdateUserNotifySettingRequest",
       "required": [
-        "id",
-        "password",
-        "avatar",
-        "balance",
-        "commission",
-        "gift_amount",
-        "telegram",
-        "refer_code",
-        "referer_id",
-        "enable",
-        "is_admin",
+        "user_id",
         "enable_email_notify",
         "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",
         "enable_trade_notify"
+      ]
+    },
+    "UpdateUserNotifySettingRequet": {
+      "type": "object",
+      "properties": {
+        "telegram": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateUserNotifySettingRequet",
+      "required": [
+        "telegram",
+        "enable_email_notify",
+        "enable_telegram_notify"
+      ]
+    },
+    "UpdateUserPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateUserPasswordRequest",
+      "required": [
+        "password"
       ]
     },
     "UpdateUserSubscribeRequest": {
