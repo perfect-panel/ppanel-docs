@@ -3976,6 +3976,46 @@
             "apiKey": []
           }
         ]
+      },
+      "put": {
+        "summary": "Update user auth method",
+        "operationId": "UpdateUserAuthMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserAuthMethodRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     },
     "/v1/admin/user/basic": {
@@ -14489,6 +14529,27 @@
       "required": [
         "id",
         "status"
+      ]
+    },
+    "UpdateUserAuthMethodRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "auth_type": {
+          "type": "string"
+        },
+        "auth_identifier": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateUserAuthMethodRequest",
+      "required": [
+        "user_id",
+        "auth_type",
+        "auth_identifier"
       ]
     },
     "UpdateUserBasiceInfoRequest": {
