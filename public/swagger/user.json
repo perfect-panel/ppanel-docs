@@ -4429,20 +4429,18 @@
           "type": "integer",
           "format": "int64"
         },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
+        "ip": {
+          "type": "string"
         },
         "imei": {
+          "type": "string"
+        },
+        "user_agent": {
           "type": "string"
         },
         "online": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "last_online": {
-          "type": "integer",
-          "format": "int64"
         },
         "enabled": {
           "type": "boolean",
@@ -4460,10 +4458,10 @@
       "title": "UserDevice",
       "required": [
         "id",
-        "user_id",
+        "ip",
         "imei",
+        "user_agent",
         "online",
-        "last_online",
         "enabled",
         "created_at",
         "updated_at"
