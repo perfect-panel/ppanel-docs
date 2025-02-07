@@ -4584,7 +4584,7 @@
           {
             "name": "subscribe_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int64"
           }
@@ -6873,8 +6873,7 @@
       "required": [
         "page",
         "size",
-        "user_id",
-        "subscribe_id"
+        "user_id"
       ]
     },
     "GetUserSubscribeLogsResponse": {

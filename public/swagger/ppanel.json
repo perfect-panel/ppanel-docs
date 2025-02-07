@@ -4584,7 +4584,7 @@
           {
             "name": "subscribe_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int64"
           }
@@ -7069,6 +7069,51 @@
         ]
       }
     },
+    "/v1/public/user/login_log": {
+      "get": {
+        "summary": "Get Login Log",
+        "operationId": "GetLoginLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetLoginLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/notify": {
       "put": {
         "summary": "Update User Notify",
@@ -7233,6 +7278,51 @@
             }
           }
         },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/subscribe_log": {
+      "get": {
+        "summary": "Get Subscribe Log",
+        "operationId": "GetSubscribeLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscribeLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "ppanel/public/user"
         ]
@@ -9945,6 +10035,44 @@
         "oauth_methods"
       ]
     },
+    "GetLoginLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetLoginLogRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetLoginLogResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserLoginLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetLoginLogResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "GetNodeDetailRequest": {
       "type": "object",
       "properties": {
@@ -10365,6 +10493,44 @@
         "total"
       ]
     },
+    "GetSubscribeLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetSubscribeLogRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetSubscribeLogResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetSubscribeLogResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "GetSubscriptionResponse": {
       "type": "object",
       "properties": {
@@ -10681,8 +10847,7 @@
       "required": [
         "page",
         "size",
-        "user_id",
-        "subscribe_id"
+        "user_id"
       ]
     },
     "GetUserSubscribeLogsResponse": {
