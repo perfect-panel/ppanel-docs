@@ -9855,7 +9855,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "device_number": {
+        "imei": {
           "type": "string"
         },
         "online": {
@@ -9883,7 +9883,7 @@
       "required": [
         "id",
         "user_id",
-        "device_number",
+        "imei",
         "online",
         "last_online",
         "enabled",
