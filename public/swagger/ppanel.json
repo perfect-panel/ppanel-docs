@@ -8261,7 +8261,7 @@
           "type": "string"
         },
         "config": {
-          "$ref": "#/definitions/mapstringinterface"
+          "type": "object"
         },
         "enabled": {
           "type": "boolean",
