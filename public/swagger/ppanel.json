@@ -14670,6 +14670,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
         "traffic": {
           "type": "integer",
           "format": "int64"
@@ -14694,6 +14698,7 @@
       "title": "UpdateUserSubscribeRequest",
       "required": [
         "user_subscribe_id",
+        "subscribe_id",
         "traffic",
         "expired_at",
         "upload",
