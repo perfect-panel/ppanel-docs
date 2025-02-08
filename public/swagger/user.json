@@ -1179,43 +1179,6 @@
         ]
       }
     },
-    "/v1/public/user/notify_setting": {
-      "put": {
-        "summary": "Update User Notify Setting",
-        "operationId": "UpdateUserNotifySetting",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateUserNotifySettingRequet"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/public/user"
-        ]
-      }
-    },
     "/v1/public/user/oauth_methods": {
       "get": {
         "summary": "Get OAuth Methods",
@@ -4132,6 +4095,14 @@
     "UpdateUserNotifyRequest": {
       "type": "object",
       "properties": {
+        "enable_email_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_telegram_notify": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "enable_balance_notify": {
           "type": "boolean",
           "format": "boolean"
@@ -4151,33 +4122,12 @@
       },
       "title": "UpdateUserNotifyRequest",
       "required": [
+        "enable_email_notify",
+        "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",
         "enable_trade_notify"
-      ]
-    },
-    "UpdateUserNotifySettingRequet": {
-      "type": "object",
-      "properties": {
-        "telegram": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateUserNotifySettingRequet",
-      "required": [
-        "telegram",
-        "enable_email_notify",
-        "enable_telegram_notify"
       ]
     },
     "UpdateUserPasswordRequest": {
