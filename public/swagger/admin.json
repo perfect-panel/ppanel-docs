@@ -5053,7 +5053,7 @@
     "AuthConfig": {
       "type": "object",
       "properties": {
-        "sms": {
+        "mobile": {
           "$ref": "#/definitions/MobileAuthenticateConfig"
         },
         "email": {
@@ -5065,7 +5065,7 @@
       },
       "title": "AuthConfig",
       "required": [
-        "sms",
+        "mobile",
         "email",
         "register"
       ]
