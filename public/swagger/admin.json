@@ -9625,10 +9625,6 @@
         "download": {
           "type": "integer",
           "format": "int64"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
         }
       },
       "title": "UpdateUserSubscribeRequest",
@@ -9638,8 +9634,7 @@
         "traffic",
         "expired_at",
         "upload",
-        "download",
-        "status"
+        "download"
       ]
     },
     "User": {
