@@ -5890,10 +5890,6 @@
           "type": "integer",
           "format": "int64"
         },
-        "reset_time": {
-          "type": "integer",
-          "format": "uint8"
-        },
         "traffic": {
           "type": "integer",
           "format": "int64"
@@ -5907,7 +5903,6 @@
       "required": [
         "user_id",
         "expired_at",
-        "reset_time",
         "traffic",
         "subscribe_id"
       ]
@@ -9607,7 +9602,7 @@
     "UpdateUserSubscribeRequest": {
       "type": "object",
       "properties": {
-        "id": {
+        "user_subscribe_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -9615,21 +9610,31 @@
           "type": "integer",
           "format": "int64"
         },
-        "reset_time": {
-          "type": "integer",
-          "format": "uint8"
-        },
         "expired_at": {
           "type": "integer",
           "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
         }
       },
       "title": "UpdateUserSubscribeRequest",
       "required": [
-        "id",
+        "user_subscribe_id",
         "traffic",
-        "reset_time",
-        "expired_at"
+        "expired_at",
+        "upload",
+        "download",
+        "status"
       ]
     },
     "User": {
