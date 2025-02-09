@@ -7014,6 +7014,80 @@
         ]
       }
     },
+    "/v1/public/user/bind_email": {
+      "post": {
+        "summary": "Bind Email",
+        "operationId": "BindEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/bind_mobile": {
+      "post": {
+        "summary": "Bind Mobile",
+        "operationId": "BindMobile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindMobileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/bind_oauth": {
       "post": {
         "summary": "Bind OAuth",
@@ -7114,6 +7188,80 @@
             }
           }
         },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/change_bind_email": {
+      "post": {
+        "summary": "Change Bind Email",
+        "operationId": "ChangebindEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangebindEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/change_bind_mobile": {
+      "post": {
+        "summary": "Change Bind Mobile",
+        "operationId": "ChangebindMobile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangebindMobileRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/public/user"
         ]
@@ -7584,6 +7732,43 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PreUnsubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/verify_email": {
+      "post": {
+        "summary": "Verify Email",
+        "operationId": "VerifyEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyEmailRequest"
             }
           }
         ],
@@ -8565,6 +8750,38 @@
         "ids"
       ]
     },
+    "BindEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "BindEmailRequest",
+      "required": [
+        "email"
+      ]
+    },
+    "BindMobileRequest": {
+      "type": "object",
+      "properties": {
+        "area_code": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "BindMobileRequest",
+      "required": [
+        "area_code",
+        "mobile",
+        "code"
+      ]
+    },
     "BindOAuthCallbackRequest": {
       "type": "object",
       "properties": {
@@ -8624,6 +8841,38 @@
       "required": [
         "url",
         "expired_at"
+      ]
+    },
+    "ChangebindEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "ChangebindEmailRequest",
+      "required": [
+        "email"
+      ]
+    },
+    "ChangebindMobileRequest": {
+      "type": "object",
+      "properties": {
+        "area_code": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "ChangebindMobileRequest",
+      "required": [
+        "area_code",
+        "mobile",
+        "code"
       ]
     },
     "CheckUserRequest": {
@@ -14879,6 +15128,9 @@
         "verified": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "area_code": {
+          "type": "string"
         }
       },
       "title": "UserAuthMethod",
@@ -15496,6 +15748,22 @@
         "enable_login_verify",
         "enable_register_verify",
         "enable_reset_password_verify"
+      ]
+    },
+    "VerifyEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "VerifyEmailRequest",
+      "required": [
+        "email",
+        "code"
       ]
     },
     "Vless": {
