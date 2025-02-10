@@ -1100,7 +1100,7 @@
     "/v1/public/user/change_bind_email": {
       "post": {
         "summary": "Change Bind Email",
-        "operationId": "ChangebindEmail",
+        "operationId": "ChangeBindEmail",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1125,7 +1125,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangebindEmailRequest"
+              "$ref": "#/definitions/ChangeBindEmailRequest"
             }
           }
         ],
@@ -1137,7 +1137,7 @@
     "/v1/public/user/change_bind_mobile": {
       "post": {
         "summary": "Change Bind Mobile",
-        "operationId": "ChangebindMobile",
+        "operationId": "ChangeBindMobile",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1162,7 +1162,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangebindMobileRequest"
+              "$ref": "#/definitions/ChangeBindMobileRequest"
             }
           }
         ],
@@ -2054,19 +2054,19 @@
         "expired_at"
       ]
     },
-    "ChangebindEmailRequest": {
+    "ChangeBindEmailRequest": {
       "type": "object",
       "properties": {
         "email": {
           "type": "string"
         }
       },
-      "title": "ChangebindEmailRequest",
+      "title": "ChangeBindEmailRequest",
       "required": [
         "email"
       ]
     },
-    "ChangebindMobileRequest": {
+    "ChangeBindMobileRequest": {
       "type": "object",
       "properties": {
         "area_code": {
@@ -2079,7 +2079,7 @@
           "type": "string"
         }
       },
-      "title": "ChangebindMobileRequest",
+      "title": "ChangeBindMobileRequest",
       "required": [
         "area_code",
         "mobile",
