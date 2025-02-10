@@ -7015,9 +7015,9 @@
       }
     },
     "/v1/public/user/bind_email": {
-      "post": {
-        "summary": "Bind Email",
-        "operationId": "BindEmail",
+      "put": {
+        "summary": "Update Bind Email",
+        "operationId": "UpdateBindEmail",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -7042,7 +7042,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BindEmailRequest"
+              "$ref": "#/definitions/UpdateBindEmailRequest"
             }
           }
         ],
@@ -7052,9 +7052,9 @@
       }
     },
     "/v1/public/user/bind_mobile": {
-      "post": {
-        "summary": "Bind Mobile",
-        "operationId": "BindMobile",
+      "put": {
+        "summary": "Update Bind Mobile",
+        "operationId": "UpdateBindMobile",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -7079,7 +7079,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BindMobileRequest"
+              "$ref": "#/definitions/UpdateBindMobileRequest"
             }
           }
         ],
@@ -7188,80 +7188,6 @@
             }
           }
         },
-        "tags": [
-          "ppanel/public/user"
-        ]
-      }
-    },
-    "/v1/public/user/change_bind_email": {
-      "post": {
-        "summary": "Change Bind Email",
-        "operationId": "ChangeBindEmail",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeBindEmailRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/public/user"
-        ]
-      }
-    },
-    "/v1/public/user/change_bind_mobile": {
-      "post": {
-        "summary": "Change Bind Mobile",
-        "operationId": "ChangeBindMobile",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeBindMobileRequest"
-            }
-          }
-        ],
         "tags": [
           "ppanel/public/user"
         ]
@@ -8750,38 +8676,6 @@
         "ids"
       ]
     },
-    "BindEmailRequest": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        }
-      },
-      "title": "BindEmailRequest",
-      "required": [
-        "email"
-      ]
-    },
-    "BindMobileRequest": {
-      "type": "object",
-      "properties": {
-        "area_code": {
-          "type": "string"
-        },
-        "mobile": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        }
-      },
-      "title": "BindMobileRequest",
-      "required": [
-        "area_code",
-        "mobile",
-        "code"
-      ]
-    },
     "BindOAuthCallbackRequest": {
       "type": "object",
       "properties": {
@@ -8841,38 +8735,6 @@
       "required": [
         "url",
         "expired_at"
-      ]
-    },
-    "ChangeBindEmailRequest": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        }
-      },
-      "title": "ChangeBindEmailRequest",
-      "required": [
-        "email"
-      ]
-    },
-    "ChangeBindMobileRequest": {
-      "type": "object",
-      "properties": {
-        "area_code": {
-          "type": "string"
-        },
-        "mobile": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        }
-      },
-      "title": "ChangeBindMobileRequest",
-      "required": [
-        "area_code",
-        "mobile",
-        "code"
       ]
     },
     "CheckUserRequest": {
@@ -14215,6 +14077,38 @@
         "platform",
         "is_default",
         "application_id"
+      ]
+    },
+    "UpdateBindEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateBindEmailRequest",
+      "required": [
+        "email"
+      ]
+    },
+    "UpdateBindMobileRequest": {
+      "type": "object",
+      "properties": {
+        "area_code": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateBindMobileRequest",
+      "required": [
+        "area_code",
+        "mobile",
+        "code"
       ]
     },
     "UpdateCouponRequest": {
