@@ -2092,6 +2092,10 @@
     "SendSmsCodeRequest": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
         "telephone": {
           "type": "string"
         },
@@ -2101,6 +2105,7 @@
       },
       "title": "SendSmsCodeRequest",
       "required": [
+        "type",
         "telephone",
         "telephone_area_code"
       ]
