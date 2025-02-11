@@ -3071,9 +3071,6 @@
         "verified": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "area_code": {
-          "type": "string"
         }
       },
       "title": "UserAuthMethod",
