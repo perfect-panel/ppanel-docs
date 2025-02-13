@@ -2482,6 +2482,54 @@
         "only_first_purchase"
       ]
     },
+    "MessageLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MessageLog",
+      "required": [
+        "id",
+        "type",
+        "platform",
+        "to",
+        "subject",
+        "content",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "MobileAuthenticateConfig": {
       "type": "object",
       "properties": {
@@ -3305,6 +3353,17 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "trial_subscribe": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trial_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trial_time_unit": {
+          "type": "string"
+        },
         "enable_ip_register_limit": {
           "type": "boolean",
           "format": "boolean"
@@ -3322,6 +3381,9 @@
       "required": [
         "stop_register",
         "enable_trial",
+        "trial_subscribe",
+        "trial_time",
+        "trial_time_unit",
         "enable_ip_register_limit",
         "ip_register_limit",
         "ip_register_limit_duration"

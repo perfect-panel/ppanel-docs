@@ -1016,6 +1016,88 @@
         ]
       }
     },
+    "/v1/admin/log/message/list": {
+      "get": {
+        "summary": "Get message log list",
+        "operationId": "GetMessageLogList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetMessageLogListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
     "/v1/admin/order/": {
       "post": {
         "summary": "Create order",
@@ -2036,57 +2118,6 @@
         ],
         "tags": [
           "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/sms/list": {
-      "get": {
-        "summary": "Get sms list",
-        "operationId": "GetSmsList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetSmsListResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "telephone",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/admin/sms"
         ]
       }
     },
@@ -3353,70 +3384,6 @@
             }
           }
         },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/telegram_config": {
-      "get": {
-        "summary": "Get Telegram Config",
-        "operationId": "GetTelegramConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/TelegramConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      },
-      "put": {
-        "summary": "Update Telegram Config",
-        "operationId": "UpdateTelegramConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelegramConfig"
-            }
-          }
-        ],
         "tags": [
           "ppanel/admin/system"
         ]
@@ -6432,6 +6399,64 @@
         "list"
       ]
     },
+    "GetMessageLogListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetMessageLogListRequest",
+      "required": [
+        "page",
+        "size",
+        "type"
+      ]
+    },
+    "GetMessageLogListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLog"
+          }
+        }
+      },
+      "title": "GetMessageLogListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "GetNodeDetailRequest": {
       "type": "object",
       "properties": {
@@ -6596,47 +6621,6 @@
         }
       },
       "title": "GetRuleGroupResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
-    "GetSmsListRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "telephone": {
-          "type": "string"
-        }
-      },
-      "title": "GetSmsListRequest",
-      "required": [
-        "page",
-        "size"
-      ]
-    },
-    "GetSmsListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SMS"
-          }
-        }
-      },
-      "title": "GetSmsListResponse",
       "required": [
         "total",
         "list"
@@ -7158,6 +7142,54 @@
         "list"
       ]
     },
+    "MessageLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MessageLog",
+      "required": [
+        "id",
+        "type",
+        "platform",
+        "to",
+        "subject",
+        "content",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "MobileAuthenticateConfig": {
       "type": "object",
       "properties": {
@@ -7612,6 +7644,17 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "trial_subscribe": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trial_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trial_time_unit": {
+          "type": "string"
+        },
         "enable_ip_register_limit": {
           "type": "boolean",
           "format": "boolean"
@@ -7629,6 +7672,9 @@
       "required": [
         "stop_register",
         "enable_trial",
+        "trial_subscribe",
+        "trial_time",
+        "trial_time_unit",
         "enable_ip_register_limit",
         "ip_register_limit",
         "ip_register_limit_duration"
@@ -7669,44 +7715,6 @@
         "today",
         "monthly",
         "all"
-      ]
-    },
-    "SMS": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "areaCode": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SMS",
-      "required": [
-        "id",
-        "content",
-        "platform",
-        "areaCode",
-        "telephone",
-        "status",
-        "created_at"
       ]
     },
     "SecurityConfig": {
