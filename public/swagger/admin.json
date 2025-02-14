@@ -5091,7 +5091,7 @@
           "$ref": "#/definitions/EmailAuthticateConfig"
         },
         "register": {
-          "$ref": "#/definitions/RegisterConfig"
+          "$ref": "#/definitions/PubilcRegisterConfig"
         }
       },
       "title": "AuthConfig",
@@ -7260,11 +7260,20 @@
         "enable": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "enable_whitelist": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "whitelist": {
+          "type": "string"
         }
       },
       "title": "MobileAuthenticateConfig",
       "required": [
-        "enable"
+        "enable",
+        "enable_whitelist",
+        "whitelist"
       ]
     },
     "NodeConfig": {
@@ -7680,6 +7689,47 @@
       "title": "PlatformResponse",
       "required": [
         "list"
+      ]
+    },
+    "PubilcRegisterConfig": {
+      "type": "object",
+      "properties": {
+        "stop_register": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_ip_register_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_register_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_register_limit_duration": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PubilcRegisterConfig",
+      "required": [
+        "stop_register",
+        "enable_ip_register_limit",
+        "ip_register_limit",
+        "ip_register_limit_duration"
+      ]
+    },
+    "PubilcVerifyCodeConfig": {
+      "type": "object",
+      "properties": {
+        "verify_code_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PubilcVerifyCodeConfig",
+      "required": [
+        "verify_code_interval"
       ]
     },
     "RegisterConfig": {
