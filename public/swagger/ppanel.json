@@ -11303,26 +11303,11 @@
         "enable": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "expire_time": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "MobileAuthenticateConfig",
       "required": [
-        "enable",
-        "limit",
-        "interval",
-        "expire_time"
+        "enable"
       ]
     },
     "NodeConfig": {
