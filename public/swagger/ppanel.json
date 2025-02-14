@@ -14885,18 +14885,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "valid_email": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "enable_balance_notify": {
           "type": "boolean",
           "format": "boolean"
@@ -14953,9 +14941,6 @@
         "refer_code",
         "referer_id",
         "enable",
-        "valid_email",
-        "enable_email_notify",
-        "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",
