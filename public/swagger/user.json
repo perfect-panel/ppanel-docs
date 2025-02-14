@@ -2542,7 +2542,10 @@
           "format": "boolean"
         },
         "whitelist": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "MobileAuthenticateConfig",
