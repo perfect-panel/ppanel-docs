@@ -4545,6 +4545,46 @@
           }
         ]
       },
+      "delete": {
+        "summary": "Delete user subcribe",
+        "operationId": "DeleteUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteUserSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
       "post": {
         "summary": "Create user subcribe",
         "operationId": "CreateUserSubscribe",
@@ -9708,6 +9748,19 @@
       "title": "DeleteUserDeivceRequest",
       "required": [
         "id"
+      ]
+    },
+    "DeleteUserSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteUserSubscribeRequest",
+      "required": [
+        "user_subscribe_id"
       ]
     },
     "Document": {
