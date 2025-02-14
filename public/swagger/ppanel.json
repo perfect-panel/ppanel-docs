@@ -3453,6 +3453,70 @@
         ]
       }
     },
+    "/v1/admin/system/verify_code_config": {
+      "get": {
+        "summary": "Get Verify Code Config",
+        "operationId": "GetVerifyCodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/VerifyCodeConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      },
+      "put": {
+        "summary": "Update Verify Code Config",
+        "operationId": "UpdateVerifyCodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyCodeConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/verify_config": {
       "get": {
         "summary": "Get verify config",
@@ -15526,6 +15590,29 @@
         "enable_login_verify",
         "enable_register_verify",
         "enable_reset_password_verify"
+      ]
+    },
+    "VerifyCodeConfig": {
+      "type": "object",
+      "properties": {
+        "verify_code_expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "VerifyCodeConfig",
+      "required": [
+        "verify_code_expire_time",
+        "verify_code_limit",
+        "verify_code_interval"
       ]
     },
     "VerifyConfig": {
