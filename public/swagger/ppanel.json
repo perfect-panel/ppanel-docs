@@ -10163,6 +10163,9 @@
         "subscribe": {
           "$ref": "#/definitions/SubscribeConfig"
         },
+        "verify_code": {
+          "$ref": "#/definitions/VerifyCodeConfig"
+        },
         "oauth_methods": {
           "type": "array",
           "items": {
@@ -10178,6 +10181,7 @@
         "invite",
         "currency",
         "subscribe",
+        "verify_code",
         "oauth_methods"
       ]
     },
@@ -14698,14 +14702,6 @@
     "UpdateUserNotifyRequest": {
       "type": "object",
       "properties": {
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "enable_balance_notify": {
           "type": "boolean",
           "format": "boolean"
@@ -14725,8 +14721,6 @@
       },
       "title": "UpdateUserNotifyRequest",
       "required": [
-        "enable_email_notify",
-        "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",
@@ -14739,14 +14733,6 @@
         "user_id": {
           "type": "integer",
           "format": "int64"
-        },
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
         },
         "enable_balance_notify": {
           "type": "boolean",
@@ -14768,8 +14754,6 @@
       "title": "UpdateUserNotifySettingRequest",
       "required": [
         "user_id",
-        "enable_email_notify",
-        "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",

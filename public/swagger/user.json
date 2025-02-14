@@ -4300,14 +4300,6 @@
     "UpdateUserNotifyRequest": {
       "type": "object",
       "properties": {
-        "enable_email_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "enable_balance_notify": {
           "type": "boolean",
           "format": "boolean"
@@ -4327,8 +4319,6 @@
       },
       "title": "UpdateUserNotifyRequest",
       "required": [
-        "enable_email_notify",
-        "enable_telegram_notify",
         "enable_balance_notify",
         "enable_login_notify",
         "enable_subscribe_notify",
@@ -4762,6 +4752,29 @@
         "ip",
         "user_agent",
         "created_at"
+      ]
+    },
+    "VerifyCodeConfig": {
+      "type": "object",
+      "properties": {
+        "verify_code_expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "VerifyCodeConfig",
+      "required": [
+        "verify_code_expire_time",
+        "verify_code_limit",
+        "verify_code_interval"
       ]
     },
     "VerifyConfig": {

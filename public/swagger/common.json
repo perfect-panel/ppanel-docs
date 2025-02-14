@@ -1284,6 +1284,9 @@
         "subscribe": {
           "$ref": "#/definitions/SubscribeConfig"
         },
+        "verify_code": {
+          "$ref": "#/definitions/VerifyCodeConfig"
+        },
         "oauth_methods": {
           "type": "array",
           "items": {
@@ -1299,6 +1302,7 @@
         "invite",
         "currency",
         "subscribe",
+        "verify_code",
         "oauth_methods"
       ]
     },
@@ -3346,6 +3350,29 @@
         "enable_login_verify",
         "enable_register_verify",
         "enable_reset_password_verify"
+      ]
+    },
+    "VerifyCodeConfig": {
+      "type": "object",
+      "properties": {
+        "verify_code_expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "verify_code_interval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "VerifyCodeConfig",
+      "required": [
+        "verify_code_expire_time",
+        "verify_code_limit",
+        "verify_code_interval"
       ]
     },
     "VerifyConfig": {
