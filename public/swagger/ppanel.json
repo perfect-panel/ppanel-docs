@@ -297,7 +297,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdataAuthMethodConfigRequest"
+              "$ref": "#/definitions/UpdateAuthMethodConfigRequest"
             }
           }
         ],
@@ -13942,32 +13942,6 @@
         "id"
       ]
     },
-    "UpdataAuthMethodConfigRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "method": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdataAuthMethodConfigRequest",
-      "required": [
-        "id",
-        "method",
-        "config",
-        "enabled"
-      ]
-    },
     "UpdateAlipayF2fRequest": {
       "type": "object",
       "properties": {
@@ -14149,6 +14123,32 @@
         "platform",
         "is_default",
         "application_id"
+      ]
+    },
+    "UpdateAuthMethodConfigRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdateAuthMethodConfigRequest",
+      "required": [
+        "id",
+        "method",
+        "config",
+        "enabled"
       ]
     },
     "UpdateBindEmailRequest": {
