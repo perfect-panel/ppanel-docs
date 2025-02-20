@@ -9997,7 +9997,7 @@
         "ip": {
           "type": "string"
         },
-        "imei": {
+        "identifier": {
           "type": "string"
         },
         "user_agent": {
@@ -10024,7 +10024,7 @@
       "required": [
         "id",
         "ip",
-        "imei",
+        "identifier",
         "user_agent",
         "online",
         "enabled",

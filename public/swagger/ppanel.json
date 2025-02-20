@@ -4884,12 +4884,6 @@
         },
         "parameters": [
           {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -4968,12 +4962,6 @@
         },
         "parameters": [
           {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -5013,12 +5001,6 @@
         },
         "parameters": [
           {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -5057,12 +5039,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
@@ -8050,7 +8026,7 @@
         "account": {
           "type": "string"
         },
-        "imei": {
+        "identifier": {
           "type": "string"
         },
         "user_agent": {
@@ -8072,7 +8048,7 @@
       "required": [
         "method",
         "account",
-        "imei",
+        "identifier",
         "user_agent",
         "area_code"
       ]
@@ -8104,7 +8080,7 @@
         "password": {
           "type": "string"
         },
-        "imei": {
+        "identifier": {
           "type": "string"
         },
         "user_agent": {
@@ -8133,7 +8109,7 @@
         "method",
         "account",
         "password",
-        "imei",
+        "identifier",
         "user_agent",
         "code",
         "area_code"
@@ -15126,7 +15102,7 @@
         "ip": {
           "type": "string"
         },
-        "imei": {
+        "identifier": {
           "type": "string"
         },
         "user_agent": {
@@ -15153,7 +15129,7 @@
       "required": [
         "id",
         "ip",
-        "imei",
+        "identifier",
         "user_agent",
         "online",
         "enabled",
