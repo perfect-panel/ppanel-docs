@@ -1953,6 +1953,9 @@
       "properties": {
         "orderNo": {
           "type": "string"
+        },
+        "returnUrl": {
+          "type": "string"
         }
       },
       "title": "CheckoutOrderRequest",
