@@ -861,7 +861,7 @@
             "$ref": "#/definitions/ApplicationVersion"
           }
         },
-        "mac": {
+        "macos": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationVersion"
