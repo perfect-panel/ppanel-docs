@@ -8260,6 +8260,12 @@
         },
         "site_logo": {
           "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "custom_html": {
+          "type": "string"
         }
       },
       "title": "SiteConfig",
@@ -8267,7 +8273,9 @@
         "host",
         "site_name",
         "site_desc",
-        "site_logo"
+        "site_logo",
+        "keywords",
+        "custom_html"
       ]
     },
     "SortItem": {
