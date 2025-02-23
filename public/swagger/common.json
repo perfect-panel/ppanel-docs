@@ -631,6 +631,35 @@
         ]
       }
     },
+    "/v1/common/site/privacy": {
+      "get": {
+        "summary": "Get Privacy Policy",
+        "operationId": "GetPrivacyPolicy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PrivacyPolicyConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/site/stat": {
       "get": {
         "summary": "Get stat",
@@ -1894,6 +1923,18 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "PrivacyPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "privacy_policy": {
+          "type": "string"
+        }
+      },
+      "title": "PrivacyPolicyConfig",
+      "required": [
+        "privacy_policy"
       ]
     },
     "PubilcRegisterConfig": {

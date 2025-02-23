@@ -3103,6 +3103,70 @@
         ]
       }
     },
+    "/v1/admin/system/privacy": {
+      "get": {
+        "summary": "get Privacy Policy Config",
+        "operationId": "GetPrivacyPolicyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PrivacyPolicyConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      },
+      "put": {
+        "summary": "Update Privacy Policy Config",
+        "operationId": "UpdatePrivacyPolicyConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivacyPolicyConfig"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/register_config": {
       "get": {
         "summary": "Get register config",
@@ -5818,6 +5882,35 @@
                   "properties": {
                     "data": {
                       "$ref": "#/definitions/GetGlobalConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
+    "/v1/common/site/privacy": {
+      "get": {
+        "summary": "Get Privacy Policy",
+        "operationId": "GetPrivacyPolicy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PrivacyPolicyConfig"
                     }
                   }
                 }
@@ -11908,6 +12001,18 @@
       "title": "PreUnsubscribeResponse",
       "required": [
         "deduction_amount"
+      ]
+    },
+    "PrivacyPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "privacy_policy": {
+          "type": "string"
+        }
+      },
+      "title": "PrivacyPolicyConfig",
+      "required": [
+        "privacy_policy"
       ]
     },
     "PubilcRegisterConfig": {

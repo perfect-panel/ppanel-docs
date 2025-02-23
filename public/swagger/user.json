@@ -2971,6 +2971,18 @@
         "deduction_amount"
       ]
     },
+    "PrivacyPolicyConfig": {
+      "type": "object",
+      "properties": {
+        "privacy_policy": {
+          "type": "string"
+        }
+      },
+      "title": "PrivacyPolicyConfig",
+      "required": [
+        "privacy_policy"
+      ]
+    },
     "PubilcRegisterConfig": {
       "type": "object",
       "properties": {
