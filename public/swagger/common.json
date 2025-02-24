@@ -749,6 +749,60 @@
     }
   },
   "definitions": {
+    "Ads": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "target_url": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Ads",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "content",
+        "target_url",
+        "start_time",
+        "end_time",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "Announcement": {
       "type": "object",
       "properties": {

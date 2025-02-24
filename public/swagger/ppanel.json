@@ -15,6 +15,209 @@
     "application/json"
   ],
   "paths": {
+    "/v1/admin/ads/": {
+      "delete": {
+        "summary": "Delete Ads",
+        "operationId": "DeleteAds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteAdsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/ads"
+        ]
+      },
+      "post": {
+        "summary": "Create Ads",
+        "operationId": "CreateAds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateAdsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/ads"
+        ]
+      },
+      "put": {
+        "summary": "Update Ads",
+        "operationId": "UpdateAds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAdsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/ads"
+        ]
+      }
+    },
+    "/v1/admin/ads/detail": {
+      "get": {
+        "summary": "Get Ads Detail",
+        "operationId": "GetAdsDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Ads"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/ads"
+        ]
+      }
+    },
+    "/v1/admin/ads/list": {
+      "get": {
+        "summary": "Get Ads List",
+        "operationId": "GetAdsList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAdsListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/ads"
+        ]
+      }
+    },
     "/v1/admin/announcement/": {
       "delete": {
         "summary": "Delete announcement",
@@ -8018,6 +8221,60 @@
     }
   },
   "definitions": {
+    "Ads": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "target_url": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Ads",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "content",
+        "target_url",
+        "start_time",
+        "end_time",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "AlipayF2FConfig": {
       "type": "object",
       "properties": {
@@ -8963,6 +9220,45 @@
         "updated_at"
       ]
     },
+    "CreateAdsRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "target_url": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CreateAdsRequest",
+      "required": [
+        "title",
+        "type",
+        "content",
+        "target_url",
+        "start_time",
+        "end_time",
+        "status"
+      ]
+    },
     "CreateAnnouncementRequest": {
       "type": "object",
       "properties": {
@@ -9662,6 +9958,19 @@
         "code"
       ]
     },
+    "DeleteAdsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteAdsRequest",
+      "required": [
+        "id"
+      ]
+    },
     "DeleteAnnouncementRequest": {
       "type": "object",
       "properties": {
@@ -10008,6 +10317,64 @@
         "type",
         "content",
         "created_at"
+      ]
+    },
+    "GetAdsDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetAdsDetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "GetAdsListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "GetAdsListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetAdsListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ads"
+          }
+        }
+      },
+      "title": "GetAdsListResponse",
+      "required": [
+        "total",
+        "list"
       ]
     },
     "GetAllPaymentConfigResponse": {
@@ -14032,6 +14399,50 @@
       "title": "UnsubscribeRequest",
       "required": [
         "id"
+      ]
+    },
+    "UpdateAdsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "target_url": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "UpdateAdsRequest",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "content",
+        "target_url",
+        "start_time",
+        "end_time",
+        "status"
       ]
     },
     "UpdateAlipayF2fRequest": {
