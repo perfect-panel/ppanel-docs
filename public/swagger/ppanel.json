@@ -5481,6 +5481,33 @@
         ]
       }
     },
+    "/v1/app/ws/{userid}/{identifier}": {
+      "get": {
+        "summary": "App heartbeat",
+        "operationId": "AppWs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/ws"
+        ]
+      }
+    },
     "/v1/auth/check": {
       "get": {
         "summary": "Check user is exist",
