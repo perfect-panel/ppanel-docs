@@ -326,6 +326,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "public order",
             "in": "body",
             "required": true,
             "schema": {
@@ -365,6 +366,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "public order",
             "in": "body",
             "required": true,
             "schema": {

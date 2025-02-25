@@ -1126,6 +1126,51 @@
         "exist"
       ]
     },
+    "CheckoutOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        },
+        "returnUrl": {
+          "type": "string"
+        }
+      },
+      "title": "CheckoutOrderRequest",
+      "required": [
+        "orderNo"
+      ]
+    },
+    "CheckoutOrderResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "checkout_url": {
+          "type": "string"
+        },
+        "stripe": {
+          "$ref": "#/definitions/StripePayment"
+        }
+      },
+      "title": "CheckoutOrderResponse",
+      "required": [
+        "type"
+      ]
+    },
+    "CloseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        }
+      },
+      "title": "CloseOrderRequest",
+      "required": [
+        "orderNo"
+      ]
+    },
     "Coupon": {
       "type": "object",
       "properties": {
@@ -1344,6 +1389,21 @@
       "required": [
         "config",
         "applications"
+      ]
+    },
+    "GetAvailablePaymentMethodsResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentConfig"
+          }
+        }
+      },
+      "title": "GetAvailablePaymentMethodsResponse",
+      "required": [
+        "list"
       ]
     },
     "GetGlobalConfigResponse": {
@@ -1979,6 +2039,60 @@
         "enable"
       ]
     },
+    "PreOrderResponse": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gift_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PreOrderResponse",
+      "required": [
+        "price",
+        "amount",
+        "discount",
+        "gift_amount",
+        "coupon",
+        "coupon_discount",
+        "fee_amount"
+      ]
+    },
+    "PreRenewalOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        }
+      },
+      "title": "PreRenewalOrderResponse",
+      "required": [
+        "orderNo"
+      ]
+    },
     "PrivacyPolicyConfig": {
       "type": "object",
       "properties": {
@@ -2032,6 +2146,203 @@
         "verify_code_interval"
       ]
     },
+    "PurchaseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "coupon": {
+          "type": "string"
+        }
+      },
+      "title": "PurchaseOrderRequest",
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment"
+      ]
+    },
+    "PurchaseOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "PurchaseOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
+    "QueryAnnouncementRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pinned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "popup": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "QueryAnnouncementRequest",
+      "required": [
+        "page",
+        "size",
+        "pinned",
+        "popup"
+      ]
+    },
+    "QueryAnnouncementResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "announcements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Announcement"
+          }
+        }
+      },
+      "title": "QueryAnnouncementResponse",
+      "required": [
+        "total",
+        "announcements"
+      ]
+    },
+    "QueryDocumentDetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryDocumentDetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "QueryDocumentListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        }
+      },
+      "title": "QueryDocumentListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "QueryOrderDetailRequest": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "QueryOrderDetailRequest",
+      "required": [
+        "order_no"
+      ]
+    },
+    "QueryOrderListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryOrderListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryOrderListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetail"
+          }
+        }
+      },
+      "title": "QueryOrderListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "RechargeOrderRequest": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "RechargeOrderRequest",
+      "required": [
+        "amount",
+        "payment"
+      ]
+    },
+    "RechargeOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "RechargeOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
     "RegisterConfig": {
       "type": "object",
       "properties": {
@@ -2079,6 +2390,43 @@
         "ip_register_limit_duration"
       ]
     },
+    "RenewalOrderRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "coupon": {
+          "type": "string"
+        }
+      },
+      "title": "RenewalOrderRequest",
+      "required": [
+        "user_subscribe_id",
+        "quantity",
+        "payment"
+      ]
+    },
+    "RenewalOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "RenewalOrderResponse",
+      "required": [
+        "order_no"
+      ]
+    },
     "ResetPasswordRequest": {
       "type": "object",
       "properties": {
@@ -2099,6 +2447,35 @@
       "required": [
         "email",
         "password"
+      ]
+    },
+    "ResetTrafficOrderRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        }
+      },
+      "title": "ResetTrafficOrderRequest",
+      "required": [
+        "user_subscribe_id",
+        "payment"
+      ]
+    },
+    "ResetTrafficOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "ResetTrafficOrderResponse",
+      "required": [
+        "order_no"
       ]
     },
     "Response": {
@@ -2476,6 +2853,26 @@
       "required": [
         "id",
         "sort"
+      ]
+    },
+    "StripePayment": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "publishable_key": {
+          "type": "string"
+        }
+      },
+      "title": "StripePayment",
+      "required": [
+        "method",
+        "client_secret",
+        "publishable_key"
       ]
     },
     "Subscribe": {

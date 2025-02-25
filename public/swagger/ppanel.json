@@ -5125,6 +5125,65 @@
         ]
       }
     },
+    "/v1/app/announcement/list": {
+      "get": {
+        "summary": "Query announcement",
+        "operationId": "QueryAnnouncement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryAnnouncementResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          }
+        ],
+        "tags": [
+          "ppanel/app/announcement"
+        ]
+      }
+    },
     "/v1/app/auth/check": {
       "post": {
         "summary": "Check Account",
@@ -5320,6 +5379,73 @@
         ]
       }
     },
+    "/v1/app/document/detail": {
+      "get": {
+        "summary": "Get document detail",
+        "operationId": "QueryDocumentDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Document"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/app/document"
+        ]
+      }
+    },
+    "/v1/app/document/list": {
+      "get": {
+        "summary": "Get document list",
+        "operationId": "QueryDocumentList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryDocumentListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/document"
+        ]
+      }
+    },
     "/v1/app/node/list": {
       "get": {
         "summary": "Get Node list",
@@ -5375,6 +5501,390 @@
         },
         "tags": [
           "ppanel/app/node"
+        ]
+      }
+    },
+    "/v1/app/order/checkout": {
+      "post": {
+        "summary": "Checkout order",
+        "operationId": "CheckoutOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CheckoutOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckoutOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/close": {
+      "post": {
+        "summary": "Close order",
+        "operationId": "CloseOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/detail": {
+      "get": {
+        "summary": "Get order",
+        "operationId": "QueryOrderDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OrderDetail"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_no",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/list": {
+      "get": {
+        "summary": "Get order list",
+        "operationId": "QueryOrderList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryOrderListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/pre": {
+      "post": {
+        "summary": "Pre create order",
+        "operationId": "PreCreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PreOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "public order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/purchase": {
+      "post": {
+        "summary": "purchase Subscription",
+        "operationId": "Purchase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PurchaseOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "public order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/recharge": {
+      "post": {
+        "summary": "Recharge",
+        "operationId": "Recharge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RechargeOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RechargeOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/renewal": {
+      "post": {
+        "summary": "Renewal Subscription",
+        "operationId": "Renewal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RenewalOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenewalOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/reset": {
+      "post": {
+        "summary": "Reset traffic",
+        "operationId": "ResetTraffic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ResetTrafficOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetTrafficOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/payment/methods": {
+      "get": {
+        "summary": "Get available payment methods",
+        "operationId": "GetAvailablePaymentMethods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAvailablePaymentMethodsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/payment"
         ]
       }
     },
@@ -6697,6 +7207,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "public order",
             "in": "body",
             "required": true,
             "schema": {
@@ -6736,6 +7247,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "public order",
             "in": "body",
             "required": true,
             "schema": {
