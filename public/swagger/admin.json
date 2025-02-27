@@ -5143,6 +5143,9 @@
         "content": {
           "type": "string"
         },
+        "description": {
+          "type": "string"
+        },
         "target_url": {
           "type": "string"
         },
@@ -5173,6 +5176,7 @@
         "title",
         "type",
         "content",
+        "description",
         "target_url",
         "start_time",
         "end_time",
