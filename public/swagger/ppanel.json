@@ -5888,6 +5888,93 @@
         ]
       }
     },
+    "/v1/app/subscribe/application/config": {
+      "get": {
+        "summary": "Get application config",
+        "operationId": "QueryApplicationConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ApplicationResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/subscribe/group/list": {
+      "get": {
+        "summary": "Get subscribe group list",
+        "operationId": "QuerySubscribeGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/subscribe/list": {
+      "get": {
+        "summary": "Get subscribe list",
+        "operationId": "QuerySubscribeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
     "/v1/app/user/account": {
       "delete": {
         "summary": "Delete Account",
@@ -8919,7 +9006,7 @@
           "enum": [
             "device",
             "email",
-            "telephone"
+            "mobile"
           ]
         },
         "account": {
@@ -8970,7 +9057,7 @@
           "enum": [
             "device",
             "email",
-            "telephone"
+            "mobile"
           ]
         },
         "account": {
@@ -9127,7 +9214,7 @@
           "type": "string",
           "enum": [
             "email",
-            "telephone"
+            "mobile"
           ]
         },
         "account": {
@@ -16443,13 +16530,19 @@
           "type": "integer",
           "format": "int64"
         },
-        "city": {
-          "type": "string"
-        },
         "config": {
           "type": "string"
         },
         "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
           "type": "string"
         },
         "created_at": {
@@ -16475,9 +16568,11 @@
         "traffic",
         "traffic_ratio",
         "upload",
-        "city",
         "config",
         "country",
+        "city",
+        "latitude",
+        "longitude",
         "created_at",
         "download"
       ]

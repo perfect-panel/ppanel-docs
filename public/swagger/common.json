@@ -2324,6 +2324,46 @@
         "list"
       ]
     },
+    "QuerySubscribeGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeGroup"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QuerySubscribeGroupListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
+    "QuerySubscribeListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscribe"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QuerySubscribeListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "RechargeOrderRequest": {
       "type": "object",
       "properties": {
