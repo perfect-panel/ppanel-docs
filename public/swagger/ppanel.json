@@ -9083,6 +9083,9 @@
         "code": {
           "type": "string"
         },
+        "invite": {
+          "type": "string"
+        },
         "area_code": {
           "type": "string"
         },
@@ -9098,6 +9101,7 @@
         "identifier",
         "user_agent",
         "code",
+        "invite",
         "area_code"
       ]
     },
@@ -16318,6 +16322,13 @@
         "email": {
           "type": "string"
         },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
         "avatar": {
           "type": "string"
         },
@@ -16344,6 +16355,8 @@
       "required": [
         "id",
         "email",
+        "referer_id",
+        "refer_code",
         "avatar",
         "area_code",
         "telephone",
