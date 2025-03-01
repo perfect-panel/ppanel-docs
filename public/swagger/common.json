@@ -1516,6 +1516,64 @@
         "tos_content"
       ]
     },
+    "GetUserSubscribeTrafficLogsRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserSubscribeTrafficLogsRequest",
+      "required": [
+        "page",
+        "size",
+        "user_id",
+        "subscribe_id",
+        "start_time",
+        "end_time"
+      ]
+    },
+    "GetUserSubscribeTrafficLogsResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserSubscribeTrafficLogsResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "GoogleLoginCallbackRequest": {
       "type": "object",
       "properties": {

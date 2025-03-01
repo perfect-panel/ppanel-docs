@@ -5113,6 +5113,20 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -7650,6 +7664,14 @@
         "subscribe_id": {
           "type": "integer",
           "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "GetUserSubscribeTrafficLogsRequest",
@@ -7657,7 +7679,9 @@
         "page",
         "size",
         "user_id",
-        "subscribe_id"
+        "subscribe_id",
+        "start_time",
+        "end_time"
       ]
     },
     "GetUserSubscribeTrafficLogsResponse": {

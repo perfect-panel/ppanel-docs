@@ -5113,6 +5113,20 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -6071,6 +6085,79 @@
             "schema": {
               "$ref": "#/definitions/UpdatePasswordRequeset"
             }
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/subscribe/traffic_logs": {
+      "get": {
+        "summary": "Get user subcribe traffic logs",
+        "operationId": "GetUserSubscribeTrafficLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserSubscribeTrafficLogsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscribe_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -12191,6 +12278,14 @@
         "subscribe_id": {
           "type": "integer",
           "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "end_time": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "GetUserSubscribeTrafficLogsRequest",
@@ -12198,7 +12293,9 @@
         "page",
         "size",
         "user_id",
-        "subscribe_id"
+        "subscribe_id",
+        "start_time",
+        "end_time"
       ]
     },
     "GetUserSubscribeTrafficLogsResponse": {
