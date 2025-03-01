@@ -11286,7 +11286,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PaymentConfig"
+            "$ref": "#/definitions/PaymenMethod"
           }
         }
       },
@@ -12990,6 +12990,46 @@
         "amount_total",
         "new_order_amount",
         "renewal_order_amount"
+      ]
+    },
+    "PaymenMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PaymenMethod",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "icon",
+        "fee_mode",
+        "fee_percent",
+        "fee_amount"
       ]
     },
     "PaymentConfig": {
