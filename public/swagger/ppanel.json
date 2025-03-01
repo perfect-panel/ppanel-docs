@@ -6026,6 +6026,51 @@
         ]
       }
     },
+    "/v1/app/user/affiliate/list": {
+      "get": {
+        "summary": "Query User Affiliate List",
+        "operationId": "QueryUserAffiliateList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserAffiliateListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
     "/v1/app/user/info": {
       "get": {
         "summary": "query user info",

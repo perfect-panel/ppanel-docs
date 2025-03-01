@@ -8585,6 +8585,26 @@
         "total"
       ]
     },
+    "QueryUserAffiliateListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAffiliate"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserAffiliateListResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "RechargeOrderRequest": {
       "type": "object",
       "properties": {
