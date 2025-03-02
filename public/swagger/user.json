@@ -525,6 +525,142 @@
         ]
       }
     },
+    "/v1/public/portal/payment-method": {
+      "get": {
+        "summary": "Get available payment methods",
+        "operationId": "GetAvailablePaymentMethods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAvailablePaymentMethodsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
+    "/v1/public/portal/pre": {
+      "post": {
+        "summary": "Pre Purchase Order",
+        "operationId": "PrePurchaseOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PrePurchaseOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrePurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
+    "/v1/public/portal/purchase": {
+      "post": {
+        "summary": "Purchase subscription",
+        "operationId": "Purchase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PortalPurchaseResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalPurchaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
+    "/v1/public/portal/subscribe": {
+      "get": {
+        "summary": "Get Subscription",
+        "operationId": "GetSubscription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscriptionResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
     "/v1/public/subscribe/application/config": {
       "get": {
         "summary": "Get application config",
@@ -2434,6 +2570,21 @@
         "total"
       ]
     },
+    "GetSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscribe"
+          }
+        }
+      },
+      "title": "GetSubscriptionResponse",
+      "required": [
+        "list"
+      ]
+    },
     "GetUserSubscribeTrafficLogsRequest": {
       "type": "object",
       "properties": {
@@ -3049,6 +3200,71 @@
         "enable"
       ]
     },
+    "PortalPurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "turnstile_token": {
+          "type": "string"
+        },
+        "return_url": {
+          "type": "string"
+        }
+      },
+      "title": "PortalPurchaseRequest",
+      "required": [
+        "identifier",
+        "platform",
+        "payment",
+        "subscribe_id",
+        "quantity"
+      ]
+    },
+    "PortalPurchaseResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        },
+        "check_url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "stripe": {
+          "$ref": "#/definitions/StripePayment"
+        }
+      },
+      "title": "PortalPurchaseResponse",
+      "required": [
+        "order_no",
+        "check_url",
+        "type"
+      ]
+    },
     "PreOrderResponse": {
       "type": "object",
       "properties": {
@@ -3086,6 +3302,68 @@
         "amount",
         "discount",
         "gift_amount",
+        "coupon",
+        "coupon_discount",
+        "fee_amount"
+      ]
+    },
+    "PrePurchaseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "type": "string"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        }
+      },
+      "title": "PrePurchaseOrderRequest",
+      "required": [
+        "payment",
+        "subscribe_id",
+        "quantity"
+      ]
+    },
+    "PrePurchaseOrderResponse": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PrePurchaseOrderResponse",
+      "required": [
+        "price",
+        "amount",
+        "discount",
         "coupon",
         "coupon_discount",
         "fee_amount"
