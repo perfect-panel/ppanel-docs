@@ -7602,6 +7602,45 @@
         ]
       }
     },
+    "/v1/public/portal/order/checkout": {
+      "post": {
+        "summary": "Purchase Checkout",
+        "operationId": "PurchaseCheckout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PurchaseCheckoutResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseCheckoutRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
     "/v1/public/portal/order/status": {
       "get": {
         "summary": "Query Purchase Order",
@@ -13288,9 +13327,6 @@
         },
         "turnstile_token": {
           "type": "string"
-        },
-        "return_url": {
-          "type": "string"
         }
       },
       "title": "PortalPurchaseRequest",
@@ -13307,22 +13343,11 @@
       "properties": {
         "order_no": {
           "type": "string"
-        },
-        "check_url": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "stripe": {
-          "$ref": "#/definitions/StripePayment"
         }
       },
       "title": "PortalPurchaseResponse",
       "required": [
-        "order_no",
-        "check_url",
-        "type"
+        "order_no"
       ]
     },
     "PreOrderResponse": {
@@ -13520,6 +13545,40 @@
         "verify_code_interval"
       ]
     },
+    "PurchaseCheckoutRequest": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        },
+        "return_url": {
+          "type": "string"
+        }
+      },
+      "title": "PurchaseCheckoutRequest",
+      "required": [
+        "order_no"
+      ]
+    },
+    "PurchaseCheckoutResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "check_url": {
+          "type": "string"
+        },
+        "stripe": {
+          "$ref": "#/definitions/StripePayment"
+        }
+      },
+      "title": "PurchaseCheckoutResponse",
+      "required": [
+        "type",
+        "check_url"
+      ]
+    },
     "PurchaseOrderRequest": {
       "type": "object",
       "properties": {
@@ -13706,6 +13765,13 @@
         "order_no": {
           "type": "string"
         },
+        "subscribe": {
+          "$ref": "#/definitions/Subscribe"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
         "price": {
           "type": "integer",
           "format": "int64"
@@ -13736,6 +13802,10 @@
           "type": "integer",
           "format": "uint8"
         },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
         "token": {
           "type": "string"
         }
@@ -13743,6 +13813,8 @@
       "title": "QueryPurchaseOrderResponse",
       "required": [
         "order_no",
+        "subscribe",
+        "quantity",
         "price",
         "amount",
         "discount",
@@ -13750,7 +13822,8 @@
         "coupon_discount",
         "fee_amount",
         "payment",
-        "status"
+        "status",
+        "created_at"
       ]
     },
     "QuerySubscribeGroupListResponse": {
