@@ -7602,6 +7602,43 @@
         ]
       }
     },
+    "/v1/public/portal/order/status": {
+      "get": {
+        "summary": "Query Purchase Order",
+        "operationId": "QueryPurchaseOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryPurchaseOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_no",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/public/portal"
+        ]
+      }
+    },
     "/v1/public/portal/payment-method": {
       "get": {
         "summary": "Get available payment methods",
@@ -13649,6 +13686,71 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "QueryPurchaseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        }
+      },
+      "title": "QueryPurchaseOrderRequest",
+      "required": [
+        "order_no"
+      ]
+    },
+    "QueryPurchaseOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order_no": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "coupon": {
+          "type": "string"
+        },
+        "coupon_discount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payment": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "QueryPurchaseOrderResponse",
+      "required": [
+        "order_no",
+        "price",
+        "amount",
+        "discount",
+        "coupon",
+        "coupon_discount",
+        "fee_amount",
+        "payment",
+        "status"
       ]
     },
     "QuerySubscribeGroupListResponse": {
