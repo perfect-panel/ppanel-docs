@@ -1107,39 +1107,6 @@
         "exist"
       ]
     },
-    "CheckoutOrderRequest": {
-      "type": "object",
-      "properties": {
-        "orderNo": {
-          "type": "string"
-        },
-        "returnUrl": {
-          "type": "string"
-        }
-      },
-      "title": "CheckoutOrderRequest",
-      "required": [
-        "orderNo"
-      ]
-    },
-    "CheckoutOrderResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "checkout_url": {
-          "type": "string"
-        },
-        "stripe": {
-          "$ref": "#/definitions/StripePayment"
-        }
-      },
-      "title": "CheckoutOrderResponse",
-      "required": [
-        "type"
-      ]
-    },
     "CloseOrderRequest": {
       "type": "object",
       "properties": {
