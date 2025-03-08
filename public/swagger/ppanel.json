@@ -6722,6 +6722,49 @@
         ]
       }
     },
+    "/v1/common/ads": {
+      "get": {
+        "summary": "Get Ads",
+        "operationId": "GetAds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetAdsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "position",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/application": {
       "get": {
         "summary": "Get Tos Content",
@@ -11297,6 +11340,37 @@
         "list"
       ]
     },
+    "GetAdsRequest": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        }
+      },
+      "title": "GetAdsRequest",
+      "required": [
+        "device",
+        "position"
+      ]
+    },
+    "GetAdsResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ads"
+          }
+        }
+      },
+      "title": "GetAdsResponse",
+      "required": [
+        "list"
+      ]
+    },
     "GetAllPaymentConfigResponse": {
       "type": "object",
       "properties": {
@@ -11583,6 +11657,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "web_ad": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "GetGlobalConfigResponse",
@@ -11594,7 +11672,8 @@
         "currency",
         "subscribe",
         "verify_code",
-        "oauth_methods"
+        "oauth_methods",
+        "web_ad"
       ]
     },
     "GetLoginLogRequest": {
