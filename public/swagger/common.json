@@ -3621,10 +3621,10 @@
     "UserAffiliate": {
       "type": "object",
       "properties": {
-        "email": {
+        "avatar": {
           "type": "string"
         },
-        "avatar": {
+        "identifier": {
           "type": "string"
         },
         "registered_at": {
@@ -3638,8 +3638,8 @@
       },
       "title": "UserAffiliate",
       "required": [
-        "email",
         "avatar",
+        "identifier",
         "registered_at",
         "enable"
       ]
