@@ -3531,7 +3531,8 @@
           "format": "int64"
         },
         "payment": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         },
         "coupon": {
           "type": "string"
@@ -3948,7 +3949,8 @@
           "format": "int64"
         },
         "payment": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "RechargeOrderRequest",
@@ -4028,7 +4030,8 @@
           "format": "int64"
         },
         "payment": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         },
         "coupon": {
           "type": "string"
@@ -4061,7 +4064,8 @@
           "format": "int64"
         },
         "payment": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "ResetTrafficOrderRequest",
