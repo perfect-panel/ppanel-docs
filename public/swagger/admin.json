@@ -7153,7 +7153,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PaymentConfig"
+            "$ref": "#/definitions/PaymentMethodDetail"
           }
         }
       },
@@ -8200,6 +8200,63 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "PaymentMethodDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "notify_url": {
+          "type": "string"
+        }
+      },
+      "title": "PaymentMethodDetail",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "icon",
+        "domain",
+        "config",
+        "fee_mode",
+        "fee_percent",
+        "fee_amount",
+        "enable",
+        "notify_url"
       ]
     },
     "PlatformInfo": {
