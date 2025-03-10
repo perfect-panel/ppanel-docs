@@ -2149,6 +2149,41 @@
         "enable"
       ]
     },
+    "PlatformInfo": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "platform_url": {
+          "type": "string"
+        },
+        "platform_field_description": {
+          "type": "object"
+        }
+      },
+      "title": "PlatformInfo",
+      "required": [
+        "platform",
+        "platform_url",
+        "platform_field_description"
+      ]
+    },
+    "PlatformResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformInfo"
+          }
+        }
+      },
+      "title": "PlatformResponse",
+      "required": [
+        "list"
+      ]
+    },
     "PreOrderResponse": {
       "type": "object",
       "properties": {

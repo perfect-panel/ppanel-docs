@@ -1447,37 +1447,10 @@
         ]
       }
     },
-    "/v1/admin/payment/alipay_f2f": {
-      "get": {
-        "summary": "Get alipay f2f payment config",
-        "operationId": "GetAlipayF2FPaymentConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/PaymentConfig"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/payment"
-        ]
-      },
-      "put": {
-        "summary": "Update alipay f2f payment config",
-        "operationId": "UpdateAlipayF2FPaymentConfig",
+    "/v1/admin/payment/": {
+      "delete": {
+        "summary": "Delete Payment Method",
+        "operationId": "DeletePaymentMethod",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1502,48 +1475,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAlipayF2fRequest"
+              "$ref": "#/definitions/DeletePaymentMethodRequest"
             }
           }
         ],
         "tags": [
           "ppanel/admin/payment"
         ]
-      }
-    },
-    "/v1/admin/payment/all": {
-      "get": {
-        "summary": "Get all payment config",
-        "operationId": "GetAllPaymentConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetAllPaymentConfigResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/payment"
-        ]
-      }
-    },
-    "/v1/admin/payment/epay": {
-      "get": {
-        "summary": "Get epay payment config",
-        "operationId": "GetEpayPaymentConfig",
+      },
+      "post": {
+        "summary": "Create Payment Method",
+        "operationId": "CreatePaymentMethod",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1564,50 +1506,23 @@
             }
           }
         },
-        "tags": [
-          "ppanel/admin/payment"
-        ]
-      },
-      "put": {
-        "summary": "Update epay payment config",
-        "operationId": "UpdateEpayPaymentConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateEpayRequest"
+              "$ref": "#/definitions/CreatePaymentMethodRequest"
             }
           }
         ],
         "tags": [
           "ppanel/admin/payment"
         ]
-      }
-    },
-    "/v1/admin/payment/stripe_alipay": {
-      "get": {
-        "summary": "Get stripe alipay payment config",
-        "operationId": "GetStripeAlipayPaymentConfig",
+      },
+      "put": {
+        "summary": "Update Payment Method",
+        "operationId": "UpdatePaymentMethod",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1628,38 +1543,13 @@
             }
           }
         },
-        "tags": [
-          "ppanel/admin/payment"
-        ]
-      },
-      "put": {
-        "summary": "Update stripe alipay payment config",
-        "operationId": "UpdateStripeAlipayPaymentConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateStripeRequest"
+              "$ref": "#/definitions/UpdatePaymentMethodRequest"
             }
           }
         ],
@@ -1668,10 +1558,10 @@
         ]
       }
     },
-    "/v1/admin/payment/stripe_wechat_pay": {
+    "/v1/admin/payment/list": {
       "get": {
-        "summary": "Get stripe wechat pay payment config",
-        "operationId": "GetStripeWeChatPayPaymentConfig",
+        "summary": "Get Payment Method List",
+        "operationId": "GetPaymentMethodList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1684,7 +1574,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/PaymentConfig"
+                      "$ref": "#/definitions/GetPaymentMethodListResponse"
                     }
                   }
                 }
@@ -1692,13 +1582,50 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "mark",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "enable",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          }
+        ],
         "tags": [
           "ppanel/admin/payment"
         ]
-      },
-      "put": {
-        "summary": "Update stripe wechat pay payment config",
-        "operationId": "UpdateStripeWeChatPayPaymentConfig",
+      }
+    },
+    "/v1/admin/payment/platform": {
+      "get": {
+        "summary": "Get supported payment platform",
+        "operationId": "GetPaymentPlatform",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1710,23 +1637,15 @@
                 {
                   "type": "object",
                   "properties": {
-                    "data": {}
+                    "data": {
+                      "$ref": "#/definitions/PlatformResponse"
+                    }
                   }
                 }
               ]
             }
           }
         },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateStripeRequest"
-            }
-          }
-        ],
         "tags": [
           "ppanel/admin/payment"
         ]
@@ -5199,35 +5118,6 @@
         "updated_at"
       ]
     },
-    "AlipayF2FConfig": {
-      "type": "object",
-      "properties": {
-        "app_id": {
-          "type": "string"
-        },
-        "private_key": {
-          "type": "string"
-        },
-        "public_key": {
-          "type": "string"
-        },
-        "invoice_name": {
-          "type": "string"
-        },
-        "sandbox": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "AlipayF2FConfig",
-      "required": [
-        "app_id",
-        "private_key",
-        "public_key",
-        "invoice_name",
-        "sandbox"
-      ]
-    },
     "Announcement": {
       "type": "object",
       "properties": {
@@ -6081,6 +5971,50 @@
         "fee_amount"
       ]
     },
+    "CreatePaymentMethodRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreatePaymentMethodRequest",
+      "required": [
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
+    },
     "CreateRuleGroupRequest": {
       "type": "object",
       "properties": {
@@ -6492,6 +6426,19 @@
         "id"
       ]
     },
+    "DeletePaymentMethodRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeletePaymentMethodRequest",
+      "required": [
+        "id"
+      ]
+    },
     "DeleteRuleGroupRequest": {
       "type": "object",
       "properties": {
@@ -6644,26 +6591,6 @@
         "domain_suffix_list"
       ]
     },
-    "EpayConfig": {
-      "type": "object",
-      "properties": {
-        "pid": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        }
-      },
-      "title": "EpayConfig",
-      "required": [
-        "pid",
-        "url",
-        "key"
-      ]
-    },
     "Follow": {
       "type": "object",
       "properties": {
@@ -6755,21 +6682,6 @@
       "title": "GetAdsListResponse",
       "required": [
         "total",
-        "list"
-      ]
-    },
-    "GetAllPaymentConfigResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PaymentConfig"
-          }
-        }
-      },
-      "title": "GetAllPaymentConfigResponse",
-      "required": [
         "list"
       ]
     },
@@ -7198,6 +7110,54 @@
         }
       },
       "title": "GetOrderListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "GetPaymentMethodListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "GetPaymentMethodListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetPaymentMethodListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentConfig"
+          }
+        }
+      },
+      "title": "GetPaymentMethodListResponse",
       "required": [
         "total",
         "list"
@@ -9215,30 +9175,6 @@
         "sort"
       ]
     },
-    "StripeConfig": {
-      "type": "object",
-      "properties": {
-        "public_key": {
-          "type": "string"
-        },
-        "secret_key": {
-          "type": "string"
-        },
-        "webhook_secret": {
-          "type": "string"
-        },
-        "payment": {
-          "type": "string"
-        }
-      },
-      "title": "StripeConfig",
-      "required": [
-        "public_key",
-        "secret_key",
-        "webhook_secret",
-        "payment"
-      ]
-    },
     "StripePayment": {
       "type": "object",
       "properties": {
@@ -9914,55 +9850,6 @@
         "status"
       ]
     },
-    "UpdateAlipayF2fRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/AlipayF2FConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateAlipayF2fRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
-        "enable"
-      ]
-    },
     "UpdateAnnouncementEnableRequest": {
       "type": "object",
       "properties": {
@@ -10218,55 +10105,6 @@
         "show"
       ]
     },
-    "UpdateEpayRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/EpayConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateEpayRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
-        "enable"
-      ]
-    },
     "UpdateNodeGroupRequest": {
       "type": "object",
       "properties": {
@@ -10392,6 +10230,55 @@
         "status"
       ]
     },
+    "UpdatePaymentMethodRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UpdatePaymentMethodRequest",
+      "required": [
+        "id",
+        "name",
+        "mark",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
+    },
     "UpdateRuleGroupRequest": {
       "type": "object",
       "properties": {
@@ -10419,55 +10306,6 @@
         "name",
         "icon",
         "description",
-        "enable"
-      ]
-    },
-    "UpdateStripeRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mark": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/StripeConfig"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UpdateStripeRequest",
-      "required": [
-        "id",
-        "name",
-        "mark",
-        "config",
-        "fee_mode",
         "enable"
       ]
     },
