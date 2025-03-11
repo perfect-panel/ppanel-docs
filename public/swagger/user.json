@@ -1842,6 +1842,18 @@
         "updated_at"
       ]
     },
+    "AlipayNotifyResponse": {
+      "type": "object",
+      "properties": {
+        "return_code": {
+          "type": "string"
+        }
+      },
+      "title": "AlipayNotifyResponse",
+      "required": [
+        "return_code"
+      ]
+    },
     "Announcement": {
       "type": "object",
       "properties": {
@@ -2436,6 +2448,55 @@
         "show",
         "created_at",
         "updated_at"
+      ]
+    },
+    "EPayNotifyRequest": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "trade_no": {
+          "type": "string"
+        },
+        "out_trade_no": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "money": {
+          "type": "string"
+        },
+        "trade_status": {
+          "type": "string"
+        },
+        "param": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "sign_type": {
+          "type": "string"
+        }
+      },
+      "title": "EPayNotifyRequest",
+      "required": [
+        "pid",
+        "trade_no",
+        "out_trade_no",
+        "type",
+        "name",
+        "money",
+        "trade_status",
+        "param",
+        "sign",
+        "sign_type"
       ]
     },
     "EmailAuthticateConfig": {
@@ -3427,7 +3488,8 @@
       "type": "object",
       "properties": {
         "payment": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         },
         "subscribe_id": {
           "type": "integer",
