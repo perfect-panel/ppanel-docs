@@ -3158,7 +3158,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -3181,7 +3181,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "icon",
         "fee_mode",
         "fee_percent",
@@ -3198,7 +3198,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -3231,7 +3231,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "config",
         "fee_mode",
         "enable"
@@ -3247,7 +3247,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -3283,7 +3283,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "icon",
         "domain",
         "config",

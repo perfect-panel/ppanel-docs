@@ -1598,7 +1598,7 @@
             "format": "int32"
           },
           {
-            "name": "mark",
+            "name": "platform",
             "in": "query",
             "required": false,
             "type": "string"
@@ -10447,7 +10447,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -10479,7 +10479,7 @@
       "title": "CreatePaymentMethodRequest",
       "required": [
         "name",
-        "mark",
+        "platform",
         "config",
         "fee_mode",
         "enable"
@@ -11859,7 +11859,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "search": {
@@ -13185,7 +13185,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -13208,7 +13208,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "icon",
         "fee_mode",
         "fee_percent",
@@ -13225,7 +13225,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -13258,7 +13258,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "config",
         "fee_mode",
         "enable"
@@ -13274,7 +13274,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -13310,7 +13310,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "icon",
         "domain",
         "config",
@@ -16126,7 +16126,7 @@
         "name": {
           "type": "string"
         },
-        "mark": {
+        "platform": {
           "type": "string"
         },
         "icon": {
@@ -16159,7 +16159,7 @@
       "required": [
         "id",
         "name",
-        "mark",
+        "platform",
         "config",
         "fee_mode",
         "enable"
