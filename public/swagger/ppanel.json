@@ -10304,6 +10304,9 @@
         "platform": {
           "type": "string"
         },
+        "description": {
+          "type": "string"
+        },
         "icon": {
           "type": "string"
         },
@@ -10334,6 +10337,7 @@
       "required": [
         "name",
         "platform",
+        "description",
         "config",
         "fee_mode",
         "enable"
@@ -13042,6 +13046,9 @@
         "platform": {
           "type": "string"
         },
+        "description": {
+          "type": "string"
+        },
         "icon": {
           "type": "string"
         },
@@ -13063,6 +13070,7 @@
         "id",
         "name",
         "platform",
+        "description",
         "icon",
         "fee_mode",
         "fee_percent",
@@ -13080,6 +13088,9 @@
           "type": "string"
         },
         "platform": {
+          "type": "string"
+        },
+        "description": {
           "type": "string"
         },
         "icon": {
@@ -13113,6 +13124,7 @@
         "id",
         "name",
         "platform",
+        "description",
         "config",
         "fee_mode",
         "enable"
@@ -13129,6 +13141,9 @@
           "type": "string"
         },
         "platform": {
+          "type": "string"
+        },
+        "description": {
           "type": "string"
         },
         "icon": {
@@ -13165,6 +13180,7 @@
         "id",
         "name",
         "platform",
+        "description",
         "icon",
         "domain",
         "config",
@@ -15984,6 +16000,9 @@
         "platform": {
           "type": "string"
         },
+        "description": {
+          "type": "string"
+        },
         "icon": {
           "type": "string"
         },
@@ -16015,6 +16034,7 @@
         "id",
         "name",
         "platform",
+        "description",
         "config",
         "fee_mode",
         "enable"
