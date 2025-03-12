@@ -1480,7 +1480,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PaymenMethod"
+            "$ref": "#/definitions/PaymentMethod"
           }
         }
       },
@@ -1971,7 +1971,7 @@
           "format": "int64"
         },
         "payment": {
-          "$ref": "#/definitions/PaymenMethod"
+          "$ref": "#/definitions/PaymentMethod"
         },
         "fee_amount": {
           "type": "integer",
@@ -2121,50 +2121,6 @@
         "updated_at"
       ]
     },
-    "PaymenMethod": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "PaymenMethod",
-      "required": [
-        "id",
-        "name",
-        "platform",
-        "description",
-        "icon",
-        "fee_mode",
-        "fee_percent",
-        "fee_amount"
-      ]
-    },
     "PaymentConfig": {
       "type": "object",
       "properties": {
@@ -2216,6 +2172,50 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "PaymentMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "fee_mode": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "fee_percent": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fee_amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PaymentMethod",
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "description",
+        "icon",
+        "fee_mode",
+        "fee_percent",
+        "fee_amount"
       ]
     },
     "PaymentMethodDetail": {
