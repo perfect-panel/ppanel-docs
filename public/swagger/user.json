@@ -3156,6 +3156,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "payment": {
+          "$ref": "#/definitions/PaymentMethod"
+        },
         "method": {
           "type": "string"
         },
@@ -3199,6 +3202,7 @@
         "discount",
         "coupon",
         "coupon_discount",
+        "payment",
         "method",
         "fee_amount",
         "trade_no",
