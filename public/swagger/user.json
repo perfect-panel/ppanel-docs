@@ -3058,8 +3058,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "method": {
-          "type": "string"
+        "payment": {
+          "$ref": "#/definitions/PaymenMethod"
         },
         "fee_amount": {
           "type": "integer",
@@ -3098,7 +3098,7 @@
         "discount",
         "coupon",
         "coupon_discount",
-        "method",
+        "payment",
         "fee_amount",
         "trade_no",
         "status",

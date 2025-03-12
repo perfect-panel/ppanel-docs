@@ -5958,8 +5958,9 @@
           "type": "integer",
           "format": "int64"
         },
-        "method": {
-          "type": "string"
+        "payment_id": {
+          "type": "integer",
+          "format": "int64"
         },
         "trade_no": {
           "type": "string"
@@ -5980,7 +5981,8 @@
         "price",
         "amount",
         "commission",
-        "fee_amount"
+        "fee_amount",
+        "payment_id"
       ]
     },
     "CreatePaymentMethodRequest": {
@@ -7995,8 +7997,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "method": {
-          "type": "string"
+        "payment": {
+          "$ref": "#/definitions/PaymenMethod"
         },
         "fee_amount": {
           "type": "integer",
@@ -8035,7 +8037,7 @@
         "discount",
         "coupon",
         "coupon_discount",
-        "method",
+        "payment",
         "fee_amount",
         "trade_no",
         "status",
@@ -10355,8 +10357,9 @@
           "type": "integer",
           "format": "uint8"
         },
-        "method": {
-          "type": "string"
+        "payment_id": {
+          "type": "integer",
+          "format": "int64"
         },
         "trade_no": {
           "type": "string"
