@@ -3,6 +3,8 @@ const meta = {
   common: 'Comum',
   user: 'Usuário',
   admin: 'Administração',
+  node: 'Nó',
+  app: 'Aplicativo',
 };
 
 export default meta;
