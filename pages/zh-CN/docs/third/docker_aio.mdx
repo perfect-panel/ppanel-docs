@@ -1,27 +1,33 @@
 # Docker All in One 部署方式
 
 ## 介绍
+
 使用一键脚本在一台服务器上部署包括服务端、管理端、用户端、数据库、Nginx等组件。
 
 ## 前置条件
-* 一台有公网IP的服务器
-* 三个已经通过CloudFlare解析的域名
+
+- 一台有公网IP的服务器
+- 三个已经通过CloudFlare解析的域名
 
 ## 准备工作
-* curl
-* CloudFlare Global API Token
+
+- curl
+- CloudFlare Global API Token
 
 ## 使用方法
+
 以下方法均通过root用户执行
-* 方法一 - 交互式输入配置文件
+
+- 方法一 - 交互式输入配置文件
 
 ```shell
 bash <(curl -sL https://raw.githubusercontent.com/xiaoyaohanyue/ppanel-docker-aio/refs/heads/main/init.sh) -i
 ```
+
 根据提示输入关键配置内容
 
-* 方法二 - 参数启动
-  
+- 方法二 - 参数启动
+
 ```shell
 bash <(curl -sL https://raw.githubusercontent.com/xiaoyaohanyue/ppanel-docker-aio/refs/heads/main/init.sh) && \
     bash /opt/dslr/install.sh --admin_email "管理员邮箱" \
@@ -34,6 +40,5 @@ bash <(curl -sL https://raw.githubusercontent.com/xiaoyaohanyue/ppanel-docker-ai
 ```
 
 ## BUG
-* 目前仅支持Cloudflare解析的域名进行自动SSL申请
 
-  
+- 目前仅支持Cloudflare解析的域名进行自动SSL申请
