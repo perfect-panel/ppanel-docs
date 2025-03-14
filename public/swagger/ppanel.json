@@ -7444,6 +7444,18 @@
         },
         "parameters": [
           {
+            "name": "auth_type",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "order_no",
             "in": "query",
             "required": true,
@@ -13656,6 +13668,9 @@
           "type": "string"
         },
         "identifier": {
+          "type": "string"
+        },
+        "order_no": {
           "type": "string"
         }
       },
