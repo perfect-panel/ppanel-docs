@@ -13235,10 +13235,10 @@
     "PortalPurchaseRequest": {
       "type": "object",
       "properties": {
-        "identifier": {
+        "auth_type": {
           "type": "string"
         },
-        "platform": {
+        "identifier": {
           "type": "string"
         },
         "password": {
@@ -13265,8 +13265,8 @@
       },
       "title": "PortalPurchaseRequest",
       "required": [
+        "auth_type",
         "identifier",
-        "platform",
         "payment",
         "subscribe_id",
         "quantity"
@@ -13652,12 +13652,17 @@
     "QueryPurchaseOrderRequest": {
       "type": "object",
       "properties": {
-        "order_no": {
+        "auth_type": {
+          "type": "string"
+        },
+        "identifier": {
           "type": "string"
         }
       },
       "title": "QueryPurchaseOrderRequest",
       "required": [
+        "auth_type",
+        "identifier",
         "order_no"
       ]
     },

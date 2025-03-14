@@ -5520,6 +5520,39 @@
         "ids"
       ]
     },
+    "CheckoutOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderNo": {
+          "type": "string"
+        },
+        "returnUrl": {
+          "type": "string"
+        }
+      },
+      "title": "CheckoutOrderRequest",
+      "required": [
+        "orderNo"
+      ]
+    },
+    "CheckoutOrderResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "checkout_url": {
+          "type": "string"
+        },
+        "stripe": {
+          "$ref": "#/definitions/StripePayment"
+        }
+      },
+      "title": "CheckoutOrderResponse",
+      "required": [
+        "type"
+      ]
+    },
     "CloseOrderRequest": {
       "type": "object",
       "properties": {
@@ -8691,6 +8724,24 @@
       "required": [
         "list",
         "total"
+      ]
+    },
+    "QueryUserAffiliateListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "QueryUserAffiliateListRequest",
+      "required": [
+        "page",
+        "size"
       ]
     },
     "QueryUserAffiliateListResponse": {

@@ -15,10 +15,10 @@
     "application/json"
   ],
   "paths": {
-    "/v1/auth/check": {
+    "/v1/app/announcement/list": {
       "get": {
-        "summary": "Check user is exist",
-        "operationId": "CheckUser",
+        "summary": "Query announcement",
+        "operationId": "QueryAnnouncement",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -31,7 +31,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/CheckUserResponse"
+                      "$ref": "#/definitions/QueryAnnouncementResponse"
                     }
                   }
                 }
@@ -41,58 +41,43 @@
         },
         "parameters": [
           {
-            "name": "email",
+            "name": "page",
             "in": "query",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/check/telephone": {
-      "get": {
-        "summary": "Check user telephone is exist",
-        "operationId": "CheckUserTelephone",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/TelephoneCheckUserResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
+            "type": "integer",
+            "format": "int32"
+          },
           {
-            "name": "telephone",
+            "name": "size",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pinned",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
+            "name": "popup",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
-          "ppanel/auth"
+          "ppanel/app/announcement"
         ]
       }
     },
-    "/v1/auth/login": {
+    "/v1/app/auth/check": {
       "post": {
-        "summary": "User login",
-        "operationId": "UserLogin",
+        "summary": "Check Account",
+        "operationId": "Check",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -105,7 +90,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/LoginResponse"
+                      "$ref": "#/definitions/AppAuthCheckResponse"
                     }
                   }
                 }
@@ -114,37 +99,24 @@
           }
         },
         "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "User-Agent",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
-            "description": "User login request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserLoginRequest"
+              "$ref": "#/definitions/AppAuthCheckRequest"
             }
           }
         ],
         "tags": [
-          "ppanel/auth"
+          "ppanel/app/auth"
         ]
       }
     },
-    "/v1/auth/login/telephone": {
+    "/v1/app/auth/config": {
       "post": {
-        "summary": "User Telephone login",
-        "operationId": "TelephoneLogin",
+        "summary": "GetAppConfig",
+        "operationId": "GetAppConfig",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -157,7 +129,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/LoginResponse"
+                      "$ref": "#/definitions/AppConfigResponse"
                     }
                   }
                 }
@@ -167,30 +139,304 @@
         },
         "parameters": [
           {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
-            "description": "login request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TelephoneLoginRequest"
+              "$ref": "#/definitions/AppConfigRequest"
             }
           }
         ],
         "tags": [
-          "ppanel/auth"
+          "ppanel/app/auth"
         ]
       }
     },
-    "/v1/auth/oauth/callback/apple": {
+    "/v1/app/auth/login": {
       "post": {
-        "summary": "Apple Login Callback",
-        "operationId": "AppleLoginCallback",
+        "summary": "Login",
+        "operationId": "Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
+    "/v1/app/auth/register": {
+      "post": {
+        "summary": "Register",
+        "operationId": "Register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
+    "/v1/app/auth/reset_password": {
+      "post": {
+        "summary": "Reset Password",
+        "operationId": "ResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppAuthRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/auth"
+        ]
+      }
+    },
+    "/v1/app/document/detail": {
+      "get": {
+        "summary": "Get document detail",
+        "operationId": "QueryDocumentDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/Document"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/app/document"
+        ]
+      }
+    },
+    "/v1/app/document/list": {
+      "get": {
+        "summary": "Get document list",
+        "operationId": "QueryDocumentList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryDocumentListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/document"
+        ]
+      }
+    },
+    "/v1/app/node/list": {
+      "get": {
+        "summary": "Get Node list",
+        "operationId": "GetNodeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserSubscbribeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/node"
+        ]
+      }
+    },
+    "/v1/app/node/rule_group_list": {
+      "get": {
+        "summary": "Get rule group list",
+        "operationId": "GetRuleGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetRuleGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/node"
+        ]
+      }
+    },
+    "/v1/app/order/checkout": {
+      "post": {
+        "summary": "Checkout order",
+        "operationId": "CheckoutOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CheckoutOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckoutOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/close": {
+      "post": {
+        "summary": "Close order",
+        "operationId": "CloseOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -211,299 +457,23 @@
         },
         "parameters": [
           {
-            "name": "code",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id_token",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "state",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/auth/oauth"
-        ],
-        "consumes": [
-          "multipart/form-data",
-          "application/x-www-form-urlencoded"
-        ]
-      }
-    },
-    "/v1/auth/oauth/login": {
-      "post": {
-        "summary": "OAuth login",
-        "operationId": "OAuthLogin",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/OAuthLoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OAthLoginRequest"
+              "$ref": "#/definitions/CloseOrderRequest"
             }
           }
         ],
         "tags": [
-          "ppanel/auth/oauth"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/auth/oauth/login/token": {
-      "post": {
-        "summary": "OAuth login get token",
-        "operationId": "OAuthLoginGetToken",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OAuthLoginGetTokenRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth/oauth"
-        ]
-      }
-    },
-    "/v1/auth/register": {
-      "post": {
-        "summary": "User register",
-        "operationId": "UserRegister",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserRegisterRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/register/telephone": {
-      "post": {
-        "summary": "User Telephone register",
-        "operationId": "TelephoneUserRegister",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneRegisterRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/reset": {
-      "post": {
-        "summary": "Reset password",
-        "operationId": "ResetPassword",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResetPasswordRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/auth/reset/telephone": {
-      "post": {
-        "summary": "Reset password",
-        "operationId": "TelephoneResetPassword",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/LoginResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "X-Original-Forwarded-For",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "description": "User login response",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TelephoneResetPasswordRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/auth"
-        ]
-      }
-    },
-    "/v1/common/ads": {
+    "/v1/app/order/detail": {
       "get": {
-        "summary": "Get Ads",
-        "operationId": "GetAds",
+        "summary": "Get order",
+        "operationId": "QueryOrderDetail",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -516,7 +486,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetAdsResponse"
+                      "$ref": "#/definitions/OrderDetail"
                     }
                   }
                 }
@@ -526,27 +496,21 @@
         },
         "parameters": [
           {
-            "name": "device",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "position",
+            "name": "order_no",
             "in": "query",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/application": {
+    "/v1/app/order/list": {
       "get": {
-        "summary": "Get Tos Content",
-        "operationId": "GetApplication",
+        "summary": "Get order list",
+        "operationId": "QueryOrderList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -559,7 +523,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetAppcationResponse"
+                      "$ref": "#/definitions/QueryOrderListResponse"
                     }
                   }
                 }
@@ -567,15 +531,31 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/send_code": {
+    "/v1/app/order/pre": {
       "post": {
-        "summary": "Get verification code",
-        "operationId": "SendEmailCode",
+        "summary": "Pre create order",
+        "operationId": "PreCreateOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -588,7 +568,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/SendCodeResponse"
+                      "$ref": "#/definitions/PreOrderResponse"
                     }
                   }
                 }
@@ -599,23 +579,23 @@
         "parameters": [
           {
             "name": "body",
-            "description": "GetCodeRequest Get code request",
+            "description": "public order",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendCodeRequest"
+              "$ref": "#/definitions/PurchaseOrderRequest"
             }
           }
         ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/send_sms_code": {
+    "/v1/app/order/purchase": {
       "post": {
-        "summary": "Get sms verification code",
-        "operationId": "SendSmsCode",
+        "summary": "purchase Subscription",
+        "operationId": "Purchase",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -628,7 +608,47 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/SendCodeResponse"
+                      "$ref": "#/definitions/PurchaseOrderResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "public order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/order"
+        ]
+      }
+    },
+    "/v1/app/order/recharge": {
+      "post": {
+        "summary": "Recharge",
+        "operationId": "Recharge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/RechargeOrderResponse"
                     }
                   }
                 }
@@ -642,19 +662,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendSmsCodeRequest"
+              "$ref": "#/definitions/RechargeOrderRequest"
             }
           }
         ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/site/config": {
-      "get": {
-        "summary": "Get global config",
-        "operationId": "GetGlobalConfig",
+    "/v1/app/order/renewal": {
+      "post": {
+        "summary": "Renewal Subscription",
+        "operationId": "Renewal",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -667,7 +687,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetGlobalConfigResponse"
+                      "$ref": "#/definitions/RenewalOrderResponse"
                     }
                   }
                 }
@@ -675,15 +695,25 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenewalOrderRequest"
+            }
+          }
+        ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/site/privacy": {
-      "get": {
-        "summary": "Get Privacy Policy",
-        "operationId": "GetPrivacyPolicy",
+    "/v1/app/order/reset": {
+      "post": {
+        "summary": "Reset traffic",
+        "operationId": "ResetTraffic",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -696,7 +726,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/PrivacyPolicyConfig"
+                      "$ref": "#/definitions/ResetTrafficOrderResponse"
                     }
                   }
                 }
@@ -704,15 +734,25 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetTrafficOrderRequest"
+            }
+          }
+        ],
         "tags": [
-          "ppanel/common"
+          "ppanel/app/order"
         ]
       }
     },
-    "/v1/common/site/stat": {
+    "/v1/app/payment/methods": {
       "get": {
-        "summary": "Get stat",
-        "operationId": "GetStat",
+        "summary": "Get available payment methods",
+        "operationId": "GetAvailablePaymentMethods",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -725,7 +765,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetStatResponse"
+                      "$ref": "#/definitions/GetAvailablePaymentMethodsResponse"
                     }
                   }
                 }
@@ -734,14 +774,14 @@
           }
         },
         "tags": [
-          "ppanel/common"
+          "ppanel/app/payment"
         ]
       }
     },
-    "/v1/common/site/tos": {
+    "/v1/app/subscribe/application/config": {
       "get": {
-        "summary": "Get Tos Content",
-        "operationId": "GetTos",
+        "summary": "Get application config",
+        "operationId": "QueryApplicationConfig",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -754,7 +794,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetTosResponse"
+                      "$ref": "#/definitions/ApplicationResponse"
                     }
                   }
                 }
@@ -763,7 +803,313 @@
           }
         },
         "tags": [
-          "ppanel/common"
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/subscribe/group/list": {
+      "get": {
+        "summary": "Get subscribe group list",
+        "operationId": "QuerySubscribeGroupList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeGroupListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/subscribe/list": {
+      "get": {
+        "summary": "Get subscribe list",
+        "operationId": "QuerySubscribeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QuerySubscribeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/user/account": {
+      "delete": {
+        "summary": "Delete Account",
+        "operationId": "DeleteAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/affiliate/list": {
+      "get": {
+        "summary": "Query User Affiliate List",
+        "operationId": "QueryUserAffiliateList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserAffiliateListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/info": {
+      "get": {
+        "summary": "query user info",
+        "operationId": "QueryUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserInfoResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/password": {
+      "put": {
+        "summary": "Update Password ",
+        "operationId": "UpdatePassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePasswordRequeset"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/user/subscribe/traffic_logs": {
+      "get": {
+        "summary": "Get user subcribe traffic logs",
+        "operationId": "GetUserSubscribeTrafficLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserSubscribeTrafficLogsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscribe_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
+    "/v1/app/ws/{userid}/{identifier}": {
+      "get": {
+        "summary": "App heartbeat",
+        "operationId": "AppWs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/ws"
         ]
       }
     }
@@ -885,24 +1231,260 @@
         "updated_at"
       ]
     },
-    "AppleLoginCallbackRequest": {
+    "AppAuthCheckRequest": {
       "type": "object",
       "properties": {
-        "code": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "device",
+            "email",
+            "mobile"
+          ]
+        },
+        "account": {
           "type": "string"
         },
-        "id_token": {
+        "identifier": {
           "type": "string"
         },
-        "state": {
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
+        },
+        "area_code": {
           "type": "string"
         }
       },
-      "title": "AppleLoginCallbackRequest",
+      "title": "AppAuthCheckRequest",
       "required": [
+        "method",
+        "account",
+        "identifier",
+        "user_agent",
+        "area_code"
+      ]
+    },
+    "AppAuthCheckResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppAuthCheckResponse"
+    },
+    "AppAuthRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "device",
+            "email",
+            "mobile"
+          ]
+        },
+        "account": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
+        },
+        "code": {
+          "type": "string"
+        },
+        "invite": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "AppAuthRequest",
+      "required": [
+        "method",
+        "account",
+        "password",
+        "identifier",
+        "user_agent",
         "code",
-        "id_token",
-        "state"
+        "invite",
+        "area_code"
+      ]
+    },
+    "AppAuthRespone": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "AppAuthRespone",
+      "required": [
+        "token"
+      ]
+    },
+    "AppConfigRequest": {
+      "type": "object",
+      "properties": {
+        "user_agent": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
+        }
+      },
+      "title": "AppConfigRequest",
+      "required": [
+        "user_agent"
+      ]
+    },
+    "AppConfigResponse": {
+      "type": "object",
+      "properties": {
+        "encryption_key": {
+          "type": "string"
+        },
+        "encryption_method": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startup_picture": {
+          "type": "string"
+        },
+        "startup_picture_skip_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "applications": {
+          "$ref": "#/definitions/AppInfo"
+        }
+      },
+      "title": "AppConfigResponse",
+      "required": [
+        "encryption_key",
+        "encryption_method",
+        "domains",
+        "startup_picture",
+        "startup_picture_skip_time",
+        "applications"
+      ]
+    },
+    "AppInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "version_description": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppInfo",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "url",
+        "version",
+        "version_description",
+        "is_default"
+      ]
+    },
+    "AppSendCodeRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "email",
+            "mobile"
+          ]
+        },
+        "account": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "AppSendCodeRequest",
+      "required": [
+        "method",
+        "account",
+        "area_code"
+      ]
+    },
+    "AppSendCodeRespone": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "AppSendCodeRespone",
+      "required": [
+        "status"
       ]
     },
     "Application": {
@@ -1137,31 +1719,6 @@
         "enabled"
       ]
     },
-    "CheckUserRequest": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        }
-      },
-      "title": "CheckUserRequest",
-      "required": [
-        "email"
-      ]
-    },
-    "CheckUserResponse": {
-      "type": "object",
-      "properties": {
-        "exist": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "CheckUserResponse",
-      "required": [
-        "exist"
-      ]
-    },
     "CheckoutOrderRequest": {
       "type": "object",
       "properties": {
@@ -1300,6 +1857,27 @@
       "required": [
         "currency_unit",
         "currency_symbol"
+      ]
+    },
+    "DeleteAccountRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "email",
+            "telephone",
+            "device"
+          ]
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteAccountRequest",
+      "required": [
+        "method",
+        "code"
       ]
     },
     "Document": {
@@ -1457,56 +2035,6 @@
         "created_at"
       ]
     },
-    "GetAdsRequest": {
-      "type": "object",
-      "properties": {
-        "device": {
-          "type": "string"
-        },
-        "position": {
-          "type": "string"
-        }
-      },
-      "title": "GetAdsRequest",
-      "required": [
-        "device",
-        "position"
-      ]
-    },
-    "GetAdsResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Ads"
-          }
-        }
-      },
-      "title": "GetAdsResponse",
-      "required": [
-        "list"
-      ]
-    },
-    "GetAppcationResponse": {
-      "type": "object",
-      "properties": {
-        "config": {
-          "$ref": "#/definitions/ApplicationConfig"
-        },
-        "applications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationResponseInfo"
-          }
-        }
-      },
-      "title": "GetAppcationResponse",
-      "required": [
-        "config",
-        "applications"
-      ]
-    },
     "GetAvailablePaymentMethodsResponse": {
       "type": "object",
       "properties": {
@@ -1522,94 +2050,24 @@
         "list"
       ]
     },
-    "GetGlobalConfigResponse": {
+    "GetRuleGroupListResponse": {
       "type": "object",
       "properties": {
-        "site": {
-          "$ref": "#/definitions/SiteConfig"
+        "total": {
+          "type": "integer",
+          "format": "int64"
         },
-        "verify": {
-          "$ref": "#/definitions/VeifyConfig"
-        },
-        "auth": {
-          "$ref": "#/definitions/AuthConfig"
-        },
-        "invite": {
-          "$ref": "#/definitions/InviteConfig"
-        },
-        "currency": {
-          "$ref": "#/definitions/CurrencyConfig"
-        },
-        "subscribe": {
-          "$ref": "#/definitions/SubscribeConfig"
-        },
-        "verify_code": {
-          "$ref": "#/definitions/PubilcVerifyCodeConfig"
-        },
-        "oauth_methods": {
+        "list": {
           "type": "array",
           "items": {
-            "type": "string"
-          }
-        },
-        "web_ad": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "GetGlobalConfigResponse",
-      "required": [
-        "site",
-        "verify",
-        "auth",
-        "invite",
-        "currency",
-        "subscribe",
-        "verify_code",
-        "oauth_methods",
-        "web_ad"
-      ]
-    },
-    "GetStatResponse": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "node": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "country": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "protocol": {
-          "type": "array",
-          "items": {
-            "type": "string"
+            "$ref": "#/definitions/ServerRuleGroup"
           }
         }
       },
-      "title": "GetStatResponse",
+      "title": "GetRuleGroupListResponse",
       "required": [
-        "user",
-        "node",
-        "country",
-        "protocol"
-      ]
-    },
-    "GetTosResponse": {
-      "type": "object",
-      "properties": {
-        "tos_content": {
-          "type": "string"
-        }
-      },
-      "title": "GetTosResponse",
-      "required": [
-        "tos_content"
+        "total",
+        "list"
       ]
     },
     "GetUserSubscribeTrafficLogsRequest": {
@@ -1670,22 +2128,6 @@
         "total"
       ]
     },
-    "GoogleLoginCallbackRequest": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        }
-      },
-      "title": "GoogleLoginCallbackRequest",
-      "required": [
-        "code",
-        "state"
-      ]
-    },
     "Hysteria2": {
       "type": "object",
       "properties": {
@@ -1737,18 +2179,6 @@
         "forced_invite",
         "referral_percentage",
         "only_first_purchase"
-      ]
-    },
-    "LoginResponse": {
-      "type": "object",
-      "properties": {
-        "token": {
-          "type": "string"
-        }
-      },
-      "title": "LoginResponse",
-      "required": [
-        "token"
       ]
     },
     "MessageLog": {
@@ -1889,52 +2319,6 @@
         "online_users",
         "status",
         "last_at"
-      ]
-    },
-    "OAthLoginRequest": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "google, facebook, apple, telegram, github etc."
-        },
-        "redirect": {
-          "type": "string"
-        }
-      },
-      "title": "OAthLoginRequest",
-      "required": [
-        "method",
-        "redirect"
-      ]
-    },
-    "OAuthLoginGetTokenRequest": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "google, facebook, apple, telegram, github etc."
-        },
-        "callback": {
-          "type": "object"
-        }
-      },
-      "title": "OAuthLoginGetTokenRequest",
-      "required": [
-        "method",
-        "callback"
-      ]
-    },
-    "OAuthLoginResponse": {
-      "type": "object",
-      "properties": {
-        "redirect": {
-          "type": "string"
-        }
-      },
-      "title": "OAuthLoginResponse",
-      "required": [
-        "redirect"
       ]
     },
     "OnlineUser": {
@@ -2820,28 +3204,6 @@
         "order_no"
       ]
     },
-    "ResetPasswordRequest": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "ResetPasswordRequest",
-      "required": [
-        "email",
-        "password"
-      ]
-    },
     "ResetTrafficOrderRequest": {
       "type": "object",
       "properties": {
@@ -2929,60 +3291,6 @@
         "reality_private_key",
         "reality_public_key",
         "reality_short_id"
-      ]
-    },
-    "SendCodeRequest": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        }
-      },
-      "title": "SendCodeRequest",
-      "required": [
-        "email",
-        "type"
-      ]
-    },
-    "SendCodeResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "status": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "SendCodeResponse",
-      "required": [
-        "status"
-      ]
-    },
-    "SendSmsCodeRequest": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        }
-      },
-      "title": "SendSmsCodeRequest",
-      "required": [
-        "type",
-        "telephone",
-        "telephone_area_code"
       ]
     },
     "Server": {
@@ -3517,114 +3825,6 @@
         "telegram_web_hook_domain"
       ]
     },
-    "TelephoneCheckUserRequest": {
-      "type": "object",
-      "properties": {
-        "telephone_area_code": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneCheckUserRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code"
-      ]
-    },
-    "TelephoneCheckUserResponse": {
-      "type": "object",
-      "properties": {
-        "exist": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "TelephoneCheckUserResponse",
-      "required": [
-        "exist"
-      ]
-    },
-    "TelephoneLoginRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_code": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneLoginRequest",
-      "required": [
-        "telephone",
-        "telephone_code",
-        "telephone_area_code",
-        "password"
-      ]
-    },
-    "TelephoneRegisterRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "invite": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneRegisterRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code",
-        "password"
-      ]
-    },
-    "TelephoneResetPasswordRequest": {
-      "type": "object",
-      "properties": {
-        "telephone": {
-          "type": "string"
-        },
-        "telephone_area_code": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
-        }
-      },
-      "title": "TelephoneResetPasswordRequest",
-      "required": [
-        "telephone",
-        "telephone_area_code",
-        "password"
-      ]
-    },
     "Ticket": {
       "type": "object",
       "properties": {
@@ -3812,6 +4012,22 @@
       "required": [
         "port",
         "security_config"
+      ]
+    },
+    "UpdatePasswordRequeset": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        }
+      },
+      "title": "UpdatePasswordRequeset",
+      "required": [
+        "password",
+        "new_password"
       ]
     },
     "User": {
@@ -4056,6 +4272,58 @@
         "updated_at"
       ]
     },
+    "UserInfoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refer_code": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "area_code": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDevice"
+          }
+        },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAuthMethod"
+          }
+        }
+      },
+      "title": "UserInfoResponse",
+      "required": [
+        "id",
+        "email",
+        "referer_id",
+        "refer_code",
+        "avatar",
+        "area_code",
+        "telephone",
+        "devices",
+        "auth_methods"
+      ]
+    },
     "UserLoginLog": {
       "type": "object",
       "properties": {
@@ -4092,48 +4360,130 @@
         "created_at"
       ]
     },
-    "UserLoginRequest": {
+    "UserSubscbribeNodeInfo": {
       "type": "object",
       "properties": {
-        "email": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
           "type": "string"
         },
-        "password": {
+        "uuid": {
           "type": "string"
         },
-        "cf_token": {
+        "protocol": {
           "type": "string"
+        },
+        "relay_mode": {
+          "type": "string"
+        },
+        "relay_node": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "config": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
         }
       },
-      "title": "UserLoginRequest",
+      "title": "UserSubscbribeNodeInfo",
       "required": [
-        "email",
-        "password"
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "relay_mode",
+        "relay_node",
+        "server_addr",
+        "speed_limit",
+        "tags",
+        "traffic",
+        "traffic_ratio",
+        "upload",
+        "config",
+        "country",
+        "city",
+        "latitude",
+        "longitude",
+        "created_at",
+        "download"
       ]
     },
-    "UserRegisterRequest": {
+    "UserSubscbribeResponse": {
       "type": "object",
       "properties": {
-        "email": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
           "type": "string"
         },
-        "password": {
+        "start_time": {
           "type": "string"
         },
-        "invite": {
+        "expire_time": {
           "type": "string"
         },
-        "code": {
-          "type": "string"
-        },
-        "cf_token": {
-          "type": "string"
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscbribeNodeInfo"
+          }
         }
       },
-      "title": "UserRegisterRequest",
+      "title": "UserSubscbribeResponse",
       "required": [
-        "email",
-        "password"
+        "id",
+        "name",
+        "start_time",
+        "expire_time",
+        "list"
       ]
     },
     "UserSubscribe": {
@@ -4255,33 +4605,6 @@
         "ip",
         "user_agent",
         "created_at"
-      ]
-    },
-    "VeifyConfig": {
-      "type": "object",
-      "properties": {
-        "turnstile_site_key": {
-          "type": "string"
-        },
-        "enable_login_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_register_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_reset_password_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "VeifyConfig",
-      "required": [
-        "turnstile_site_key",
-        "enable_login_verify",
-        "enable_register_verify",
-        "enable_reset_password_verify"
       ]
     },
     "VerifyCodeConfig": {
