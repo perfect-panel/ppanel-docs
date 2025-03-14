@@ -4,9 +4,16 @@
     "title": "",
     "version": ""
   },
-  "schemes": ["http", "https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/v1/admin/ads/": {
       "delete": {
@@ -40,7 +47,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ads"]
+        "tags": [
+          "ppanel/admin/ads"
+        ]
       },
       "post": {
         "summary": "Create Ads",
@@ -73,7 +82,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ads"]
+        "tags": [
+          "ppanel/admin/ads"
+        ]
       },
       "put": {
         "summary": "Update Ads",
@@ -106,7 +117,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ads"]
+        "tags": [
+          "ppanel/admin/ads"
+        ]
       }
     },
     "/v1/admin/ads/detail": {
@@ -142,7 +155,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/ads"]
+        "tags": [
+          "ppanel/admin/ads"
+        ]
       }
     },
     "/v1/admin/ads/list": {
@@ -198,7 +213,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/ads"]
+        "tags": [
+          "ppanel/admin/ads"
+        ]
       }
     },
     "/v1/admin/announcement/": {
@@ -233,7 +250,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       },
       "post": {
         "summary": "Create announcement",
@@ -266,7 +285,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       },
       "put": {
         "summary": "Update announcement",
@@ -299,7 +320,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/announcement/detail": {
@@ -335,7 +358,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/announcement/list": {
@@ -405,7 +430,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/announcement"]
+        "tags": [
+          "ppanel/admin/announcement"
+        ]
       }
     },
     "/v1/admin/auth-method/config": {
@@ -440,7 +467,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       },
       "put": {
         "summary": "Update auth method config",
@@ -475,7 +504,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/auth-method/email_platform": {
@@ -502,7 +533,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/auth-method/list": {
@@ -529,7 +562,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/auth-method/sms_platform": {
@@ -556,7 +591,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/auth-method/test_email_send": {
@@ -592,7 +629,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/auth-method/test_sms_send": {
@@ -627,7 +666,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/authMethod"]
+        "tags": [
+          "ppanel/admin/authMethod"
+        ]
       }
     },
     "/v1/admin/console/revenue": {
@@ -654,7 +695,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/server": {
@@ -681,7 +724,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/ticket": {
@@ -708,7 +753,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/console/user": {
@@ -735,7 +782,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/console"]
+        "tags": [
+          "ppanel/admin/console"
+        ]
       }
     },
     "/v1/admin/coupon/": {
@@ -770,7 +819,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       },
       "post": {
         "summary": "Create coupon",
@@ -803,7 +854,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       },
       "put": {
         "summary": "Update coupon",
@@ -836,7 +889,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/coupon/batch": {
@@ -871,7 +926,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/coupon/list": {
@@ -927,7 +984,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/coupon"]
+        "tags": [
+          "ppanel/admin/coupon"
+        ]
       }
     },
     "/v1/admin/document/": {
@@ -962,7 +1021,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       },
       "post": {
         "summary": "Create document",
@@ -995,7 +1056,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       },
       "put": {
         "summary": "Update document",
@@ -1028,7 +1091,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/batch": {
@@ -1063,7 +1128,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/detail": {
@@ -1090,7 +1157,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/document/list": {
@@ -1145,7 +1214,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/document"]
+        "tags": [
+          "ppanel/admin/document"
+        ]
       }
     },
     "/v1/admin/log/message/list": {
@@ -1225,7 +1296,9 @@
             "format": "int32"
           }
         ],
-        "tags": ["ppanel/admin/log"]
+        "tags": [
+          "ppanel/admin/log"
+        ]
       }
     },
     "/v1/admin/order/": {
@@ -1260,7 +1333,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/order/list": {
@@ -1330,7 +1405,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/order/status": {
@@ -1365,7 +1442,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/order"]
+        "tags": [
+          "ppanel/admin/order"
+        ]
       }
     },
     "/v1/admin/payment/": {
@@ -1400,7 +1479,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "post": {
         "summary": "Create Payment Method",
@@ -1435,7 +1516,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       },
       "put": {
         "summary": "Update Payment Method",
@@ -1470,7 +1553,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/list": {
@@ -1532,7 +1617,9 @@
             "format": "boolean"
           }
         ],
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/payment/platform": {
@@ -1559,7 +1646,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/payment"]
+        "tags": [
+          "ppanel/admin/payment"
+        ]
       }
     },
     "/v1/admin/server/": {
@@ -1594,7 +1683,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "post": {
         "summary": "Create node",
@@ -1627,7 +1718,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "put": {
         "summary": "Update node",
@@ -1660,7 +1753,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/batch": {
@@ -1695,7 +1790,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/detail": {
@@ -1731,7 +1828,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group": {
@@ -1766,7 +1865,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "post": {
         "summary": "Create node group",
@@ -1799,7 +1900,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "put": {
         "summary": "Update node group",
@@ -1832,7 +1935,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group/batch": {
@@ -1867,7 +1972,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/group/list": {
@@ -1894,7 +2001,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/list": {
@@ -1956,7 +2065,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/rule_group": {
@@ -1991,7 +2102,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "post": {
         "summary": "Create rule group",
@@ -2024,7 +2137,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       },
       "put": {
         "summary": "Update rule group",
@@ -2057,7 +2172,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/rule_group_list": {
@@ -2084,7 +2201,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/server/sort": {
@@ -2119,7 +2238,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/server"]
+        "tags": [
+          "ppanel/admin/server"
+        ]
       }
     },
     "/v1/admin/subscribe/": {
@@ -2154,7 +2275,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "post": {
         "summary": "Create subscribe",
@@ -2187,7 +2310,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "put": {
         "summary": "Update subscribe",
@@ -2220,7 +2345,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/batch": {
@@ -2255,7 +2382,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/details": {
@@ -2291,7 +2420,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group": {
@@ -2326,7 +2457,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "post": {
         "summary": "Create subscribe group",
@@ -2359,7 +2492,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       },
       "put": {
         "summary": "Update subscribe group",
@@ -2392,7 +2527,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group/batch": {
@@ -2427,7 +2564,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/group/list": {
@@ -2454,7 +2593,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/list": {
@@ -2510,7 +2651,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/subscribe/sort": {
@@ -2545,7 +2688,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/subscribe"]
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
       }
     },
     "/v1/admin/system/application": {
@@ -2572,7 +2717,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "delete": {
         "summary": "Delete application",
@@ -2606,7 +2753,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "post": {
         "summary": "Create application",
@@ -2640,7 +2789,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update application",
@@ -2674,7 +2825,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/application_config": {
@@ -2701,7 +2854,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "update application config",
@@ -2734,7 +2889,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/application_version": {
@@ -2770,7 +2927,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "post": {
         "summary": "Create application version",
@@ -2804,7 +2963,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update application version",
@@ -2838,7 +2999,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/currency_config": {
@@ -2865,7 +3028,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Currency Config",
@@ -2898,7 +3063,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/get_node_multiplier": {
@@ -2925,7 +3092,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/invite_config": {
@@ -2952,7 +3121,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update invite config",
@@ -2985,7 +3156,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/node_config": {
@@ -3012,7 +3185,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update node config",
@@ -3045,7 +3220,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/privacy": {
@@ -3072,7 +3249,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Privacy Policy Config",
@@ -3105,7 +3284,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/register_config": {
@@ -3132,7 +3313,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update register config",
@@ -3165,7 +3348,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/set_node_multiplier": {
@@ -3201,7 +3386,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/setting_telegram_bot": {
@@ -3226,7 +3413,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/site_config": {
@@ -3253,7 +3442,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update site config",
@@ -3286,7 +3477,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/subscribe_config": {
@@ -3313,7 +3506,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update subscribe config",
@@ -3346,7 +3541,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/subscribe_type": {
@@ -3373,7 +3570,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/tos_config": {
@@ -3400,7 +3599,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Team of Service Config",
@@ -3433,7 +3634,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/verify_code_config": {
@@ -3460,7 +3663,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update Verify Code Config",
@@ -3493,7 +3698,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/system/verify_config": {
@@ -3520,7 +3727,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       },
       "put": {
         "summary": "Update verify config",
@@ -3553,7 +3762,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/system"]
+        "tags": [
+          "ppanel/admin/system"
+        ]
       }
     },
     "/v1/admin/ticket/": {
@@ -3588,7 +3799,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/detail": {
@@ -3624,7 +3837,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/follow": {
@@ -3659,7 +3874,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/ticket/list": {
@@ -3722,7 +3939,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/ticket"]
+        "tags": [
+          "ppanel/admin/ticket"
+        ]
       }
     },
     "/v1/admin/tool/log": {
@@ -3749,7 +3968,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/tool"]
+        "tags": [
+          "ppanel/admin/tool"
+        ]
       }
     },
     "/v1/admin/tool/restart": {
@@ -3774,7 +3995,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/tool"]
+        "tags": [
+          "ppanel/admin/tool"
+        ]
       }
     },
     "/v1/admin/user/": {
@@ -3808,7 +4031,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3846,7 +4071,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3878,7 +4105,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3916,7 +4145,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3954,7 +4185,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -3992,7 +4225,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4032,7 +4267,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4072,7 +4309,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4104,7 +4343,9 @@
             }
           }
         },
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4145,7 +4386,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4185,7 +4428,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4223,7 +4468,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4263,7 +4510,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4317,7 +4566,9 @@
             "type": "string"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4372,7 +4623,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4412,7 +4665,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4467,7 +4722,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4505,7 +4762,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4543,7 +4802,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4581,7 +4842,9 @@
             }
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4643,7 +4906,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4705,7 +4970,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4781,7 +5048,9 @@
             "format": "int64"
           }
         ],
-        "tags": ["ppanel/admin/user"],
+        "tags": [
+          "ppanel/admin/user"
+        ],
         "security": [
           {
             "apiKey": []
@@ -4857,7 +5126,9 @@
         }
       },
       "title": "AlipayNotifyResponse",
-      "required": ["return_code"]
+      "required": [
+        "return_code"
+      ]
     },
     "Announcement": {
       "type": "object",
@@ -4894,7 +5165,16 @@
         }
       },
       "title": "Announcement",
-      "required": ["id", "title", "content", "show", "pinned", "popup", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show",
+        "pinned",
+        "popup",
+        "created_at",
+        "updated_at"
+      ]
     },
     "Application": {
       "type": "object",
@@ -4917,7 +5197,13 @@
         }
       },
       "title": "Application",
-      "required": ["id", "icon", "name", "description", "subscribe_type"]
+      "required": [
+        "id",
+        "icon",
+        "name",
+        "description",
+        "subscribe_type"
+      ]
     },
     "ApplicationConfig": {
       "type": "object",
@@ -5009,7 +5295,9 @@
         }
       },
       "title": "ApplicationResponse",
-      "required": ["applications"]
+      "required": [
+        "applications"
+      ]
     },
     "ApplicationResponseInfo": {
       "type": "object",
@@ -5035,7 +5323,14 @@
         }
       },
       "title": "ApplicationResponseInfo",
-      "required": ["id", "name", "icon", "description", "subscribe_type", "platform"]
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "subscribe_type",
+        "platform"
+      ]
     },
     "ApplicationVersion": {
       "type": "object",
@@ -5059,7 +5354,13 @@
         }
       },
       "title": "ApplicationVersion",
-      "required": ["id", "url", "version", "description", "is_default"]
+      "required": [
+        "id",
+        "url",
+        "version",
+        "description",
+        "is_default"
+      ]
     },
     "AuthConfig": {
       "type": "object",
@@ -5075,7 +5376,11 @@
         }
       },
       "title": "AuthConfig",
-      "required": ["mobile", "email", "register"]
+      "required": [
+        "mobile",
+        "email",
+        "register"
+      ]
     },
     "AuthMethodConfig": {
       "type": "object",
@@ -5096,7 +5401,12 @@
         }
       },
       "title": "AuthMethodConfig",
-      "required": ["id", "method", "config", "enabled"]
+      "required": [
+        "id",
+        "method",
+        "config",
+        "enabled"
+      ]
     },
     "BatchDeleteCouponRequest": {
       "type": "object",
@@ -5110,7 +5420,9 @@
         }
       },
       "title": "BatchDeleteCouponRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteDocumentRequest": {
       "type": "object",
@@ -5124,7 +5436,9 @@
         }
       },
       "title": "BatchDeleteDocumentRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteNodeGroupRequest": {
       "type": "object",
@@ -5138,7 +5452,9 @@
         }
       },
       "title": "BatchDeleteNodeGroupRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteNodeRequest": {
       "type": "object",
@@ -5152,7 +5468,9 @@
         }
       },
       "title": "BatchDeleteNodeRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteSubscribeGroupRequest": {
       "type": "object",
@@ -5166,7 +5484,9 @@
         }
       },
       "title": "BatchDeleteSubscribeGroupRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteSubscribeRequest": {
       "type": "object",
@@ -5180,7 +5500,9 @@
         }
       },
       "title": "BatchDeleteSubscribeRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "BatchDeleteUserRequest": {
       "type": "object",
@@ -5194,7 +5516,9 @@
         }
       },
       "title": "BatchDeleteUserRequest",
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "CheckoutOrderRequest": {
       "type": "object",
@@ -5207,7 +5531,9 @@
         }
       },
       "title": "CheckoutOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "CheckoutOrderResponse": {
       "type": "object",
@@ -5223,7 +5549,9 @@
         }
       },
       "title": "CheckoutOrderResponse",
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "CloseOrderRequest": {
       "type": "object",
@@ -5233,7 +5561,9 @@
         }
       },
       "title": "CloseOrderRequest",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "Coupon": {
       "type": "object",
@@ -5368,7 +5698,10 @@
         }
       },
       "title": "CreateAnnouncementRequest",
-      "required": ["title", "content"]
+      "required": [
+        "title",
+        "content"
+      ]
     },
     "CreateApplicationRequest": {
       "type": "object",
@@ -5390,7 +5723,13 @@
         }
       },
       "title": "CreateApplicationRequest",
-      "required": ["icon", "name", "description", "subscribe_type", "platform"]
+      "required": [
+        "icon",
+        "name",
+        "description",
+        "subscribe_type",
+        "platform"
+      ]
     },
     "CreateApplicationVersionRequest": {
       "type": "object",
@@ -5406,7 +5745,14 @@
         },
         "platform": {
           "type": "string",
-          "enum": ["windows", "mac", "linux", "android", "ios", "harmony"]
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
         },
         "is_default": {
           "type": "boolean",
@@ -5418,7 +5764,14 @@
         }
       },
       "title": "CreateApplicationVersionRequest",
-      "required": ["url", "version", "description", "platform", "is_default", "application_id"]
+      "required": [
+        "url",
+        "version",
+        "description",
+        "platform",
+        "is_default",
+        "application_id"
+      ]
     },
     "CreateCouponRequest": {
       "type": "object",
@@ -5470,7 +5823,13 @@
         }
       },
       "title": "CreateCouponRequest",
-      "required": ["name", "type", "discount", "start_time", "expire_time"]
+      "required": [
+        "name",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time"
+      ]
     },
     "CreateDocumentRequest": {
       "type": "object",
@@ -5493,7 +5852,11 @@
         }
       },
       "title": "CreateDocumentRequest",
-      "required": ["title", "content", "show"]
+      "required": [
+        "title",
+        "content",
+        "show"
+      ]
     },
     "CreateNodeGroupRequest": {
       "type": "object",
@@ -5506,7 +5869,10 @@
         }
       },
       "title": "CreateNodeGroupRequest",
-      "required": ["name", "description"]
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "CreateNodeRequest": {
       "type": "object",
@@ -5642,7 +6008,15 @@
         }
       },
       "title": "CreateOrderRequest",
-      "required": ["user_id", "type", "price", "amount", "commission", "fee_amount", "payment_id"]
+      "required": [
+        "user_id",
+        "type",
+        "price",
+        "amount",
+        "commission",
+        "fee_amount",
+        "payment_id"
+      ]
     },
     "CreatePaymentMethodRequest": {
       "type": "object",
@@ -5683,7 +6057,14 @@
         }
       },
       "title": "CreatePaymentMethodRequest",
-      "required": ["name", "platform", "description", "config", "fee_mode", "enable"]
+      "required": [
+        "name",
+        "platform",
+        "description",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "CreateRuleGroupRequest": {
       "type": "object",
@@ -5703,7 +6084,12 @@
         }
       },
       "title": "CreateRuleGroupRequest",
-      "required": ["name", "icon", "description", "enable"]
+      "required": [
+        "name",
+        "icon",
+        "description",
+        "enable"
+      ]
     },
     "CreateSubscribeGroupRequest": {
       "type": "object",
@@ -5716,7 +6102,10 @@
         }
       },
       "title": "CreateSubscribeGroupRequest",
-      "required": ["name", "description"]
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "CreateSubscribeRequest": {
       "type": "object",
@@ -5850,7 +6239,12 @@
         }
       },
       "title": "CreateTicketFollowRequest",
-      "required": ["ticket_id", "from", "type", "content"]
+      "required": [
+        "ticket_id",
+        "from",
+        "type",
+        "content"
+      ]
     },
     "CreateUserAuthMethodRequest": {
       "type": "object",
@@ -5867,7 +6261,11 @@
         }
       },
       "title": "CreateUserAuthMethodRequest",
-      "required": ["user_id", "auth_type", "auth_identifier"]
+      "required": [
+        "user_id",
+        "auth_type",
+        "auth_identifier"
+      ]
     },
     "CreateUserRequest": {
       "type": "object",
@@ -5952,7 +6350,12 @@
         }
       },
       "title": "CreateUserSubscribeRequest",
-      "required": ["user_id", "expired_at", "traffic", "subscribe_id"]
+      "required": [
+        "user_id",
+        "expired_at",
+        "traffic",
+        "subscribe_id"
+      ]
     },
     "CurrencyConfig": {
       "type": "object",
@@ -5965,7 +6368,10 @@
         }
       },
       "title": "CurrencyConfig",
-      "required": ["currency_unit", "currency_symbol"]
+      "required": [
+        "currency_unit",
+        "currency_symbol"
+      ]
     },
     "DeleteAdsRequest": {
       "type": "object",
@@ -5976,7 +6382,9 @@
         }
       },
       "title": "DeleteAdsRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteAnnouncementRequest": {
       "type": "object",
@@ -5987,7 +6395,9 @@
         }
       },
       "title": "DeleteAnnouncementRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteApplicationRequest": {
       "type": "object",
@@ -5998,7 +6408,9 @@
         }
       },
       "title": "DeleteApplicationRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteApplicationVersionRequest": {
       "type": "object",
@@ -6009,7 +6421,9 @@
         }
       },
       "title": "DeleteApplicationVersionRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteCouponRequest": {
       "type": "object",
@@ -6020,7 +6434,9 @@
         }
       },
       "title": "DeleteCouponRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteDocumentRequest": {
       "type": "object",
@@ -6031,7 +6447,9 @@
         }
       },
       "title": "DeleteDocumentRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteNodeGroupRequest": {
       "type": "object",
@@ -6042,7 +6460,9 @@
         }
       },
       "title": "DeleteNodeGroupRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteNodeRequest": {
       "type": "object",
@@ -6053,7 +6473,9 @@
         }
       },
       "title": "DeleteNodeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeletePaymentMethodRequest": {
       "type": "object",
@@ -6064,7 +6486,9 @@
         }
       },
       "title": "DeletePaymentMethodRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteRuleGroupRequest": {
       "type": "object",
@@ -6075,7 +6499,9 @@
         }
       },
       "title": "DeleteRuleGroupRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteSubscribeGroupRequest": {
       "type": "object",
@@ -6086,7 +6512,9 @@
         }
       },
       "title": "DeleteSubscribeGroupRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteSubscribeRequest": {
       "type": "object",
@@ -6097,7 +6525,9 @@
         }
       },
       "title": "DeleteSubscribeRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteUserAuthMethodRequest": {
       "type": "object",
@@ -6111,7 +6541,10 @@
         }
       },
       "title": "DeleteUserAuthMethodRequest",
-      "required": ["user_id", "auth_type"]
+      "required": [
+        "user_id",
+        "auth_type"
+      ]
     },
     "DeleteUserDeivceRequest": {
       "type": "object",
@@ -6122,7 +6555,9 @@
         }
       },
       "title": "DeleteUserDeivceRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "DeleteUserSubscribeRequest": {
       "type": "object",
@@ -6133,7 +6568,9 @@
         }
       },
       "title": "DeleteUserSubscribeRequest",
-      "required": ["user_subscribe_id"]
+      "required": [
+        "user_subscribe_id"
+      ]
     },
     "Document": {
       "type": "object",
@@ -6168,7 +6605,15 @@
         }
       },
       "title": "Document",
-      "required": ["id", "title", "content", "tags", "show", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "tags",
+        "show",
+        "created_at",
+        "updated_at"
+      ]
     },
     "EPayNotifyRequest": {
       "type": "object",
@@ -6239,7 +6684,12 @@
         }
       },
       "title": "EmailAuthticateConfig",
-      "required": ["enable", "enable_verify", "enable_domain_suffix", "domain_suffix_list"]
+      "required": [
+        "enable",
+        "enable_verify",
+        "enable_domain_suffix",
+        "domain_suffix_list"
+      ]
     },
     "Follow": {
       "type": "object",
@@ -6268,7 +6718,14 @@
         }
       },
       "title": "Follow",
-      "required": ["id", "ticket_id", "from", "type", "content", "created_at"]
+      "required": [
+        "id",
+        "ticket_id",
+        "from",
+        "type",
+        "content",
+        "created_at"
+      ]
     },
     "GetAdsDetailRequest": {
       "type": "object",
@@ -6279,7 +6736,9 @@
         }
       },
       "title": "GetAdsDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetAdsListRequest": {
       "type": "object",
@@ -6301,7 +6760,10 @@
         }
       },
       "title": "GetAdsListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetAdsListResponse": {
       "type": "object",
@@ -6318,7 +6780,10 @@
         }
       },
       "title": "GetAdsListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetAnnouncementListRequest": {
       "type": "object",
@@ -6348,7 +6813,10 @@
         }
       },
       "title": "GetAnnouncementListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetAnnouncementListResponse": {
       "type": "object",
@@ -6365,7 +6833,10 @@
         }
       },
       "title": "GetAnnouncementListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetAnnouncementRequest": {
       "type": "object",
@@ -6376,7 +6847,9 @@
         }
       },
       "title": "GetAnnouncementRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetAuthMethodConfigRequest": {
       "type": "object",
@@ -6386,7 +6859,9 @@
         }
       },
       "title": "GetAuthMethodConfigRequest",
-      "required": ["method"]
+      "required": [
+        "method"
+      ]
     },
     "GetAuthMethodListResponse": {
       "type": "object",
@@ -6399,7 +6874,9 @@
         }
       },
       "title": "GetAuthMethodListResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetAvailablePaymentMethodsResponse": {
       "type": "object",
@@ -6412,7 +6889,9 @@
         }
       },
       "title": "GetAvailablePaymentMethodsResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "GetCouponListRequest": {
       "type": "object",
@@ -6434,7 +6913,10 @@
         }
       },
       "title": "GetCouponListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetCouponListResponse": {
       "type": "object",
@@ -6451,7 +6933,10 @@
         }
       },
       "title": "GetCouponListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetDetailRequest": {
       "type": "object",
@@ -6462,7 +6947,9 @@
         }
       },
       "title": "GetDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetDocumentDetailRequest": {
       "type": "object",
@@ -6473,7 +6960,9 @@
         }
       },
       "title": "GetDocumentDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetDocumentListRequest": {
       "type": "object",
@@ -6494,7 +6983,10 @@
         }
       },
       "title": "GetDocumentListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetDocumentListResponse": {
       "type": "object",
@@ -6511,7 +7003,10 @@
         }
       },
       "title": "GetDocumentListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetMessageLogListRequest": {
       "type": "object",
@@ -6545,7 +7040,11 @@
         }
       },
       "title": "GetMessageLogListRequest",
-      "required": ["page", "size", "type"]
+      "required": [
+        "page",
+        "size",
+        "type"
+      ]
     },
     "GetMessageLogListResponse": {
       "type": "object",
@@ -6562,7 +7061,10 @@
         }
       },
       "title": "GetMessageLogListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetNodeDetailRequest": {
       "type": "object",
@@ -6573,7 +7075,9 @@
         }
       },
       "title": "GetNodeDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetNodeGroupListResponse": {
       "type": "object",
@@ -6590,7 +7094,10 @@
         }
       },
       "title": "GetNodeGroupListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetNodeMultiplierResponse": {
       "type": "object",
@@ -6603,7 +7110,9 @@
         }
       },
       "title": "GetNodeMultiplierResponse",
-      "required": ["periods"]
+      "required": [
+        "periods"
+      ]
     },
     "GetNodeServerListRequest": {
       "type": "object",
@@ -6628,7 +7137,10 @@
         }
       },
       "title": "GetNodeServerListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetNodeServerListResponse": {
       "type": "object",
@@ -6645,7 +7157,10 @@
         }
       },
       "title": "GetNodeServerListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetOrderListRequest": {
       "type": "object",
@@ -6675,7 +7190,10 @@
         }
       },
       "title": "GetOrderListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetOrderListResponse": {
       "type": "object",
@@ -6692,7 +7210,10 @@
         }
       },
       "title": "GetOrderListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetPaymentMethodListRequest": {
       "type": "object",
@@ -6717,7 +7238,10 @@
         }
       },
       "title": "GetPaymentMethodListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetPaymentMethodListResponse": {
       "type": "object",
@@ -6734,7 +7258,10 @@
         }
       },
       "title": "GetPaymentMethodListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetRuleGroupResponse": {
       "type": "object",
@@ -6751,7 +7278,10 @@
         }
       },
       "title": "GetRuleGroupResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetSubscribeDetailsRequest": {
       "type": "object",
@@ -6762,7 +7292,9 @@
         }
       },
       "title": "GetSubscribeDetailsRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetSubscribeGroupListResponse": {
       "type": "object",
@@ -6779,7 +7311,10 @@
         }
       },
       "title": "GetSubscribeGroupListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetSubscribeListRequest": {
       "type": "object",
@@ -6801,7 +7336,10 @@
         }
       },
       "title": "GetSubscribeListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetSubscribeListResponse": {
       "type": "object",
@@ -6818,7 +7356,10 @@
         }
       },
       "title": "GetSubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetTicketListRequest": {
       "type": "object",
@@ -6844,7 +7385,10 @@
         }
       },
       "title": "GetTicketListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetTicketListResponse": {
       "type": "object",
@@ -6861,7 +7405,10 @@
         }
       },
       "title": "GetTicketListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetTicketRequest": {
       "type": "object",
@@ -6872,7 +7419,9 @@
         }
       },
       "title": "GetTicketRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "GetUserAuthMethodRequest": {
       "type": "object",
@@ -6883,7 +7432,9 @@
         }
       },
       "title": "GetUserAuthMethodRequest",
-      "required": ["user_id"]
+      "required": [
+        "user_id"
+      ]
     },
     "GetUserAuthMethodResponse": {
       "type": "object",
@@ -6896,7 +7447,9 @@
         }
       },
       "title": "GetUserAuthMethodResponse",
-      "required": ["auth_methods"]
+      "required": [
+        "auth_methods"
+      ]
     },
     "GetUserListRequest": {
       "type": "object",
@@ -6914,7 +7467,10 @@
         }
       },
       "title": "GetUserListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "GetUserListResponse": {
       "type": "object",
@@ -6931,7 +7487,10 @@
         }
       },
       "title": "GetUserListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "GetUserLoginLogsRequest": {
       "type": "object",
@@ -6950,7 +7509,11 @@
         }
       },
       "title": "GetUserLoginLogsRequest",
-      "required": ["page", "size", "user_id"]
+      "required": [
+        "page",
+        "size",
+        "user_id"
+      ]
     },
     "GetUserLoginLogsResponse": {
       "type": "object",
@@ -6967,7 +7530,10 @@
         }
       },
       "title": "GetUserLoginLogsResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetUserSubscribeDevicesRequest": {
       "type": "object",
@@ -6990,7 +7556,12 @@
         }
       },
       "title": "GetUserSubscribeDevicesRequest",
-      "required": ["page", "size", "user_id", "subscribe_id"]
+      "required": [
+        "page",
+        "size",
+        "user_id",
+        "subscribe_id"
+      ]
     },
     "GetUserSubscribeDevicesResponse": {
       "type": "object",
@@ -7007,7 +7578,10 @@
         }
       },
       "title": "GetUserSubscribeDevicesResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetUserSubscribeListRequest": {
       "type": "object",
@@ -7026,7 +7600,11 @@
         }
       },
       "title": "GetUserSubscribeListRequest",
-      "required": ["page", "size", "user_id"]
+      "required": [
+        "page",
+        "size",
+        "user_id"
+      ]
     },
     "GetUserSubscribeListResponse": {
       "type": "object",
@@ -7043,7 +7621,10 @@
         }
       },
       "title": "GetUserSubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetUserSubscribeLogsRequest": {
       "type": "object",
@@ -7066,7 +7647,11 @@
         }
       },
       "title": "GetUserSubscribeLogsRequest",
-      "required": ["page", "size", "user_id"]
+      "required": [
+        "page",
+        "size",
+        "user_id"
+      ]
     },
     "GetUserSubscribeLogsResponse": {
       "type": "object",
@@ -7083,7 +7668,10 @@
         }
       },
       "title": "GetUserSubscribeLogsResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "GetUserSubscribeTrafficLogsRequest": {
       "type": "object",
@@ -7114,7 +7702,14 @@
         }
       },
       "title": "GetUserSubscribeTrafficLogsRequest",
-      "required": ["page", "size", "user_id", "subscribe_id", "start_time", "end_time"]
+      "required": [
+        "page",
+        "size",
+        "user_id",
+        "subscribe_id",
+        "start_time",
+        "end_time"
+      ]
     },
     "GetUserSubscribeTrafficLogsResponse": {
       "type": "object",
@@ -7131,7 +7726,10 @@
         }
       },
       "title": "GetUserSubscribeTrafficLogsResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "Hysteria2": {
       "type": "object",
@@ -7155,7 +7753,13 @@
         }
       },
       "title": "Hysteria2",
-      "required": ["port", "hop_ports", "hop_interval", "obfs_password", "security_config"]
+      "required": [
+        "port",
+        "hop_ports",
+        "hop_interval",
+        "obfs_password",
+        "security_config"
+      ]
     },
     "InviteConfig": {
       "type": "object",
@@ -7174,7 +7778,11 @@
         }
       },
       "title": "InviteConfig",
-      "required": ["forced_invite", "referral_percentage", "only_first_purchase"]
+      "required": [
+        "forced_invite",
+        "referral_percentage",
+        "only_first_purchase"
+      ]
     },
     "KickOfflineRequest": {
       "type": "object",
@@ -7185,7 +7793,9 @@
         }
       },
       "title": "KickOfflineRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "LogResponse": {
       "type": "object",
@@ -7195,7 +7805,9 @@
         }
       },
       "title": "LogResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "MessageLog": {
       "type": "object",
@@ -7264,7 +7876,11 @@
         }
       },
       "title": "MobileAuthenticateConfig",
-      "required": ["enable", "enable_whitelist", "whitelist"]
+      "required": [
+        "enable",
+        "enable_whitelist",
+        "whitelist"
+      ]
     },
     "NodeConfig": {
       "type": "object",
@@ -7282,7 +7898,11 @@
         }
       },
       "title": "NodeConfig",
-      "required": ["node_secret", "node_pull_interval", "node_push_interval"]
+      "required": [
+        "node_secret",
+        "node_pull_interval",
+        "node_push_interval"
+      ]
     },
     "NodeRelay": {
       "type": "object",
@@ -7299,7 +7919,11 @@
         }
       },
       "title": "NodeRelay",
-      "required": ["host", "port", "prefix"]
+      "required": [
+        "host",
+        "port",
+        "prefix"
+      ]
     },
     "NodeSortRequest": {
       "type": "object",
@@ -7312,7 +7936,9 @@
         }
       },
       "title": "NodeSortRequest",
-      "required": ["sort"]
+      "required": [
+        "sort"
+      ]
     },
     "NodeStatus": {
       "type": "object",
@@ -7332,7 +7958,11 @@
         }
       },
       "title": "NodeStatus",
-      "required": ["online_users", "status", "last_at"]
+      "required": [
+        "online_users",
+        "status",
+        "last_at"
+      ]
     },
     "OnlineUser": {
       "type": "object",
@@ -7346,7 +7976,10 @@
         }
       },
       "title": "OnlineUser",
-      "required": ["uid", "ip"]
+      "required": [
+        "uid",
+        "ip"
+      ]
     },
     "Order": {
       "type": "object",
@@ -7578,7 +8211,11 @@
         }
       },
       "title": "OrdersStatistics",
-      "required": ["amount_total", "new_order_amount", "renewal_order_amount"]
+      "required": [
+        "amount_total",
+        "new_order_amount",
+        "renewal_order_amount"
+      ]
     },
     "PaymentConfig": {
       "type": "object",
@@ -7623,7 +8260,15 @@
         }
       },
       "title": "PaymentConfig",
-      "required": ["id", "name", "platform", "description", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "description",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "PaymentMethod": {
       "type": "object",
@@ -7744,7 +8389,11 @@
         }
       },
       "title": "PlatformInfo",
-      "required": ["platform", "platform_url", "platform_field_description"]
+      "required": [
+        "platform",
+        "platform_url",
+        "platform_field_description"
+      ]
     },
     "PlatformResponse": {
       "type": "object",
@@ -7757,7 +8406,9 @@
         }
       },
       "title": "PlatformResponse",
-      "required": ["list"]
+      "required": [
+        "list"
+      ]
     },
     "PreOrderResponse": {
       "type": "object",
@@ -7809,7 +8460,9 @@
         }
       },
       "title": "PreRenewalOrderResponse",
-      "required": ["orderNo"]
+      "required": [
+        "orderNo"
+      ]
     },
     "PrivacyPolicyConfig": {
       "type": "object",
@@ -7819,7 +8472,9 @@
         }
       },
       "title": "PrivacyPolicyConfig",
-      "required": ["privacy_policy"]
+      "required": [
+        "privacy_policy"
+      ]
     },
     "PubilcRegisterConfig": {
       "type": "object",
@@ -7858,7 +8513,9 @@
         }
       },
       "title": "PubilcVerifyCodeConfig",
-      "required": ["verify_code_interval"]
+      "required": [
+        "verify_code_interval"
+      ]
     },
     "PurchaseOrderRequest": {
       "type": "object",
@@ -7880,7 +8537,11 @@
         }
       },
       "title": "PurchaseOrderRequest",
-      "required": ["subscribe_id", "quantity", "payment"]
+      "required": [
+        "subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "PurchaseOrderResponse": {
       "type": "object",
@@ -7890,7 +8551,9 @@
         }
       },
       "title": "PurchaseOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryAnnouncementRequest": {
       "type": "object",
@@ -7913,7 +8576,12 @@
         }
       },
       "title": "QueryAnnouncementRequest",
-      "required": ["page", "size", "pinned", "popup"]
+      "required": [
+        "page",
+        "size",
+        "pinned",
+        "popup"
+      ]
     },
     "QueryAnnouncementResponse": {
       "type": "object",
@@ -7930,7 +8598,10 @@
         }
       },
       "title": "QueryAnnouncementResponse",
-      "required": ["total", "announcements"]
+      "required": [
+        "total",
+        "announcements"
+      ]
     },
     "QueryDocumentDetailRequest": {
       "type": "object",
@@ -7941,7 +8612,9 @@
         }
       },
       "title": "QueryDocumentDetailRequest",
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "QueryDocumentListResponse": {
       "type": "object",
@@ -7958,7 +8631,10 @@
         }
       },
       "title": "QueryDocumentListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QueryOrderDetailRequest": {
       "type": "object",
@@ -7968,7 +8644,9 @@
         }
       },
       "title": "QueryOrderDetailRequest",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "QueryOrderListRequest": {
       "type": "object",
@@ -7983,7 +8661,10 @@
         }
       },
       "title": "QueryOrderListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryOrderListResponse": {
       "type": "object",
@@ -8000,7 +8681,10 @@
         }
       },
       "title": "QueryOrderListResponse",
-      "required": ["total", "list"]
+      "required": [
+        "total",
+        "list"
+      ]
     },
     "QuerySubscribeGroupListResponse": {
       "type": "object",
@@ -8017,7 +8701,10 @@
         }
       },
       "title": "QuerySubscribeGroupListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QuerySubscribeListResponse": {
       "type": "object",
@@ -8034,7 +8721,10 @@
         }
       },
       "title": "QuerySubscribeListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "QueryUserAffiliateListRequest": {
       "type": "object",
@@ -8049,7 +8739,10 @@
         }
       },
       "title": "QueryUserAffiliateListRequest",
-      "required": ["page", "size"]
+      "required": [
+        "page",
+        "size"
+      ]
     },
     "QueryUserAffiliateListResponse": {
       "type": "object",
@@ -8066,7 +8759,10 @@
         }
       },
       "title": "QueryUserAffiliateListResponse",
-      "required": ["list", "total"]
+      "required": [
+        "list",
+        "total"
+      ]
     },
     "RechargeOrderRequest": {
       "type": "object",
@@ -8081,7 +8777,10 @@
         }
       },
       "title": "RechargeOrderRequest",
-      "required": ["amount", "payment"]
+      "required": [
+        "amount",
+        "payment"
+      ]
     },
     "RechargeOrderResponse": {
       "type": "object",
@@ -8091,7 +8790,9 @@
         }
       },
       "title": "RechargeOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "RegisterConfig": {
       "type": "object",
@@ -8160,7 +8861,11 @@
         }
       },
       "title": "RenewalOrderRequest",
-      "required": ["user_subscribe_id", "quantity", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "quantity",
+        "payment"
+      ]
     },
     "RenewalOrderResponse": {
       "type": "object",
@@ -8170,7 +8875,9 @@
         }
       },
       "title": "RenewalOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "ResetTrafficOrderRequest": {
       "type": "object",
@@ -8185,7 +8892,10 @@
         }
       },
       "title": "ResetTrafficOrderRequest",
-      "required": ["user_subscribe_id", "payment"]
+      "required": [
+        "user_subscribe_id",
+        "payment"
+      ]
     },
     "ResetTrafficOrderResponse": {
       "type": "object",
@@ -8195,7 +8905,9 @@
         }
       },
       "title": "ResetTrafficOrderResponse",
-      "required": ["order_no"]
+      "required": [
+        "order_no"
+      ]
     },
     "Response": {
       "type": "object",
@@ -8228,7 +8940,11 @@
         }
       },
       "title": "RevenueStatisticsResponse",
-      "required": ["today", "monthly", "all"]
+      "required": [
+        "today",
+        "monthly",
+        "all"
+      ]
     },
     "SecurityConfig": {
       "type": "object",
@@ -8389,7 +9105,13 @@
         }
       },
       "title": "ServerGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
     },
     "ServerRuleGroup": {
       "type": "object",
@@ -8421,7 +9143,15 @@
         }
       },
       "title": "ServerRuleGroup",
-      "required": ["id", "name", "icon", "description", "enable", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "enable",
+        "created_at",
+        "updated_at"
+      ]
     },
     "ServerStatus": {
       "type": "object",
@@ -8444,7 +9174,12 @@
         }
       },
       "title": "ServerStatus",
-      "required": ["cpu", "mem", "disk", "updated_at"]
+      "required": [
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
+      ]
     },
     "ServerTotalDataResponse": {
       "type": "object",
@@ -8542,7 +9277,12 @@
         }
       },
       "title": "ServerTrafficData",
-      "required": ["server_id", "name", "upload", "download"]
+      "required": [
+        "server_id",
+        "name",
+        "upload",
+        "download"
+      ]
     },
     "SetNodeMultiplierRequest": {
       "type": "object",
@@ -8555,7 +9295,9 @@
         }
       },
       "title": "SetNodeMultiplierRequest",
-      "required": ["periods"]
+      "required": [
+        "periods"
+      ]
     },
     "Shadowsocks": {
       "type": "object",
@@ -8572,7 +9314,11 @@
         }
       },
       "title": "Shadowsocks",
-      "required": ["method", "port", "server_key"]
+      "required": [
+        "method",
+        "port",
+        "server_key"
+      ]
     },
     "SiteConfig": {
       "type": "object",
@@ -8597,7 +9343,14 @@
         }
       },
       "title": "SiteConfig",
-      "required": ["host", "site_name", "site_desc", "site_logo", "keywords", "custom_html"]
+      "required": [
+        "host",
+        "site_name",
+        "site_desc",
+        "site_logo",
+        "keywords",
+        "custom_html"
+      ]
     },
     "SortItem": {
       "type": "object",
@@ -8612,7 +9365,10 @@
         }
       },
       "title": "SortItem",
-      "required": ["id", "sort"]
+      "required": [
+        "id",
+        "sort"
+      ]
     },
     "StripePayment": {
       "type": "object",
@@ -8628,7 +9384,11 @@
         }
       },
       "title": "StripePayment",
-      "required": ["method", "client_secret", "publishable_key"]
+      "required": [
+        "method",
+        "client_secret",
+        "publishable_key"
+      ]
     },
     "Subscribe": {
       "type": "object",
@@ -8782,7 +9542,12 @@
         }
       },
       "title": "SubscribeConfig",
-      "required": ["single_model", "subscribe_path", "subscribe_domain", "pan_domain"]
+      "required": [
+        "single_model",
+        "subscribe_path",
+        "subscribe_domain",
+        "pan_domain"
+      ]
     },
     "SubscribeDiscount": {
       "type": "object",
@@ -8797,7 +9562,10 @@
         }
       },
       "title": "SubscribeDiscount",
-      "required": ["quantity", "discount"]
+      "required": [
+        "quantity",
+        "discount"
+      ]
     },
     "SubscribeGroup": {
       "type": "object",
@@ -8822,7 +9590,13 @@
         }
       },
       "title": "SubscribeGroup",
-      "required": ["id", "name", "description", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
     },
     "SubscribeItem": {
       "type": "object",
@@ -8934,7 +9708,9 @@
         }
       },
       "title": "SubscribeItem",
-      "required": ["sold"]
+      "required": [
+        "sold"
+      ]
     },
     "SubscribeSortRequest": {
       "type": "object",
@@ -8947,7 +9723,9 @@
         }
       },
       "title": "SubscribeSortRequest",
-      "required": ["sort"]
+      "required": [
+        "sort"
+      ]
     },
     "SubscribeType": {
       "type": "object",
@@ -8960,7 +9738,9 @@
         }
       },
       "title": "SubscribeType",
-      "required": ["subscribe_types"]
+      "required": [
+        "subscribe_types"
+      ]
     },
     "TelegramConfig": {
       "type": "object",
@@ -8995,7 +9775,9 @@
         }
       },
       "title": "TestEmailSendRequest",
-      "required": ["email"]
+      "required": [
+        "email"
+      ]
     },
     "TestSmsSendRequest": {
       "type": "object",
@@ -9008,7 +9790,10 @@
         }
       },
       "title": "TestSmsSendRequest",
-      "required": ["area_code", "telephone"]
+      "required": [
+        "area_code",
+        "telephone"
+      ]
     },
     "Ticket": {
       "type": "object",
@@ -9047,7 +9832,15 @@
         }
       },
       "title": "Ticket",
-      "required": ["id", "title", "description", "user_id", "status", "created_at", "updated_at"]
+      "required": [
+        "id",
+        "title",
+        "description",
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
     },
     "TicketWaitRelpyResponse": {
       "type": "object",
@@ -9058,7 +9851,9 @@
         }
       },
       "title": "TicketWaitRelpyResponse",
-      "required": ["count"]
+      "required": [
+        "count"
+      ]
     },
     "TimePeriod": {
       "type": "object",
@@ -9075,7 +9870,11 @@
         }
       },
       "title": "TimePeriod",
-      "required": ["start_time", "end_time", "multiplier"]
+      "required": [
+        "start_time",
+        "end_time",
+        "multiplier"
+      ]
     },
     "TosConfig": {
       "type": "object",
@@ -9085,7 +9884,9 @@
         }
       },
       "title": "TosConfig",
-      "required": ["tos_content"]
+      "required": [
+        "tos_content"
+      ]
     },
     "TrafficLog": {
       "type": "object",
@@ -9120,7 +9921,15 @@
         }
       },
       "title": "TrafficLog",
-      "required": ["id", "server_id", "user_id", "subscribe_id", "download", "upload", "timestamp"]
+      "required": [
+        "id",
+        "server_id",
+        "user_id",
+        "subscribe_id",
+        "download",
+        "upload",
+        "timestamp"
+      ]
     },
     "TransportConfig": {
       "type": "object",
@@ -9136,7 +9945,11 @@
         }
       },
       "title": "TransportConfig",
-      "required": ["path", "host", "service_name"]
+      "required": [
+        "path",
+        "host",
+        "service_name"
+      ]
     },
     "Trojan": {
       "type": "object",
@@ -9159,7 +9972,13 @@
         }
       },
       "title": "Trojan",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "Tuic": {
       "type": "object",
@@ -9173,7 +9992,10 @@
         }
       },
       "title": "Tuic",
-      "required": ["port", "security_config"]
+      "required": [
+        "port",
+        "security_config"
+      ]
     },
     "UpdateAdsRequest": {
       "type": "object",
@@ -9236,7 +10058,10 @@
         }
       },
       "title": "UpdateAnnouncementEnableRequest",
-      "required": ["id", "enable"]
+      "required": [
+        "id",
+        "enable"
+      ]
     },
     "UpdateAnnouncementRequest": {
       "type": "object",
@@ -9265,7 +10090,14 @@
         }
       },
       "title": "UpdateAnnouncementRequest",
-      "required": ["id", "title", "content", "show", "pinned", "popup"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show",
+        "pinned",
+        "popup"
+      ]
     },
     "UpdateApplicationRequest": {
       "type": "object",
@@ -9291,7 +10123,14 @@
         }
       },
       "title": "UpdateApplicationRequest",
-      "required": ["id", "icon", "name", "description", "subscribe_type", "platform"]
+      "required": [
+        "id",
+        "icon",
+        "name",
+        "description",
+        "subscribe_type",
+        "platform"
+      ]
     },
     "UpdateApplicationVersionRequest": {
       "type": "object",
@@ -9311,7 +10150,14 @@
         },
         "platform": {
           "type": "string",
-          "enum": ["windows", "mac", "linux", "android", "ios", "harmony"]
+          "enum": [
+            "windows",
+            "mac",
+            "linux",
+            "android",
+            "ios",
+            "harmony"
+          ]
         },
         "is_default": {
           "type": "boolean",
@@ -9352,7 +10198,12 @@
         }
       },
       "title": "UpdateAuthMethodConfigRequest",
-      "required": ["id", "method", "config", "enabled"]
+      "required": [
+        "id",
+        "method",
+        "config",
+        "enabled"
+      ]
     },
     "UpdateCouponRequest": {
       "type": "object",
@@ -9408,7 +10259,14 @@
         }
       },
       "title": "UpdateCouponRequest",
-      "required": ["id", "name", "type", "discount", "start_time", "expire_time"]
+      "required": [
+        "id",
+        "name",
+        "type",
+        "discount",
+        "start_time",
+        "expire_time"
+      ]
     },
     "UpdateDocumentRequest": {
       "type": "object",
@@ -9435,7 +10293,12 @@
         }
       },
       "title": "UpdateDocumentRequest",
-      "required": ["id", "title", "content", "show"]
+      "required": [
+        "id",
+        "title",
+        "content",
+        "show"
+      ]
     },
     "UpdateNodeGroupRequest": {
       "type": "object",
@@ -9452,7 +10315,11 @@
         }
       },
       "title": "UpdateNodeGroupRequest",
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "UpdateNodeRequest": {
       "type": "object",
@@ -9554,7 +10421,10 @@
         }
       },
       "title": "UpdateOrderStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "UpdatePaymentMethodRequest": {
       "type": "object",
@@ -9599,7 +10469,15 @@
         }
       },
       "title": "UpdatePaymentMethodRequest",
-      "required": ["id", "name", "platform", "description", "config", "fee_mode", "enable"]
+      "required": [
+        "id",
+        "name",
+        "platform",
+        "description",
+        "config",
+        "fee_mode",
+        "enable"
+      ]
     },
     "UpdateRuleGroupRequest": {
       "type": "object",
@@ -9623,7 +10501,13 @@
         }
       },
       "title": "UpdateRuleGroupRequest",
-      "required": ["id", "name", "icon", "description", "enable"]
+      "required": [
+        "id",
+        "name",
+        "icon",
+        "description",
+        "enable"
+      ]
     },
     "UpdateSubscribeGroupRequest": {
       "type": "object",
@@ -9640,7 +10524,11 @@
         }
       },
       "title": "UpdateSubscribeGroupRequest",
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "UpdateSubscribeRequest": {
       "type": "object",
@@ -9778,7 +10666,10 @@
         }
       },
       "title": "UpdateTicketStatusRequest",
-      "required": ["id", "status"]
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "UpdateUserAuthMethodRequest": {
       "type": "object",
@@ -9795,7 +10686,11 @@
         }
       },
       "title": "UpdateUserAuthMethodRequest",
-      "required": ["user_id", "auth_type", "auth_identifier"]
+      "required": [
+        "user_id",
+        "auth_type",
+        "auth_identifier"
+      ]
     },
     "UpdateUserBasiceInfoRequest": {
       "type": "object",
@@ -10054,7 +10949,12 @@
         }
       },
       "title": "UserAffiliate",
-      "required": ["avatar", "identifier", "registered_at", "enable"]
+      "required": [
+        "avatar",
+        "identifier",
+        "registered_at",
+        "enable"
+      ]
     },
     "UserAuthMethod": {
       "type": "object",
@@ -10071,7 +10971,11 @@
         }
       },
       "title": "UserAuthMethod",
-      "required": ["auth_type", "auth_identifier", "verified"]
+      "required": [
+        "auth_type",
+        "auth_identifier",
+        "verified"
+      ]
     },
     "UserBalanceLog": {
       "type": "object",
@@ -10106,7 +11010,15 @@
         }
       },
       "title": "UserBalanceLog",
-      "required": ["id", "user_id", "amount", "type", "order_id", "balance", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "amount",
+        "type",
+        "order_id",
+        "balance",
+        "created_at"
+      ]
     },
     "UserDevice": {
       "type": "object",
@@ -10180,7 +11092,14 @@
         }
       },
       "title": "UserLoginLog",
-      "required": ["id", "user_id", "login_ip", "user_agent", "success", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "login_ip",
+        "user_agent",
+        "success",
+        "created_at"
+      ]
     },
     "UserStatistics": {
       "type": "object",
@@ -10208,7 +11127,11 @@
         }
       },
       "title": "UserStatistics",
-      "required": ["register", "new_order_users", "renewal_order_users"]
+      "required": [
+        "register",
+        "new_order_users",
+        "renewal_order_users"
+      ]
     },
     "UserStatisticsResponse": {
       "type": "object",
@@ -10224,7 +11147,11 @@
         }
       },
       "title": "UserStatisticsResponse",
-      "required": ["today", "monthly", "all"]
+      "required": [
+        "today",
+        "monthly",
+        "all"
+      ]
     },
     "UserSubscribe": {
       "type": "object",
@@ -10337,7 +11264,15 @@
         }
       },
       "title": "UserSubscribeLog",
-      "required": ["id", "user_id", "user_subscribe_id", "token", "ip", "user_agent", "created_at"]
+      "required": [
+        "id",
+        "user_id",
+        "user_subscribe_id",
+        "token",
+        "ip",
+        "user_agent",
+        "created_at"
+      ]
     },
     "UserTrafficData": {
       "type": "object",
@@ -10359,7 +11294,12 @@
         }
       },
       "title": "UserTrafficData",
-      "required": ["user_id", "email", "upload", "download"]
+      "required": [
+        "user_id",
+        "email",
+        "upload",
+        "download"
+      ]
     },
     "VerifyCodeConfig": {
       "type": "object",
@@ -10378,7 +11318,11 @@
         }
       },
       "title": "VerifyCodeConfig",
-      "required": ["verify_code_expire_time", "verify_code_limit", "verify_code_interval"]
+      "required": [
+        "verify_code_expire_time",
+        "verify_code_limit",
+        "verify_code_interval"
+      ]
     },
     "VerifyConfig": {
       "type": "object",
@@ -10435,7 +11379,14 @@
         }
       },
       "title": "Vless",
-      "required": ["port", "flow", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "flow",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     },
     "Vmess": {
       "type": "object",
@@ -10458,7 +11409,13 @@
         }
       },
       "title": "Vmess",
-      "required": ["port", "transport", "transport_config", "security", "security_config"]
+      "required": [
+        "port",
+        "transport",
+        "transport_config",
+        "security",
+        "security_config"
+      ]
     }
   },
   "securityDefinitions": {
