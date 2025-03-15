@@ -4547,6 +4547,9 @@
         },
         "custom_html": {
           "type": "string"
+        },
+        "custom_data": {
+          "$ref": "#/definitions/SiteCustomData"
         }
       },
       "title": "SiteConfig",
@@ -4556,7 +4559,84 @@
         "site_desc",
         "site_logo",
         "keywords",
-        "custom_html"
+        "custom_html",
+        "custom_data"
+      ]
+    },
+    "SiteCustomData": {
+      "type": "object",
+      "properties": {
+        "website": {
+          "type": "string"
+        },
+        "contacts": {
+          "$ref": "#/definitions/SiteCustomDataContacts"
+        },
+        "community": {
+          "$ref": "#/definitions/SiteCustomDataCommunity"
+        }
+      },
+      "title": "SiteCustomData",
+      "required": [
+        "website",
+        "contacts",
+        "community"
+      ]
+    },
+    "SiteCustomDataCommunity": {
+      "type": "object",
+      "properties": {
+        "telegram": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "discord": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "github": {
+          "type": "string"
+        }
+      },
+      "title": "SiteCustomDataCommunity",
+      "required": [
+        "telegram",
+        "twitter",
+        "discord",
+        "instagram",
+        "linkedin",
+        "facebook",
+        "github"
+      ]
+    },
+    "SiteCustomDataContacts": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      },
+      "title": "SiteCustomDataContacts",
+      "required": [
+        "email",
+        "telephone",
+        "address"
       ]
     },
     "SortItem": {
