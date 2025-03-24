@@ -865,6 +865,35 @@
         ]
       }
     },
+    "/v1/app/subscribe/user/already_subscribe": {
+      "get": {
+        "summary": "Get  Already subscribed to package",
+        "operationId": "QueryUserAlreadySubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserSubscribeResp"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
     "/v1/app/user/account": {
       "delete": {
         "summary": "Delete Account",
@@ -3105,6 +3134,21 @@
         "total"
       ]
     },
+    "QueryUserSubscribeResp": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeData"
+          }
+        }
+      },
+      "title": "QueryUserSubscribeResp",
+      "required": [
+        "data"
+      ]
+    },
     "RechargeOrderRequest": {
       "type": "object",
       "properties": {
@@ -4605,6 +4649,24 @@
         "status",
         "created_at",
         "updated_at"
+      ]
+    },
+    "UserSubscribeData": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribeData",
+      "required": [
+        "subscribe_id",
+        "user_subscribe_id"
       ]
     },
     "UserSubscribeLog": {
