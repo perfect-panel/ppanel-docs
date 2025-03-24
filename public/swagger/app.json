@@ -2345,25 +2345,33 @@
     "NodeStatus": {
       "type": "object",
       "properties": {
-        "online_users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnlineUser"
-          }
+        "online": {
+          "type": "object"
         },
-        "status": {
-          "$ref": "#/definitions/ServerStatus"
+        "cpu": {
+          "type": "number",
+          "format": "double"
         },
-        "last_at": {
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
           "type": "integer",
           "format": "int64"
         }
       },
       "title": "NodeStatus",
       "required": [
-        "online_users",
-        "status",
-        "last_at"
+        "online",
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
       ]
     },
     "OnlineUser": {
@@ -3515,34 +3523,6 @@
         "description",
         "enable",
         "created_at",
-        "updated_at"
-      ]
-    },
-    "ServerStatus": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerStatus",
-      "required": [
-        "cpu",
-        "mem",
-        "disk",
         "updated_at"
       ]
     },

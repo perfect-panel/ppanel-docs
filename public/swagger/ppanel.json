@@ -4852,6 +4852,49 @@
         ]
       }
     },
+    "/v1/admin/user/subscribe/detail": {
+      "get": {
+        "summary": "Get user subcribe by id",
+        "operationId": "GetUserSubscribeById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/UserSubscribeDetail"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/admin/user/subscribe/device": {
       "get": {
         "summary": "Get user subcribe devices",
@@ -12267,6 +12310,19 @@
         "total"
       ]
     },
+    "GetUserSubscribeByIdRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserSubscribeByIdRequest",
+      "required": [
+        "id"
+      ]
+    },
     "GetUserSubscribeDevicesRequest": {
       "type": "object",
       "properties": {
@@ -12761,25 +12817,33 @@
     "NodeStatus": {
       "type": "object",
       "properties": {
-        "online_users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnlineUser"
-          }
+        "online": {
+          "type": "object"
         },
-        "status": {
-          "$ref": "#/definitions/ServerStatus"
+        "cpu": {
+          "type": "number",
+          "format": "double"
         },
-        "last_at": {
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
           "type": "integer",
           "format": "int64"
         }
       },
       "title": "NodeStatus",
       "required": [
-        "online_users",
-        "status",
-        "last_at"
+        "online",
+        "cpu",
+        "mem",
+        "disk",
+        "updated_at"
       ]
     },
     "OAthLoginRequest": {
@@ -14539,34 +14603,6 @@
         "description",
         "enable",
         "created_at",
-        "updated_at"
-      ]
-    },
-    "ServerStatus": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerStatus",
-      "required": [
-        "cpu",
-        "mem",
-        "disk",
         "updated_at"
       ]
     },
@@ -17204,6 +17240,91 @@
         "user_subscribe_id"
       ]
     },
+    "UserSubscribeDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/Subscribe"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reset_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "token": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribeDetail",
+      "required": [
+        "id",
+        "user_id",
+        "user",
+        "order_id",
+        "subscribe_id",
+        "subscribe",
+        "start_time",
+        "expire_time",
+        "reset_time",
+        "traffic",
+        "download",
+        "upload",
+        "token",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "UserSubscribeLog": {
       "type": "object",
       "properties": {
@@ -17270,12 +17391,9 @@
     "UserTrafficData": {
       "type": "object",
       "properties": {
-        "user_id": {
+        "sid": {
           "type": "integer",
           "format": "int64"
-        },
-        "email": {
-          "type": "string"
         },
         "upload": {
           "type": "integer",
@@ -17288,8 +17406,7 @@
       },
       "title": "UserTrafficData",
       "required": [
-        "user_id",
-        "email",
+        "sid",
         "upload",
         "download"
       ]
