@@ -1891,6 +1891,9 @@
     "CurrencyConfig": {
       "type": "object",
       "properties": {
+        "access_key": {
+          "type": "string"
+        },
         "currency_unit": {
           "type": "string"
         },
@@ -1900,6 +1903,7 @@
       },
       "title": "CurrencyConfig",
       "required": [
+        "access_key",
         "currency_unit",
         "currency_symbol"
       ]

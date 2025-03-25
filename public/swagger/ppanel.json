@@ -10790,7 +10790,7 @@
         "description"
       ]
     },
-    "CurrencyConfig": {
+    "Currency": {
       "type": "object",
       "properties": {
         "currency_unit": {
@@ -10800,8 +10800,28 @@
           "type": "string"
         }
       },
+      "title": "Currency",
+      "required": [
+        "currency_unit",
+        "currency_symbol"
+      ]
+    },
+    "CurrencyConfig": {
+      "type": "object",
+      "properties": {
+        "access_key": {
+          "type": "string"
+        },
+        "currency_unit": {
+          "type": "string"
+        },
+        "currency_symbol": {
+          "type": "string"
+        }
+      },
       "title": "CurrencyConfig",
       "required": [
+        "access_key",
         "currency_unit",
         "currency_symbol"
       ]
@@ -11528,7 +11548,7 @@
           "$ref": "#/definitions/InviteConfig"
         },
         "currency": {
-          "$ref": "#/definitions/CurrencyConfig"
+          "$ref": "#/definitions/Currency"
         },
         "subscribe": {
           "$ref": "#/definitions/SubscribeConfig"
