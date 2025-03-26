@@ -4564,6 +4564,27 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "user_subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -12271,6 +12292,18 @@
         },
         "search": {
           "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "GetUserListRequest",
