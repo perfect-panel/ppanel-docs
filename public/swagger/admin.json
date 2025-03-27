@@ -6136,10 +6136,14 @@
         "name": {
           "type": "string"
         },
-        "icon": {
-          "type": "string"
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "description": {
+        "rules": {
           "type": "string"
         },
         "enable": {
@@ -6150,8 +6154,8 @@
       "title": "CreateRuleGroupRequest",
       "required": [
         "name",
-        "icon",
-        "description",
+        "nodes",
+        "rules",
         "enable"
       ]
     },
@@ -9224,10 +9228,14 @@
         "name": {
           "type": "string"
         },
-        "icon": {
-          "type": "string"
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "description": {
+        "rules": {
           "type": "string"
         },
         "enable": {
@@ -9247,8 +9255,8 @@
       "required": [
         "id",
         "name",
-        "icon",
-        "description",
+        "nodes",
+        "rules",
         "enable",
         "created_at",
         "updated_at"
@@ -10586,10 +10594,14 @@
         "name": {
           "type": "string"
         },
-        "icon": {
-          "type": "string"
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "description": {
+        "rules": {
           "type": "string"
         },
         "enable": {
@@ -10601,8 +10613,8 @@
       "required": [
         "id",
         "name",
-        "icon",
-        "description",
+        "nodes",
+        "rules",
         "enable"
       ]
     },
