@@ -10513,6 +10513,9 @@
         "name": {
           "type": "string"
         },
+        "icon": {
+          "type": "string"
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -10530,6 +10533,7 @@
       "title": "CreateRuleGroupRequest",
       "required": [
         "name",
+        "icon",
         "tags",
         "rules",
         "enable"
@@ -14685,6 +14689,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "icon": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -14713,6 +14720,7 @@
       "title": "ServerRuleGroup",
       "required": [
         "id",
+        "icon",
         "name",
         "tags",
         "rules",
@@ -16309,6 +16317,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "icon": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -16329,6 +16340,7 @@
       "title": "UpdateRuleGroupRequest",
       "required": [
         "id",
+        "icon",
         "name",
         "tags",
         "rules",

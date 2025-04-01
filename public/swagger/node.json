@@ -2474,6 +2474,9 @@
           "type": "integer",
           "format": "int64"
         },
+        "icon": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -2502,6 +2505,7 @@
       "title": "ServerRuleGroup",
       "required": [
         "id",
+        "icon",
         "name",
         "tags",
         "rules",
