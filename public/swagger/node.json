@@ -2477,11 +2477,10 @@
         "name": {
           "type": "string"
         },
-        "nodes": {
+        "tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "rules": {
@@ -2504,7 +2503,7 @@
       "required": [
         "id",
         "name",
-        "nodes",
+        "tags",
         "rules",
         "enable",
         "created_at",

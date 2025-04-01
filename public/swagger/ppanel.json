@@ -2243,6 +2243,35 @@
         ]
       }
     },
+    "/v1/admin/server/tag/list": {
+      "get": {
+        "summary": "Get node tag list",
+        "operationId": "GetNodeTagList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetNodeTagListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/subscribe/": {
       "delete": {
         "summary": "Delete subscribe",
@@ -10484,11 +10513,10 @@
         "name": {
           "type": "string"
         },
-        "nodes": {
+        "tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "rules": {
@@ -10502,7 +10530,7 @@
       "title": "CreateRuleGroupRequest",
       "required": [
         "name",
-        "nodes",
+        "tags",
         "rules",
         "enable"
       ]
@@ -11795,6 +11823,21 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "GetNodeTagListResponse": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "GetNodeTagListResponse",
+      "required": [
+        "tags"
       ]
     },
     "GetOAuthMethodsResponse": {
@@ -14645,11 +14688,10 @@
         "name": {
           "type": "string"
         },
-        "nodes": {
+        "tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "rules": {
@@ -14672,7 +14714,7 @@
       "required": [
         "id",
         "name",
-        "nodes",
+        "tags",
         "rules",
         "enable",
         "created_at",
@@ -16270,11 +16312,10 @@
         "name": {
           "type": "string"
         },
-        "nodes": {
+        "tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "rules": {
@@ -16289,7 +16330,7 @@
       "required": [
         "id",
         "name",
-        "nodes",
+        "tags",
         "rules",
         "enable"
       ]
