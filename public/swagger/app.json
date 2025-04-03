@@ -1005,6 +1005,35 @@
         ]
       }
     },
+    "/v1/app/user/online_time/statistics": {
+      "get": {
+        "summary": "Get user online time total",
+        "operationId": "GetUserOnlineTimeStatistics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserOnlineTimeStatisticsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
     "/v1/app/user/password": {
       "put": {
         "summary": "Update Password ",
@@ -1435,6 +1464,9 @@
         },
         "official_telephone": {
           "type": "string"
+        },
+        "invitation_link": {
+          "type": "string"
         }
       },
       "title": "AppConfigResponse",
@@ -1448,7 +1480,8 @@
         "official_email",
         "official_website",
         "official_telegram",
-        "official_telephone"
+        "official_telephone",
+        "invitation_link"
       ]
     },
     "AppInfo": {
@@ -1809,6 +1842,29 @@
         "orderNo"
       ]
     },
+    "ConnectionRecords": {
+      "type": "object",
+      "properties": {
+        "current_continuous_days": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "history_continuous_days": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "longest_single_connection": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ConnectionRecords",
+      "required": [
+        "current_continuous_days",
+        "history_continuous_days",
+        "longest_single_connection"
+      ]
+    },
     "Coupon": {
       "type": "object",
       "properties": {
@@ -2117,6 +2173,25 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "GetUserOnlineTimeStatisticsResponse": {
+      "type": "object",
+      "properties": {
+        "weekly_stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WeeklyStat"
+          }
+        },
+        "connection_records": {
+          "$ref": "#/definitions/ConnectionRecords"
+        }
+      },
+      "title": "GetUserOnlineTimeStatisticsResponse",
+      "required": [
+        "weekly_stats",
+        "connection_records"
       ]
     },
     "GetUserSubscribeTrafficLogsRequest": {
@@ -4814,6 +4889,28 @@
         "transport_config",
         "security",
         "security_config"
+      ]
+    },
+    "WeeklyStat": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "day_name": {
+          "type": "string"
+        },
+        "hours": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "WeeklyStat",
+      "required": [
+        "day",
+        "day_name",
+        "hours"
       ]
     }
   },
