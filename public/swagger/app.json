@@ -4666,6 +4666,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "finished_at": {
+          "type": "integer",
+          "format": "int64"
+        },
         "reset_time": {
           "type": "integer",
           "format": "int64"
@@ -4707,6 +4711,7 @@
         "subscribe",
         "start_time",
         "expire_time",
+        "finished_at",
         "reset_time",
         "traffic",
         "download",
