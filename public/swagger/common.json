@@ -584,6 +584,45 @@
         ]
       }
     },
+    "/v1/common/check_verification_code": {
+      "post": {
+        "summary": "Check verification code",
+        "operationId": "CheckVerificationCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/CheckVerificationCodeRespone"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckVerificationCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/send_code": {
       "post": {
         "summary": "Get verification code",
@@ -1172,6 +1211,48 @@
       "title": "CheckUserResponse",
       "required": [
         "exist"
+      ]
+    },
+    "CheckVerificationCodeRequest": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "email",
+            "mobile"
+          ]
+        },
+        "account": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "CheckVerificationCodeRequest",
+      "required": [
+        "method",
+        "account",
+        "code",
+        "type"
+      ]
+    },
+    "CheckVerificationCodeRespone": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CheckVerificationCodeRespone",
+      "required": [
+        "status"
       ]
     },
     "CheckoutOrderRequest": {

@@ -1467,6 +1467,9 @@
         },
         "invitation_link": {
           "type": "string"
+        },
+        "kr_website_id": {
+          "type": "string"
         }
       },
       "title": "AppConfigResponse",
@@ -1481,7 +1484,8 @@
         "official_website",
         "official_telegram",
         "official_telephone",
-        "invitation_link"
+        "invitation_link",
+        "kr_website_id"
       ]
     },
     "AppInfo": {
