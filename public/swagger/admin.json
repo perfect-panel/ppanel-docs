@@ -8878,6 +8878,24 @@
         "total"
       ]
     },
+    "QueryUserAffiliateCountResponse": {
+      "type": "object",
+      "properties": {
+        "registers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total_commission": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserAffiliateCountResponse",
+      "required": [
+        "registers",
+        "total_commission"
+      ]
+    },
     "QueryUserAffiliateListRequest": {
       "type": "object",
       "properties": {

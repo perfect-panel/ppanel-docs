@@ -931,6 +931,35 @@
         ]
       }
     },
+    "/v1/app/user/affiliate/count": {
+      "get": {
+        "summary": "Query User Affiliate Count",
+        "operationId": "QueryUserAffiliate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserAffiliateCountResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/app/user"
+        ]
+      }
+    },
     "/v1/app/user/affiliate/list": {
       "get": {
         "summary": "Query User Affiliate List",
@@ -3185,6 +3214,24 @@
       "required": [
         "list",
         "total"
+      ]
+    },
+    "QueryUserAffiliateCountResponse": {
+      "type": "object",
+      "properties": {
+        "registers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total_commission": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryUserAffiliateCountResponse",
+      "required": [
+        "registers",
+        "total_commission"
       ]
     },
     "QueryUserAffiliateListRequest": {
