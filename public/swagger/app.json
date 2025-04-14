@@ -352,7 +352,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/UserSubscbribeResponse"
+                      "$ref": "#/definitions/AppUserSubscbribeNodeResponse"
                     }
                   }
                 }
@@ -360,6 +360,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "tags": [
           "ppanel/app/node"
         ]
@@ -381,7 +390,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetRuleGroupListResponse"
+                      "$ref": "#/definitions/AppRuleGroupListResponse"
                     }
                   }
                 }
@@ -889,6 +898,44 @@
             }
           }
         },
+        "tags": [
+          "ppanel/app/subscribe"
+        ]
+      }
+    },
+    "/v1/app/subscribe/user/available_subscribe": {
+      "get": {
+        "summary": "Get Available subscriptions for users",
+        "operationId": "QueryUserAvailableUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/AppUserSubscbribeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contains_nodes",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "format": "boolean"
+          }
+        ],
         "tags": [
           "ppanel/app/subscribe"
         ]
@@ -1555,6 +1602,26 @@
         "is_default"
       ]
     },
+    "AppRuleGroupListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerRuleGroup"
+          }
+        }
+      },
+      "title": "AppRuleGroupListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "AppSendCodeRequest": {
       "type": "object",
       "properties": {
@@ -1596,6 +1663,208 @@
       "title": "AppSendCodeRespone",
       "required": [
         "status"
+      ]
+    },
+    "AppUserSubcbribe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "expire_time": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppUserSubscbribeNode"
+          }
+        }
+      },
+      "title": "AppUserSubcbribe",
+      "required": [
+        "id",
+        "name",
+        "upload",
+        "traffic",
+        "download",
+        "device_limit",
+        "start_time",
+        "expire_time",
+        "list"
+      ]
+    },
+    "AppUserSubscbribeNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "relay_mode": {
+          "type": "string"
+        },
+        "relay_node": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "config": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AppUserSubscbribeNode",
+      "required": [
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "relay_mode",
+        "relay_node",
+        "server_addr",
+        "speed_limit",
+        "tags",
+        "traffic",
+        "traffic_ratio",
+        "upload",
+        "config",
+        "country",
+        "city",
+        "latitude",
+        "longitude",
+        "created_at",
+        "download"
+      ]
+    },
+    "AppUserSubscbribeNodeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AppUserSubscbribeNodeRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "AppUserSubscbribeNodeResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppUserSubscbribeNode"
+          }
+        }
+      },
+      "title": "AppUserSubscbribeNodeResponse",
+      "required": [
+        "list"
+      ]
+    },
+    "AppUserSubscbribeResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppUserSubcbribe"
+          }
+        }
+      },
+      "title": "AppUserSubscbribeResponse",
+      "required": [
+        "list"
+      ]
+    },
+    "AppUserSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "contains_nodes": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "AppUserSubscribeRequest",
+      "required": [
+        "contains_nodes"
       ]
     },
     "Application": {
@@ -2185,26 +2454,6 @@
       },
       "title": "GetAvailablePaymentMethodsResponse",
       "required": [
-        "list"
-      ]
-    },
-    "GetRuleGroupListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerRuleGroup"
-          }
-        }
-      },
-      "title": "GetRuleGroupListResponse",
-      "required": [
-        "total",
         "list"
       ]
     },
@@ -4480,6 +4729,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
         "email": {
           "type": "string"
         },
@@ -4515,6 +4768,7 @@
       "title": "UserInfoResponse",
       "required": [
         "id",
+        "balance",
         "email",
         "referer_id",
         "refer_code",
@@ -4559,132 +4813,6 @@
         "user_agent",
         "success",
         "created_at"
-      ]
-    },
-    "UserSubscbribeNodeInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "double"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "config": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "string"
-        },
-        "longitude": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserSubscbribeNodeInfo",
-      "required": [
-        "id",
-        "name",
-        "uuid",
-        "protocol",
-        "relay_mode",
-        "relay_node",
-        "server_addr",
-        "speed_limit",
-        "tags",
-        "traffic",
-        "traffic_ratio",
-        "upload",
-        "config",
-        "country",
-        "city",
-        "latitude",
-        "longitude",
-        "created_at",
-        "download"
-      ]
-    },
-    "UserSubscbribeResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "start_time": {
-          "type": "string"
-        },
-        "expire_time": {
-          "type": "string"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserSubscbribeNodeInfo"
-          }
-        }
-      },
-      "title": "UserSubscbribeResponse",
-      "required": [
-        "id",
-        "name",
-        "start_time",
-        "expire_time",
-        "list"
       ]
     },
     "UserSubscribe": {

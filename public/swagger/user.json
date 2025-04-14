@@ -1912,6 +1912,152 @@
         "updated_at"
       ]
     },
+    "AppUserSubcbribe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "device_limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "expire_time": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppUserSubscbribeNode"
+          }
+        }
+      },
+      "title": "AppUserSubcbribe",
+      "required": [
+        "id",
+        "name",
+        "upload",
+        "traffic",
+        "download",
+        "device_limit",
+        "start_time",
+        "expire_time",
+        "list"
+      ]
+    },
+    "AppUserSubscbribeNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "relay_mode": {
+          "type": "string"
+        },
+        "relay_node": {
+          "type": "string"
+        },
+        "server_addr": {
+          "type": "string"
+        },
+        "speed_limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "config": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AppUserSubscbribeNode",
+      "required": [
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "relay_mode",
+        "relay_node",
+        "server_addr",
+        "speed_limit",
+        "tags",
+        "traffic",
+        "traffic_ratio",
+        "upload",
+        "config",
+        "country",
+        "city",
+        "latitude",
+        "longitude",
+        "created_at",
+        "download"
+      ]
+    },
     "Application": {
       "type": "object",
       "properties": {
