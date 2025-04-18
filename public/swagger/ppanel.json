@@ -6011,7 +6011,7 @@
       }
     },
     "/v1/app/subscribe/reset/period": {
-      "get": {
+      "post": {
         "summary": "Reset user subscription period",
         "operationId": "ResetUserSubscribePeriod",
         "responses": {
@@ -6034,6 +6034,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSubscribeResetPeriodRequest"
+            }
+          }
+        ],
         "tags": [
           "ppanel/app/subscribe"
         ]
