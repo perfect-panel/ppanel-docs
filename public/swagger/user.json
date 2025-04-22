@@ -3691,7 +3691,6 @@
       },
       "title": "PrePurchaseOrderRequest",
       "required": [
-        "payment",
         "subscribe_id",
         "quantity"
       ]
@@ -3846,8 +3845,7 @@
       "title": "PurchaseOrderRequest",
       "required": [
         "subscribe_id",
-        "quantity",
-        "payment"
+        "quantity"
       ]
     },
     "PurchaseOrderResponse": {

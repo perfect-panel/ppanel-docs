@@ -8837,8 +8837,7 @@
       "title": "PurchaseOrderRequest",
       "required": [
         "subscribe_id",
-        "quantity",
-        "payment"
+        "quantity"
       ]
     },
     "PurchaseOrderResponse": {
