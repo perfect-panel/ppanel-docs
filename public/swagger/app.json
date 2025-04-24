@@ -3304,7 +3304,8 @@
         },
         "quantity": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "exclusiveMinimum": true
         },
         "payment": {
           "type": "integer",
