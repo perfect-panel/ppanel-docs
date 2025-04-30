@@ -2046,7 +2046,7 @@
             "format": "int32"
           },
           {
-            "name": "tag",
+            "name": "tags",
             "in": "query",
             "required": false,
             "type": "string"
@@ -7375,7 +7375,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "tag": {
+        "tags": {
           "type": "string"
         },
         "group_id": {
