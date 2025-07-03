@@ -4092,6 +4092,20 @@
           "type": "integer",
           "format": "int32"
         },
+        "disable_sni": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reduce_rtt": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "udp_relay_mode": {
+          "type": "string"
+        },
+        "congestion_controller": {
+          "type": "string"
+        },
         "security_config": {
           "$ref": "#/definitions/SecurityConfig"
         }
@@ -4099,6 +4113,10 @@
       "title": "Tuic",
       "required": [
         "port",
+        "disable_sni",
+        "reduce_rtt",
+        "udp_relay_mode",
+        "congestion_controller",
         "security_config"
       ]
     },
