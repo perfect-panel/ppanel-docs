@@ -5269,6 +5269,23 @@
         "updated_at"
       ]
     },
+    "AnyTLS": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "security_config": {
+          "$ref": "#/definitions/SecurityConfig"
+        }
+      },
+      "title": "AnyTLS",
+      "required": [
+        "port",
+        "security_config"
+      ]
+    },
     "AppUserSubcbribe": {
       "type": "object",
       "properties": {
