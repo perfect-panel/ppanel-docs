@@ -26,7 +26,7 @@ PPanel از راه‌اندازی مبتنی بر وب پشتیبانی می‌�
      --restart=always \
      --log-opt max-size=10m \
      --log-opt max-file=3 \
-     ppanel/ppanel-server:beta
+     ppanel/ppanel-server:latest
    ```
 
 3. **دسترسی به صفحه راه‌اندازی**: در مرورگر به `http://آی‌پی_سرور:8080/init` بروید.
@@ -64,7 +64,7 @@ docker run -d \
   --restart=always \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
-  ppanel/ppanel-server:beta
+  ppanel/ppanel-server:latest
 ```
 
 ## استفاده از Docker Compose برای استقرار
@@ -84,7 +84,7 @@ version: '3'
 
 services:
   ppanel-server:
-    image: ppanel/ppanel-server:beta
+    image: ppanel/ppanel-server:latest
     container_name: ppanel-server
     network_mode: host
     volumes:

@@ -26,7 +26,7 @@ PPanel 支持基於 Web 的初始化，簡化了手動配置過程。
      --restart=always \
      --log-opt max-size=10m \
      --log-opt max-file=3 \
-     ppanel/ppanel-server:beta
+     ppanel/ppanel-server:latest
    ```
 
 3. **訪問初始化頁面**：在瀏覽器中訪問 `http://伺服器IP:8080/init`。
@@ -64,7 +64,7 @@ docker run -d \
   --restart=always \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
-  ppanel/ppanel-server:beta
+  ppanel/ppanel-server:latest
 ```
 
 ## 使用 Docker Compose 部署
@@ -84,7 +84,7 @@ version: '3'
 
 services:
   ppanel-server:
-    image: ppanel/ppanel-server:beta
+    image: ppanel/ppanel-server:latest
     container_name: ppanel-server
     network_mode: host
     volumes:

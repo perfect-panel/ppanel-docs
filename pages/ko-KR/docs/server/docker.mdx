@@ -26,7 +26,7 @@ PPanel은 웹 기반 초기화를 지원하여 수동 구성 과정을 간소화
      --restart=always \
      --log-opt max-size=10m \
      --log-opt max-file=3 \
-     ppanel/ppanel-server:beta
+     ppanel/ppanel-server:latest
    ```
 
 3. **초기화 페이지 접근**: 브라우저에서 `http://서버IP:8080/init`에 접속합니다.
@@ -64,7 +64,7 @@ docker run -d \
   --restart=always \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
-  ppanel/ppanel-server:beta
+  ppanel/ppanel-server:latest
 ```
 
 ## Docker Compose를 사용한 배포
@@ -84,7 +84,7 @@ version: '3'
 
 services:
   ppanel-server:
-    image: ppanel/ppanel-server:beta
+    image: ppanel/ppanel-server:latest
     container_name: ppanel-server
     network_mode: host
     volumes:

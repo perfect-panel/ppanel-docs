@@ -26,7 +26,7 @@ PPanel, manuel yapılandırma sürecini basitleştiren web tabanlı bir başlatm
      --restart=always \
      --log-opt max-size=10m \
      --log-opt max-file=3 \
-     ppanel/ppanel-server:beta
+     ppanel/ppanel-server:latest
    ```
 
 3. **Başlatma sayfasına erişin**: Tarayıcınızda `http://sunucuIP:8080/init` adresine gidin.
@@ -64,7 +64,7 @@ docker run -d \
   --restart=always \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
-  ppanel/ppanel-server:beta
+  ppanel/ppanel-server:latest
 ```
 
 ## Docker Compose ile Dağıtım
@@ -84,7 +84,7 @@ version: '3'
 
 services:
   ppanel-server:
-    image: ppanel/ppanel-server:beta
+    image: ppanel/ppanel-server:latest
     container_name: ppanel-server
     network_mode: host
     volumes:

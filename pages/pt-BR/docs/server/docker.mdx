@@ -26,7 +26,7 @@ O PPanel suporta inicialização baseada na Web, simplificando o processo de con
      --restart=always \
      --log-opt max-size=10m \
      --log-opt max-file=3 \
-     ppanel/ppanel-server:beta
+     ppanel/ppanel-server:latest
    ```
 
 3. **Acesse a página de inicialização**: No navegador, acesse `http://IP_do_servidor:8080/init`.
@@ -64,7 +64,7 @@ docker run -d \
   --restart=always \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
-  ppanel/ppanel-server:beta
+  ppanel/ppanel-server:latest
 ```
 
 ## Implantação com Docker Compose
@@ -84,7 +84,7 @@ version: '3'
 
 services:
   ppanel-server:
-    image: ppanel/ppanel-server:beta
+    image: ppanel/ppanel-server:latest
     container_name: ppanel-server
     network_mode: host
     volumes:

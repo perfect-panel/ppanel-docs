@@ -181,6 +181,31 @@ const config: DocsThemeConfig = {
   footer: {
     component: <Footer />,
   },
+   banner: {
+    key: 'bygga.app',
+    content: (
+      <div>
+        🚀 Flux PPanel theme is now live — only 20 licenses available!
+        <a
+          href="https://bygga.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-2 underline text-primary transition-colors"
+        >
+          Buy Now →
+        </a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a
+          href="https://flux-bygga.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-2 underline text-primary transition-colors"
+        >
+          Preview →
+        </a>
+      </div>
+    )
+  }
 };
 
 export default config;
