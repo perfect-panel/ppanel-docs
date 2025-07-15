@@ -11011,6 +11011,9 @@
         "icon": {
           "type": "string"
         },
+        "type": {
+          "type": "string"
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -11019,6 +11022,10 @@
         },
         "rules": {
           "type": "string"
+        },
+        "default": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "enable": {
           "type": "boolean",
@@ -11029,8 +11036,10 @@
       "required": [
         "name",
         "icon",
+        "type",
         "tags",
         "rules",
+        "default",
         "enable"
       ]
     },
@@ -16834,6 +16843,9 @@
         "icon": {
           "type": "string"
         },
+        "type": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -16846,6 +16858,10 @@
         "rules": {
           "type": "string"
         },
+        "default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -16855,9 +16871,11 @@
       "required": [
         "id",
         "icon",
+        "type",
         "name",
         "tags",
         "rules",
+        "default",
         "enable"
       ]
     },
