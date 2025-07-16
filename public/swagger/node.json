@@ -2661,6 +2661,9 @@
         "name": {
           "type": "string"
         },
+        "type": {
+          "type": "string"
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -2671,6 +2674,10 @@
           "type": "string"
         },
         "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "default": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -2688,9 +2695,11 @@
         "id",
         "icon",
         "name",
+        "type",
         "tags",
         "rules",
         "enable",
+        "default",
         "created_at",
         "updated_at"
       ]
