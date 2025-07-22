@@ -1,23 +1,222 @@
-# Gyors Telepítési Útmutató
+# Gyors telepítési útmutató
 
-> **Telepítés Előtti Figyelmeztetések**
+## 1. Docker telepítése
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Projekt könyvtár létrehozása
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Konfigurációs fájl létrehozása
+
+### 3.1 `compose.yaml` létrehozása
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 `ppanel.yaml` létrehozása
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Szolgáltatás indítása
+
+```bash
+docker-compose up -d
+```
+
+## Szolgáltatás információk
+
+### Alapértelmezett elérhetőség
+
+- Adminisztrátori panel: `http://szerverIP:3001`
+- Felhasználói panel: `http://szerverIP:3002`
+- Háttér API: `http://szerverIP:8080`
+
+### Alapértelmezett bejelentkezési információk
+
+- Adminisztrátor email: `admin@ppanel.dev`
+- Kezdeti jelszó: `password`
+
+### Gyakran használt adminisztrációs parancsok
+
+```bash
+# Szolgáltatás állapotának megtekintése
+docker-compose ps
+
+# Szolgáltatás naplóinak megtekintése
+docker-compose logs
+
+# Szolgáltatás leállítása
+docker-compose down
+
+# Szolgáltatás újraindítása
+docker-compose up -d
+```
+
+## Fontos megjegyzések
+
+1. Első bejelentkezés után azonnal módosítsa az alapértelmezett jelszót.
+2. Javasolt a `ppanel.yaml` konfigurációs fájl beállításainak módosítása a tényleges igények szerint.
+3. Termelési környezetben minden alapértelmezett jelszót módosítson.
+4. Győződjön meg arról, hogy a szerver tűzfala megnyitotta a megfelelő portokat.
+
+## Technikai támogatás
+
+Ha problémába ütközik, ellenőrizze:
+
+- A Docker szolgáltatás megfelelően működik-e
+- A hálózati beállítások helyesek-e
+- A szerver tűzfal beállításai
+
+## Frissítési módszer
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Egylépéses telepítés
+
+> **Telepítés előtti megjegyzések**
 >
-> - **A kezelőfelület alapértelmezett portja 8080**: Kérjük, előre állítsa be a domain név feloldást, vagy győződjön meg arról, hogy van elérhető IP-cím, hogy zökkenőmentesen befejezhesse a kezelőfelület és a felhasználói felület telepítését.
-> - Szolgáltató: További információkért kérjük, nézze meg a [szolgáltatót](/hu-HU/docs/server/config).
-> - Kezelőfelület: További információkért kérjük, nézze meg a [kezelőfelületet](/hu-HU/docs/admin/config).
-> - Felhasználói felület: További információkért kérjük, nézze meg a [felhasználói felületet](/hu-HU/docs/user/config).
+> - **Az adminisztrátori panel alapértelmezett portja 8080**: Kérjük, előre állítsa be a domain feloldást, vagy győződjön meg arról, hogy van elérhető IP-cím a zökkenőmentes adminisztrátori és felhasználói panel telepítéséhez.
+> - Szolgáltató: További információkért kérjük, olvassa el a [szolgáltatót](/hu-HU/docs/server/config) .
+> - Adminisztrátor: További információkért kérjük, olvassa el az [adminisztrátort](/hu-HU/docs/admin/config) .
+> - Felhasználó: További információkért kérjük, olvassa el a [felhasználót](/hu-HU/docs/user/config) .
 
-## Egylépéses Telepítés
-
-Használja az alábbi parancsok egyikét az PPanel egylépéses telepítéséhez, beleértve a szolgáltatót, a kezelőfelületet és a felhasználói felületet:
-
-### Opció 1: `curl` használatával
+## 1. lehetőség: `curl` használata
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Opció 2: `wget` használatával
+## 2. lehetőség: `wget` használata
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

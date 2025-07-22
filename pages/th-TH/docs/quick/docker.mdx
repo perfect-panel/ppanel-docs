@@ -1,23 +1,222 @@
 # คู่มือการติดตั้งอย่างรวดเร็ว
 
+## 1. ติดตั้ง Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. สร้างไดเรกทอรีโปรเจกต์
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. สร้างไฟล์การตั้งค่า
+
+### 3.1 สร้าง `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 สร้าง `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. เริ่มบริการ
+
+```bash
+docker-compose up -d
+```
+
+## ข้อมูลบริการ
+
+### ที่อยู่เข้าถึงเริ่มต้น
+
+- แผงผู้ดูแลระบบ: `http://IPของเซิร์ฟเวอร์:3001`
+- แผงผู้ใช้: `http://IPของเซิร์ฟเวอร์:3002`
+- API ด้านหลัง: `http://IPของเซิร์ฟเวอร์:8080`
+
+### ข้อมูลการเข้าสู่ระบบเริ่มต้น
+
+- อีเมลผู้ดูแลระบบ: `admin@ppanel.dev`
+- รหัสผ่านเริ่มต้น: `password`
+
+### คำสั่งการจัดการที่ใช้บ่อย
+
+```bash
+# ดูสถานะบริการ
+docker-compose ps
+
+# ดูบันทึกบริการ
+docker-compose logs
+
+# หยุดบริการ
+docker-compose down
+
+# รีสตาร์ทบริการ
+docker-compose up -d
+```
+
+## ข้อควรระวัง
+
+1. กรุณาเปลี่ยนรหัสผ่านเริ่มต้นทันทีหลังจากเข้าสู่ระบบครั้งแรก
+2. แนะนำให้ปรับแต่งการตั้งค่าใน `ppanel.yaml` ตามความต้องการจริง
+3. ในสภาพแวดล้อมการผลิตให้เปลี่ยนรหัสผ่านเริ่มต้นทั้งหมด
+4. ตรวจสอบให้แน่ใจว่าไฟร์วอลล์ของเซิร์ฟเวอร์เปิดพอร์ตที่เกี่ยวข้อง
+
+## การสนับสนุนทางเทคนิค
+
+หากพบปัญหา กรุณาตรวจสอบ:
+
+- บริการ Docker ทำงานปกติหรือไม่
+- การตั้งค่าเครือข่ายถูกต้องหรือไม่
+- การตั้งค่าไฟร์วอลล์ของเซิร์ฟเวอร์
+
+## วิธีการอัปเกรด
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# การติดตั้งแบบ One-Click
+
 > **ข้อควรระวังก่อนการติดตั้ง**
 >
-> - **พอร์ตเริ่มต้นของการจัดการคือ 8080**: กรุณากำหนดการตั้งค่าการชี้โดเมนล่วงหน้าหรือให้แน่ใจว่ามีที่อยู่ IP ที่ใช้งานได้ เพื่อให้การติดตั้งส่วนการจัดการและส่วนผู้ใช้เป็นไปอย่างราบรื่น
-> - เซิร์ฟเวอร์: สำหรับข้อมูลเพิ่มเติมโปรดดูที่ [เซิร์ฟเวอร์](/th-TH/docs/server/config)
-> - ส่วนการจัดการ: สำหรับข้อมูลเพิ่มเติมโปรดดูที่ [ส่วนการจัดการ](/th-TH/docs/admin/config)
-> - ส่วนผู้ใช้: สำหรับข้อมูลเพิ่มเติมโปรดดูที่ [ส่วนผู้ใช้](/th-TH/docs/user/config)
+> - **พอร์ตเริ่มต้นของแผงผู้ดูแลระบบคือ 8080**: กรุณาตั้งค่าการวิเคราะห์โดเมนล่วงหน้าหรือให้แน่ใจว่ามีที่อยู่ IP ที่ใช้งานได้ เพื่อให้การติดตั้งแผงผู้ดูแลระบบและแผงผู้ใช้เสร็จสมบูรณ์
+> - เซิร์ฟเวอร์: ข้อมูลเพิ่มเติมกรุณาอ้างอิงที่ [เซิร์ฟเวอร์](/zh-CN/docs/server/config)
+> - แผงผู้ดูแลระบบ: ข้อมูลเพิ่มเติมกรุณาอ้างอิงที่ [แผงผู้ดูแลระบบ](/zh-CN/docs/admin/config)
+> - แผงผู้ใช้: ข้อมูลเพิ่มเติมกรุณาอ้างอิงที่ [แผงผู้ใช้](/zh-CN/docs/user/config)
 
-## การติดตั้งด้วยคำสั่งเดียว
-
-ใช้คำสั่งใดคำสั่งหนึ่งด้านล่างนี้เพื่อทำการติดตั้ง PPanel โดยรวมถึงเซิร์ฟเวอร์, ส่วนการจัดการ และส่วนผู้ใช้:
-
-### ตัวเลือก 1: ใช้ `curl`
+## ตัวเลือก 1: ใช้ `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### ตัวเลือก 2: ใช้ `wget`
+## ตัวเลือก 2: ใช้ `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

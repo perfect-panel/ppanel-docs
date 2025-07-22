@@ -1,23 +1,222 @@
 # Guide de déploiement rapide
 
-> **Remarques avant déploiement**
+## 1. Installer Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Créer un répertoire de projet
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Créer un fichier de configuration
+
+### 3.1 Créer `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Créer `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Démarrer le service
+
+```bash
+docker-compose up -d
+```
+
+## Informations sur le service
+
+### Adresse d'accès par défaut
+
+- Panneau d'administration : `http://IP_du_serveur:3001`
+- Panneau utilisateur : `http://IP_du_serveur:3002`
+- API backend : `http://IP_du_serveur:8080`
+
+### Informations de connexion par défaut
+
+- Email de l'administrateur : `admin@ppanel.dev`
+- Mot de passe initial : `password`
+
+### Commandes de gestion courantes
+
+```bash
+# Vérifier l'état des services
+docker-compose ps
+
+# Voir les journaux des services
+docker-compose logs
+
+# Arrêter les services
+docker-compose down
+
+# Redémarrer les services
+docker-compose up -d
+```
+
+## Remarques
+
+1. Veuillez changer le mot de passe par défaut immédiatement après la première connexion.
+2. Il est conseillé d'ajuster la configuration dans `ppanel.yaml` en fonction des besoins réels.
+3. Dans un environnement de production, veuillez changer tous les mots de passe par défaut.
+4. Assurez-vous que le pare-feu du serveur a ouvert les ports appropriés.
+
+## Support technique
+
+En cas de problème, veuillez vérifier :
+
+- Si le service Docker fonctionne correctement
+- Si la configuration réseau est correcte
+- Les paramètres du pare-feu du serveur
+
+## Méthode de mise à jour
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Déploiement en un clic
+
+> **Remarques avant le déploiement**
 >
-> - **Le port par défaut de l'interface de gestion est 8080** : Veuillez configurer à l'avance la résolution de nom de domaine ou vous assurer d'avoir une adresse IP disponible pour faciliter l'installation de l'interface de gestion et de l'interface utilisateur.
+> - **Le port par défaut de l'interface d'administration est 8080** : Veuillez configurer à l'avance la résolution de nom de domaine ou vous assurer d'avoir une adresse IP disponible pour réussir l'installation de l'interface d'administration et de l'interface utilisateur.
 > - Serveur : Pour plus d'informations, veuillez consulter [Serveur](/fr-FR/docs/server/config).
-> - Interface de gestion : Pour plus d'informations, veuillez consulter [Interface de gestion](/fr-FR/docs/admin/config).
-> - Interface utilisateur : Pour plus d'informations, veuillez consulter [Interface utilisateur](/fr-FR/docs/user/config).
+> - Interface d'administration : Pour plus d'informations, veuillez consulter [Administration](/fr-FR/docs/admin/config).
+> - Interface utilisateur : Pour plus d'informations, veuillez consulter [Utilisateur](/fr-FR/docs/user/config).
 
-## Déploiement en un clic
-
-Utilisez l'une des commandes suivantes pour déployer PPanel en un clic, y compris le serveur, l'interface de gestion et l'interface utilisateur :
-
-### Option 1 : Utiliser `curl`
+## Option 1 : Utiliser `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Option 2 : Utiliser `wget`
+## Option 2 : Utiliser `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

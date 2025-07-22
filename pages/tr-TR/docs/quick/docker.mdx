@@ -1,23 +1,222 @@
 # Hızlı Dağıtım Kılavuzu
 
+## 1. Docker'ı Kurun
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Proje Dizini Oluşturun
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Konfigürasyon Dosyası Oluşturun
+
+### 3.1 `compose.yaml` Oluşturun
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 `ppanel.yaml` Oluşturun
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Servisi Başlatın
+
+```bash
+docker-compose up -d
+```
+
+## Servis Bilgileri
+
+### Varsayılan Erişim Adresi
+
+- Yönetici Paneli: `http://sunucuIP:3001`
+- Kullanıcı Paneli: `http://sunucuIP:3002`
+- Arka Uç API: `http://sunucuIP:8080`
+
+### Varsayılan Giriş Bilgileri
+
+- Yönetici E-posta: `admin@ppanel.dev`
+- İlk Şifre: `password`
+
+### Yaygın Yönetim Komutları
+
+```bash
+# Servis durumunu kontrol et
+docker-compose ps
+
+# Servis günlüklerini görüntüle
+docker-compose logs
+
+# Servisi durdur
+docker-compose down
+
+# Servisi yeniden başlat
+docker-compose up -d
+```
+
+## Dikkat Edilmesi Gerekenler
+
+1. İlk girişten sonra varsayılan şifreyi hemen değiştirin.
+2. Gerçek ihtiyaçlarınıza göre `ppanel.yaml` içindeki ayarları değiştirmeniz önerilir.
+3. Üretim ortamında tüm varsayılan şifreleri değiştirin.
+4. Sunucu güvenlik duvarının ilgili portları açtığından emin olun.
+
+## Teknik Destek
+
+Herhangi bir sorunla karşılaşırsanız, lütfen kontrol edin:
+
+- Docker servisi düzgün çalışıyor mu
+- Ağ yapılandırması doğru mu
+- Sunucu güvenlik duvarı ayarları
+
+## Güncelleme Yöntemi
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Tek Tıkla Dağıtım
+
 > **Dağıtım Öncesi Dikkat Edilmesi Gerekenler**
 >
-> - **Yönetim panelinin varsayılan portu 8080'dir**: Lütfen alan adı çözümlemesini önceden yapılandırın veya yönetim paneli ve kullanıcı panelinin kurulumu için kullanılabilir bir IP adresine sahip olduğunuzdan emin olun.
-> - Sunucu: Daha fazla bilgi için lütfen [Sunucu](/tr-TR/docs/server/config) sayfasına bakın.
-> - Yönetim Paneli: Daha fazla bilgi için lütfen [Yönetim Paneli](/tr-TR/docs/admin/config) sayfasına bakın.
-> - Kullanıcı Paneli: Daha fazla bilgi için lütfen [Kullanıcı Paneli](/tr-TR/docs/user/config) sayfasına bakın.
+> - **Yönetim panelinin varsayılan portu 8080'dir**: Yönetim ve kullanıcı panelinin kurulumu için önceden alan adı çözümlemesi yapıldığından veya kullanılabilir bir IP adresinin mevcut olduğundan emin olun.
+> - Sunucu: Daha fazla bilgi için [Sunucu](/tr-TR/docs/server/config) bölümüne bakın.
+> - Yönetim paneli: Daha fazla bilgi için [Yönetim Paneli](/tr-TR/docs/admin/config) bölümüne bakın.
+> - Kullanıcı paneli: Daha fazla bilgi için [Kullanıcı Paneli](/tr-TR/docs/user/config) bölümüne bakın.
 
-## Tek Tıkla Dağıtım
-
-Aşağıdaki komutlardan birini kullanarak PPanel'i, sunucu, yönetim paneli ve kullanıcı paneli ile birlikte tek tıkla dağıtabilirsiniz:
-
-### Seçenek 1: `curl` kullanarak
+## Seçenek 1: `curl` Kullanarak
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Seçenek 2: `wget` kullanarak
+## Seçenek 2: `wget` Kullanarak
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

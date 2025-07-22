@@ -1,23 +1,222 @@
 # Швидкий посібник з розгортання
 
+## 1. Встановлення Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Створення каталогу проекту
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Створення файлу конфігурації
+
+### 3.1 Створення `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Створення `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Запуск сервісу
+
+```bash
+docker-compose up -d
+```
+
+## Інформація про сервіс
+
+### За замовчуванням адреса доступу
+
+- Панель адміністратора: `http://IP_сервера:3001`
+- Панель користувача: `http://IP_сервера:3002`
+- API бекенду: `http://IP_сервера:8080`
+
+### За замовчуванням дані для входу
+
+- Email адміністратора: `admin@ppanel.dev`
+- Початковий пароль: `password`
+
+### Загальні команди управління
+
+```bash
+# Перегляд стану сервісу
+docker-compose ps
+
+# Перегляд журналів сервісу
+docker-compose logs
+
+# Зупинка сервісу
+docker-compose down
+
+# Перезапуск сервісу
+docker-compose up -d
+```
+
+## Зверніть увагу
+
+1. Після першого входу терміново змініть пароль за замовчуванням
+2. Рекомендується налаштувати конфігурацію в `ppanel.yaml` відповідно до ваших потреб
+3. У виробничому середовищі змініть усі паролі за замовчуванням
+4. Переконайтеся, що брандмауер сервера відкритий для відповідних портів
+
+## Технічна підтримка
+
+Якщо виникли проблеми, перевірте:
+
+- Чи працює служба Docker
+- Чи правильно налаштовано мережу
+- Налаштування брандмауера сервера
+
+## Метод оновлення
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Одноклікове розгортання
+
 > **Зверніть увагу перед розгортанням**
 >
-> - **Порт управлінського інтерфейсу за замовчуванням - 8080**: будь ласка, заздалегідь налаштуйте DNS або переконайтеся, що у вас є доступна IP-адреса, щоб успішно завершити установку управлінського та користувацького інтерфейсів.
-> - Сервер: для отримання додаткової інформації, будь ласка, зверніться до [Сервера](/uk-UA/docs/server/config).
-> - Управлінський інтерфейс: для отримання додаткової інформації, будь ласка, зверніться до [Управлінського інтерфейсу](/uk-UA/docs/admin/config).
-> - Користувацький інтерфейс: для отримання додаткової інформації, будь ласка, зверніться до [Користувацького інтерфейсу](/uk-UA/docs/user/config).
+> - **Порт адміністративної панелі за замовчуванням - 8080**: будь ласка, заздалегідь налаштуйте DNS або переконайтеся, що у вас є доступна IP-адреса для успішного завершення установки адміністративної та користувацької панелей.
+> - Сервер: більше інформації дивіться в [Сервері](/uk-UA/docs/server/config).
+> - Адміністративна панель: більше інформації дивіться в [Адміністративній панелі](/uk-UA/docs/admin/config).
+> - Користувацька панель: більше інформації дивіться в [Користувацькій панелі](/uk-UA/docs/user/config).
 
-## Одноклікове розгортання
-
-Використовуйте будь-яку з наведених команд для одноклікового розгортання PPanel, включаючи сервер, управлінський та користувацький інтерфейси:
-
-### Варіант 1: Використання `curl`
+## Варіант 1: Використання `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Варіант 2: Використання `wget`
+## Варіант 2: Використання `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

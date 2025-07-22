@@ -31,12 +31,11 @@ module.exports = defineConfig({
   outputLocales: outputLocales,
   markdown: {
     // entry: ['./pages/zh-CN/**/*.mdx', './pages/zh-CN/**/*.ts'],
-    entry: ['./pages/zh-CN/swagger/*.ts', './pages/zh-CN/swagger/*.mdx'],
+    entry: ['./pages/zh-CN/docs/quick/*.mdx'],
     exclude: [
-      './pages/zh-CN/swagger/common.mdx',
-      './pages/zh-CN/swagger/ppanel.mdx',
-      './pages/zh-CN/swagger/user.mdx',
-      './pages/zh-CN/swagger/admin.mdx',
+      './pages/zh-CN/docs/quick/zeabur.mdx',
+      './pages/zh-CN/docs/quick/_meta.ts',
+      './pages/zh-CN/docs/quick/docker.*.ts',
       // './pages/zh-CN/_meta.ts',
       // './pages/zh-CN/changelog',
     ],

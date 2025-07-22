@@ -1,23 +1,222 @@
 # Guía de Despliegue Rápido
 
-> **Consideraciones Previas al Despliegue**
+## 1. Instalar Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Crear el directorio del proyecto
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Crear el archivo de configuración
+
+### 3.1 Crear `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Crear `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Iniciar el servicio
+
+```bash
+docker-compose up -d
+```
+
+## Información del Servicio
+
+### Dirección de acceso por defecto
+
+- Panel de administración: `http://IP_del_servidor:3001`
+- Panel de usuario: `http://IP_del_servidor:3002`
+- API del backend: `http://IP_del_servidor:8080`
+
+### Información de inicio de sesión por defecto
+
+- Correo electrónico del administrador: `admin@ppanel.dev`
+- Contraseña inicial: `password`
+
+### Comandos de administración comunes
+
+```bash
+# Ver el estado del servicio
+docker-compose ps
+
+# Ver los registros del servicio
+docker-compose logs
+
+# Detener el servicio
+docker-compose down
+
+# Reiniciar el servicio
+docker-compose up -d
+```
+
+## Consideraciones
+
+1. Por favor, cambie la contraseña por defecto inmediatamente después del primer inicio de sesión.
+2. Se recomienda ajustar la configuración en `ppanel.yaml` según las necesidades reales.
+3. En un entorno de producción, cambie todas las contraseñas por defecto.
+4. Asegúrese de que el firewall del servidor tenga abiertos los puertos correspondientes.
+
+## Soporte Técnico
+
+Si encuentra problemas, verifique:
+
+- Si el servicio de Docker está funcionando correctamente.
+- Si la configuración de red es correcta.
+- La configuración del firewall del servidor.
+
+## Método de Actualización
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Despliegue con un solo clic
+
+> **Consideraciones antes del despliegue**
 >
-> - **El puerto predeterminado del panel de administración es el 8080**: Asegúrese de configurar la resolución de nombres de dominio o de tener una dirección IP disponible para completar con éxito la instalación del panel de administración y del panel de usuario.
+> - **El puerto por defecto del panel de administración es 8080**: Asegúrese de tener configurada la resolución de nombres de dominio o de contar con una dirección IP disponible para completar la instalación del panel de administración y del panel de usuario sin problemas.
 > - Servidor: Para más información, consulte [Servidor](/es-MX/docs/server/config).
 > - Panel de administración: Para más información, consulte [Panel de administración](/es-MX/docs/admin/config).
 > - Panel de usuario: Para más información, consulte [Panel de usuario](/es-MX/docs/user/config).
 
-## Despliegue con un Solo Comando
-
-Utilice cualquiera de los siguientes comandos para desplegar PPanel de un solo golpe, incluyendo el servidor, el panel de administración y el panel de usuario:
-
-### Opción 1: Usando `curl`
+## Opción 1: Usar `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Opción 2: Usando `wget`
+## Opción 2: Usar `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

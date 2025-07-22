@@ -1,23 +1,222 @@
 # 빠른 배포 가이드
 
+## 1. Docker 설치
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. 프로젝트 디렉토리 생성
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. 구성 파일 생성
+
+### 3.1 `compose.yaml` 생성
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 `ppanel.yaml` 생성
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. 서비스 시작
+
+```bash
+docker-compose up -d
+```
+
+## 서비스 정보
+
+### 기본 접근 주소
+
+- 관리자 패널: `http://서버IP:3001`
+- 사용자 패널: `http://서버IP:3002`
+- 백엔드 API: `http://서버IP:8080`
+
+### 기본 로그인 정보
+
+- 관리자 이메일: `admin@ppanel.dev`
+- 초기 비밀번호: `password`
+
+### 자주 사용하는 관리 명령어
+
+```bash
+# 서비스 상태 확인
+docker-compose ps
+
+# 서비스 로그 확인
+docker-compose logs
+
+# 서비스 중지
+docker-compose down
+
+# 서비스 재시작
+docker-compose up -d
+```
+
+## 주의 사항
+
+1. 처음 로그인 후 즉시 기본 비밀번호를 변경하십시오.
+2. 실제 요구 사항에 따라 `ppanel.yaml`의 구성을 조정하는 것이 좋습니다.
+3. 운영 환경에서는 모든 기본 비밀번호를 변경하십시오.
+4. 서버 방화벽이 해당 포트를 열어 두었는지 확인하십시오.
+
+## 기술 지원
+
+문제가 발생하면 다음을 확인하십시오:
+
+- Docker 서비스가 정상적으로 실행되고 있는지
+- 네트워크 구성이 올바른지
+- 서버 방화벽 설정
+
+## 업그레이드 방법
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# 원클릭 배포
+
 > **배포 전 주의 사항**
 >
-> - **관리자 포트 기본값은 8080입니다**: 도메인 해상도를 미리 설정하거나 사용 가능한 IP 주소가 있는지 확인하여 관리자와 사용자 측의 설치를 원활하게 진행하세요.
-> - 서버: 더 많은 정보는 [서버](/ko-KR/docs/server/config)를 참조하세요.
-> - 관리자: 더 많은 정보는 [관리자](/ko-KR/docs/admin/config)를 참조하세요.
-> - 사용자: 더 많은 정보는 [사용자](/ko-KR/docs/user/config)를 참조하세요.
+> - **관리자 포트는 기본적으로 8080입니다**: 도메인 해상도를 미리 설정하거나 사용 가능한 IP 주소가 있는지 확인하여 관리자 패널과 사용자 패널 설치를 원활하게 진행하십시오.
+> - 서버: 더 많은 정보는 [서버](/ko-KR/docs/server/config)를 참조하십시오.
+> - 관리자: 더 많은 정보는 [관리자](/ko-KR/docs/admin/config)를 참조하십시오.
+> - 사용자: 더 많은 정보는 [사용자](/ko-KR/docs/user/config)를 참조하십시오.
 
-## 원클릭 배포
-
-다음의 명령어 중 하나를 사용하여 PPanel을 원클릭으로 배포할 수 있습니다. 여기에는 서버, 관리자 및 사용자 측이 포함됩니다.
-
-### 옵션 1: `curl` 사용
+## 옵션 1: `curl` 사용
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### 옵션 2: `wget` 사용
+## 옵션 2: `wget` 사용
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

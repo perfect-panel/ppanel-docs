@@ -1,5 +1,208 @@
 # 快速部署指南
 
+## 1. 安装 Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. 创建项目目录
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. 创建配置文件
+
+### 3.1 创建 `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 创建 `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. 启动服务
+
+```bash
+docker-compose up -d
+```
+
+## 服务信息
+
+### 默认访问地址
+
+- 管理员面板：`http://服务器IP:3001`
+- 用户面板：`http://服务器IP:3002`
+- 后端 API：`http://服务器IP:8080`
+
+### 默认登录信息
+
+- 管理员邮箱：`admin@ppanel.dev`
+- 初始密码：`password`
+
+### 常用管理命令
+
+```bash
+# 查看服务状态
+docker-compose ps
+
+# 查看服务日志
+docker-compose logs
+
+# 停止服务
+docker-compose down
+
+# 重启服务
+docker-compose up -d
+```
+
+## 注意事项
+
+1. 首次登录后请立即修改默认密码
+2. 建议根据实际需求调整 `ppanel.yaml` 中的配置
+3. 生产环境中请更改所有默认密码
+4. 确保服务器防火墙已开放相应端口
+
+## 技术支持
+
+如遇到问题，请检查：
+
+- Docker 服务是否正常运行
+- 网络配置是否正确
+- 服务器防火墙设置
+
+## 升级方法
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# 一键部署
+
 > **部署前注意事项**
 >
 > - **管理端默认端口为 8080**：请提前配置好域名解析或确保有可用的 IP 地址，以便顺利完成管理端和用户端的安装。
@@ -7,17 +210,13 @@
 > - 管理端：更多信息请参考 [管理端](/zh-CN/docs/admin/config)。
 > - 用户端：更多信息请参考 [用户端](/zh-CN/docs/user/config)。
 
-## 一键部署
-
-使用以下任意命令即可一键部署 PPanel，包括服务端、管理端和用户端：
-
-### 选项 1：使用 `curl`
+## 选项 1：使用 `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### 选项 2：使用 `wget`
+## 选项 2：使用 `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

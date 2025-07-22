@@ -1,23 +1,222 @@
 # Rychlý průvodce nasazením
 
+## 1. Instalace Dockeru
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Vytvoření adresáře projektu
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Vytvoření konfiguračního souboru
+
+### 3.1 Vytvoření `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Vytvoření `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Spuštění služby
+
+```bash
+docker-compose up -d
+```
+
+## Informace o službě
+
+### Výchozí přístupová adresa
+
+- Administrátorský panel: `http://IP_serveru:3001`
+- Uživatelský panel: `http://IP_serveru:3002`
+- Backend API: `http://IP_serveru:8080`
+
+### Výchozí přihlašovací údaje
+
+- Email administrátora: `admin@ppanel.dev`
+- Počáteční heslo: `password`
+
+### Časté administrativní příkazy
+
+```bash
+# Zobrazit stav služby
+docker-compose ps
+
+# Zobrazit logy služby
+docker-compose logs
+
+# Zastavit službu
+docker-compose down
+
+# Restartovat službu
+docker-compose up -d
+```
+
+## Poznámky
+
+1. Po prvním přihlášení prosím okamžitě změňte výchozí heslo.
+2. Doporučuje se upravit konfiguraci v `ppanel.yaml` podle skutečných potřeb.
+3. V produkčním prostředí prosím změňte všechna výchozí hesla.
+4. Ujistěte se, že je firewall serveru nastaven tak, aby povoloval příslušné porty.
+
+## Technická podpora
+
+Pokud narazíte na problémy, zkontrolujte:
+
+- Zda služba Docker běží správně
+- Zda je síťová konfigurace správná
+- Nastavení firewallu serveru
+
+## Metoda aktualizace
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Jednoduché nasazení
+
 > **Poznámky před nasazením**
 >
-> - **Výchozí port pro správu je 8080**: Předem si prosím nastavte DNS nebo se ujistěte, že máte k dispozici IP adresu, aby bylo možné úspěšně dokončit instalaci správy a uživatelského rozhraní.
-> - Server: Pro více informací prosím navštivte [server](/cs-CZ/docs/server/config).
-> - Správa: Pro více informací prosím navštivte [správu](/cs-CZ/docs/admin/config).
-> - Uživatelské rozhraní: Pro více informací prosím navštivte [uživatelské rozhraní](/cs-CZ/docs/user/config).
+> - **Výchozí port pro administraci je 8080**: Předem si prosím nastavte DNS nebo se ujistěte, že máte k dispozici IP adresu, aby bylo možné úspěšně dokončit instalaci administrátorského a uživatelského panelu.
+> - Server: Další informace naleznete v [serverové dokumentaci](/cs-CZ/docs/server/config).
+> - Administrátor: Další informace naleznete v [administrátorské dokumentaci](/cs-CZ/docs/admin/config).
+> - Uživatel: Další informace naleznete v [uživatelské dokumentaci](/cs-CZ/docs/user/config).
 
-## Jednoduché nasazení
-
-Použijte jakýkoli z následujících příkazů pro jednoduché nasazení PPanel, včetně serveru, správy a uživatelského rozhraní:
-
-### Možnost 1: Použití `curl`
+## Možnost 1: Použití `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Možnost 2: Použití `wget`
+## Možnost 2: Použití `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

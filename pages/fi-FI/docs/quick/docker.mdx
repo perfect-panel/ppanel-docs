@@ -1,23 +1,222 @@
 # Nopea käyttöönotto-opas
 
+## 1. Asenna Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Luo projektikansio
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Luo konfiguraatiotiedosto
+
+### 3.1 Luo `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Luo `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Käynnistä palvelu
+
+```bash
+docker-compose up -d
+```
+
+## Palvelutiedot
+
+### Oletusosoite
+
+- Hallintapaneeli: `http://palvelinIP:3001`
+- Käyttäjäpaneeli: `http://palvelinIP:3002`
+- Taustajärjestelmän API: `http://palvelinIP:8080`
+
+### Oletuskirjautumistiedot
+
+- Hallinnoijan sähköposti: `admin@ppanel.dev`
+- Alkuperäinen salasana: `password`
+
+### Yleiset hallintakomennot
+
+```bash
+# Tarkista palvelun tila
+docker-compose ps
+
+# Tarkista palvelun lokit
+docker-compose logs
+
+# Pysäytä palvelu
+docker-compose down
+
+# Käynnistä palvelu uudelleen
+docker-compose up -d
+```
+
+## Huomioitavaa
+
+1. Muuta oletussalasana heti ensimmäisen kirjautumisen jälkeen.
+2. Suosittelemme säätämään `ppanel.yaml` -tiedoston asetuksia tarpeiden mukaan.
+3. Tuotantoympäristössä vaihda kaikki oletussalasanat.
+4. Varmista, että palvelimen palomuuri on avannut tarvittavat portit.
+
+## Tekninen tuki
+
+Jos kohtaat ongelmia, tarkista:
+
+- Onko Docker-palvelu käynnissä
+- Onko verkkokonfiguraatio oikein
+- Onko palvelimen palomuurin asetukset kunnossa
+
+## Päivitysmenetelmä
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Yhden komennon käyttöönotto
+
 > **Huomioitavaa ennen käyttöönottoa**
 >
-> - **Hallintapaneelin oletusportti on 8080**: Varmista etukäteen, että verkkotunnuksen resoluutio on kunnossa tai että käytettävissä on IP-osoite, jotta hallintapaneelin ja käyttäjäpaneelin asennus sujuu ongelmitta.
+> - **Hallintapaneelin oletusportti on 8080**: Varmista, että olet määrittänyt verkkotunnuksen tai että sinulla on käytettävissä oleva IP-osoite, jotta hallintapaneelin ja käyttäjäpaneelin asennus onnistuu.
 > - Palvelin: Lisätietoja löytyy [palvelimesta](/fi-FI/docs/server/config).
 > - Hallintapaneeli: Lisätietoja löytyy [hallintapaneelista](/fi-FI/docs/admin/config).
 > - Käyttäjäpaneeli: Lisätietoja löytyy [käyttäjäpaneelista](/fi-FI/docs/user/config).
 
-## Yhden komennon käyttöönotto
-
-Voit käyttää mitä tahansa seuraavista komennoista ottaaksesi PPanelin käyttöön yhdellä komennolla, mukaan lukien palvelin, hallintapaneeli ja käyttäjäpaneeli:
-
-### Vaihtoehto 1: Käytä `curl`
+## Vaihtoehto 1: Käytä `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Vaihtoehto 2: Käytä `wget`
+## Vaihtoehto 2: Käytä `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

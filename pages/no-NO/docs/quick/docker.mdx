@@ -1,23 +1,222 @@
 # Rask distribusjonsguide
 
-> **Viktige punkter før distribusjon**
+## 1. Installer Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Opprett prosjektmappe
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Opprett konfigurasjonsfil
+
+### 3.1 Opprett `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Opprett `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Start tjenesten
+
+```bash
+docker-compose up -d
+```
+
+## Tjenesteinformasjon
+
+### Standard tilgangsadresse
+
+- Administrasjonspanel: `http://serverIP:3001`
+- Brukerpanel: `http://serverIP:3002`
+- Backend API: `http://serverIP:8080`
+
+### Standard påloggingsinformasjon
+
+- Administratormail: `admin@ppanel.dev`
+- Startpassord: `password`
+
+### Vanlige administrasjonskommandoer
+
+```bash
+# Sjekk tjenestestatus
+docker-compose ps
+
+# Sjekk tjenestelogg
+docker-compose logs
+
+# Stopp tjenesten
+docker-compose down
+
+# Start tjenesten på nytt
+docker-compose up -d
+```
+
+## Viktige merknader
+
+1. Vennligst endre standardpassordet umiddelbart etter første pålogging.
+2. Det anbefales å justere konfigurasjonen i `ppanel.yaml` i henhold til faktiske behov.
+3. I produksjonsmiljøer, vennligst endre alle standardpassord.
+4. Sørg for at serverens brannmur har åpnet de nødvendige portene.
+
+## Teknisk støtte
+
+Hvis du opplever problemer, vennligst sjekk:
+
+- Om Docker-tjenesten kjører som den skal
+- Om nettverkskonfigurasjonen er korrekt
+- Brannmurinnstillingene på serveren
+
+## Oppgraderingsmetode
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Én-klikks distribusjon
+
+> **Viktige merknader før distribusjon**
 >
-> - **Administrasjonsporten er som standard 8080**: Vennligst konfigurer domenenavnoppløsning på forhånd eller sørg for at du har en tilgjengelig IP-adresse for å fullføre installasjonen av administrasjons- og brukergrensesnittet uten problemer.
-> - Tjenestekontakt: For mer informasjon, vennligst se [tjenestekontakt](/no-NO/docs/server/config).
-> - Administrasjonsgrensesnitt: For mer informasjon, vennligst se [administrasjonsgrensesnitt](/no-NO/docs/admin/config).
-> - Brukergrensesnitt: For mer informasjon, vennligst se [brukergrensesnitt](/no-NO/docs/user/config).
+> - **Standard port for administrasjonsgrensesnittet er 8080**: Vennligst konfigurer domenenavn eller sørg for at det er en tilgjengelig IP-adresse for å fullføre installasjonen av administrasjons- og brukergrensesnittet.
+> - Tjenestemodul: For mer informasjon, vennligst se [tjenestemodul](/no-NO/docs/server/config).
+> - Administrasjonsmodul: For mer informasjon, vennligst se [administrasjonsmodul](/no-NO/docs/admin/config).
+> - Brukermodul: For mer informasjon, vennligst se [brukermodul](/no-NO/docs/user/config).
 
-## Én-kommando distribusjon
-
-Bruk en av følgende kommandoer for å distribuere PPanel med ett klikk, inkludert tjenestekontakt, administrasjonsgrensesnitt og brukergrensesnitt:
-
-### Alternativ 1: Bruk `curl`
+## Alternativ 1: Bruk `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Alternativ 2: Bruk `wget`
+## Alternativ 2: Bruk `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

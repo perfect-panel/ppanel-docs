@@ -1,23 +1,222 @@
 # クイックデプロイガイド
 
+## 1. Dockerのインストール
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. プロジェクトディレクトリの作成
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. 設定ファイルの作成
+
+### 3.1 `compose.yaml`の作成
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 `ppanel.yaml`の作成
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. サービスの起動
+
+```bash
+docker-compose up -d
+```
+
+## サービス情報
+
+### デフォルトのアクセスアドレス
+
+- 管理者パネル：`http://サーバーIP:3001`
+- ユーザーパネル：`http://サーバーIP:3002`
+- バックエンドAPI：`http://サーバーIP:8080`
+
+### デフォルトのログイン情報
+
+- 管理者メール：`admin@ppanel.dev`
+- 初期パスワード：`password`
+
+### よく使う管理コマンド
+
+```bash
+# サービスの状態を確認
+docker-compose ps
+
+# サービスのログを確認
+docker-compose logs
+
+# サービスを停止
+docker-compose down
+
+# サービスを再起動
+docker-compose up -d
+```
+
+## 注意事項
+
+1. 初回ログイン後は必ずデフォルトのパスワードを変更してください。
+2. 実際のニーズに応じて`ppanel.yaml`の設定を調整することをお勧めします。
+3. 本番環境ではすべてのデフォルトパスワードを変更してください。
+4. サーバーのファイアウォールが適切なポートを開放していることを確認してください。
+
+## 技術サポート
+
+問題が発生した場合は、以下を確認してください：
+
+- Dockerサービスが正常に動作しているか
+- ネットワーク設定が正しいか
+- サーバーファイアウォールの設定
+
+## アップグレード方法
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# ワンクリックデプロイ
+
 > **デプロイ前の注意事項**
 >
-> - **管理端のデフォルトポートは 8080 です**：事前にドメインの解決を設定するか、利用可能な IP アドレスを確保して、管理端とユーザ端のインストールをスムーズに行えるようにしてください。
-> - サーバー：詳細については [サーバー](/ja-JP/docs/server/config) を参照してください。
-> - 管理端：詳細については [管理端](/ja-JP/docs/admin/config) を参照してください。
-> - ユーザ端：詳細については [ユーザ端](/ja-JP/docs/user/config) を参照してください。
+> - **管理端のデフォルトポートは8080です**：事前にドメインの設定を行うか、利用可能なIPアドレスを確保して、管理端とユーザ端のインストールをスムーズに行えるようにしてください。
+> - サーバー側：詳細については[サーバー側](/ja-JP/docs/server/config)を参照してください。
+> - 管理端：詳細については[管理端](/ja-JP/docs/admin/config)を参照してください。
+> - ユーザ端：詳細については[ユーザ端](/ja-JP/docs/user/config)を参照してください。
 
-## ワンクリックデプロイ
-
-以下のいずれかのコマンドを使用して、PPanel をワンクリックでデプロイできます。サーバー、管理端、ユーザ端が含まれます：
-
-### オプション 1：`curl` を使用
+## オプション 1：`curl`を使用
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### オプション 2：`wget` を使用
+## オプション 2：`wget`を使用
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

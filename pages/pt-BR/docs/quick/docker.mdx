@@ -1,23 +1,222 @@
 # Guia de Implantação Rápida
 
-> **Considerações Antes da Implantação**
+## 1. Instalar o Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Criar o diretório do projeto
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Criar o arquivo de configuração
+
+### 3.1 Criar `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Criar `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Iniciar o serviço
+
+```bash
+docker-compose up -d
+```
+
+## Informações do Serviço
+
+### Endereço de Acesso Padrão
+
+- Painel do Administrador: `http://IP_do_servidor:3001`
+- Painel do Usuário: `http://IP_do_servidor:3002`
+- API do Backend: `http://IP_do_servidor:8080`
+
+### Informações de Login Padrão
+
+- Email do Administrador: `admin@ppanel.dev`
+- Senha Inicial: `password`
+
+### Comandos de Gerenciamento Comuns
+
+```bash
+# Verificar o status do serviço
+docker-compose ps
+
+# Verificar os logs do serviço
+docker-compose logs
+
+# Parar o serviço
+docker-compose down
+
+# Reiniciar o serviço
+docker-compose up -d
+```
+
+## Observações
+
+1. Após o primeiro login, altere imediatamente a senha padrão.
+2. É recomendável ajustar as configurações no `ppanel.yaml` de acordo com suas necessidades.
+3. Em ambientes de produção, altere todas as senhas padrão.
+4. Certifique-se de que o firewall do servidor tenha as portas apropriadas abertas.
+
+## Suporte Técnico
+
+Se você encontrar problemas, verifique:
+
+- Se o serviço Docker está em execução corretamente
+- Se a configuração da rede está correta
+- As configurações do firewall do servidor
+
+## Método de Atualização
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Implantação com Um Clique
+
+> **Observações antes da implantação**
 >
-> - **A porta padrão do painel de gerenciamento é 8080**: Por favor, configure previamente a resolução de domínio ou assegure-se de ter um endereço IP disponível para completar a instalação do painel de gerenciamento e do painel do usuário sem problemas.
-> - Servidor: Para mais informações, consulte [Servidor](/pt-BR/docs/server/config).
-> - Painel de Gerenciamento: Para mais informações, consulte [Painel de Gerenciamento](/pt-BR/docs/admin/config).
-> - Painel do Usuário: Para mais informações, consulte [Painel do Usuário](/pt-BR/docs/user/config).
+> - **A porta padrão do painel de administração é 8080**: configure o DNS ou certifique-se de ter um endereço IP disponível para concluir a instalação do painel de administração e do painel do usuário.
+> - Servidor: para mais informações, consulte [Servidor](/pt-BR/docs/server/config).
+> - Painel de Administração: para mais informações, consulte [Painel de Administração](/pt-BR/docs/admin/config).
+> - Painel do Usuário: para mais informações, consulte [Painel do Usuário](/pt-BR/docs/user/config).
 
-## Implantação com Um Clique
-
-Use qualquer um dos comandos abaixo para implantar o PPanel com um clique, incluindo o servidor, o painel de gerenciamento e o painel do usuário:
-
-### Opção 1: Usando `curl`
+## Opção 1: Usando `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Opção 2: Usando `wget`
+## Opção 2: Usando `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)

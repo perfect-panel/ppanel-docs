@@ -1,23 +1,222 @@
-# Hướng Dẫn Triển Khai Nhanh
+# Hướng dẫn triển khai nhanh
 
-> **Lưu Ý Trước Khi Triển Khai**
+## 1. Cài đặt Docker
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+```
+
+## 2. Tạo thư mục dự án
+
+```bash
+mkdir /opt/ppanel && cd /opt/ppanel
+```
+
+## 3. Tạo tệp cấu hình
+
+### 3.1 Tạo `compose.yaml`
+
+```yaml
+services:
+  ppanel-server:
+    image: ppanel/ppanel-server:latest
+    container_name: ppanel-server
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 8080:8080
+    depends_on:
+      ppanel-db:
+        condition: service_healthy
+      ppanel-cache:
+        condition: service_healthy
+    volumes:
+      - ./config/ppanel.yaml:/app/etc/ppanel.yaml
+
+  ppanel-db:
+    image: mysql:8.4.5
+    container_name: ppanel-db
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ppanel
+      MYSQL_USER: ppanel
+      MYSQL_PASSWORD: ppanelpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    command:
+      - --mysql-native-password=on
+      - --bind-address=0.0.0.0
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-prootpassword']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-cache:
+    image: redis:7.4.5
+    container_name: ppanel-cache
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 6379:6379
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ppanel-admin:
+    image: ppanel/ppanel-admin-web:latest
+    container_name: ppanel-admin-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3001:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+  ppanel-user:
+    image: ppanel/ppanel-user-web:latest
+    container_name: ppanel-user-web
+    restart: always
+    networks:
+      - ppanel-network
+    ports:
+      - 3002:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://<IP>:8080
+
+networks:
+  ppanel-network:
+    driver: bridge
+```
+
+### 3.2 Tạo `ppanel.yaml`
+
+```yaml
+Host: 0.0.0.0
+Port: 8080
+Debug: false
+JwtAuth:
+  AccessSecret: 1234567890
+  AccessExpire: 604800
+Logger:
+  ServiceName: PPanel
+  Mode: console
+  Encoding: plain
+  TimeFormat: '2025-01-01 00:00:00.000'
+  Path: logs
+  Level: debug
+  MaxContentLength: 0
+  Compress: false
+  Stat: true
+  KeepDays: 0
+  StackCooldownMillis: 100
+  MaxBackups: 0
+  MaxSize: 0
+  Rotation: daily
+  FileTimeFormat: 2025-01-01T00:00:00.000Z00:00
+MySQL:
+  Addr: ppanel-db:3306
+  Dbname: ppanel
+  Username: ppanel
+  Password: ppanelpassword
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  SlowThreshold: 1000
+Redis:
+  Host: ppanel-cache:6379
+  Pass:
+  DB: 0
+Administrator:
+  Password: password
+  Email: admin@ppanel.dev
+```
+
+## 4. Khởi động dịch vụ
+
+```bash
+docker-compose up -d
+```
+
+## Thông tin dịch vụ
+
+### Địa chỉ truy cập mặc định
+
+- Bảng điều khiển quản trị: `http://ĐịaChỉIPMáyChủ:3001`
+- Bảng điều khiển người dùng: `http://ĐịaChỉIPMáyChủ:3002`
+- API backend: `http://ĐịaChỉIPMáyChủ:8080`
+
+### Thông tin đăng nhập mặc định
+
+- Email quản trị viên: `admin@ppanel.dev`
+- Mật khẩu ban đầu: `password`
+
+### Các lệnh quản lý thường dùng
+
+```bash
+# Xem trạng thái dịch vụ
+docker-compose ps
+
+# Xem nhật ký dịch vụ
+docker-compose logs
+
+# Dừng dịch vụ
+docker-compose down
+
+# Khởi động lại dịch vụ
+docker-compose up -d
+```
+
+## Lưu ý
+
+1. Vui lòng thay đổi mật khẩu mặc định ngay sau lần đăng nhập đầu tiên
+2. Nên điều chỉnh cấu hình trong `ppanel.yaml` theo nhu cầu thực tế
+3. Trong môi trường sản xuất, hãy thay đổi tất cả mật khẩu mặc định
+4. Đảm bảo tường lửa của máy chủ đã mở các cổng tương ứng
+
+## Hỗ trợ kỹ thuật
+
+Nếu gặp vấn đề, vui lòng kiểm tra:
+
+- Dịch vụ Docker có đang chạy bình thường không
+- Cấu hình mạng có chính xác không
+- Cài đặt tường lửa của máy chủ
+
+## Phương pháp nâng cấp
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+# Triển khai một lần
+
+> **Lưu ý trước khi triển khai**
 >
-> - **Cổng mặc định của quản lý là 8080**: Vui lòng cấu hình trước phân giải tên miền hoặc đảm bảo có địa chỉ IP khả dụng để hoàn tất việc cài đặt quản lý và người dùng một cách suôn sẻ.
-> - Máy chủ: Để biết thêm thông tin, vui lòng tham khảo [Máy chủ](/vi-VN/docs/server/config).
-> - Quản lý: Để biết thêm thông tin, vui lòng tham khảo [Quản lý](/vi-VN/docs/admin/config).
-> - Người dùng: Để biết thêm thông tin, vui lòng tham khảo [Người dùng](/vi-VN/docs/user/config).
+> - **Cổng mặc định của quản trị viên là 8080**: Vui lòng cấu hình phân giải tên miền trước hoặc đảm bảo có địa chỉ IP khả dụng để hoàn tất việc cài đặt bảng điều khiển quản trị và người dùng.
+> - Máy chủ: Thông tin thêm vui lòng tham khảo [Máy chủ](/vi-VN/docs/server/config).
+> - Bảng điều khiển quản trị: Thông tin thêm vui lòng tham khảo [Bảng điều khiển quản trị](/vi-VN/docs/admin/config).
+> - Bảng điều khiển người dùng: Thông tin thêm vui lòng tham khảo [Bảng điều khiển người dùng](/vi-VN/docs/user/config).
 
-## Triển Khai Một Chạm
-
-Sử dụng bất kỳ lệnh nào dưới đây để triển khai PPanel một cách nhanh chóng, bao gồm máy chủ, quản lý và người dùng:
-
-### Tùy Chọn 1: Sử Dụng `curl`
+## Tùy chọn 1: Sử dụng `curl`
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
 ```
 
-### Tùy Chọn 2: Sử Dụng `wget`
+## Tùy chọn 2: Sử dụng `wget`
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/perfect-panel/ppanel-script/refs/heads/main/install.sh)
