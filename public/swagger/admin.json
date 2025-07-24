@@ -4029,6 +4029,35 @@
         ]
       }
     },
+    "/v1/admin/tool/version": {
+      "get": {
+        "summary": "Get Version",
+        "operationId": "GetVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/VersionResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/tool"
+        ]
+      }
+    },
     "/v1/admin/user/": {
       "delete": {
         "summary": "Delete user",
@@ -11827,6 +11856,18 @@
         "enable_login_verify",
         "enable_register_verify",
         "enable_reset_password_verify"
+      ]
+    },
+    "VersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "VersionResponse",
+      "required": [
+        "version"
       ]
     },
     "Vless": {
