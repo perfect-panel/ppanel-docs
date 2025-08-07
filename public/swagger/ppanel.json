@@ -1301,6 +1301,216 @@
         ]
       }
     },
+    "/v1/admin/marketing/email/batch/list": {
+      "get": {
+        "summary": "Get batch send email task list",
+        "operationId": "GetBatchSendEmailTaskList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetBatchSendEmailTaskListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/email/batch/pre-send-count": {
+      "post": {
+        "summary": "Get pre-send email count",
+        "operationId": "GetPreSendEmailCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetPreSendEmailCountResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetPreSendEmailCountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/email/batch/send": {
+      "post": {
+        "summary": "Create a batch send email task",
+        "operationId": "CreateBatchSendEmailTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateBatchSendEmailTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/email/batch/status": {
+      "post": {
+        "summary": "Get batch send email task status",
+        "operationId": "GetBatchSendEmailTaskStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetBatchSendEmailTaskStatusResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetBatchSendEmailTaskStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/email/batch/stop": {
+      "post": {
+        "summary": "Stop a batch send email task",
+        "operationId": "StopBatchSendEmailTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopBatchSendEmailTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
     "/v1/admin/order/": {
       "post": {
         "summary": "Create order",
@@ -10302,6 +10512,93 @@
         "ids"
       ]
     },
+    "BatchSendEmailTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "recipients": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "additional": {
+          "type": "string"
+        },
+        "scheduled": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "errors": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BatchSendEmailTask",
+      "required": [
+        "id",
+        "subject",
+        "content",
+        "recipients",
+        "scope",
+        "register_start_time",
+        "register_end_time",
+        "additional",
+        "scheduled",
+        "interval",
+        "limit",
+        "status",
+        "errors",
+        "total",
+        "current",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "BindOAuthCallbackRequest": {
       "type": "object",
       "properties": {
@@ -10736,6 +11033,49 @@
         "platform",
         "is_default",
         "application_id"
+      ]
+    },
+    "CreateBatchSendEmailTaskRequest": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "additional": {
+          "type": "string"
+        },
+        "scheduled": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateBatchSendEmailTaskRequest",
+      "required": [
+        "subject",
+        "content",
+        "scope"
       ]
     },
     "CreateCouponRequest": {
@@ -12007,6 +12347,91 @@
         "list"
       ]
     },
+    "GetBatchSendEmailTaskListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "GetBatchSendEmailTaskListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetBatchSendEmailTaskListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchSendEmailTask"
+          }
+        }
+      },
+      "title": "GetBatchSendEmailTaskListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "GetBatchSendEmailTaskStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetBatchSendEmailTaskStatusRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "GetBatchSendEmailTaskStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "string"
+        }
+      },
+      "title": "GetBatchSendEmailTaskStatusResponse",
+      "required": [
+        "status",
+        "current",
+        "total",
+        "errors"
+      ]
+    },
     "GetCouponListRequest": {
       "type": "object",
       "properties": {
@@ -12491,6 +12916,39 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "GetPreSendEmailCountRequest": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetPreSendEmailCountRequest",
+      "required": [
+        "scope"
+      ]
+    },
+    "GetPreSendEmailCountResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetPreSendEmailCountResponse",
+      "required": [
+        "count"
       ]
     },
     "GetRuleGroupResponse": {
@@ -15527,6 +15985,19 @@
       "required": [
         "id",
         "sort"
+      ]
+    },
+    "StopBatchSendEmailTaskRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StopBatchSendEmailTaskRequest",
+      "required": [
+        "id"
       ]
     },
     "StripePayment": {
