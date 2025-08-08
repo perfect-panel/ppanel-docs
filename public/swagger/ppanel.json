@@ -11599,7 +11599,7 @@
           "type": "string"
         },
         "download_link": {
-          "type": "string"
+          "$ref": "#/definitions/DownloadLink"
         }
       },
       "title": "CreateSubscribeApplicationRequest",
@@ -11609,7 +11609,8 @@
         "is_default",
         "proxy_template",
         "template",
-        "output_format"
+        "output_format",
+        "download_link"
       ]
     },
     "CreateSubscribeGroupRequest": {
@@ -12231,6 +12232,30 @@
         "created_at",
         "updated_at"
       ]
+    },
+    "DownloadLink": {
+      "type": "object",
+      "properties": {
+        "ios": {
+          "type": "string"
+        },
+        "android": {
+          "type": "string"
+        },
+        "windows": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "linux": {
+          "type": "string"
+        },
+        "harmony": {
+          "type": "string"
+        }
+      },
+      "title": "DownloadLink"
     },
     "EPayNotifyRequest": {
       "type": "object",
@@ -16437,7 +16462,7 @@
           "type": "string"
         },
         "download_link": {
-          "type": "string"
+          "$ref": "#/definitions/DownloadLink"
         },
         "created_at": {
           "type": "integer",
@@ -17738,7 +17763,7 @@
           "type": "string"
         },
         "download_link": {
-          "type": "string"
+          "$ref": "#/definitions/DownloadLink"
         }
       },
       "title": "UpdateSubscribeApplicationRequest",
