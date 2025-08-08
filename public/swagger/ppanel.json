@@ -435,6 +435,164 @@
         ]
       }
     },
+    "/v1/admin/application/": {
+      "post": {
+        "summary": "Create subscribe application",
+        "operationId": "CreateSubscribeApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SubscribeApplication"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSubscribeApplicationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/application"
+        ]
+      }
+    },
+    "/v1/admin/application/subscribe_application": {
+      "delete": {
+        "summary": "Delete subscribe application",
+        "operationId": "DeleteSubscribeApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteSubscribeApplicationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/application"
+        ]
+      },
+      "put": {
+        "summary": "Update subscribe application",
+        "operationId": "UpdateSubscribeApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/SubscribeApplication"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSubscribeApplicationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/application"
+        ]
+      }
+    },
+    "/v1/admin/application/subscribe_application_list": {
+      "get": {
+        "summary": "Get subscribe application list",
+        "operationId": "GetSubscribeApplicationList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscribeApplicationListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/application"
+        ]
+      }
+    },
     "/v1/admin/auth-method/config": {
       "get": {
         "summary": "Get auth method config",
@@ -11412,6 +11570,48 @@
         "enable"
       ]
     },
+    "CreateSubscribeApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "proxy_template": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "output_format": {
+          "type": "string"
+        },
+        "download_link": {
+          "type": "string"
+        }
+      },
+      "title": "CreateSubscribeApplicationRequest",
+      "required": [
+        "name",
+        "user_agent",
+        "is_default",
+        "proxy_template",
+        "template",
+        "output_format"
+      ]
+    },
     "CreateSubscribeGroupRequest": {
       "type": "object",
       "properties": {
@@ -11903,6 +12103,19 @@
         }
       },
       "title": "DeleteRuleGroupRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DeleteSubscribeApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteSubscribeApplicationRequest",
       "required": [
         "id"
       ]
@@ -13066,6 +13279,44 @@
         "node",
         "country",
         "protocol"
+      ]
+    },
+    "GetSubscribeApplicationListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetSubscribeApplicationListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "GetSubscribeApplicationListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeApplication"
+          }
+        }
+      },
+      "title": "GetSubscribeApplicationListResponse",
+      "required": [
+        "total",
+        "list"
       ]
     },
     "GetSubscribeDetailsRequest": {
@@ -16153,6 +16404,63 @@
         "updated_at"
       ]
     },
+    "SubscribeApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "proxy_template": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "output_format": {
+          "type": "string"
+        },
+        "download_link": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeApplication",
+      "required": [
+        "id",
+        "name",
+        "user_agent",
+        "is_default",
+        "proxy_template",
+        "template",
+        "output_format",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "SubscribeConfig": {
       "type": "object",
       "properties": {
@@ -17386,6 +17694,53 @@
         "rules",
         "default",
         "enable"
+      ]
+    },
+    "UpdateSubscribeApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "proxy_template": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "output_format": {
+          "type": "string"
+        },
+        "download_link": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateSubscribeApplicationRequest",
+      "required": [
+        "id",
+        "name",
+        "user_agent",
+        "is_default",
+        "proxy_template",
+        "template",
+        "output_format"
       ]
     },
     "UpdateSubscribeGroupRequest": {
