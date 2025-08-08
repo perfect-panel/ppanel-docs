@@ -4241,6 +4241,13 @@
         "pan_domain": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "user_agent_limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "user_agent_list": {
+          "type": "string"
         }
       },
       "title": "SubscribeConfig",
@@ -4248,7 +4255,9 @@
         "single_model",
         "subscribe_path",
         "subscribe_domain",
-        "pan_domain"
+        "pan_domain",
+        "user_agent_limit",
+        "user_agent_list"
       ]
     },
     "SubscribeDiscount": {
