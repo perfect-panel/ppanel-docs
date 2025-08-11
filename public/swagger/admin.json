@@ -6902,6 +6902,9 @@
         "icon": {
           "type": "string"
         },
+        "scheme": {
+          "type": "string"
+        },
         "user_agent": {
           "type": "string"
         },
@@ -10669,6 +10672,9 @@
         "icon": {
           "type": "string"
         },
+        "scheme": {
+          "type": "string"
+        },
         "user_agent": {
           "type": "string"
         },
@@ -11753,6 +11759,9 @@
           "type": "string"
         },
         "icon": {
+          "type": "string"
+        },
+        "scheme": {
           "type": "string"
         },
         "user_agent": {
