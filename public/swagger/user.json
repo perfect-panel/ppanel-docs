@@ -2629,6 +2629,30 @@
         "updated_at"
       ]
     },
+    "DownloadLink": {
+      "type": "object",
+      "properties": {
+        "ios": {
+          "type": "string"
+        },
+        "android": {
+          "type": "string"
+        },
+        "windows": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "linux": {
+          "type": "string"
+        },
+        "harmony": {
+          "type": "string"
+        }
+      },
+      "title": "DownloadLink"
+    },
     "EPayNotifyRequest": {
       "type": "object",
       "properties": {
@@ -2807,6 +2831,26 @@
       "title": "GetOAuthMethodsResponse",
       "required": [
         "methods"
+      ]
+    },
+    "GetSubscribeApplicationListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeApplication"
+          }
+        }
+      },
+      "title": "GetSubscribeApplicationListResponse",
+      "required": [
+        "total",
+        "list"
       ]
     },
     "GetSubscribeLogRequest": {
@@ -4915,6 +4959,66 @@
         "allow_deduction",
         "reset_cycle",
         "renewal_reset",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "SubscribeApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "proxy_template": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "output_format": {
+          "type": "string"
+        },
+        "download_link": {
+          "$ref": "#/definitions/DownloadLink"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeApplication",
+      "required": [
+        "id",
+        "name",
+        "user_agent",
+        "is_default",
+        "proxy_template",
+        "template",
+        "output_format",
         "created_at",
         "updated_at"
       ]

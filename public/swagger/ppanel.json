@@ -7427,6 +7427,35 @@
         ]
       }
     },
+    "/v1/common/client": {
+      "get": {
+        "summary": "Get Client",
+        "operationId": "GetClient",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetSubscribeApplicationListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/send_code": {
       "post": {
         "summary": "Get verification code",
