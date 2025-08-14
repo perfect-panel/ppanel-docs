@@ -11827,9 +11827,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "proxy_template": {
-          "type": "string"
-        },
         "template": {
           "type": "string"
         },
@@ -11846,7 +11843,6 @@
         "name",
         "user_agent",
         "is_default",
-        "proxy_template",
         "template",
         "output_format"
       ]
