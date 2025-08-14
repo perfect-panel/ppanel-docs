@@ -474,6 +474,44 @@
         ]
       }
     },
+    "/v1/admin/application/preview": {
+      "get": {
+        "summary": "Preview Template",
+        "operationId": "PreviewSubscribeTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/string"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/application"
+        ]
+      }
+    },
     "/v1/admin/application/subscribe_application": {
       "delete": {
         "summary": "Delete subscribe application",
@@ -7443,7 +7481,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetSubscribeApplicationListResponse"
+                      "$ref": "#/definitions/GetSubscribeClientResponse"
                     }
                   }
                 }
@@ -11621,9 +11659,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "proxy_template": {
-          "type": "string"
-        },
         "template": {
           "type": "string"
         },
@@ -11639,7 +11674,6 @@
         "name",
         "user_agent",
         "is_default",
-        "proxy_template",
         "template",
         "output_format",
         "download_link"
@@ -13376,6 +13410,26 @@
         "list"
       ]
     },
+    "GetSubscribeClientResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeClient"
+          }
+        }
+      },
+      "title": "GetSubscribeClientResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "GetSubscribeDetailsRequest": {
       "type": "object",
       "properties": {
@@ -14964,6 +15018,19 @@
         "deduction_amount"
       ]
     },
+    "PreviewSubscribeTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PreviewSubscribeTemplateRequest",
+      "required": [
+        "id"
+      ]
+    },
     "PrivacyPolicyConfig": {
       "type": "object",
       "properties": {
@@ -16487,9 +16554,6 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "proxy_template": {
-          "type": "string"
-        },
         "template": {
           "type": "string"
         },
@@ -16514,11 +16578,44 @@
         "name",
         "user_agent",
         "is_default",
-        "proxy_template",
         "template",
         "output_format",
         "created_at",
         "updated_at"
+      ]
+    },
+    "SubscribeClient": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "download_link": {
+          "$ref": "#/definitions/DownloadLink"
+        }
+      },
+      "title": "SubscribeClient",
+      "required": [
+        "id",
+        "name",
+        "is_default"
       ]
     },
     "SubscribeConfig": {

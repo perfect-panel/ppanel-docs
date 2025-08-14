@@ -639,7 +639,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/GetSubscribeApplicationListResponse"
+                      "$ref": "#/definitions/GetSubscribeClientResponse"
                     }
                   }
                 }
@@ -1929,7 +1929,7 @@
         "protocol"
       ]
     },
-    "GetSubscribeApplicationListResponse": {
+    "GetSubscribeClientResponse": {
       "type": "object",
       "properties": {
         "total": {
@@ -1939,11 +1939,11 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscribeApplication"
+            "$ref": "#/definitions/SubscribeClient"
           }
         }
       },
-      "title": "GetSubscribeApplicationListResponse",
+      "title": "GetSubscribeClientResponse",
       "required": [
         "total",
         "list"
@@ -3789,7 +3789,7 @@
         "updated_at"
       ]
     },
-    "SubscribeApplication": {
+    "SubscribeClient": {
       "type": "object",
       "properties": {
         "id": {
@@ -3808,45 +3808,19 @@
         "scheme": {
           "type": "string"
         },
-        "user_agent": {
-          "type": "string"
-        },
         "is_default": {
           "type": "boolean",
           "format": "boolean"
         },
-        "proxy_template": {
-          "type": "string"
-        },
-        "template": {
-          "type": "string"
-        },
-        "output_format": {
-          "type": "string"
-        },
         "download_link": {
           "$ref": "#/definitions/DownloadLink"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
         }
       },
-      "title": "SubscribeApplication",
+      "title": "SubscribeClient",
       "required": [
         "id",
         "name",
-        "user_agent",
-        "is_default",
-        "proxy_template",
-        "template",
-        "output_format",
-        "created_at",
-        "updated_at"
+        "is_default"
       ]
     },
     "SubscribeConfig": {
