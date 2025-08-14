@@ -490,7 +490,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/string"
+                      "$ref": "#/definitions/PreviewSubscribeTemplateResponse"
                     }
                   }
                 }
@@ -15029,6 +15029,19 @@
       "title": "PreviewSubscribeTemplateRequest",
       "required": [
         "id"
+      ]
+    },
+    "PreviewSubscribeTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "description": "预览的模板内容"
+        }
+      },
+      "title": "PreviewSubscribeTemplateResponse",
+      "required": [
+        "template"
       ]
     },
     "PrivacyPolicyConfig": {
