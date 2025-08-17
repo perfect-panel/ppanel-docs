@@ -593,43 +593,6 @@
         "subscribe_type"
       ]
     },
-    "ApplicationConfig": {
-      "type": "object",
-      "properties": {
-        "app_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "encryption_key": {
-          "type": "string"
-        },
-        "encryption_method": {
-          "type": "string"
-        },
-        "domains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "startup_picture": {
-          "type": "string"
-        },
-        "startup_picture_skip_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ApplicationConfig",
-      "required": [
-        "app_id",
-        "encryption_key",
-        "encryption_method",
-        "domains",
-        "startup_picture",
-        "startup_picture_skip_time"
-      ]
-    },
     "ApplicationPlatform": {
       "type": "object",
       "properties": {
