@@ -2023,7 +2023,8 @@
           "format": "int64"
         },
         "type": {
-          "type": "string"
+          "type": "integer",
+          "format": "uint8"
         },
         "platform": {
           "type": "string"
@@ -2035,17 +2036,13 @@
           "type": "string"
         },
         "content": {
-          "type": "string"
+          "$ref": "#/definitions/mapstringinterface"
         },
         "status": {
           "type": "integer",
-          "format": "int32"
+          "format": "uint8"
         },
         "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
           "type": "integer",
           "format": "int64"
         }
@@ -2059,8 +2056,7 @@
         "subject",
         "content",
         "status",
-        "created_at",
-        "updated_at"
+        "created_at"
       ]
     },
     "MobileAuthenticateConfig": {
