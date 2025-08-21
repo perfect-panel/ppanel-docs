@@ -1506,58 +1506,6 @@
         ]
       }
     },
-    "/v1/public/user/subscribe/reset/log": {
-      "get": {
-        "summary": "Reset Subscribe Traffic Log",
-        "operationId": "ResetSubscribeTrafficLog",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/ResetSubscribeTrafficLogResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "user_subscribe_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "ppanel/public/user"
-        ]
-      }
-    },
     "/v1/public/user/subscribe_log": {
       "get": {
         "summary": "Get Subscribe Log",
@@ -4423,49 +4371,6 @@
         "type",
         "user_subscribe_id",
         "reset_at"
-      ]
-    },
-    "ResetSubscribeTrafficLogRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ResetSubscribeTrafficLogRequest",
-      "required": [
-        "page",
-        "size",
-        "user_subscribe_id"
-      ]
-    },
-    "ResetSubscribeTrafficLogResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResetSubscribeTrafficLog"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ResetSubscribeTrafficLogResponse",
-      "required": [
-        "list",
-        "total"
       ]
     },
     "ResetTrafficOrderRequest": {
