@@ -2036,7 +2036,7 @@
           "type": "string"
         },
         "content": {
-          "$ref": "#/definitions/mapstringinterface"
+          "type": "object"
         },
         "status": {
           "type": "integer",
