@@ -5466,6 +5466,12 @@
             "type": "string"
           },
           {
+            "name": "User-Agent",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "login request",
             "in": "body",
@@ -5693,6 +5699,12 @@
             "type": "string"
           },
           {
+            "name": "User-Agent",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login response",
             "in": "body",
@@ -5786,6 +5798,12 @@
         "parameters": [
           {
             "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
             "in": "header",
             "required": true,
             "type": "string"
