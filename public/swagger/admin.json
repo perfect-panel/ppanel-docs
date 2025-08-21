@@ -5173,6 +5173,63 @@
         ]
       }
     },
+    "/v1/admin/user/subscribe/reset/logs": {
+      "get": {
+        "summary": "Get user subcribe reset traffic logs",
+        "operationId": "GetUserSubscribeResetTrafficLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetUserSubscribeResetTrafficLogsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "user_subscribe_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/admin/user/subscribe/traffic_logs": {
       "get": {
         "summary": "Get user subcribe traffic logs",
@@ -8309,6 +8366,49 @@
         "total"
       ]
     },
+    "GetUserSubscribeResetTrafficLogsRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserSubscribeResetTrafficLogsRequest",
+      "required": [
+        "page",
+        "size",
+        "user_subscribe_id"
+      ]
+    },
+    "GetUserSubscribeResetTrafficLogsResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResetSubscribeTrafficLog"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserSubscribeResetTrafficLogsResponse",
+      "required": [
+        "list",
+        "total"
+      ]
+    },
     "GetUserSubscribeTrafficLogsRequest": {
       "type": "object",
       "properties": {
@@ -9561,6 +9661,37 @@
       "title": "RenewalOrderResponse",
       "required": [
         "order_no"
+      ]
+    },
+    "ResetSubscribeTrafficLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "reset_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetSubscribeTrafficLog",
+      "required": [
+        "id",
+        "type",
+        "user_subscribe_id",
+        "reset_at"
       ]
     },
     "ResetTrafficOrderRequest": {

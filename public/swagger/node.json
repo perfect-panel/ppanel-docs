@@ -2335,6 +2335,37 @@
         "order_no"
       ]
     },
+    "ResetSubscribeTrafficLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "reset_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetSubscribeTrafficLog",
+      "required": [
+        "id",
+        "type",
+        "user_subscribe_id",
+        "reset_at"
+      ]
+    },
     "ResetTrafficOrderRequest": {
       "type": "object",
       "properties": {
