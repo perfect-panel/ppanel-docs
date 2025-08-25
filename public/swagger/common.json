@@ -1332,6 +1332,43 @@
         "enabled"
       ]
     },
+    "BalanceLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BalanceLog",
+      "required": [
+        "type",
+        "user_id",
+        "amount",
+        "balance",
+        "timestamp"
+      ]
+    },
     "CheckUserRequest": {
       "type": "object",
       "properties": {
@@ -1442,6 +1479,38 @@
       "title": "CloseOrderRequest",
       "required": [
         "orderNo"
+      ]
+    },
+    "CommissionLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CommissionLog",
+      "required": [
+        "type",
+        "user_id",
+        "amount",
+        "order_no",
+        "created_at"
       ]
     },
     "Coupon": {
@@ -3106,7 +3175,7 @@
         },
         "type": {
           "type": "integer",
-          "format": "uint8"
+          "format": "uin16"
         },
         "user_subscribe_id": {
           "type": "integer",
@@ -4231,49 +4300,6 @@
         "auth_type",
         "auth_identifier",
         "verified"
-      ]
-    },
-    "UserBalanceLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "order_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserBalanceLog",
-      "required": [
-        "id",
-        "user_id",
-        "amount",
-        "type",
-        "order_id",
-        "balance",
-        "created_at"
       ]
     },
     "UserDevice": {

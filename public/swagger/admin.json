@@ -1415,6 +1415,319 @@
         ]
       }
     },
+    "/v1/admin/log/balance/list": {
+      "get": {
+        "summary": "Filter balance log",
+        "operationId": "FilterBalanceLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterBalanceLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/commission/list": {
+      "get": {
+        "summary": "Filter commission log",
+        "operationId": "FilterCommissionLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterCommissionLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/email/list": {
+      "get": {
+        "summary": "Filter email log",
+        "operationId": "FilterEmailLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterEmailLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/gift/list": {
+      "get": {
+        "summary": "Filter gift log",
+        "operationId": "FilterGiftLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterGiftLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/login/list": {
+      "get": {
+        "summary": "Filter login log",
+        "operationId": "FilterLoginLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterLoginLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
     "/v1/admin/log/message/list": {
       "get": {
         "summary": "Get message log list",
@@ -1466,6 +1779,390 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/mobile/list": {
+      "get": {
+        "summary": "Filter mobile log",
+        "operationId": "FilterMobileLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterMobileLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/register/list": {
+      "get": {
+        "summary": "Filter register log",
+        "operationId": "FilterRegisterLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterRegisterLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/server/traffic/list": {
+      "get": {
+        "summary": "Filter server traffic log",
+        "operationId": "FilterServerTrafficLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterServerTrafficLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/subscribe/list": {
+      "get": {
+        "summary": "Filter subscribe log",
+        "operationId": "FilterSubscribeLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterSubscribeLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/subscribe/reset/list": {
+      "get": {
+        "summary": "Filter reset subscribe log",
+        "operationId": "FilterResetSubscribeLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterResetSubscribeLogResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
+    "/v1/admin/log/subscribe/traffic/list": {
+      "get": {
+        "summary": "Filter user subscribe traffic log",
+        "operationId": "FilterUserSubscribeTrafficLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterSubscribeTrafficResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "user_subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -2276,6 +2973,43 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/node/status/toggle": {
+      "post": {
+        "summary": "Toggle Node Status",
+        "operationId": "ToggleNodeStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ToggleNodeStatusRequest"
+            }
           }
         ],
         "tags": [
@@ -5525,6 +6259,43 @@
         "enabled"
       ]
     },
+    "BalanceLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BalanceLog",
+      "required": [
+        "type",
+        "user_id",
+        "amount",
+        "balance",
+        "timestamp"
+      ]
+    },
     "BatchDeleteCouponRequest": {
       "type": "object",
       "properties": {
@@ -5735,6 +6506,38 @@
       "title": "CloseOrderRequest",
       "required": [
         "orderNo"
+      ]
+    },
+    "CommissionLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CommissionLog",
+      "required": [
+        "type",
+        "user_id",
+        "amount",
+        "order_no",
+        "created_at"
       ]
     },
     "Coupon": {
@@ -6010,7 +6813,10 @@
           "type": "string"
         },
         "tags": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "port": {
           "type": "integer",
@@ -6025,6 +6831,10 @@
         },
         "protocol": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "CreateNodeRequest",
@@ -6033,7 +6843,8 @@
         "port",
         "address",
         "server_id",
-        "protocol"
+        "protocol",
+        "enabled"
       ]
     },
     "CreateOrderRequest": {
@@ -6835,6 +7646,246 @@
         "domain_suffix_list"
       ]
     },
+    "FilterBalanceLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterBalanceLogRequest"
+    },
+    "FilterBalanceLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceLog"
+          }
+        }
+      },
+      "title": "FilterBalanceLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterCommissionLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterCommissionLogRequest"
+    },
+    "FilterCommissionLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommissionLog"
+          }
+        }
+      },
+      "title": "FilterCommissionLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterEmailLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLog"
+          }
+        }
+      },
+      "title": "FilterEmailLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterGiftLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterGiftLogRequest"
+    },
+    "FilterGiftLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GiftLog"
+          }
+        }
+      },
+      "title": "FilterGiftLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterLogParams": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "FilterLogParams",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "FilterLoginLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterLoginLogRequest"
+    },
+    "FilterLoginLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoginLog"
+          }
+        }
+      },
+      "title": "FilterLoginLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterMobileLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLog"
+          }
+        }
+      },
+      "title": "FilterMobileLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "FilterNodeListRequest": {
       "type": "object",
       "properties": {
@@ -6876,6 +7927,94 @@
         "list"
       ]
     },
+    "FilterRegisterLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterRegisterLogRequest"
+    },
+    "FilterRegisterLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegisterLog"
+          }
+        }
+      },
+      "title": "FilterRegisterLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterResetSubscribeLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterResetSubscribeLogRequest"
+    },
+    "FilterResetSubscribeLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResetSubscribeLog"
+          }
+        }
+      },
+      "title": "FilterResetSubscribeLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "FilterServerListRequest": {
       "type": "object",
       "properties": {
@@ -6912,6 +8051,142 @@
         }
       },
       "title": "FilterServerListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterServerTrafficLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterServerTrafficLogRequest"
+    },
+    "FilterServerTrafficLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrafficLog"
+          }
+        }
+      },
+      "title": "FilterServerTrafficLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterSubscribeLogRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterSubscribeLogRequest"
+    },
+    "FilterSubscribeLogResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscribeLog"
+          }
+        }
+      },
+      "title": "FilterSubscribeLogResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterSubscribeTrafficRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterSubscribeTrafficRequest"
+    },
+    "FilterSubscribeTrafficResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeTrafficLog"
+          }
+        }
+      },
+      "title": "FilterSubscribeTrafficResponse",
       "required": [
         "total",
         "list"
@@ -8096,6 +9371,51 @@
         "total"
       ]
     },
+    "GiftLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GiftLog",
+      "required": [
+        "type",
+        "user_id",
+        "order_no",
+        "subscribe_id",
+        "amount",
+        "balance",
+        "created_at"
+      ]
+    },
     "Hysteria2": {
       "type": "object",
       "properties": {
@@ -8172,6 +9492,41 @@
       "title": "LogResponse",
       "required": [
         "list"
+      ]
+    },
+    "LoginLog": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "method": {
+          "type": "string"
+        },
+        "login_ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "login_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LoginLog",
+      "required": [
+        "user_id",
+        "method",
+        "login_ip",
+        "user_agent",
+        "success",
+        "login_time"
       ]
     },
     "MessageLog": {
@@ -8254,7 +9609,10 @@
           "type": "string"
         },
         "tags": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "port": {
           "type": "integer",
@@ -8269,6 +9627,10 @@
         },
         "protocol": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "created_at": {
           "type": "integer",
@@ -8288,6 +9650,7 @@
         "address",
         "server_id",
         "protocol",
+        "enabled",
         "created_at",
         "updated_at"
       ]
@@ -8862,6 +10225,10 @@
         "type": {
           "type": "string"
         },
+        "port": {
+          "type": "integer",
+          "format": "uin16"
+        },
         "security": {
           "type": "string"
         },
@@ -8939,7 +10306,8 @@
       },
       "title": "Protocol",
       "required": [
-        "type"
+        "type",
+        "port"
       ]
     },
     "PubilcRegisterConfig": {
@@ -9325,6 +10693,40 @@
         "ip_register_limit_duration"
       ]
     },
+    "RegisterLog": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "auth_method": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "register_ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "register_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RegisterLog",
+      "required": [
+        "user_id",
+        "auth_method",
+        "identifier",
+        "register_ip",
+        "user_agent",
+        "register_time"
+      ]
+    },
     "RenewalOrderRequest": {
       "type": "object",
       "properties": {
@@ -9363,6 +10765,37 @@
         "order_no"
       ]
     },
+    "ResetSubscribeLog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_no": {
+          "type": "string"
+        },
+        "reset_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetSubscribeLog",
+      "required": [
+        "type",
+        "user_id",
+        "user_subscribe_id",
+        "reset_at"
+      ]
+    },
     "ResetSubscribeTrafficLog": {
       "type": "object",
       "properties": {
@@ -9372,7 +10805,7 @@
         },
         "type": {
           "type": "integer",
-          "format": "uint8"
+          "format": "uin16"
         },
         "user_subscribe_id": {
           "type": "integer",
@@ -9825,6 +11258,43 @@
         "name",
         "upload",
         "download"
+      ]
+    },
+    "ServerTrafficLog": {
+      "type": "object",
+      "properties": {
+        "server_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Server ID"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Upload traffic in bytes"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Download traffic in bytes"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total traffic in bytes (Upload + Download)"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date in YYYY-MM-DD format"
+        }
+      },
+      "title": "ServerTrafficLog",
+      "required": [
+        "server_id",
+        "upload",
+        "download",
+        "total",
+        "date"
       ]
     },
     "SetNodeMultiplierRequest": {
@@ -10357,6 +11827,41 @@
         "sold"
       ]
     },
+    "SubscribeLog": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "token": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "client_ip": {
+          "type": "string"
+        },
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribed_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SubscribeLog",
+      "required": [
+        "user_id",
+        "token",
+        "user_agent",
+        "client_ip",
+        "user_subscribe_id",
+        "subscribed_at"
+      ]
+    },
     "SubscribeSortRequest": {
       "type": "object",
       "properties": {
@@ -10519,6 +12024,24 @@
         "start_time",
         "end_time",
         "multiplier"
+      ]
+    },
+    "ToggleNodeStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "ToggleNodeStatusRequest",
+      "required": [
+        "id",
+        "enable"
       ]
     },
     "TosConfig": {
@@ -10894,7 +12417,10 @@
           "type": "string"
         },
         "tags": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "port": {
           "type": "integer",
@@ -10909,6 +12435,10 @@
         },
         "protocol": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "UpdateNodeRequest",
@@ -10918,7 +12448,8 @@
         "port",
         "address",
         "server_id",
-        "protocol"
+        "protocol",
+        "enabled"
       ]
     },
     "UpdateOrderStatusRequest": {
@@ -11556,49 +13087,6 @@
         "verified"
       ]
     },
-    "UserBalanceLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "order_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserBalanceLog",
-      "required": [
-        "id",
-        "user_id",
-        "amount",
-        "type",
-        "order_id",
-        "balance",
-        "created_at"
-      ]
-    },
     "UserDevice": {
       "type": "object",
       "properties": {
@@ -11941,6 +13429,49 @@
         "ip",
         "user_agent",
         "created_at"
+      ]
+    },
+    "UserSubscribeTrafficLog": {
+      "type": "object",
+      "properties": {
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Subscribe ID"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "User ID"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Upload traffic in bytes"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Download traffic in bytes"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total traffic in bytes (Upload + Download)"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date in YYYY-MM-DD format"
+        }
+      },
+      "title": "UserSubscribeTrafficLog",
+      "required": [
+        "subscribe_id",
+        "user_id",
+        "upload",
+        "download",
+        "total",
+        "date"
       ]
     },
     "UserTrafficData": {
