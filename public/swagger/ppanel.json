@@ -2033,10 +2033,10 @@
         ]
       }
     },
-    "/v1/admin/server/": {
-      "delete": {
-        "summary": "Delete node",
-        "operationId": "DeleteNode",
+    "/v1/admin/server/create": {
+      "post": {
+        "summary": "Create Server",
+        "operationId": "CreateServer",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -2061,16 +2061,106 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeleteNodeRequest"
+              "$ref": "#/definitions/CreateServerRequest"
             }
           }
         ],
         "tags": [
           "ppanel/admin/server"
         ]
-      },
+      }
+    },
+    "/v1/admin/server/delete": {
       "post": {
-        "summary": "Create node",
+        "summary": "Delete Server",
+        "operationId": "DeleteServer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteServerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/list": {
+      "get": {
+        "summary": "Filter Server List",
+        "operationId": "FilterServerList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterServerListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/node/create": {
+      "post": {
+        "summary": "Create Node",
         "operationId": "CreateNode",
         "responses": {
           "200": {
@@ -2103,9 +2193,99 @@
         "tags": [
           "ppanel/admin/server"
         ]
-      },
-      "put": {
-        "summary": "Update node",
+      }
+    },
+    "/v1/admin/server/node/delete": {
+      "post": {
+        "summary": "Delete Node",
+        "operationId": "DeleteNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteNodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/node/list": {
+      "get": {
+        "summary": "Filter Node List",
+        "operationId": "FilterNodeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterNodeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/node/update": {
+      "post": {
+        "summary": "Update Node",
         "operationId": "UpdateNode",
         "responses": {
           "200": {
@@ -2140,47 +2320,10 @@
         ]
       }
     },
-    "/v1/admin/server/batch": {
-      "delete": {
-        "summary": "Batch delete node",
-        "operationId": "BatchDeleteNode",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchDeleteNodeRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/detail": {
+    "/v1/admin/server/protocols": {
       "get": {
-        "summary": "Get node detail",
-        "operationId": "GetNodeDetail",
+        "summary": "Get Server Protocols",
+        "operationId": "GetServerProtocols",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -2193,7 +2336,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "$ref": "#/definitions/Server"
+                      "$ref": "#/definitions/GetServerProtocolsResponse"
                     }
                   }
                 }
@@ -2215,45 +2358,10 @@
         ]
       }
     },
-    "/v1/admin/server/group": {
-      "delete": {
-        "summary": "Delete node group",
-        "operationId": "DeleteNodeGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteNodeGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      },
+    "/v1/admin/server/update": {
       "post": {
-        "summary": "Create node group",
-        "operationId": "CreateNodeGroup",
+        "summary": "Update Server",
+        "operationId": "UpdateServer",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -2278,377 +2386,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateNodeGroupRequest"
+              "$ref": "#/definitions/UpdateServerRequest"
             }
           }
         ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      },
-      "put": {
-        "summary": "Update node group",
-        "operationId": "UpdateNodeGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateNodeGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/group/batch": {
-      "delete": {
-        "summary": "Batch delete node group",
-        "operationId": "BatchDeleteNodeGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchDeleteNodeGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/group/list": {
-      "get": {
-        "summary": "Get node group list",
-        "operationId": "GetNodeGroupList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetNodeGroupListResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/list": {
-      "get": {
-        "summary": "Get node list",
-        "operationId": "GetNodeList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetNodeServerListResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "group_id",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/rule_group": {
-      "delete": {
-        "summary": "Delete rule group",
-        "operationId": "DeleteRuleGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteRuleGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      },
-      "post": {
-        "summary": "Create rule group",
-        "operationId": "CreateRuleGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateRuleGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      },
-      "put": {
-        "summary": "Update rule group",
-        "operationId": "UpdateRuleGroup",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateRuleGroupRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/rule_group_list": {
-      "get": {
-        "summary": "Get rule group list",
-        "operationId": "GetRuleGroupList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetRuleGroupResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/sort": {
-      "post": {
-        "summary": "Node sort ",
-        "operationId": "NodeSort",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeSortRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/tag/list": {
-      "get": {
-        "summary": "Get node tag list",
-        "operationId": "GetNodeTagList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetNodeTagListResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
         "tags": [
           "ppanel/admin/server"
         ]
@@ -8675,38 +8416,6 @@
         "ids"
       ]
     },
-    "BatchDeleteNodeGroupRequest": {
-      "type": "object",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "title": "BatchDeleteNodeGroupRequest",
-      "required": [
-        "ids"
-      ]
-    },
-    "BatchDeleteNodeRequest": {
-      "type": "object",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "title": "BatchDeleteNodeRequest",
-      "required": [
-        "ids"
-      ]
-    },
     "BatchDeleteSubscribeGroupRequest": {
       "type": "object",
       "properties": {
@@ -9313,22 +9022,6 @@
         "show"
       ]
     },
-    "CreateNodeGroupRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "title": "CreateNodeGroupRequest",
-      "required": [
-        "name",
-        "description"
-      ]
-    },
     "CreateNodeRequest": {
       "type": "object",
       "properties": {
@@ -9336,72 +9029,30 @@
           "type": "string"
         },
         "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "country": {
           "type": "string"
         },
-        "city": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeRelay"
-          }
-        },
-        "speed_limit": {
+        "port": {
           "type": "integer",
-          "format": "int32"
+          "format": "uin16"
         },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "float"
+        "address": {
+          "type": "string"
         },
-        "group_id": {
+        "server_id": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "CreateNodeRequest",
       "required": [
         "name",
-        "tags",
-        "country",
-        "city",
-        "server_addr",
-        "relay_mode",
-        "relay_node",
-        "speed_limit",
-        "traffic_ratio",
-        "group_id",
-        "protocol",
-        "config",
-        "enable",
-        "sort"
+        "port",
+        "address",
+        "server_id",
+        "protocol"
       ]
     },
     "CreateOrderRequest": {
@@ -9521,45 +9172,42 @@
         "enable"
       ]
     },
-    "CreateRuleGroupRequest": {
+    "CreateServerRequest": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
         },
-        "icon": {
+        "country": {
           "type": "string"
         },
-        "type": {
+        "city": {
           "type": "string"
         },
-        "tags": {
+        "ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "address": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocols": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Protocol"
           }
-        },
-        "rules": {
-          "type": "string"
-        },
-        "default": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
-      "title": "CreateRuleGroupRequest",
+      "title": "CreateServerRequest",
       "required": [
         "name",
-        "icon",
-        "type",
-        "tags",
-        "rules",
-        "default",
-        "enable"
+        "ratio",
+        "address",
+        "protocols"
       ]
     },
     "CreateSubscribeApplicationRequest": {
@@ -10000,19 +9648,6 @@
         "id"
       ]
     },
-    "DeleteNodeGroupRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "DeleteNodeGroupRequest",
-      "required": [
-        "id"
-      ]
-    },
     "DeleteNodeRequest": {
       "type": "object",
       "properties": {
@@ -10039,7 +9674,7 @@
         "id"
       ]
     },
-    "DeleteRuleGroupRequest": {
+    "DeleteServerRequest": {
       "type": "object",
       "properties": {
         "id": {
@@ -10047,7 +9682,7 @@
           "format": "int64"
         }
       },
-      "title": "DeleteRuleGroupRequest",
+      "title": "DeleteServerRequest",
       "required": [
         "id"
       ]
@@ -10275,6 +9910,88 @@
         "enable_verify",
         "enable_domain_suffix",
         "domain_suffix_list"
+      ]
+    },
+    "FilterNodeListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "FilterNodeListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "FilterNodeListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      },
+      "title": "FilterNodeListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "FilterServerListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "title": "FilterServerListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "FilterServerListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          }
+        }
+      },
+      "title": "FilterServerListResponse",
+      "required": [
+        "total",
+        "list"
       ]
     },
     "Follow": {
@@ -10842,39 +10559,6 @@
         "list"
       ]
     },
-    "GetNodeDetailRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "GetNodeDetailRequest",
-      "required": [
-        "id"
-      ]
-    },
-    "GetNodeGroupListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerGroup"
-          }
-        }
-      },
-      "title": "GetNodeGroupListResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
     "GetNodeMultiplierResponse": {
       "type": "object",
       "properties": {
@@ -10888,69 +10572,6 @@
       "title": "GetNodeMultiplierResponse",
       "required": [
         "periods"
-      ]
-    },
-    "GetNodeServerListRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "tags": {
-          "type": "string"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "search": {
-          "type": "string"
-        }
-      },
-      "title": "GetNodeServerListRequest",
-      "required": [
-        "page",
-        "size"
-      ]
-    },
-    "GetNodeServerListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Server"
-          }
-        }
-      },
-      "title": "GetNodeServerListResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
-    "GetNodeTagListResponse": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "GetNodeTagListResponse",
-      "required": [
-        "tags"
       ]
     },
     "GetOAuthMethodsResponse": {
@@ -11102,26 +10723,6 @@
         "count"
       ]
     },
-    "GetRuleGroupResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerRuleGroup"
-          }
-        }
-      },
-      "title": "GetRuleGroupResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
     "GetServerConfigRequest": {
       "type": "object",
       "properties": {
@@ -11156,6 +10757,34 @@
         "basic",
         "protocol",
         "config"
+      ]
+    },
+    "GetServerProtocolsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetServerProtocolsRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "GetServerProtocolsResponse": {
+      "type": "object",
+      "properties": {
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
+        }
+      },
+      "title": "GetServerProtocolsResponse",
+      "required": [
+        "protocols"
       ]
     },
     "GetServerUserListRequest": {
@@ -12091,6 +11720,55 @@
         "whitelist"
       ]
     },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "address": {
+          "type": "string"
+        },
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Node",
+      "required": [
+        "id",
+        "name",
+        "tags",
+        "port",
+        "address",
+        "server_id",
+        "protocol",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "NodeConfig": {
       "type": "object",
       "properties": {
@@ -12132,53 +11810,6 @@
         "host",
         "port",
         "prefix"
-      ]
-    },
-    "NodeSortRequest": {
-      "type": "object",
-      "properties": {
-        "sort": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SortItem"
-          }
-        }
-      },
-      "title": "NodeSortRequest",
-      "required": [
-        "sort"
-      ]
-    },
-    "NodeStatus": {
-      "type": "object",
-      "properties": {
-        "online": {
-          "type": "object"
-        },
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "NodeStatus",
-      "required": [
-        "online",
-        "cpu",
-        "mem",
-        "disk",
-        "updated_at"
       ]
     },
     "OAthLoginRequest": {
@@ -12921,6 +12552,92 @@
       "title": "PrivacyPolicyConfig",
       "required": [
         "privacy_policy"
+      ]
+    },
+    "Protocol": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "reality_server_addr": {
+          "type": "string"
+        },
+        "reality_server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_private_key": {
+          "type": "string"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "service_name": {
+          "type": "string"
+        },
+        "cipher": {
+          "type": "string"
+        },
+        "server_key": {
+          "type": "string"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "hop_ports": {
+          "type": "string"
+        },
+        "hop_interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "obfs_password": {
+          "type": "string"
+        },
+        "disable_sni": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reduce_rtt": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "udp_relay_mode": {
+          "type": "string"
+        },
+        "congestion_controller": {
+          "type": "string"
+        }
+      },
+      "title": "Protocol",
+      "required": [
+        "type"
       ]
     },
     "PubilcRegisterConfig": {
@@ -13745,11 +13462,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "name": {
+          "type": "string"
         },
         "country": {
           "type": "string"
@@ -13757,42 +13471,29 @@
         "city": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeRelay"
-          }
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "traffic_ratio": {
+        "ratio": {
           "type": "number",
           "format": "float"
         },
-        "group_id": {
+        "address": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
+        },
+        "last_reported_at": {
           "type": "integer",
           "format": "int64"
         },
-        "protocol": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
+        "status": {
+          "$ref": "#/definitions/ServerStatus"
         },
         "created_at": {
           "type": "integer",
@@ -13801,35 +13502,22 @@
         "updated_at": {
           "type": "integer",
           "format": "int64"
-        },
-        "status": {
-          "$ref": "#/definitions/NodeStatus"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "Server",
       "required": [
         "id",
-        "tags",
+        "name",
         "country",
         "city",
-        "name",
-        "server_addr",
-        "relay_mode",
-        "relay_node",
-        "speed_limit",
-        "traffic_ratio",
-        "group_id",
-        "protocol",
-        "config",
-        "enable",
-        "created_at",
-        "updated_at",
+        "ratio",
+        "address",
+        "sort",
+        "protocols",
+        "last_reported_at",
         "status",
-        "sort"
+        "created_at",
+        "updated_at"
       ]
     },
     "ServerBasic": {
@@ -13900,6 +13588,45 @@
         "description",
         "created_at",
         "updated_at"
+      ]
+    },
+    "ServerOnlineUser": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe": {
+          "type": "string"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ServerOnlineUser",
+      "required": [
+        "ip",
+        "user_id",
+        "subscribe",
+        "subscribe_id",
+        "traffic",
+        "expired_at"
       ]
     },
     "ServerPushStatusRequest": {
@@ -13999,6 +13726,36 @@
         "default",
         "created_at",
         "updated_at"
+      ]
+    },
+    "ServerStatus": {
+      "type": "object",
+      "properties": {
+        "online": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerOnlineUser"
+          }
+        },
+        "cpu": {
+          "type": "number",
+          "format": "double"
+        },
+        "mem": {
+          "type": "number",
+          "format": "double"
+        },
+        "disk": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "ServerStatus",
+      "required": [
+        "online",
+        "cpu",
+        "mem",
+        "disk"
       ]
     },
     "ServerTotalDataResponse": {
@@ -15437,27 +15194,6 @@
         "show"
       ]
     },
-    "UpdateNodeGroupRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "title": "UpdateNodeGroupRequest",
-      "required": [
-        "id",
-        "name",
-        "description"
-      ]
-    },
     "UpdateNodeRequest": {
       "type": "object",
       "properties": {
@@ -15465,77 +15201,35 @@
           "type": "integer",
           "format": "int64"
         },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "country": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },
-        "server_addr": {
+        "tags": {
           "type": "string"
         },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeRelay"
-          }
-        },
-        "speed_limit": {
+        "port": {
           "type": "integer",
-          "format": "int32"
+          "format": "uin16"
         },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "float"
+        "address": {
+          "type": "string"
         },
-        "group_id": {
+        "server_id": {
           "type": "integer",
           "format": "int64"
         },
         "protocol": {
           "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
         }
       },
       "title": "UpdateNodeRequest",
       "required": [
         "id",
-        "tags",
-        "country",
-        "city",
         "name",
-        "server_addr",
-        "relay_mode",
-        "relay_node",
-        "speed_limit",
-        "traffic_ratio",
-        "group_id",
-        "protocol",
-        "config",
-        "enable",
-        "sort"
+        "port",
+        "address",
+        "server_id",
+        "protocol"
       ]
     },
     "UpdateOrderStatusRequest": {
@@ -15616,50 +15310,47 @@
         "enable"
       ]
     },
-    "UpdateRuleGroupRequest": {
+    "UpdateServerRequest": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "icon": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "rules": {
+        "country": {
           "type": "string"
         },
-        "default": {
-          "type": "boolean",
-          "format": "boolean"
+        "city": {
+          "type": "string"
         },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
+        "ratio": {
+          "type": "number",
+          "format": "float"
+        },
+        "address": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
         }
       },
-      "title": "UpdateRuleGroupRequest",
+      "title": "UpdateServerRequest",
       "required": [
         "id",
-        "icon",
-        "type",
         "name",
-        "tags",
-        "rules",
-        "default",
-        "enable"
+        "ratio",
+        "address",
+        "protocols"
       ]
     },
     "UpdateSubscribeApplicationRequest": {

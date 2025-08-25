@@ -1387,38 +1387,6 @@
         "prefix"
       ]
     },
-    "NodeStatus": {
-      "type": "object",
-      "properties": {
-        "online": {
-          "type": "object"
-        },
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "NodeStatus",
-      "required": [
-        "online",
-        "cpu",
-        "mem",
-        "disk",
-        "updated_at"
-      ]
-    },
     "OnlineUser": {
       "type": "object",
       "properties": {
@@ -2453,100 +2421,6 @@
         "reality_private_key",
         "reality_public_key",
         "reality_short_id"
-      ]
-    },
-    "Server": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "country": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeRelay"
-          }
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "float"
-        },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "$ref": "#/definitions/NodeStatus"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Server",
-      "required": [
-        "id",
-        "tags",
-        "country",
-        "city",
-        "name",
-        "server_addr",
-        "relay_mode",
-        "relay_node",
-        "speed_limit",
-        "traffic_ratio",
-        "group_id",
-        "protocol",
-        "config",
-        "enable",
-        "created_at",
-        "updated_at",
-        "status",
-        "sort"
       ]
     },
     "ServerBasic": {
