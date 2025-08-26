@@ -2933,6 +2933,64 @@
         ]
       }
     },
+    "/v1/admin/server/migrate/has": {
+      "get": {
+        "summary": "Check if there is any server or node to migrate",
+        "operationId": "HasMigrateSeverNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/HasMigrateSeverNodeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/migrate/run": {
+      "post": {
+        "summary": "Migrate server and node data to new database",
+        "operationId": "MigrateServerNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/MigrateServerNodeResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/server/node/create": {
       "post": {
         "summary": "Create Node",
@@ -10175,18 +10233,17 @@
           "type": "integer",
           "format": "int64"
         },
-        "server_group": {
+        "nodes": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           }
         },
-        "server": {
+        "node_tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "show": {
@@ -10228,8 +10285,8 @@
         "device_limit",
         "quota",
         "group_id",
-        "server_group",
-        "server",
+        "nodes",
+        "node_tags",
         "show",
         "sell",
         "deduction_ratio",
@@ -12979,6 +13036,19 @@
         "state"
       ]
     },
+    "HasMigrateSeverNodeResponse": {
+      "type": "object",
+      "properties": {
+        "has_migrate": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "HasMigrateSeverNodeResponse",
+      "required": [
+        "has_migrate"
+      ]
+    },
     "Hysteria2": {
       "type": "object",
       "properties": {
@@ -13146,6 +13216,27 @@
         "content",
         "status",
         "created_at"
+      ]
+    },
+    "MigrateServerNodeResponse": {
+      "type": "object",
+      "properties": {
+        "succee": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fail": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "MigrateServerNodeResponse",
+      "required": [
+        "succee",
+        "fail"
       ]
     },
     "MobileAuthenticateConfig": {
@@ -15676,18 +15767,17 @@
           "type": "integer",
           "format": "int64"
         },
-        "server_group": {
+        "nodes": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           }
         },
-        "server": {
+        "node_tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "show": {
@@ -15742,8 +15832,8 @@
         "device_limit",
         "quota",
         "group_id",
-        "server_group",
-        "server",
+        "nodes",
+        "node_tags",
         "show",
         "sell",
         "sort",
@@ -15983,18 +16073,17 @@
           "type": "integer",
           "format": "int64"
         },
-        "server_group": {
+        "nodes": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           }
         },
-        "server": {
+        "node_tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "show": {
@@ -17152,18 +17241,17 @@
           "type": "integer",
           "format": "int64"
         },
-        "server_group": {
+        "nodes": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           }
         },
-        "server": {
+        "node_tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "show": {
@@ -17210,8 +17298,8 @@
         "device_limit",
         "quota",
         "group_id",
-        "server_group",
-        "server",
+        "nodes",
+        "node_tags",
         "show",
         "sell",
         "sort",

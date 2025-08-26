@@ -3596,18 +3596,17 @@
           "type": "integer",
           "format": "int64"
         },
-        "server_group": {
+        "nodes": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           }
         },
-        "server": {
+        "node_tags": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "show": {
@@ -3662,8 +3661,8 @@
         "device_limit",
         "quota",
         "group_id",
-        "server_group",
-        "server",
+        "nodes",
+        "node_tags",
         "show",
         "sell",
         "sort",
