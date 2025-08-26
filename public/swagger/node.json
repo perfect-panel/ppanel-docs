@@ -859,7 +859,7 @@
         "order_no": {
           "type": "string"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -870,7 +870,7 @@
         "user_id",
         "amount",
         "order_no",
-        "created_at"
+        "timestamp"
       ]
     },
     "Coupon": {
@@ -2390,7 +2390,7 @@
         "order_no": {
           "type": "string"
         },
-        "reset_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -2400,7 +2400,7 @@
         "id",
         "type",
         "user_subscribe_id",
-        "reset_at"
+        "timestamp"
       ]
     },
     "ResetTrafficOrderRequest": {
@@ -3537,7 +3537,7 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -3549,7 +3549,7 @@
         "login_ip",
         "user_agent",
         "success",
-        "created_at"
+        "timestamp"
       ]
     },
     "UserSubscribe": {
@@ -3662,7 +3662,7 @@
         "user_agent": {
           "type": "string"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -3675,7 +3675,7 @@
         "token",
         "ip",
         "user_agent",
-        "created_at"
+        "timestamp"
       ]
     },
     "UserTraffic": {

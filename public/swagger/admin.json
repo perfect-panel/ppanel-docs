@@ -6662,7 +6662,7 @@
         "order_no": {
           "type": "string"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -6673,7 +6673,7 @@
         "user_id",
         "amount",
         "order_no",
-        "created_at"
+        "timestamp"
       ]
     },
     "Coupon": {
@@ -9587,7 +9587,7 @@
         "remark": {
           "type": "string"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -9600,7 +9600,7 @@
         "subscribe_id",
         "amount",
         "balance",
-        "created_at"
+        "timestamp"
       ]
     },
     "HasMigrateSeverNodeResponse": {
@@ -9714,7 +9714,7 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "login_time": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -9726,7 +9726,7 @@
         "login_ip",
         "user_agent",
         "success",
-        "login_time"
+        "timestamp"
       ]
     },
     "MessageLog": {
@@ -10933,7 +10933,7 @@
         "user_agent": {
           "type": "string"
         },
-        "register_time": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -10945,7 +10945,7 @@
         "identifier",
         "register_ip",
         "user_agent",
-        "register_time"
+        "timestamp"
       ]
     },
     "RenewalOrderRequest": {
@@ -11004,7 +11004,7 @@
         "order_no": {
           "type": "string"
         },
-        "reset_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -11014,7 +11014,7 @@
         "type",
         "user_id",
         "user_subscribe_id",
-        "reset_at"
+        "timestamp"
       ]
     },
     "ResetSubscribeTrafficLog": {
@@ -11035,7 +11035,7 @@
         "order_no": {
           "type": "string"
         },
-        "reset_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -11045,7 +11045,7 @@
         "id",
         "type",
         "user_subscribe_id",
-        "reset_at"
+        "timestamp"
       ]
     },
     "ResetTrafficOrderRequest": {
@@ -12072,7 +12072,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "subscribed_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -12084,7 +12084,7 @@
         "user_agent",
         "client_ip",
         "user_subscribe_id",
-        "subscribed_at"
+        "timestamp"
       ]
     },
     "SubscribeSortRequest": {
@@ -13420,7 +13420,7 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -13432,7 +13432,7 @@
         "login_ip",
         "user_agent",
         "success",
-        "created_at"
+        "timestamp"
       ]
     },
     "UserStatistics": {
@@ -13682,7 +13682,7 @@
         "user_agent": {
           "type": "string"
         },
-        "created_at": {
+        "timestamp": {
           "type": "integer",
           "format": "int64"
         }
@@ -13695,7 +13695,7 @@
         "token",
         "ip",
         "user_agent",
-        "created_at"
+        "timestamp"
       ]
     },
     "UserSubscribeTrafficLog": {
