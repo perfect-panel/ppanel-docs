@@ -2170,6 +2170,84 @@
         ]
       }
     },
+    "/v1/admin/log/traffic/details": {
+      "get": {
+        "summary": "Filter traffic log details",
+        "operationId": "FilterTrafficLogDetails",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/FilterTrafficLogDetailsResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
     "/v1/admin/marketing/email/batch/list": {
       "get": {
         "summary": "Get batch send email task list",
@@ -11237,6 +11315,58 @@
         "list"
       ]
     },
+    "FilterTrafficLogDetailsRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        },
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "FilterTrafficLogDetailsRequest"
+    },
+    "FilterTrafficLogDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficLogDetails"
+          }
+        }
+      },
+      "title": "FilterTrafficLogDetailsResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
     "Follow": {
       "type": "object",
       "properties": {
@@ -15288,6 +15418,11 @@
         "date": {
           "type": "string",
           "description": "Date in YYYY-MM-DD format"
+        },
+        "details": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "Whether to show detailed traffic"
         }
       },
       "title": "ServerTrafficLog",
@@ -15296,7 +15431,8 @@
         "upload",
         "download",
         "total",
-        "date"
+        "date",
+        "details"
       ]
     },
     "ServerUser": {
@@ -16277,6 +16413,49 @@
         }
       },
       "title": "TrafficLog",
+      "required": [
+        "id",
+        "server_id",
+        "user_id",
+        "subscribe_id",
+        "download",
+        "upload",
+        "timestamp"
+      ]
+    },
+    "TrafficLogDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "TrafficLogDetails",
       "required": [
         "id",
         "server_id",
@@ -17843,6 +18022,11 @@
         "date": {
           "type": "string",
           "description": "Date in YYYY-MM-DD format"
+        },
+        "details": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "Whether to show detailed traffic"
         }
       },
       "title": "UserSubscribeTrafficLog",
@@ -17852,7 +18036,8 @@
         "upload",
         "download",
         "total",
-        "date"
+        "date",
+        "details"
       ]
     },
     "UserTraffic": {
