@@ -13464,6 +13464,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
