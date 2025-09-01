@@ -15012,26 +15012,15 @@
     "ResetSortRequest": {
       "type": "object",
       "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
         "sort": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "$ref": "#/definitions/SortItem"
           }
         }
       },
       "title": "ResetSortRequest",
       "required": [
-        "page",
-        "size",
         "sort"
       ]
     },
