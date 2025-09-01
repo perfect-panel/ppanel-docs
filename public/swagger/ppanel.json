@@ -1971,6 +1971,70 @@
         ]
       }
     },
+    "/v1/admin/log/setting": {
+      "get": {
+        "summary": "Get log setting",
+        "operationId": "GetLogSetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LogSetting"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      },
+      "post": {
+        "summary": "Update log setting",
+        "operationId": "UpdateLogSetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogSetting"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
     "/v1/admin/log/subscribe/list": {
       "get": {
         "summary": "Filter subscribe log",
@@ -10365,6 +10429,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "referer_user": {
           "type": "string"
         },
@@ -10396,6 +10468,8 @@
         "password",
         "product_id",
         "duration",
+        "referral_percentage",
+        "only_first_purchase",
         "referer_user",
         "refer_code",
         "balance",
@@ -13127,6 +13201,24 @@
         "list"
       ]
     },
+    "LogSetting": {
+      "type": "object",
+      "properties": {
+        "auto_clear": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "clear_days": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LogSetting",
+      "required": [
+        "auto_clear",
+        "clear_days"
+      ]
+    },
     "LoginLog": {
       "type": "object",
       "properties": {
@@ -15115,7 +15207,10 @@
           "format": "int64"
         },
         "status": {
-          "$ref": "#/definitions/ServerStatus"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerStatus"
+          }
         },
         "created_at": {
           "type": "integer",
@@ -15353,12 +15448,6 @@
     "ServerStatus": {
       "type": "object",
       "properties": {
-        "online": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerOnlineUser"
-          }
-        },
         "cpu": {
           "type": "number",
           "format": "double"
@@ -15370,20 +15459,30 @@
         "disk": {
           "type": "number",
           "format": "double"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "online": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerOnlineUser"
+          }
         }
       },
       "title": "ServerStatus",
       "required": [
-        "online",
         "cpu",
         "mem",
-        "disk"
+        "disk",
+        "protocol",
+        "online"
       ]
     },
     "ServerTotalDataResponse": {
       "type": "object",
       "properties": {
-        "online_user_ips": {
+        "online_users": {
           "type": "integer",
           "format": "int64"
         },
@@ -15442,7 +15541,7 @@
       },
       "title": "ServerTotalDataResponse",
       "required": [
-        "online_user_ips",
+        "online_users",
         "online_servers",
         "offline_servers",
         "today_upload",
@@ -17369,6 +17468,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "gift_amount": {
           "type": "integer",
           "format": "int64"
@@ -17400,6 +17507,8 @@
         "avatar",
         "balance",
         "commission",
+        "referral_percentage",
+        "only_first_purchase",
         "gift_amount",
         "telegram",
         "refer_code",
@@ -17555,6 +17664,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "gift_amount": {
           "type": "integer",
           "format": "int64"
@@ -17629,6 +17746,8 @@
         "avatar",
         "balance",
         "commission",
+        "referral_percentage",
+        "only_first_purchase",
         "gift_amount",
         "telegram",
         "refer_code",
