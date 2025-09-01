@@ -3335,6 +3335,14 @@
           "type": "integer",
           "format": "int64"
         },
+        "referral_percentage": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "only_first_purchase": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "gift_amount": {
           "type": "integer",
           "format": "int64"
@@ -3409,6 +3417,8 @@
         "avatar",
         "balance",
         "commission",
+        "referral_percentage",
+        "only_first_purchase",
         "gift_amount",
         "telegram",
         "refer_code",
