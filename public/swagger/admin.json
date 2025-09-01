@@ -11195,7 +11195,10 @@
           "format": "int64"
         },
         "status": {
-          "$ref": "#/definitions/ServerStatus"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerStatus"
+          }
         },
         "created_at": {
           "type": "integer",
@@ -11351,12 +11354,6 @@
     "ServerStatus": {
       "type": "object",
       "properties": {
-        "online": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerOnlineUser"
-          }
-        },
         "cpu": {
           "type": "number",
           "format": "double"
@@ -11368,14 +11365,24 @@
         "disk": {
           "type": "number",
           "format": "double"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "online": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerOnlineUser"
+          }
         }
       },
       "title": "ServerStatus",
       "required": [
-        "online",
         "cpu",
         "mem",
-        "disk"
+        "disk",
+        "protocol",
+        "online"
       ]
     },
     "ServerTotalDataResponse": {
