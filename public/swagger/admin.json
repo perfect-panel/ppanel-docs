@@ -11388,7 +11388,7 @@
     "ServerTotalDataResponse": {
       "type": "object",
       "properties": {
-        "online_user_ips": {
+        "online_users": {
           "type": "integer",
           "format": "int64"
         },
@@ -11447,7 +11447,7 @@
       },
       "title": "ServerTotalDataResponse",
       "required": [
-        "online_user_ips",
+        "online_users",
         "online_servers",
         "offline_servers",
         "today_upload",
