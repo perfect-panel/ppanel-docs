@@ -1971,6 +1971,70 @@
         ]
       }
     },
+    "/v1/admin/log/setting": {
+      "get": {
+        "summary": "Get log setting",
+        "operationId": "GetLogSetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LogSetting"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      },
+      "post": {
+        "summary": "Update log setting",
+        "operationId": "UpdateLogSetting",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogSetting"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/log"
+        ]
+      }
+    },
     "/v1/admin/log/subscribe/list": {
       "get": {
         "summary": "Filter subscribe log",
@@ -13125,6 +13189,24 @@
       "title": "LogResponse",
       "required": [
         "list"
+      ]
+    },
+    "LogSetting": {
+      "type": "object",
+      "properties": {
+        "auto_clear": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "clear_days": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LogSetting",
+      "required": [
+        "auto_clear",
+        "clear_days"
       ]
     },
     "LoginLog": {
