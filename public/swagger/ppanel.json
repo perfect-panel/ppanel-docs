@@ -3180,6 +3180,43 @@
         ]
       }
     },
+    "/v1/admin/server/node/sort": {
+      "post": {
+        "summary": "Reset node sort",
+        "operationId": "ResetSortWithNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetSortRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/server/node/status/toggle": {
       "post": {
         "summary": "Toggle Node Status",
@@ -3285,6 +3322,43 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/server/sort": {
+      "post": {
+        "summary": "Reset server sort",
+        "operationId": "ResetSortWithServer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetSortRequest"
+            }
           }
         ],
         "tags": [
@@ -14931,6 +15005,32 @@
         "password"
       ]
     },
+    "ResetSortRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "ResetSortRequest",
+      "required": [
+        "page",
+        "size",
+        "sort"
+      ]
+    },
     "ResetSubscribeLog": {
       "type": "object",
       "properties": {
@@ -15207,10 +15307,7 @@
           "format": "int64"
         },
         "status": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerStatus"
-          }
+          "$ref": "#/definitions/ServerStatus"
         },
         "created_at": {
           "type": "integer",
@@ -15307,13 +15404,29 @@
         "updated_at"
       ]
     },
+    "ServerOnlineIP": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "title": "ServerOnlineIP",
+      "required": [
+        "ip",
+        "protocol"
+      ]
+    },
     "ServerOnlineUser": {
       "type": "object",
       "properties": {
         "ip": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ServerOnlineIP"
           }
         },
         "user_id": {
