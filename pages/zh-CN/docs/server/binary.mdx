@@ -2,203 +2,120 @@
 
 - Debian 12
 
-#### 安装 Nginx
-
-对于Nginx的安装，我们使用官方的Nginx DEB源
-
-安装必要的软件
-
+#### 安装前的准备
 ```bash
-apt install curl wget gnupg2 ca-certificates lsb-release sudo
+# 更新系统
+apt update && apt upgrade -y
+
+# 安装基础工具
+apt install -y curl wget git unzip software-properties-common \
+  apt-transport-https ca-certificates gnupg lsb-release
+
+# 设置时区
+timedatectl set-timezone Asia/Shanghai
+
+# 禁用防火墙（如果启用）
+ufw disable
+```
+## 步骤 1：安装 Nginx
+```bash
+# 添加 Nginx 官方仓库
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+  | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+  http://nginx.org/packages/mainline/debian bookworm nginx" \
+  | tee /etc/apt/sources.list.d/nginx.list
+
+# 设置仓库优先级
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+  | tee /etc/apt/preferences.d/99nginx
+
+# 安装 Nginx
+apt update && apt install -y nginx
+
+# 修改用户为 www-data
+sed -i 's/^user.*/user www-data;/' /etc/nginx/nginx.conf
+
+# 启动服务
+systemctl start nginx && systemctl enable nginx
 ```
 
-添加官方Nginx PGP密钥
+## 步骤 2：安装 Redis
 
 ```bash
-curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+# 添加 Redis 仓库
+curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] \
+  https://packages.redis.io/deb bookworm main" | tee /etc/apt/sources.list.d/redis.list
+
+# 安装 Redis
+apt update && apt install -y redis
+
+# 配置 Redis
+sed -i 's/^# bind 127.0.0.1 ::1/bind 127.0.0.1 ::1/' /etc/redis/redis.conf
+sed -i 's/^# maxmemory <bytes>/maxmemory 256mb/' /etc/redis/redis.conf
+sed -i 's/^# maxmemory-policy noeviction/maxmemory-policy allkeys-lru/' /etc/redis/redis.conf
+
+# 启动服务
+systemctl restart redis-server && systemctl enable redis-server
 ```
 
-将官方Nginx源配置写入 nginx.list
+## 步骤 3：安装 MariaDB
 
 ```bash
-echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
-```
-
-设置官方Nginx源的优先级高于系统内建源
-
-```bash
-echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | sudo tee /etc/apt/preferences.d/99nginx
-```
-
-更新APT缓存
-
-```bash
-apt update
-```
-
-安装Nginx
-
-```bash
-apt install nginx
-```
-
-最后，启动Nginx服务并设置开机自启
-
-```bash
-systemctl start nginx
-systemctl enable nginx
-```
-
-#### 安装 Redis
-
-导入GPG密钥
-
-```bash
-curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-```
-
-将官方Redis源配置写入 redis.list
-
-```bash
-echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
-```
-
-更新APT缓存
-
-```bash
-apt update
-```
-
-安装 redis-server
-
-```bash
-apt install redis
-```
-
-启动Redis服务并设置开机自启
-
-```bash
-systemctl start redis-server
-systemctl enable redis-server
-```
-
-#### 安装 MariaDB
-
-MariaDB提供了一个完整的DEB仓库，和Nginx仓库类似，因此我们需要安装必要的包并导入GPG密钥
-
-```bash
-apt install apt-transport-https curl
+# 添加 MariaDB 仓库
 mkdir -p /etc/apt/keyrings
-curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
-```
+curl -o /etc/apt/keyrings/mariadb-keyring.pgp \
+  'https://mariadb.org/mariadb_release_signing_key.pgp'
 
-编辑 `/etc/apt/sources.list.d/mariadb.sources` 文件， 并写入以下配置:
-
-```
-X-Repolib-Name: MariaDB
+cat > /etc/apt/sources.list.d/mariadb.sources <<EOF
+X-RepoLib-Name: MariaDB
 Types: deb
-URIs: https://deb.mariadb.org/11.4/debian
+URIs: https://deb.mariadb.org/11.8/debian
 Suites: bookworm
 Components: main
 Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
-```
+EOF
 
-更新APT缓存
+# 安装 MariaDB
+apt update && apt install -y mariadb-server mariadb-client
 
-```bash
-apt update
-```
+# 启动服务
+systemctl start mariadb && systemctl enable mariadb
 
-安装MariaDB 11.4
-
-```bash
-apt install mariadb-server
-```
-
-启动MariaDB服务并设置开机自启
-
-```bash
-systemctl start mariadb
-systemctl enable mariadb
-```
-
-运行MariaDB的初始设置
-
-```bash
+# 安全初始化
 mariadb-secure-installation
 ```
 
-#### 安装ppanel
-
-1.配置MariaDB数据库
-
-### 1. 登录到MariaDB
+### 创建数据库
 
 ```bash
-mariadb -u root -p
-```
+# 生成安全密码
+DB_PASSWORD=$(openssl rand -base64 16)
+echo "请牢记数据库密码！！！ 数据库密码：$DB_PASSWORD"
 
-在MariaDB命令行界面中，执行以下命令来创建一个新的数据库 ppanel_db，并设置字符集为 utf8mb4_unicode_ci
-
-```sql
-CREATE DATABASE ppanel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
-接下来，创建一个本地数据库用户，并将该用户的权限限制为新创建的数据库，使用 ppanel 作为用户名，ppanel-password 作为用户密码。
-
-```sql
-CREATE USER 'ppanel'@'localhost';
-GRANT ALL PRIVILEGES ON ppanel_db.* TO 'ppanel'@'localhost' IDENTIFIED BY 'ppanel-password';
+# 创建数据库和用户（使用 mariadb 命令，避免弃用警告）
+mariadb -u root -p <<EOF
+CREATE DATABASE ppanel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'ppanel'@'localhost' IDENTIFIED BY '$DB_PASSWORD';
+GRANT ALL PRIVILEGES ON ppanel.* TO 'ppanel'@'localhost';
 FLUSH PRIVILEGES;
+EOF
 ```
 
-退出MariaDB
-
-```sql
-EXIT;
-```
-
-2.配置Nginx
-
-将 `/etc/nginx/nginx.conf` 中的 `user` 从
-
-```nginx
-user nginx;
-```
-
-修改为
-
-```nginx
-user www-data;
-```
-
-添加 Nginx 虚拟主机配置文件
-
+## 步骤 4：配置 Nginx
 ```bash
-nano /etc/nginx/conf.d/website-domain-you-set.conf
-```
+# 创建配置目录
+mkdir -p /etc/nginx/conf.d
 
-然后写入以下配置，请注意更改网站域名和SSL证书文件(否则报错)：
-
-```nginx
+# 创建站点配置
+cat > /etc/nginx/conf.d/sspanel.conf <<'EOF'
 server {
-    listen 443 ssl;
-    server_name api.example.com *.example.com;   # 替换为你的域名
-
-    ssl_certificate /path/your/certs/example.crt;  # 替换为你的证书路径
-    ssl_certificate_key /path/your/private/example.key;  # 替换为你的私钥路径
-
-    ssl_protocols TLSv1.2 TLSv1.3; # 推荐使用的协议
-    ssl_ciphers 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384'; # 推荐的加密套件
-    ssl_prefer_server_ciphers on;
-
-    # cloudflare Start
-    set_real_ip_from 0.0.0.0/0;  # 信任 Cloudflare 所有 IP 地址
-    real_ip_header X-Forwarded-For;  # 使用 X-Forwarded-For 头获取真实 IP
-    real_ip_recursive on;  # 递归解析 X-Forwarded-For 头中的多个 IP
-    # cloudflare END
-
-    # 默认代理设置
+    listen 80;
+    listen [::]:80;
+    server_name your-domain.com;  # 修改为你的域名
+    
     location / {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -209,50 +126,53 @@ server {
 
         add_header X-Cache $upstream_cache_status;
 
-        # 配置代理到后端服务，如果后端服务在127.0.0.1:8080
+        # 配置代理到后端服务
         proxy_pass http://127.0.0.1:8080;
     }
-
     # 设置静态资源缓存
     location ~* \.(gif|png|jpg|css|js|woff|woff2)$ {
         expires 30d;
         add_header Cache-Control public;
     }
 }
+EOF
 
-# HTTP 到 HTTPS 重定向
-server {
-    listen 80;
-    server_name api.example.com *.example.com;  # 替换为你的域名
+# 测试配置
+nginx -t
 
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
+# 重载 Nginx
+systemctl reload nginx
 ```
-
-重启 Nginx
+为了保护用户数据安全，强烈建议配置 HTTPS：
 
 ```bash
-systemctl restart nginx
+# 安装 Certbot
+apt install -y certbot python3-certbot-nginx
+
+# 获取证书
+certbot --nginx -d your-domain.com
 ```
 
-3.确定系统架构，并下载对应的二进制文件
+## 步骤 5：安装ppanel-server
 
-下载地址：`https://github.com/perfect-panel/ppanel/releases`
+确定系统架构，并下载对应的二进制文件
+
+下载地址：`https://github.com/perfect-panel/server/releases`
 
 示例说明：系统：Debian amd64，用户：root，当前目录：/root
 
 - 下载
 
 ```shell
-wget https://github.com/perfect-panel/ppanel/releases/download/v0.1.0/ppanel-server-v0.1.0-linux-amd64.tar.gz
+wget -O ppanel-server-linux-amd64.tar.gz \
+  https://github.com/perfect-panel/server/releases/latest/download/ppanel-server-linux-amd64.tar.gz
+
 ```
 
 - 解压
 
 ```shell
-tar -zxvf ppanel-server-v0.1.0-linux-amd64.tar.gz
+tar -zxvf ppanel-server-linux-amd64.tar.gz
 ```
 
 - 移动
@@ -270,50 +190,51 @@ sudo chmod +x /usr/local/bin/ppanel
 ```
 
 - 修改 ppanel.yaml 配置文件
-
-```bash
-nano /usr/local/etc/ppanel/ppanel.yaml
-```
-
-```yaml
-Host: 127.0.0.1 # 服务监听地址, 修改为：1270.0.1
+```shell
+cat > /usr/local/etc/ppanel/ppanel.yaml <<'EOF'
+Host: 127.0.0.1 # 服务监听地址
 Port: 8080 # 服务监听端口, 默认: 8080
 Debug: false # 是否开启调试模式, 默认: false
+
 JwtAuth: # JWT认证配置
-  AccessSecret: d2a1b58958f13ab01shekdd123fcd12345xyz67890== # 访问令牌密钥, 请进行修改
-  AccessExpire: 604800 # 访问令牌过期时间,单位秒, 默认: 604800
+  AccessSecret: CHANGE_ME_TO_A_RANDOM_SECRET # 访问令牌密钥, 请修改为随机字符串
+  AccessExpire: 604800 # 访问令牌过期时间,单位秒, 默认: 604800 (7天)
+
 Logger: # 日志配置
-  FilePath: ./ppanel.log # 日志文件路径, 默认: ./ppanel.log
-  MaxSize: 50 # 日志文件最大大小, 单位MB, 默认: 50
-  MaxBackup: 3 # 日志文件最大备份数, 默认: 3
-  MaxAge: 30 # 日志文件最大保存时间,单位天, 默认: 30
-  Compress: true # 是否压缩日志文件, 默认: true
-  Level: info # 日志级别, 默认: info, 可选: debug, info, warn, error, panic, fatal
+  FilePath: /var/log/ppanel/ppanel.log # 日志文件路径
+  MaxSize: 50 # 日志文件最大大小, 单位MB
+  MaxBackup: 3 # 日志文件最大备份数
+  MaxAge: 30 # 日志文件最大保存时间,单位天
+  Compress: true # 是否压缩日志文件
+  Level: info # 日志级别: debug, info, warn, error, panic, fatal
+
 MySQL:
-  Addr: 127.0.0.1:3306 # MySQL地址, 必填
-  Username: ppanel # MySQL用户名, 必填
-  Password: ppanel-password # MySQL密码, 必填
-  Dbname: ppanel_db # MySQL数据库名, 必填
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai # MySQL配置默认值
-  MaxIdleConns: 10 # 最大空闲连接数, 默认: 10
-  MaxOpenConns: 100 # 最大打开连接数, 默认: 100
-  LogMode: info # 日志级别, 默认: info, 可选: debug, error, warn, info
-  LogZap: true # 是否使用zap日志记录sql, 默认: true
-  SlowThreshold: 1000 # 慢查询阈值,单位毫秒, 默认: 1000
+  Addr: 127.0.0.1:3306 # MySQL地址
+  Username: ppanel # MySQL用户名 (与创建的用户一致)
+  Password: CHANGE_ME_TO_DB_PASSWORD # MySQL密码 (换成之前生成的随机密码)
+  Dbname: ppanel # MySQL数据库名 (与脚本创建的数据库一致)
+  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  MaxIdleConns: 10
+  MaxOpenConns: 100
+  LogMode: info
+  LogZap: true
+  SlowThreshold: 1000
+
 Redis:
-  Host: 127.0.0.1:6379 # Redis地址, 默认:localhost:6379
-  Pass: '' # Redis密码, 默认: ""
-  DB: 0 # Redis数据库, 默认: 0
+  Host: 127.0.0.1:6379
+  Pass: '' # 如果Redis设置了密码，在这里填写
+  DB: 0
 
 Administrator:
-  Email: admin@ppanel.dev # 后台登录邮箱, 默认: admin@ppanel.dev
-  Password: password # 后台登录密码, 默认: password
+  Email: admin@ppanel.dev # 后台登录邮箱，请修改
+  Password: CHANGE_ME_TO_STRONG_PASSWORD # 后台登录密码，请修改为强密码
+EOF
 ```
 
 - 创建 systemd 服务文件
 
 ```shell
-$ cat > /etc/systemd/system/ppanel.service <<EOF
+cat > /etc/systemd/system/ppanel.service <<EOF
 [Unit]
 Description=PPANEL Server
 After=network.target
