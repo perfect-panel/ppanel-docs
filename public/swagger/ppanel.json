@@ -15574,6 +15574,9 @@
           "items": {
             "$ref": "#/definitions/ServerOnlineUser"
           }
+        },
+        "status": {
+          "type": "string"
         }
       },
       "title": "ServerStatus",
@@ -15582,7 +15585,8 @@
         "mem",
         "disk",
         "protocol",
-        "online"
+        "online",
+        "status"
       ]
     },
     "ServerTotalDataResponse": {
