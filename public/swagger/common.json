@@ -3552,6 +3552,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -3589,10 +3592,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -3650,6 +3649,7 @@
       "required": [
         "id",
         "name",
+        "language",
         "description",
         "unit_price",
         "unit_time",
@@ -3660,7 +3660,6 @@
         "speed_limit",
         "device_limit",
         "quota",
-        "group_id",
         "nodes",
         "node_tags",
         "show",

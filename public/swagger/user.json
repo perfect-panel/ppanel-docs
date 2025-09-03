@@ -710,35 +710,6 @@
         ]
       }
     },
-    "/v1/public/subscribe/group/list": {
-      "get": {
-        "summary": "Get subscribe group list",
-        "operationId": "QuerySubscribeGroupList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/QuerySubscribeGroupListResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/public/subscribe"
-        ]
-      }
-    },
     "/v1/public/subscribe/list": {
       "get": {
         "summary": "Get subscribe list",
@@ -763,6 +734,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/public/subscribe"
         ]
@@ -4061,6 +4040,18 @@
         "total"
       ]
     },
+    "QuerySubscribeListRequest": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        }
+      },
+      "title": "QuerySubscribeListRequest",
+      "required": [
+        "language"
+      ]
+    },
     "QuerySubscribeListResponse": {
       "type": "object",
       "properties": {
@@ -4675,6 +4666,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -4712,10 +4706,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -4773,6 +4763,7 @@
       "required": [
         "id",
         "name",
+        "language",
         "description",
         "unit_price",
         "unit_time",
@@ -4783,7 +4774,6 @@
         "speed_limit",
         "device_limit",
         "quota",
-        "group_id",
         "nodes",
         "node_tags",
         "show",

@@ -3827,11 +3827,10 @@
             "format": "int64"
           },
           {
-            "name": "group_id",
+            "name": "language",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
             "name": "search",
@@ -4419,35 +4418,6 @@
             }
           }
         ],
-        "tags": [
-          "ppanel/admin/system"
-        ]
-      }
-    },
-    "/v1/admin/system/subscribe_type": {
-      "get": {
-        "summary": "Get subscribe type",
-        "operationId": "GetSubscribeType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/SubscribeType"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
         "tags": [
           "ppanel/admin/system"
         ]
@@ -7369,6 +7339,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -7406,10 +7379,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -7454,6 +7423,7 @@
       "title": "CreateSubscribeRequest",
       "required": [
         "name",
+        "language",
         "description",
         "unit_price",
         "unit_time",
@@ -7464,7 +7434,6 @@
         "speed_limit",
         "device_limit",
         "quota",
-        "group_id",
         "nodes",
         "node_tags",
         "show",
@@ -9263,9 +9232,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "group_id": {
-          "type": "integer",
-          "format": "int64"
+        "language": {
+          "type": "string"
         },
         "search": {
           "type": "string"
@@ -11930,6 +11898,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -11967,10 +11938,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -12028,6 +11995,7 @@
       "required": [
         "id",
         "name",
+        "language",
         "description",
         "unit_price",
         "unit_time",
@@ -12038,7 +12006,6 @@
         "speed_limit",
         "device_limit",
         "quota",
-        "group_id",
         "nodes",
         "node_tags",
         "show",
@@ -12202,6 +12169,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -12239,10 +12209,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -13171,6 +13137,9 @@
         "name": {
           "type": "string"
         },
+        "language": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -13208,10 +13177,6 @@
           "format": "int64"
         },
         "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "group_id": {
           "type": "integer",
           "format": "int64"
         },
@@ -13261,6 +13226,7 @@
       "required": [
         "id",
         "name",
+        "language",
         "description",
         "unit_price",
         "unit_time",
@@ -13271,7 +13237,6 @@
         "speed_limit",
         "device_limit",
         "quota",
-        "group_id",
         "nodes",
         "node_tags",
         "show",
