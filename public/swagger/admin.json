@@ -3254,6 +3254,35 @@
         ]
       }
     },
+    "/v1/admin/server/node/tags": {
+      "get": {
+        "summary": "Query all node tags",
+        "operationId": "QueryNodeTag",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryNodeTagResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/server/node/update": {
       "post": {
         "summary": "Update Node",
@@ -10859,6 +10888,21 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "QueryNodeTagResponse": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "QueryNodeTagResponse",
+      "required": [
+        "tags"
       ]
     },
     "QueryOrderDetailRequest": {
