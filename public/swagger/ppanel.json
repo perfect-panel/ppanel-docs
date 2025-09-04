@@ -7567,6 +7567,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ppanel/public/portal"
         ]
@@ -12574,6 +12582,18 @@
       "required": [
         "list",
         "total"
+      ]
+    },
+    "GetSubscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        }
+      },
+      "title": "GetSubscriptionRequest",
+      "required": [
+        "language"
       ]
     },
     "GetSubscriptionResponse": {
