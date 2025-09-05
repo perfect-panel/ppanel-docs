@@ -774,9 +774,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "order_id": {
-          "type": "integer",
-          "format": "int64"
+        "order_no": {
+          "type": "string"
         },
         "balance": {
           "type": "integer",
