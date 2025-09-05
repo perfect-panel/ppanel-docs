@@ -2092,6 +2092,13 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "user_subscribe_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -8398,6 +8405,10 @@
           "type": "string"
         },
         "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_subscribe_id": {
           "type": "integer",
           "format": "int64"
         }
