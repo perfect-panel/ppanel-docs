@@ -2362,7 +2362,8 @@
             "name": "scope",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int8"
           },
           {
             "name": "status",
@@ -2521,6 +2522,180 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopBatchSendEmailTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/quota/create": {
+      "post": {
+        "summary": "Create a quota task",
+        "operationId": "CreateQuotaTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateQuotaTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/quota/list": {
+      "get": {
+        "summary": "Query quota task list",
+        "operationId": "QueryQuotaTaskList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryQuotaTaskListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint8"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/quota/pre-count": {
+      "post": {
+        "summary": "Query quota task pre-count",
+        "operationId": "QueryQuotaTaskPreCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryQuotaTaskPreCountResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryQuotaTaskPreCountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/marketing"
+        ]
+      }
+    },
+    "/v1/admin/marketing/quota/status": {
+      "post": {
+        "summary": "Query quota task status",
+        "operationId": "QueryQuotaTaskStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryQuotaTaskStatusResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryQuotaTaskStatusRequest"
             }
           }
         ],
@@ -9518,7 +9693,8 @@
           "type": "string"
         },
         "scope": {
-          "type": "string"
+          "type": "integer",
+          "format": "int8"
         },
         "register_start_time": {
           "type": "integer",
@@ -9941,7 +10117,8 @@
           "type": "string"
         },
         "scope": {
-          "type": "string"
+          "type": "integer",
+          "format": "int8"
         },
         "register_start_time": {
           "type": "integer",
@@ -10215,6 +10392,46 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "CreateQuotaTaskRequest": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "integer",
+          "format": "int8"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota_type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "days": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of days for the quota"
+        },
+        "gift": {
+          "type": "integer",
+          "format": "uint8",
+          "description": "Invoice amount ratio(%) to gift amount for quota"
+        }
+      },
+      "title": "CreateQuotaTaskRequest",
+      "required": [
+        "scope",
+        "register_start_time",
+        "register_end_time",
+        "quota_type",
+        "days",
+        "gift"
       ]
     },
     "CreateServerRequest": {
@@ -11812,7 +12029,8 @@
           "format": "int32"
         },
         "scope": {
-          "type": "string"
+          "type": "integer",
+          "format": "int8"
         },
         "status": {
           "type": "integer",
@@ -14685,6 +14903,128 @@
         "created_at"
       ]
     },
+    "QueryQuotaTaskListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "scope": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      },
+      "title": "QueryQuotaTaskListRequest",
+      "required": [
+        "page",
+        "size"
+      ]
+    },
+    "QueryQuotaTaskListResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTask"
+          }
+        }
+      },
+      "title": "QueryQuotaTaskListResponse",
+      "required": [
+        "total",
+        "list"
+      ]
+    },
+    "QueryQuotaTaskPreCountRequest": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryQuotaTaskPreCountRequest",
+      "required": [
+        "scope",
+        "register_start_time",
+        "register_end_time"
+      ]
+    },
+    "QueryQuotaTaskPreCountResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryQuotaTaskPreCountResponse",
+      "required": [
+        "count"
+      ]
+    },
+    "QueryQuotaTaskStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QueryQuotaTaskStatusRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "QueryQuotaTaskStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "string"
+        }
+      },
+      "title": "QueryQuotaTaskStatusResponse",
+      "required": [
+        "status",
+        "current",
+        "total",
+        "errors"
+      ]
+    },
     "QuerySubscribeGroupListResponse": {
       "type": "object",
       "properties": {
@@ -14869,6 +15209,89 @@
       "required": [
         "list",
         "total"
+      ]
+    },
+    "QuotaTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "scope": {
+          "type": "integer",
+          "format": "int8"
+        },
+        "register_start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "register_end_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quota_type": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "days": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of days for the quota"
+        },
+        "gift": {
+          "type": "integer",
+          "format": "uint8",
+          "description": "Invoice amount ratio(%) to gift"
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "UserSubscribe IDs of recipients"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "QuotaTask",
+      "required": [
+        "id",
+        "scope",
+        "register_start_time",
+        "register_end_time",
+        "quota_type",
+        "days",
+        "gift",
+        "recipients",
+        "status",
+        "total",
+        "current",
+        "errors",
+        "created_at",
+        "updated_at"
       ]
     },
     "RechargeOrderRequest": {
