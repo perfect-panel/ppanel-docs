@@ -2607,13 +2607,6 @@
             "format": "int32"
           },
           {
-            "name": "scope",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "uint8"
-          },
-          {
             "name": "status",
             "in": "query",
             "required": false,
@@ -2657,45 +2650,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryQuotaTaskPreCountRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/admin/marketing"
-        ]
-      }
-    },
-    "/v1/admin/marketing/quota/status": {
-      "post": {
-        "summary": "Query quota task status",
-        "operationId": "QueryQuotaTaskStatus",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/QueryQuotaTaskStatusResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryQuotaTaskStatusRequest"
             }
           }
         ],
@@ -7423,41 +7377,52 @@
     "CreateQuotaTaskRequest": {
       "type": "object",
       "properties": {
-        "scope": {
-          "type": "integer",
-          "format": "int8"
+        "subscribers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "register_start_time": {
+        "is_active": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "start_time": {
           "type": "integer",
           "format": "int64"
         },
-        "register_end_time": {
+        "end_time": {
           "type": "integer",
           "format": "int64"
         },
-        "quota_type": {
-          "type": "integer",
-          "format": "uint8"
+        "reset_traffic": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "days": {
           "type": "integer",
-          "format": "int64",
-          "description": "Number of days for the quota"
+          "format": "int64"
         },
-        "gift": {
+        "gift_type": {
           "type": "integer",
-          "format": "uint8",
-          "description": "Invoice amount ratio(%) to gift amount for quota"
+          "format": "uint8"
+        },
+        "gift_value": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "CreateQuotaTaskRequest",
       "required": [
-        "scope",
-        "register_start_time",
-        "register_end_time",
-        "quota_type",
+        "subscribers",
+        "is_active",
+        "start_time",
+        "end_time",
+        "reset_traffic",
         "days",
-        "gift"
+        "gift_type",
+        "gift_value"
       ]
     },
     "CreateServerRequest": {
@@ -9321,7 +9286,8 @@
       "type": "object",
       "properties": {
         "scope": {
-          "type": "string"
+          "type": "integer",
+          "format": "int8"
         },
         "register_start_time": {
           "type": "integer",
@@ -11162,10 +11128,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "scope": {
-          "type": "integer",
-          "format": "uint8"
-        },
         "status": {
           "type": "integer",
           "format": "uint8"
@@ -11200,24 +11162,32 @@
     "QueryQuotaTaskPreCountRequest": {
       "type": "object",
       "properties": {
-        "scope": {
-          "type": "integer",
-          "format": "uint8"
+        "subscribers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "register_start_time": {
+        "is_active": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "start_time": {
           "type": "integer",
           "format": "int64"
         },
-        "register_end_time": {
+        "end_time": {
           "type": "integer",
           "format": "int64"
         }
       },
       "title": "QueryQuotaTaskPreCountRequest",
       "required": [
-        "scope",
-        "register_start_time",
-        "register_end_time"
+        "subscribers",
+        "is_active",
+        "start_time",
+        "end_time"
       ]
     },
     "QueryQuotaTaskPreCountResponse": {
@@ -11376,39 +11346,48 @@
           "type": "integer",
           "format": "int64"
         },
-        "scope": {
-          "type": "integer",
-          "format": "int8"
+        "subscribers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "register_start_time": {
+        "is_active": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "start_time": {
           "type": "integer",
           "format": "int64"
         },
-        "register_end_time": {
+        "end_time": {
           "type": "integer",
           "format": "int64"
         },
-        "quota_type": {
-          "type": "integer",
-          "format": "uint8"
+        "reset_traffic": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "days": {
           "type": "integer",
-          "format": "int64",
-          "description": "Number of days for the quota"
+          "format": "int64"
         },
-        "gift": {
+        "gift_type": {
           "type": "integer",
-          "format": "uint8",
-          "description": "Invoice amount ratio(%) to gift"
+          "format": "uint8"
         },
-        "recipients": {
+        "gift_value": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "objects": {
           "type": "array",
           "items": {
             "type": "integer",
             "format": "int64"
           },
-          "description": "UserSubscribe IDs of recipients"
+          "description": "UserSubscribe IDs"
         },
         "status": {
           "type": "integer",
@@ -11437,13 +11416,15 @@
       "title": "QuotaTask",
       "required": [
         "id",
-        "scope",
-        "register_start_time",
-        "register_end_time",
-        "quota_type",
+        "subscribers",
+        "is_active",
+        "start_time",
+        "end_time",
+        "reset_traffic",
         "days",
-        "gift",
-        "recipients",
+        "gift_type",
+        "gift_value",
+        "objects",
         "status",
         "total",
         "current",
