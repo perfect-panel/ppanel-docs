@@ -10884,6 +10884,32 @@
         },
         "congestion_controller": {
           "type": "string"
+        },
+        "plugin": {
+          "type": "string",
+          "description": "obfs, v2ray-plugin, simple-obfs"
+        },
+        "plugin_options": {
+          "type": "string",
+          "description": "plugin options, eg: obfs=http;obfs-host=www.bing.com"
+        },
+        "multiplex": {
+          "type": "string",
+          "description": "mux, eg: off/low/medium/high"
+        },
+        "padding_scheme": {
+          "type": "string",
+          "description": "padding scheme"
+        },
+        "up_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "upload speed limit"
+        },
+        "down_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "download speed limit"
         }
       },
       "title": "Protocol",

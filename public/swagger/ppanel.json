@@ -9017,6 +9017,50 @@
           "ppanel/server"
         ]
       }
+    },
+    "/v2/server/{server_id}": {
+      "get": {
+        "summary": "Get Server Protocol Config",
+        "operationId": "QueryServerProtocolConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryServerConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "secret_key",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/server"
+        ]
+      }
     }
   },
   "definitions": {
@@ -14549,6 +14593,32 @@
         },
         "congestion_controller": {
           "type": "string"
+        },
+        "plugin": {
+          "type": "string",
+          "description": "obfs, v2ray-plugin, simple-obfs"
+        },
+        "plugin_options": {
+          "type": "string",
+          "description": "plugin options, eg: obfs=http;obfs-host=www.bing.com"
+        },
+        "multiplex": {
+          "type": "string",
+          "description": "mux, eg: off/low/medium/high"
+        },
+        "padding_scheme": {
+          "type": "string",
+          "description": "padding scheme"
+        },
+        "up_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "upload speed limit"
+        },
+        "down_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "download speed limit"
         }
       },
       "title": "Protocol",
@@ -14993,6 +15063,26 @@
         "current",
         "total",
         "errors"
+      ]
+    },
+    "QueryServerConfigRequest": {
+      "type": "object",
+      "properties": {},
+      "title": "QueryServerConfigRequest"
+    },
+    "QueryServerConfigResponse": {
+      "type": "object",
+      "properties": {
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
+        }
+      },
+      "title": "QueryServerConfigResponse",
+      "required": [
+        "protocols"
       ]
     },
     "QuerySubscribeGroupListResponse": {

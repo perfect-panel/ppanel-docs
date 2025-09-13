@@ -2722,6 +2722,123 @@
         "privacy_policy"
       ]
     },
+    "Protocol": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "security": {
+          "type": "string"
+        },
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "reality_server_addr": {
+          "type": "string"
+        },
+        "reality_server_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_private_key": {
+          "type": "string"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "service_name": {
+          "type": "string"
+        },
+        "cipher": {
+          "type": "string"
+        },
+        "server_key": {
+          "type": "string"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "hop_ports": {
+          "type": "string"
+        },
+        "hop_interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "obfs_password": {
+          "type": "string"
+        },
+        "disable_sni": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reduce_rtt": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "udp_relay_mode": {
+          "type": "string"
+        },
+        "congestion_controller": {
+          "type": "string"
+        },
+        "plugin": {
+          "type": "string",
+          "description": "obfs, v2ray-plugin, simple-obfs"
+        },
+        "plugin_options": {
+          "type": "string",
+          "description": "plugin options, eg: obfs=http;obfs-host=www.bing.com"
+        },
+        "multiplex": {
+          "type": "string",
+          "description": "mux, eg: off/low/medium/high"
+        },
+        "padding_scheme": {
+          "type": "string",
+          "description": "padding scheme"
+        },
+        "up_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "upload speed limit"
+        },
+        "down_mbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "download speed limit"
+        }
+      },
+      "title": "Protocol",
+      "required": [
+        "type",
+        "port"
+      ]
+    },
     "PubilcRegisterConfig": {
       "type": "object",
       "properties": {
