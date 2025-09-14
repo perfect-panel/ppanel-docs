@@ -2,7 +2,7 @@ import { Callout, RemoteContent } from 'nextra/components';
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote';
 
 export async function getStaticProps() {
-  const url = `https://raw.githubusercontent.com/perfect-panel/ppanel-web/refs/heads/latest/CHANGELOG.md`;
+  const url = `https://raw.githubusercontent.com/perfect-panel/ppanel-web/refs/heads/mian/CHANGELOG.md`;
   const response = await fetch(url);
   const data = await response.text();
   const formattedData = data.replace(/# Changelog/g, '').replace(/# /g, '## ');
