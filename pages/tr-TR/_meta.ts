@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Ana Sayfa',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,53 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'BELGELER',
+    title: 'Belgeler',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API Dokümantasyonu',
   },
   source: {
-    title: 'KAYNAK',
+    title: 'Kaynak kodu',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL KULLANICI WEB',
+        title: 'Kullanıcı web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL YÖNETİCİ WEB',
+        title: 'Yönetici web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'Sunucu',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'PPANEL DÜĞÜM',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'Abonelik şablonu',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Çevrimiçi demo',
     type: 'menu',
     items: {
       user: {
-        title: 'KULLANICI WEB',
+        title: 'Kullanıcı demosu',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'YÖNETİCİ WEB',
+        title: 'Yönetici demosu',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Değişiklik günlüğü',
   },
 };
 

@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: '首页',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,54 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOCS',
+    title: '文档',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: '接口文档',
   },
   source: {
-    title: 'SOURCE',
+    title: '源代码',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL USER WEB',
+        title: '用户端',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN WEB',
+        title: '管理端',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL NODE',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: '服务端',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: '节点端',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: '订阅模板',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: '在线演示',
     type: 'menu',
     items: {
       user: {
-        title: 'USER WEB',
+        title: '用户端',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN WEB',
+        title: '管理端',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: '更新日志',
   },
 };
 

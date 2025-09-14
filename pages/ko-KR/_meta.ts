@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: '홈',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -13,29 +13,35 @@ const meta = {
   },
   swagger: {
     type: 'page',
-    title: '스웨거',
+    title: 'API 문서',
   },
   source: {
-    title: '소스',
+    title: '소스 코드',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL 사용자 웹',
+        title: '사용자',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL 관리자 웹',
+        title: '관리자',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL 노드',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: '서버',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'Node',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: '구독 템플릿',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
@@ -45,12 +51,12 @@ const meta = {
     type: 'menu',
     items: {
       user: {
-        title: '사용자 웹',
+        title: '사용자',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: '관리자 웹',
+        title: '관리자',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: '업데이트 기록',
   },
 };
 

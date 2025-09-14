@@ -29,13 +29,19 @@ const meta = {
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'PPANEL SERVER',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
         title: 'PPANEL NODE',
         href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'MẪU ĐĂNG KÝ',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },

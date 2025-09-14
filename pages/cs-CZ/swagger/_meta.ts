@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'Všechny',
-  common: 'Veřejné',
-  user: 'Uživatelský panel',
-  admin: 'Administrátorský panel',
-  node: 'Uzlový panel',
-  app: 'Aplikační panel',
+  common: "Veřejné",
+  user: "Uživatelský panel",
+  admin: "Administrátorský panel",
+  node: "Uzlový panel"
 };
 
 export default meta;

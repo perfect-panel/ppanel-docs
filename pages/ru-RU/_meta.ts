@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Главная',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,54 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'ДОКУМЕНТАЦИЯ',
+    title: 'Документация',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'Документация API',
   },
   source: {
-    title: 'ИСТОЧНИК',
+    title: 'Исходный код',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL ПОЛЬЗОВАТЕЛЬСКИЙ ВЕБ',
+        title: 'Пользователь',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL АДМИНИСТРАТОР ВЕБ',
+        title: 'Админ',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL НОД',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: 'Сервер',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'Нода',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: 'Шаблон подписки',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'ДЕМО',
+    title: 'Демонстрация онлайн',
     type: 'menu',
     items: {
       user: {
-        title: 'ПОЛЬЗОВАТЕЛЬСКИЙ ВЕБ',
+        title: 'Демонстрация пользователя',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'АДМИНИСТРАТОР ВЕБ',
+        title: 'Демонстрация администратора',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Журнал изменений',
   },
 };
 

@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Hjem',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,53 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOKUMENTER',
+    title: 'Dokumenter',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API-dokumentasjon',
   },
   source: {
-    title: 'KILDE',
+    title: 'Kildekode',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL BRUKER NETT',
+        title: 'Brukerweb',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN NETT',
+        title: 'Adminweb',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'Server',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'PPANEL NODE',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'Abonnement-mal',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Online demo',
     type: 'menu',
     items: {
       user: {
-        title: 'BRUKER NETT',
+        title: 'Brukerdemonstrasjon',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN NETT',
+        title: 'Admin demonstrasjon',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Endringslogg',
   },
 };
 

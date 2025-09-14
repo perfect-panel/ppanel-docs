@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Domov',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,54 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOKUMENTACE',
+    title: 'Dokumentace',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API dokumentace',
   },
   source: {
-    title: 'ZDROJ',
+    title: 'Zdrojový kód',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL UŽIVATELSKÝ WEB',
+        title: 'Uživatelské web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMINISTRÁTORSKÝ WEB',
+        title: 'Administrátorské web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL NODE',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: 'Server',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'Node',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: 'Šablona předplatného',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Online demo',
     type: 'menu',
     items: {
       user: {
-        title: 'UŽIVATELSKÝ WEB',
+        title: 'Uživatelské demo',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMINISTRÁTORSKÝ WEB',
+        title: 'Admin demo',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Změny',
   },
 };
 

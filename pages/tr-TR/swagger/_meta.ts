@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'Tümü',
-  common: 'Ortak',
-  user: 'Kullanıcı Arayüzü',
-  admin: 'Yönetici Arayüzü',
-  node: 'Düğüm Arayüzü',
-  app: 'Uygulama Arayüzü',
+  common: "Ortak",
+  user: "Kullanıcı Arayüzü",
+  admin: "Yönetici Arayüzü",
+  node: "Düğüm Arayüzü"
 };
 
 export default meta;

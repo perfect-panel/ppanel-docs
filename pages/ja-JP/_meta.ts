@@ -1,65 +1,52 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'ホーム',
     type: 'page',
     display: 'hidden',
-    theme: {
-      layout: 'raw',
-    },
+    theme: { layout: 'raw' },
   },
-  docs: {
-    type: 'page',
-    title: 'ドキュメント',
-  },
-  swagger: {
-    type: 'page',
-    title: 'スワッガー',
-  },
+  docs: { type: 'page', title: 'ドキュメント' },
+  swagger: { type: 'page', title: 'APIドキュメント' },
   source: {
-    title: 'ソース',
+    title: 'ソースコード',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL ユーザーウェブ',
+        title: 'ユーザー',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL 管理者ウェブ',
+        title: '管理',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL ノード',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: 'サーバー',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'ノード',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: 'サブスクリプションテンプレート',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'デモ',
+    title: 'オンラインデモ',
     type: 'menu',
     items: {
-      user: {
-        title: 'ユーザーウェブ',
-        href: 'https://user.ppanel.dev',
-        newWindow: true,
-      },
-      admin: {
-        title: '管理者ウェブ',
-        href: 'https://admin.ppanel.dev',
-        newWindow: true,
-      },
+      user: { title: 'ユーザー', href: 'https://user.ppanel.dev', newWindow: true },
+      admin: { title: '管理', href: 'https://admin.ppanel.dev', newWindow: true },
     },
   },
-  changelog: {
-    type: 'page',
-    title: 'CHANGELOG',
-  },
+  changelog: { type: 'page', title: '更新履歴' },
 };
 
 export default meta;

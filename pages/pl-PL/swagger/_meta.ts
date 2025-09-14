@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'Wszystko',
-  common: 'Publiczny',
-  user: 'Interfejs użytkownika',
-  admin: 'Interfejs administracyjny',
-  node: 'Interfejs węzła',
-  app: 'Interfejs aplikacji',
+  common: "Publiczny",
+  user: "Interfejs użytkownika",
+  admin: "Interfejs administracyjny",
+  node: "Interfejs węzła"
 };
 
 export default meta;

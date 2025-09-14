@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'خانه',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -13,44 +13,49 @@ const meta = {
   },
   swagger: {
     type: 'page',
-    title: 'سوگگر',
+    title: 'مستندات API',
   },
   source: {
-    title: 'منبع',
+    title: 'کد منبع',
     type: 'menu',
     items: {
       user: {
-        title: 'وب‌سایت کاربر پنل',
+        title: 'وب‌کاربر',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'وب‌سایت مدیر پنل',
+        title: 'وب‌مدیر',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'سرور',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'نود پنل',
+        title: 'نود',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'اکس‌ریر',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'الگوی اشتراک',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'دمو',
+    title: 'نمایش آنلاین',
     type: 'menu',
     items: {
       user: {
-        title: 'وب‌سایت کاربر',
+        title: 'نمایش کاربر',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'وب‌سایت مدیر',
+        title: 'نمایش مدیر',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'فهرست تغییرات',
   },
 };
 

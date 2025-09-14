@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'होम',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -13,44 +13,49 @@ const meta = {
   },
   swagger: {
     type: 'page',
-    title: 'स्वैगर',
+    title: 'API दस्तावेज़',
   },
   source: {
-    title: 'स्रोत',
+    title: 'स्रोत कोड',
     type: 'menu',
     items: {
       user: {
-        title: 'पीपैनल उपयोगकर्ता वेब',
+        title: 'उपयोगकर्ता वेबसाइट',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'पीपैनल प्रशासन वेब',
+        title: 'प्रशासक वेबसाइट',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'सर्वर',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'पीपैनल नोड',
+        title: 'नोड',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'एक्सरेयर',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'सब्सक्रिप्शन टेम्पलेट',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'डेमो',
+    title: 'ऑनलाइन डेमो',
     type: 'menu',
     items: {
       user: {
-        title: 'उपयोगकर्ता वेब',
+        title: 'उपयोगकर्ता डेमो',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'प्रशासन वेब',
+        title: 'प्रशासक डेमो',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'चेंजलॉग',
   },
 };
 

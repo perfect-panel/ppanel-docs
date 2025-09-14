@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'Kaikki',
-  common: 'Yhteinen',
-  user: 'Käyttäjäpuoli',
-  admin: 'Hallintapuoli',
-  node: 'Solmupiste',
-  app: 'Sovelluspuoli',
+  common: "Yhteinen",
+  user: "Käyttäjäpuoli",
+  admin: "Hallintapuoli",
+  node: "Solmupiste"
 };
 
 export default meta;

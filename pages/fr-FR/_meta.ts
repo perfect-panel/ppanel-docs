@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Accueil',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,52 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOCS',
+    title: 'Documentation',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'Documentation API',
   },
   source: {
-    title: 'SOURCE',
+    title: 'Code source',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL UTILISATEUR WEB',
+        title: 'Site utilisateur',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN WEB',
+        title: 'Site administration',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'Serveur',
+        href: 'https://github.com/perfect-panel/server',
+      },
       node: {
-        title: 'PPANEL NODE',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: "Modèle d'abonnement",
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Démonstration en ligne',
     type: 'menu',
     items: {
       user: {
-        title: 'WEB UTILISATEUR',
+        title: 'Démonstration utilisateur',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'WEB ADMIN',
+        title: 'Démonstration administration',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +62,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Journal des modifications',
   },
 };
 

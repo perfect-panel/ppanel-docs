@@ -3,7 +3,6 @@ import type { DocsThemeConfig } from 'nextra-theme-docs';
 import { useConfig } from 'nextra-theme-docs';
 import Image from 'next/legacy/image';
 import Footer from './components/footer';
-
 const config: DocsThemeConfig = {
   i18n: [
     {
@@ -123,7 +122,15 @@ const config: DocsThemeConfig = {
     },
   ],
   project: {
-    link: 'https://github.com/perfect-panel/ppanel-docs',
+    icon: (
+      <Image
+        src='https://raw.githubusercontent.com/perfect-panel/ppanel-assets/refs/heads/main/logo.svg'
+        width={48}
+        height={48}
+        alt='logo'
+      />
+    ),
+    link: 'https://t.me/PPanelChat',
   },
   logo: (
     <div className='flex items-center font-bold gap-2'>

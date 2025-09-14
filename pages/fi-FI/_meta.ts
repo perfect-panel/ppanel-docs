@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Etusivu',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,53 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOKUMENTIT',
+    title: 'Dokumentaatio',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API-dokumentaatio',
   },
   source: {
-    title: 'LÄHDE',
+    title: 'Lähdekoodi',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL KÄYTTÄJÄVERKKO',
+        title: 'Käyttäjän verkkosivu',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN VERKKO',
+        title: 'Hallinnon verkkosivu',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'Palvelin',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'PPANEL SOLMU',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'Tilausmalli',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Online-demo',
     type: 'menu',
     items: {
       user: {
-        title: 'KÄYTTÄJÄVERKKO',
+        title: 'Käyttäjädemo',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN VERKKO',
+        title: 'Admin-demo',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Muutokset',
   },
 };
 

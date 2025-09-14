@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'Todos',
-  common: 'Comum',
-  user: 'Usuário',
-  admin: 'Administração',
-  node: 'Nó',
-  app: 'Aplicativo',
+  common: "Comum",
+  user: "Usuário",
+  admin: "Administração",
+  node: "Nó"
 };
 
 export default meta;

@@ -1,10 +1,8 @@
 const meta = {
-  ppanel: 'همه',
-  common: 'عمومی',
-  user: 'کاربر',
-  admin: 'مدیر',
-  node: 'نقطه',
-  app: 'برنامه',
+  common: "عمومی",
+  user: "کاربر",
+  admin: "مدیر",
+  node: "نقطه"
 };
 
 export default meta;

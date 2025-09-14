@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Início',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,54 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOCUMENTAÇÃO',
+    title: 'Documentação',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'Documentação da API',
   },
   source: {
-    title: 'CÓDIGO-FONTE',
+    title: 'Código fonte',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL USUÁRIO WEB',
+        title: 'Site do usuário',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMINISTRADOR WEB',
+        title: 'Site do administrador',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL NODE',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: 'Servidor',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'Node',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: 'Modelo de assinatura',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Demonstração online',
     type: 'menu',
     items: {
       user: {
-        title: 'WEB DO USUÁRIO',
+        title: 'Demonstração do usuário',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'WEB DO ADMINISTRADOR',
+        title: 'Demonstração do administrador',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Registro de alterações',
   },
 };
 

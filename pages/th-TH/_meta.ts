@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'หน้าแรก',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -13,44 +13,49 @@ const meta = {
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'เอกสาร API',
   },
   source: {
-    title: 'แหล่งที่มา',
+    title: 'ซอร์สโค้ด',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL USER WEB',
+        title: 'เว็บผู้ใช้',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN WEB',
+        title: 'เว็บผู้ดูแล',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'เซิร์ฟเวอร์',
+        href: 'https://github.com/perfect-panel/ppanel-server',
+        newWindow: true,
+      },
       node: {
-        title: 'PPANEL NODE',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'เทมเพลตรับสมัคร',
+        href: 'https://github.com/perfect-panel/ppanel-subscription',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'สาธิต',
+    title: 'สาธิตออนไลน์',
     type: 'menu',
     items: {
       user: {
-        title: 'USER WEB',
+        title: 'สาธิตผู้ใช้',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN WEB',
+        title: 'สาธิตผู้ดูแล',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'บันทึกการเปลี่ยนแปลง',
   },
 };
 

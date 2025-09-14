@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Kezdőlap',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,53 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOKUMENTÁCIÓ',
+    title: 'Dokumentáció',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API dokumentáció',
   },
   source: {
-    title: 'FORRÁS',
+    title: 'Forráskód',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL FELHASZNÁLÓ WEB',
+        title: 'Felhasználói web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN WEB',
+        title: 'Admin web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
+      server: {
+        title: 'Szerver',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
+      },
       node: {
-        title: 'PPANEL NODE',
+        title: 'Node',
         href: 'https://github.com/wyx2685/ppanel-node',
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      subscription: {
+        title: 'Előfizetés sablon',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Online demó',
     type: 'menu',
     items: {
       user: {
-        title: 'FELHASZNÁLÓ WEB',
+        title: 'Felhasználói demó',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN WEB',
+        title: 'Admin demó',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +63,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Változások',
   },
 };
 

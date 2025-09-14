@@ -1,6 +1,6 @@
 const meta = {
   index: {
-    title: 'PPanel',
+    title: 'Startseite',
     type: 'page',
     display: 'hidden',
     theme: {
@@ -9,48 +9,54 @@ const meta = {
   },
   docs: {
     type: 'page',
-    title: 'DOKUMENTATION',
+    title: 'Dokumentation',
   },
   swagger: {
     type: 'page',
-    title: 'SWAGGER',
+    title: 'API-Dokumentation',
   },
   source: {
-    title: 'QUELLEN',
+    title: 'Quellcode',
     type: 'menu',
     items: {
       user: {
-        title: 'PPANEL BENUTZER WEB',
+        title: 'Benutzer-Web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
-        title: 'PPANEL ADMIN WEB',
+        title: 'Admin-Web',
         href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
         newWindow: true,
       },
-      node: {
-        title: 'PPANEL KNOTEN',
-        href: 'https://github.com/wyx2685/ppanel-node',
+      server: {
+        title: 'Server',
+        href: 'https://github.com/perfect-panel/server',
+        newWindow: true,
       },
-      xrayr: {
-        title: 'XRAYR',
-        href: 'https://github.com/perfect-panel/XrayR',
+      node: {
+        title: 'Node',
+        href: 'https://github.com/wyx2685/ppanel-node',
+        newWindow: true,
+      },
+      subscription: {
+        title: 'Abonnement-Vorlage',
+        href: 'https://github.com/perfect-panel/subscription-template',
         newWindow: true,
       },
     },
   },
   demo: {
-    title: 'DEMO',
+    title: 'Online-Demo',
     type: 'menu',
     items: {
       user: {
-        title: 'BENUTZER WEB',
+        title: 'Benutzer-Demo',
         href: 'https://user.ppanel.dev',
         newWindow: true,
       },
       admin: {
-        title: 'ADMIN WEB',
+        title: 'Admin-Demo',
         href: 'https://admin.ppanel.dev',
         newWindow: true,
       },
@@ -58,7 +64,7 @@ const meta = {
   },
   changelog: {
     type: 'page',
-    title: 'CHANGELOG',
+    title: 'Änderungsprotokoll',
   },
 };
 
