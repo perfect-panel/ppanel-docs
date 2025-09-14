@@ -125,8 +125,8 @@ const config: DocsThemeConfig = {
     icon: (
       <Image
         src='https://raw.githubusercontent.com/perfect-panel/ppanel-assets/refs/heads/main/logo.svg'
-        width={48}
-        height={48}
+        width={24}
+        height={24}
         alt='logo'
       />
     ),
