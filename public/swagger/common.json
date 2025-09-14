@@ -2808,7 +2808,7 @@
         },
         "plugin": {
           "type": "string",
-          "description": "obfs, v2ray-plugin, simple-obfs"
+          "description": "obfs, none,v2ray-plugin, simple-obfs"
         },
         "plugin_options": {
           "type": "string",
