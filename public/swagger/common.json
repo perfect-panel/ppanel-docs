@@ -2732,6 +2732,10 @@
           "type": "integer",
           "format": "uin16"
         },
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "security": {
           "type": "string"
         },
@@ -2806,14 +2810,6 @@
         "congestion_controller": {
           "type": "string"
         },
-        "plugin": {
-          "type": "string",
-          "description": "obfs, none,v2ray-plugin, simple-obfs"
-        },
-        "plugin_options": {
-          "type": "string",
-          "description": "plugin options, eg: obfs=http;obfs-host=www.bing.com"
-        },
         "multiplex": {
           "type": "string",
           "description": "mux, eg: off/low/medium/high"
@@ -2831,12 +2827,65 @@
           "type": "integer",
           "format": "int32",
           "description": "download speed limit"
+        },
+        "obfs": {
+          "type": "string",
+          "description": "obfs, 'none', 'http', 'tls'"
+        },
+        "obfs_host": {
+          "type": "string",
+          "description": "obfs host"
+        },
+        "obfs_path": {
+          "type": "string",
+          "description": "obfs path"
+        },
+        "xhttp_mode": {
+          "type": "string",
+          "description": "xhttp mode"
+        },
+        "xhttp_extra": {
+          "type": "string",
+          "description": "xhttp extra path"
+        },
+        "encryption": {
+          "type": "string",
+          "description": "encryption，'none', 'mlkem768x25519plus'"
+        },
+        "encryption_mode": {
+          "type": "string",
+          "description": "encryption mode，'native', 'xorpub', 'random'"
+        },
+        "encryption_rtt": {
+          "type": "string",
+          "description": "encryption rtt，'0rtt', '1rtt'"
+        },
+        "encryption_ticket": {
+          "type": "string",
+          "description": "encryption ticket"
+        },
+        "encryption_server_padding": {
+          "type": "string",
+          "description": "encryption server padding"
+        },
+        "encryption_private_key": {
+          "type": "string",
+          "description": "encryption private key"
+        },
+        "encryption_client_padding": {
+          "type": "string",
+          "description": "encryption client padding"
+        },
+        "encryption_password": {
+          "type": "string",
+          "description": "encryption password"
         }
       },
       "title": "Protocol",
       "required": [
         "type",
-        "port"
+        "port",
+        "enable"
       ]
     },
     "PubilcRegisterConfig": {
