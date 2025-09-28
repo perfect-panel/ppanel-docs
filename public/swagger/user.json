@@ -3106,13 +3106,102 @@
         "node_push_interval": {
           "type": "integer",
           "format": "int64"
+        },
+        "traffic_report_threshold": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ip_strategy": {
+          "type": "string"
+        },
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeDNS"
+          }
+        },
+        "block": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outbound": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeOutbound"
+          }
         }
       },
       "title": "NodeConfig",
       "required": [
         "node_secret",
         "node_pull_interval",
-        "node_push_interval"
+        "node_push_interval",
+        "traffic_report_threshold",
+        "ip_strategy",
+        "dns",
+        "block",
+        "outbound"
+      ]
+    },
+    "NodeDNS": {
+      "type": "object",
+      "properties": {
+        "proto": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "NodeDNS",
+      "required": [
+        "proto",
+        "address",
+        "domains"
+      ]
+    },
+    "NodeOutbound": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "password": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "NodeOutbound",
+      "required": [
+        "name",
+        "protocol",
+        "address",
+        "port",
+        "password",
+        "rules"
       ]
     },
     "NodeRelay": {
@@ -3899,6 +3988,23 @@
         "encryption_password": {
           "type": "string",
           "description": "encryption password"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Traffic ratio, default is 1"
+        },
+        "cert_mode": {
+          "type": "string",
+          "description": "Certificate mode, `none`｜`http`｜`dns`｜`self`"
+        },
+        "cert_dns_provider": {
+          "type": "string",
+          "description": "DNS provider for certificate"
+        },
+        "cert_dns_env": {
+          "type": "string",
+          "description": "Environment for DNS provider"
         }
       },
       "title": "Protocol",
