@@ -10461,10 +10461,6 @@
         "city": {
           "type": "string"
         },
-        "ratio": {
-          "type": "number",
-          "format": "float"
-        },
         "address": {
           "type": "string"
         },
@@ -10482,7 +10478,6 @@
       "title": "CreateServerRequest",
       "required": [
         "name",
-        "ratio",
         "address",
         "protocols"
       ]
@@ -16014,10 +16009,6 @@
         "city": {
           "type": "string"
         },
-        "ratio": {
-          "type": "number",
-          "format": "float"
-        },
         "address": {
           "type": "string"
         },
@@ -16053,7 +16044,6 @@
         "name",
         "country",
         "city",
-        "ratio",
         "address",
         "sort",
         "protocols",
@@ -18036,10 +18026,6 @@
         "city": {
           "type": "string"
         },
-        "ratio": {
-          "type": "number",
-          "format": "float"
-        },
         "address": {
           "type": "string"
         },
@@ -18058,7 +18044,6 @@
       "required": [
         "id",
         "name",
-        "ratio",
         "address",
         "protocols"
       ]
