@@ -4238,6 +4238,35 @@
         ]
       }
     },
+    "/v1/admin/system/node_multiplier/preview": {
+      "get": {
+        "summary": "PreView Node Multiplier",
+        "operationId": "PreViewNodeMultiplier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/PreViewNodeMultiplierResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/privacy": {
       "get": {
         "summary": "get Privacy Policy Config",
@@ -10845,6 +10874,23 @@
       "title": "PreRenewalOrderResponse",
       "required": [
         "orderNo"
+      ]
+    },
+    "PreViewNodeMultiplierResponse": {
+      "type": "object",
+      "properties": {
+        "current_time": {
+          "type": "string"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "PreViewNodeMultiplierResponse",
+      "required": [
+        "current_time",
+        "ratio"
       ]
     },
     "PreviewSubscribeTemplateRequest": {
