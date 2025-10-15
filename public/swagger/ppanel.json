@@ -6333,12 +6333,63 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login request",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/login/device": {
+      "post": {
+        "summary": "Device Login",
+        "operationId": "DeviceLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceLoginRequest"
             }
           }
         ],
@@ -6380,6 +6431,12 @@
           },
           {
             "name": "User-Agent",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
             "in": "header",
             "required": true,
             "type": "string"
@@ -6566,6 +6623,12 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login response",
             "in": "body",
@@ -6615,6 +6678,12 @@
             "name": "User-Agent",
             "in": "header",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
+            "in": "header",
+            "required": false,
             "type": "string"
           },
           {
@@ -6670,6 +6739,12 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login response",
             "in": "body",
@@ -6719,6 +6794,12 @@
             "name": "User-Agent",
             "in": "header",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
+            "in": "header",
+            "required": false,
             "type": "string"
           },
           {
@@ -7079,7 +7160,8 @@
             "in": "query",
             "required": true,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": "15"
           },
           {
             "name": "pinned",
@@ -7782,6 +7864,35 @@
         ]
       }
     },
+    "/v1/public/subscribe/node/list": {
+      "get": {
+        "summary": "Get user subscribe node info",
+        "operationId": "QueryUserSubscribeNodeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryUserSubscribeNodeListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/subscribe"
+        ]
+      }
+    },
     "/v1/public/ticket/": {
       "post": {
         "summary": "Create ticket",
@@ -8314,6 +8425,35 @@
         ]
       }
     },
+    "/v1/public/user/devices": {
+      "get": {
+        "summary": "Get Device List",
+        "operationId": "GetDeviceList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetDeviceListResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/info": {
       "get": {
         "summary": "Query User Info",
@@ -8594,6 +8734,43 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResetUserSubscribeTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/unbind_device": {
+      "put": {
+        "summary": "Unbind Device",
+        "operationId": "UnbindDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnbindDeviceRequest"
             }
           }
         ],
@@ -9556,6 +9733,9 @@
         "email": {
           "$ref": "#/definitions/EmailAuthticateConfig"
         },
+        "device": {
+          "$ref": "#/definitions/DeviceAuthticateConfig"
+        },
         "register": {
           "$ref": "#/definitions/PubilcRegisterConfig"
         }
@@ -9564,6 +9744,7 @@
       "required": [
         "mobile",
         "email",
+        "device",
         "register"
       ]
     },
@@ -11078,6 +11259,53 @@
         "user_subscribe_id"
       ]
     },
+    "DeviceAuthticateConfig": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "show_ads": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_security": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "only_real_device": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "DeviceAuthticateConfig",
+      "required": [
+        "enable",
+        "show_ads",
+        "enable_security",
+        "only_real_device"
+      ]
+    },
+    "DeviceLoginRequest": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "DeviceLoginRequest",
+      "required": [
+        "identifier",
+        "user_agent"
+      ]
+    },
     "Document": {
       "type": "object",
       "properties": {
@@ -12198,6 +12426,26 @@
       "title": "GetDetailRequest",
       "required": [
         "id"
+      ]
+    },
+    "GetDeviceListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDevice"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetDeviceListResponse",
+      "required": [
+        "list",
+        "total"
       ]
     },
     "GetDocumentDetailRequest": {
@@ -14917,7 +15165,8 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": "15"
         },
         "pinned": {
           "type": "boolean",
@@ -15521,6 +15770,21 @@
         "total"
       ]
     },
+    "QueryUserSubscribeNodeListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeInfo"
+          }
+        }
+      },
+      "title": "QueryUserSubscribeNodeListResponse",
+      "required": [
+        "list"
+      ]
+    },
     "QuotaTask": {
       "type": "object",
       "properties": {
@@ -15767,6 +16031,9 @@
     "ResetPasswordRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -15782,6 +16049,7 @@
       },
       "title": "ResetPasswordRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
@@ -17230,6 +17498,9 @@
     "TelephoneLoginRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -17248,6 +17519,7 @@
       },
       "title": "TelephoneLoginRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_code",
         "telephone_area_code",
@@ -17257,6 +17529,9 @@
     "TelephoneRegisterRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -17278,6 +17553,7 @@
       },
       "title": "TelephoneRegisterRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_area_code",
         "password"
@@ -17286,6 +17562,9 @@
     "TelephoneResetPasswordRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -17304,6 +17583,7 @@
       },
       "title": "TelephoneResetPasswordRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_area_code",
         "password"
@@ -17650,6 +17930,19 @@
         "udp_relay_mode",
         "congestion_controller",
         "security_config"
+      ]
+    },
+    "UnbindDeviceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UnbindDeviceRequest",
+      "required": [
+        "id"
       ]
     },
     "UnbindOAuthRequest": {
@@ -18768,6 +19061,9 @@
     "UserLoginRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -18780,6 +19076,7 @@
       },
       "title": "UserLoginRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
@@ -18787,6 +19084,9 @@
     "UserRegisterRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -18805,6 +19105,7 @@
       },
       "title": "UserRegisterRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
@@ -19032,6 +19333,100 @@
         "updated_at"
       ]
     },
+    "UserSubscribeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "start_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expire_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "finished_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reset_time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "traffic": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "download": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "upload": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "token": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint8"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "is_try_out": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscribeNodeInfo"
+          }
+        }
+      },
+      "title": "UserSubscribeInfo",
+      "required": [
+        "id",
+        "user_id",
+        "order_id",
+        "subscribe_id",
+        "start_time",
+        "expire_time",
+        "finished_at",
+        "reset_time",
+        "traffic",
+        "download",
+        "upload",
+        "token",
+        "status",
+        "created_at",
+        "updated_at",
+        "is_try_out",
+        "nodes"
+      ]
+    },
     "UserSubscribeLog": {
       "type": "object",
       "properties": {
@@ -19070,6 +19465,60 @@
         "ip",
         "user_agent",
         "timestamp"
+      ]
+    },
+    "UserSubscribeNodeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "uin16"
+        },
+        "address": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "UserSubscribeNodeInfo",
+      "required": [
+        "id",
+        "name",
+        "uuid",
+        "protocol",
+        "port",
+        "address",
+        "tags",
+        "country",
+        "city",
+        "created_at"
       ]
     },
     "UserSubscribeTrafficLog": {

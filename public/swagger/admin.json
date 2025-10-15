@@ -6660,6 +6660,9 @@
         "email": {
           "$ref": "#/definitions/EmailAuthticateConfig"
         },
+        "device": {
+          "$ref": "#/definitions/DeviceAuthticateConfig"
+        },
         "register": {
           "$ref": "#/definitions/PubilcRegisterConfig"
         }
@@ -6668,6 +6671,7 @@
       "required": [
         "mobile",
         "email",
+        "device",
         "register"
       ]
     },
@@ -7994,6 +7998,34 @@
       "title": "DeleteUserSubscribeRequest",
       "required": [
         "user_subscribe_id"
+      ]
+    },
+    "DeviceAuthticateConfig": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "show_ads": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_security": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "only_real_device": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "DeviceAuthticateConfig",
+      "required": [
+        "enable",
+        "show_ads",
+        "enable_security",
+        "only_real_device"
       ]
     },
     "Document": {
@@ -11202,7 +11234,8 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": "15"
         },
         "pinned": {
           "type": "boolean",

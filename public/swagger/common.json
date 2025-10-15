@@ -127,12 +127,63 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login request",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/auth"
+        ]
+      }
+    },
+    "/v1/auth/login/device": {
+      "post": {
+        "summary": "Device Login",
+        "operationId": "DeviceLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/LoginResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Original-Forwarded-For",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceLoginRequest"
             }
           }
         ],
@@ -174,6 +225,12 @@
           },
           {
             "name": "User-Agent",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
             "in": "header",
             "required": true,
             "type": "string"
@@ -360,6 +417,12 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login response",
             "in": "body",
@@ -409,6 +472,12 @@
             "name": "User-Agent",
             "in": "header",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
+            "in": "header",
+            "required": false,
             "type": "string"
           },
           {
@@ -464,6 +533,12 @@
             "type": "string"
           },
           {
+            "name": "Login-Type",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "description": "User login response",
             "in": "body",
@@ -513,6 +588,12 @@
             "name": "User-Agent",
             "in": "header",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Login-Type",
+            "in": "header",
+            "required": false,
             "type": "string"
           },
           {
@@ -1295,6 +1376,9 @@
         "email": {
           "$ref": "#/definitions/EmailAuthticateConfig"
         },
+        "device": {
+          "$ref": "#/definitions/DeviceAuthticateConfig"
+        },
         "register": {
           "$ref": "#/definitions/PubilcRegisterConfig"
         }
@@ -1303,6 +1387,7 @@
       "required": [
         "mobile",
         "email",
+        "device",
         "register"
       ]
     },
@@ -1625,6 +1710,53 @@
         "access_key",
         "currency_unit",
         "currency_symbol"
+      ]
+    },
+    "DeviceAuthticateConfig": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "show_ads": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "enable_security": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "only_real_device": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "DeviceAuthticateConfig",
+      "required": [
+        "enable",
+        "show_ads",
+        "enable_security",
+        "only_real_device"
+      ]
+    },
+    "DeviceLoginRequest": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "cf_token": {
+          "type": "string"
+        }
+      },
+      "title": "DeviceLoginRequest",
+      "required": [
+        "identifier",
+        "user_agent"
       ]
     },
     "Document": {
@@ -3082,7 +3214,8 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": "15"
         },
         "pinned": {
           "type": "boolean",
@@ -3418,6 +3551,9 @@
     "ResetPasswordRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -3433,6 +3569,7 @@
       },
       "title": "ResetPasswordRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
@@ -4131,6 +4268,9 @@
     "TelephoneLoginRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -4149,6 +4289,7 @@
       },
       "title": "TelephoneLoginRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_code",
         "telephone_area_code",
@@ -4158,6 +4299,9 @@
     "TelephoneRegisterRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -4179,6 +4323,7 @@
       },
       "title": "TelephoneRegisterRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_area_code",
         "password"
@@ -4187,6 +4332,9 @@
     "TelephoneResetPasswordRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "telephone": {
           "type": "string"
         },
@@ -4205,6 +4353,7 @@
       },
       "title": "TelephoneResetPasswordRequest",
       "required": [
+        "identifier",
         "telephone",
         "telephone_area_code",
         "password"
@@ -4665,6 +4814,9 @@
     "UserLoginRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -4677,6 +4829,7 @@
       },
       "title": "UserLoginRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
@@ -4684,6 +4837,9 @@
     "UserRegisterRequest": {
       "type": "object",
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
         },
@@ -4702,6 +4858,7 @@
       },
       "title": "UserRegisterRequest",
       "required": [
+        "identifier",
         "email",
         "password"
       ]
