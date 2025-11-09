@@ -4174,6 +4174,35 @@
         ]
       }
     },
+    "/v1/admin/system/module": {
+      "get": {
+        "summary": "Get Module Config",
+        "operationId": "GetModuleConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ModuleConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/node_config": {
       "get": {
         "summary": "Get node config",
@@ -6928,6 +6957,35 @@
         ]
       }
     },
+    "/v1/common/heartbeat": {
+      "get": {
+        "summary": "Heartbeat",
+        "operationId": "Heartbeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/HeartbeatResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/send_code": {
       "post": {
         "summary": "Get verification code",
@@ -8698,6 +8756,43 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
+    "/v1/public/user/subscribe_note": {
+      "put": {
+        "summary": "Update User Subscribe Note",
+        "operationId": "UpdateUserSubscribeNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserSubscribeNoteRequest"
+            }
           }
         ],
         "tags": [
@@ -13709,6 +13804,26 @@
         "has_migrate"
       ]
     },
+    "HeartbeatResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "HeartbeatResponse",
+      "required": [
+        "status"
+      ]
+    },
     "Hysteria2": {
       "type": "object",
       "properties": {
@@ -13940,6 +14055,29 @@
         "enable",
         "enable_whitelist",
         "whitelist"
+      ]
+    },
+    "ModuleConfig": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "string",
+          "description": "通讯密钥"
+        },
+        "service_name": {
+          "type": "string",
+          "description": "服务名称"
+        },
+        "service_version": {
+          "type": "string",
+          "description": "服务版本"
+        }
+      },
+      "title": "ModuleConfig",
+      "required": [
+        "secret",
+        "service_name",
+        "service_version"
       ]
     },
     "Node": {
@@ -18755,6 +18893,24 @@
       "title": "UpdateUserPasswordRequest",
       "required": [
         "password"
+      ]
+    },
+    "UpdateUserSubscribeNoteRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "title": "UpdateUserSubscribeNoteRequest",
+      "required": [
+        "user_subscribe_id",
+        "note"
       ]
     },
     "UpdateUserSubscribeRequest": {

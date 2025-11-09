@@ -1597,6 +1597,43 @@
         ]
       }
     },
+    "/v1/public/user/subscribe_note": {
+      "put": {
+        "summary": "Update User Subscribe Note",
+        "operationId": "UpdateUserSubscribeNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserSubscribeNoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/subscribe_token": {
       "put": {
         "summary": "Reset User Subscribe Token",
@@ -5681,6 +5718,24 @@
       "title": "UpdateUserPasswordRequest",
       "required": [
         "password"
+      ]
+    },
+    "UpdateUserSubscribeNoteRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "title": "UpdateUserSubscribeNoteRequest",
+      "required": [
+        "user_subscribe_id",
+        "note"
       ]
     },
     "UpdateUserTicketStatusRequest": {

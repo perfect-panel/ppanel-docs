@@ -4174,6 +4174,35 @@
         ]
       }
     },
+    "/v1/admin/system/module": {
+      "get": {
+        "summary": "Get Module Config",
+        "operationId": "GetModuleConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ModuleConfig"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/system"
+        ]
+      }
+    },
     "/v1/admin/system/node_config": {
       "get": {
         "summary": "Get node config",
@@ -10230,6 +10259,29 @@
         "enable",
         "enable_whitelist",
         "whitelist"
+      ]
+    },
+    "ModuleConfig": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "string",
+          "description": "通讯密钥"
+        },
+        "service_name": {
+          "type": "string",
+          "description": "服务名称"
+        },
+        "service_version": {
+          "type": "string",
+          "description": "服务版本"
+        }
+      },
+      "title": "ModuleConfig",
+      "required": [
+        "secret",
+        "service_name",
+        "service_version"
       ]
     },
     "Node": {

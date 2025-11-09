@@ -722,6 +722,35 @@
         ]
       }
     },
+    "/v1/common/heartbeat": {
+      "get": {
+        "summary": "Heartbeat",
+        "operationId": "Heartbeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/HeartbeatResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/common"
+        ]
+      }
+    },
     "/v1/common/send_code": {
       "post": {
         "summary": "Get verification code",
@@ -2166,6 +2195,26 @@
       "required": [
         "code",
         "state"
+      ]
+    },
+    "HeartbeatResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "HeartbeatResponse",
+      "required": [
+        "status"
       ]
     },
     "Hysteria2": {
