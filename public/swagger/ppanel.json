@@ -3980,6 +3980,35 @@
         ]
       }
     },
+    "/v1/admin/subscribe/reset_all_token": {
+      "post": {
+        "summary": "Reset all subscribe tokens",
+        "operationId": "ResetAllSubscribeToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/ResetAllSubscribeTokenResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "tags": [
+          "ppanel/admin/subscribe"
+        ]
+      }
+    },
     "/v1/admin/subscribe/sort": {
       "post": {
         "summary": "Subscribe sort",
@@ -16164,6 +16193,19 @@
       "title": "RenewalOrderResponse",
       "required": [
         "order_no"
+      ]
+    },
+    "ResetAllSubscribeTokenResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "ResetAllSubscribeTokenResponse",
+      "required": [
+        "success"
       ]
     },
     "ResetPasswordRequest": {
