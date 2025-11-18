@@ -4040,6 +4040,9 @@
           "type": "integer",
           "format": "uint8"
         },
+        "short": {
+          "type": "string"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -4065,6 +4068,7 @@
         "upload",
         "token",
         "status",
+        "short",
         "created_at",
         "updated_at"
       ]
