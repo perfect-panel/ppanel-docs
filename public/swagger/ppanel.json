@@ -5015,6 +5015,43 @@
         ]
       }
     },
+    "/v1/admin/tool/ip/location": {
+      "get": {
+        "summary": "Query IP Location",
+        "operationId": "QueryIPLocation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/QueryIPLocationResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/tool"
+        ]
+      }
+    },
     "/v1/admin/tool/log": {
       "get": {
         "summary": "Get System Log",
@@ -15403,6 +15440,37 @@
       "required": [
         "total",
         "list"
+      ]
+    },
+    "QueryIPLocationRequest": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        }
+      },
+      "title": "QueryIPLocationRequest",
+      "required": [
+        "ip"
+      ]
+    },
+    "QueryIPLocationResponse": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      },
+      "title": "QueryIPLocationResponse",
+      "required": [
+        "country",
+        "city"
       ]
     },
     "QueryNodeTagResponse": {
