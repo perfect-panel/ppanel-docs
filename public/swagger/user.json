@@ -1523,6 +1523,43 @@
         ]
       }
     },
+    "/v1/public/user/rules": {
+      "put": {
+        "summary": "Update User Rules",
+        "operationId": "UpdateUserRules",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserRulesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/public/user"
+        ]
+      }
+    },
     "/v1/public/user/subscribe": {
       "get": {
         "summary": "Query User Subscribe",
@@ -5720,6 +5757,21 @@
         "password"
       ]
     },
+    "UpdateUserRulesRequest": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "UpdateUserRulesRequest",
+      "required": [
+        "rules"
+      ]
+    },
     "UpdateUserSubscribeNoteRequest": {
       "type": "object",
       "properties": {
@@ -5833,6 +5885,12 @@
             "$ref": "#/definitions/UserDevice"
           }
         },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -5869,6 +5927,7 @@
         "enable_trade_notify",
         "auth_methods",
         "user_devices",
+        "rules",
         "created_at",
         "updated_at"
       ]
