@@ -52,8 +52,7 @@
             "in": "query",
             "required": true,
             "type": "integer",
-            "format": "int32",
-            "default": "15"
+            "format": "int32"
           },
           {
             "name": "pinned",
@@ -4425,8 +4424,7 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32",
-          "default": "15"
+          "format": "int32"
         },
         "pinned": {
           "type": "boolean",
