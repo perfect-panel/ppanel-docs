@@ -3133,64 +3133,6 @@
         ]
       }
     },
-    "/v1/admin/server/migrate/has": {
-      "get": {
-        "summary": "Check if there is any server or node to migrate",
-        "operationId": "HasMigrateSeverNode",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/HasMigrateSeverNodeResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
-    "/v1/admin/server/migrate/run": {
-      "post": {
-        "summary": "Migrate server and node data to new database",
-        "operationId": "MigrateServerNode",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/MigrateServerNodeResponse"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "tags": [
-          "ppanel/admin/server"
-        ]
-      }
-    },
     "/v1/admin/server/node/create": {
       "post": {
         "summary": "Create Node",
