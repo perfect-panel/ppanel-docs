@@ -5652,6 +5652,13 @@
             "format": "int64"
           },
           {
+            "name": "unscoped",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
+          },
+          {
             "name": "subscribe_id",
             "in": "query",
             "required": false,
@@ -9659,6 +9666,10 @@
         "user_id": {
           "type": "integer",
           "format": "int64"
+        },
+        "unscoped": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "subscribe_id": {
           "type": "integer",
