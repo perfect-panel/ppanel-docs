@@ -19304,10 +19304,6 @@
         "deleted_at": {
           "type": "integer",
           "format": "int64"
-        },
-        "is_del": {
-          "type": "boolean",
-          "format": "boolean"
         }
       },
       "title": "User",
