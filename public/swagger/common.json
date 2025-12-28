@@ -4224,8 +4224,8 @@
           "format": "int64"
         },
         "discount": {
-          "type": "integer",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         }
       },
       "title": "SubscribeDiscount",
