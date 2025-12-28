@@ -1734,6 +1734,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "reset user subscribe token",
             "in": "body",
             "required": true,
             "schema": {
@@ -5416,6 +5417,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "show_original_price": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -5449,6 +5454,7 @@
         "allow_deduction",
         "reset_cycle",
         "renewal_reset",
+        "show_original_price",
         "created_at",
         "updated_at"
       ]

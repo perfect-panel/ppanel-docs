@@ -3683,6 +3683,19 @@
         "order_no"
       ]
     },
+    "ResetUserSubscribeTokenRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetUserSubscribeTokenRequest",
+      "required": [
+        "user_subscribe_id"
+      ]
+    },
     "Response": {
       "type": "object",
       "properties": {
@@ -4092,6 +4105,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "show_original_price": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -4125,6 +4142,7 @@
         "allow_deduction",
         "reset_cycle",
         "renewal_reset",
+        "show_original_price",
         "created_at",
         "updated_at"
       ]

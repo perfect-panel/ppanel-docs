@@ -6187,6 +6187,133 @@
         ]
       }
     },
+    "/v1/admin/user/subscribe/reset/token": {
+      "post": {
+        "summary": "Reset user subscribe token",
+        "operationId": "ResetUserSubscribeToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "reset user subscribe token",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetUserSubscribeTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/subscribe/reset/traffic": {
+      "post": {
+        "summary": "Reset user subscribe traffic",
+        "operationId": "ResetUserSubscribeTraffic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetUserSubscribeTrafficRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/user/subscribe/stop": {
+      "post": {
+        "summary": "Stop user subscribe",
+        "operationId": "StopUserSubscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopUserSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/user"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/admin/user/subscribe/traffic_logs": {
       "get": {
         "summary": "Get user subcribe traffic logs",
@@ -8915,6 +9042,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "reset user subscribe token",
             "in": "body",
             "required": true,
             "schema": {
@@ -11082,6 +11210,10 @@
         "renewal_reset": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "show_original_price": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "CreateSubscribeRequest",
@@ -11105,7 +11237,8 @@
         "deduction_ratio",
         "allow_deduction",
         "reset_cycle",
-        "renewal_reset"
+        "renewal_reset",
+        "show_original_price"
       ]
     },
     "CreateTicketFollowRequest": {
@@ -16549,6 +16682,19 @@
         "user_subscribe_id"
       ]
     },
+    "ResetUserSubscribeTrafficRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ResetUserSubscribeTrafficRequest",
+      "required": [
+        "user_subscribe_id"
+      ]
+    },
     "Response": {
       "type": "object",
       "properties": {
@@ -17317,6 +17463,19 @@
         "id"
       ]
     },
+    "StopUserSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StopUserSubscribeRequest",
+      "required": [
+        "user_subscribe_id"
+      ]
+    },
     "StripePayment": {
       "type": "object",
       "properties": {
@@ -17431,6 +17590,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "show_original_price": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created_at": {
           "type": "integer",
           "format": "int64"
@@ -17464,6 +17627,7 @@
         "allow_deduction",
         "reset_cycle",
         "renewal_reset",
+        "show_original_price",
         "created_at",
         "updated_at"
       ]
@@ -17733,6 +17897,10 @@
           "format": "int64"
         },
         "renewal_reset": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "show_original_price": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -18922,6 +19090,10 @@
         "renewal_reset": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "show_original_price": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "UpdateSubscribeRequest",
@@ -18947,7 +19119,8 @@
         "deduction_ratio",
         "allow_deduction",
         "reset_cycle",
-        "renewal_reset"
+        "renewal_reset",
+        "show_original_price"
       ]
     },
     "UpdateTicketStatusRequest": {
