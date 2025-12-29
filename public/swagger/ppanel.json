@@ -6272,10 +6272,10 @@
         ]
       }
     },
-    "/v1/admin/user/subscribe/stop": {
+    "/v1/admin/user/subscribe/toggle": {
       "post": {
         "summary": "Stop user subscribe",
-        "operationId": "StopUserSubscribe",
+        "operationId": "ToggleUserSubscribeStatus",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -6300,7 +6300,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StopUserSubscribeRequest"
+              "$ref": "#/definitions/ToggleUserSubscribeStatusRequest"
             }
           }
         ],
@@ -17463,19 +17463,6 @@
         "id"
       ]
     },
-    "StopUserSubscribeRequest": {
-      "type": "object",
-      "properties": {
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "StopUserSubscribeRequest",
-      "required": [
-        "user_subscribe_id"
-      ]
-    },
     "StripePayment": {
       "type": "object",
       "properties": {
@@ -18257,6 +18244,19 @@
       "required": [
         "id",
         "enable"
+      ]
+    },
+    "ToggleUserSubscribeStatusRequest": {
+      "type": "object",
+      "properties": {
+        "user_subscribe_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ToggleUserSubscribeStatusRequest",
+      "required": [
+        "user_subscribe_id"
       ]
     },
     "TosConfig": {
