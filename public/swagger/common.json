@@ -3226,6 +3226,7 @@
         "quantity": {
           "type": "integer",
           "format": "int64",
+          "maximum": 1000,
           "exclusiveMinimum": true
         },
         "payment": {
@@ -3486,7 +3487,9 @@
       "properties": {
         "amount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000,
+          "exclusiveMinimum": true
         },
         "payment": {
           "type": "integer",
@@ -3567,7 +3570,8 @@
         },
         "quantity": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 1000
         },
         "payment": {
           "type": "integer",

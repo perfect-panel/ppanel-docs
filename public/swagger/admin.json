@@ -7474,34 +7474,41 @@
         },
         "quantity": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 1000
         },
         "price": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000
         },
         "amount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2147483647
         },
         "discount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000
         },
         "coupon": {
           "type": "string"
         },
         "coupon_discount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000
         },
         "commission": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000
         },
         "fee_amount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000
         },
         "payment_id": {
           "type": "integer",
@@ -11400,6 +11407,7 @@
         "quantity": {
           "type": "integer",
           "format": "int64",
+          "maximum": 1000,
           "exclusiveMinimum": true
         },
         "payment": {
@@ -11926,7 +11934,9 @@
       "properties": {
         "amount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 2000000000,
+          "exclusiveMinimum": true
         },
         "payment": {
           "type": "integer",
@@ -12041,7 +12051,8 @@
         },
         "quantity": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 1000
         },
         "payment": {
           "type": "integer",
