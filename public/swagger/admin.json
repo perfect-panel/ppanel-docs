@@ -3398,6 +3398,81 @@
         ]
       }
     },
+    "/v1/admin/server/node_config": {
+      "get": {
+        "summary": "Get Server Node Config",
+        "operationId": "GetServerNodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/GetServerNodeConfigResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
+    "/v1/admin/server/node_config/update": {
+      "post": {
+        "summary": "Update Server Node Config",
+        "operationId": "UpdateServerNodeConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateServerNodeConfigRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ppanel/admin/server"
+        ]
+      }
+    },
     "/v1/admin/server/protocols": {
       "get": {
         "summary": "Get Server Protocols",
@@ -7570,6 +7645,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -7779,8 +7858,7 @@
         "nodes": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "node_tags": {
@@ -9555,6 +9633,39 @@
         "count"
       ]
     },
+    "GetServerNodeConfigRequest": {
+      "type": "object",
+      "properties": {
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetServerNodeConfigRequest",
+      "required": [
+        "server_id"
+      ]
+    },
+    "GetServerNodeConfigResponse": {
+      "type": "object",
+      "properties": {
+        "global": {
+          "$ref": "#/definitions/ServerNodeConfigValues"
+        },
+        "override": {
+          "$ref": "#/definitions/ServerNodeConfigOverride"
+        },
+        "effective": {
+          "$ref": "#/definitions/ServerNodeConfigValues"
+        }
+      },
+      "title": "GetServerNodeConfigResponse",
+      "required": [
+        "global",
+        "override",
+        "effective"
+      ]
+    },
     "GetServerProtocolsRequest": {
       "type": "object",
       "properties": {
@@ -10594,7 +10705,82 @@
           "type": "integer",
           "format": "int64"
         },
+        "user": {
+          "type": "string"
+        },
         "password": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "cipher": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "service_name": {
+          "type": "string"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "uot": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "uot_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "congestion_controller": {
+          "type": "string"
+        },
+        "udp_stream": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reduce_rtt": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "heartbeat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
+        },
+        "spider_x": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "string"
+        },
+        "stream_settings": {
           "type": "string"
         },
         "rules": {
@@ -10908,6 +11094,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -10954,6 +11144,10 @@
         "fee_amount": {
           "type": "integer",
           "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "PaymentMethod",
@@ -10965,7 +11159,8 @@
         "icon",
         "fee_mode",
         "fee_percent",
-        "fee_amount"
+        "fee_amount",
+        "sort"
       ]
     },
     "PaymentMethodDetail": {
@@ -11005,6 +11200,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -11025,6 +11224,7 @@
         "fee_mode",
         "fee_percent",
         "fee_amount",
+        "sort",
         "enable",
         "notify_url"
       ]
@@ -12397,6 +12597,92 @@
         "updated_at"
       ]
     },
+    "ServerNodeConfigOverride": {
+      "type": "object",
+      "properties": {
+        "inherit_ip_strategy": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_strategy": {
+          "type": "string"
+        },
+        "inherit_dns": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeDNS"
+          }
+        },
+        "inherit_block": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "block": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inherit_outbound": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "outbound": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeOutbound"
+          }
+        }
+      },
+      "title": "ServerNodeConfigOverride",
+      "required": [
+        "inherit_ip_strategy",
+        "ip_strategy",
+        "inherit_dns",
+        "dns",
+        "inherit_block",
+        "block",
+        "inherit_outbound",
+        "outbound"
+      ]
+    },
+    "ServerNodeConfigValues": {
+      "type": "object",
+      "properties": {
+        "ip_strategy": {
+          "type": "string"
+        },
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeDNS"
+          }
+        },
+        "block": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outbound": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeOutbound"
+          }
+        }
+      },
+      "title": "ServerNodeConfigValues",
+      "required": [
+        "ip_strategy",
+        "dns",
+        "block",
+        "outbound"
+      ]
+    },
     "ServerOnlineIP": {
       "type": "object",
       "properties": {
@@ -12891,8 +13177,7 @@
         "nodes": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "node_tags": {
@@ -13050,6 +13335,10 @@
         },
         "user_agent_list": {
           "type": "string"
+        },
+        "show_tutorial": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "SubscribeConfig",
@@ -13059,7 +13348,8 @@
         "subscribe_domain",
         "pan_domain",
         "user_agent_limit",
-        "user_agent_list"
+        "user_agent_list",
+        "show_tutorial"
       ]
     },
     "SubscribeDiscount": {
@@ -13167,8 +13457,7 @@
         "nodes": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "node_tags": {
@@ -13970,6 +14259,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -13984,6 +14277,56 @@
         "config",
         "fee_mode",
         "enable"
+      ]
+    },
+    "UpdateServerNodeConfigRequest": {
+      "type": "object",
+      "properties": {
+        "server_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "inherit_ip_strategy": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ip_strategy": {
+          "type": "string"
+        },
+        "inherit_dns": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "dns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeDNS"
+          }
+        },
+        "inherit_block": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "block": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inherit_outbound": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "outbound": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeOutbound"
+          }
+        }
+      },
+      "title": "UpdateServerNodeConfigRequest",
+      "required": [
+        "server_id"
       ]
     },
     "UpdateServerRequest": {
@@ -14147,8 +14490,7 @@
         "nodes": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "node_tags": {

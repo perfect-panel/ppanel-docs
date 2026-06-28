@@ -3507,7 +3507,82 @@
           "type": "integer",
           "format": "int64"
         },
+        "user": {
+          "type": "string"
+        },
         "password": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "cipher": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "sni": {
+          "type": "string"
+        },
+        "allow_insecure": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "service_name": {
+          "type": "string"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "uot": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "uot_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "congestion_controller": {
+          "type": "string"
+        },
+        "udp_stream": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reduce_rtt": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "heartbeat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reality_public_key": {
+          "type": "string"
+        },
+        "reality_short_id": {
+          "type": "string"
+        },
+        "spider_x": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "string"
+        },
+        "stream_settings": {
           "type": "string"
         },
         "rules": {
@@ -3789,6 +3864,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -3835,6 +3914,10 @@
         "fee_amount": {
           "type": "integer",
           "format": "int64"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "PaymentMethod",
@@ -3846,7 +3929,8 @@
         "icon",
         "fee_mode",
         "fee_percent",
-        "fee_amount"
+        "fee_amount",
+        "sort"
       ]
     },
     "PaymentMethodDetail": {
@@ -3886,6 +3970,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "sort": {
+          "type": "integer",
+          "format": "int64"
+        },
         "enable": {
           "type": "boolean",
           "format": "boolean"
@@ -3906,6 +3994,7 @@
         "fee_mode",
         "fee_percent",
         "fee_amount",
+        "sort",
         "enable",
         "notify_url"
       ]
@@ -5383,8 +5472,7 @@
         "nodes": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         },
         "node_tags": {
@@ -5486,6 +5574,10 @@
         },
         "user_agent_list": {
           "type": "string"
+        },
+        "show_tutorial": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "SubscribeConfig",
@@ -5495,7 +5587,8 @@
         "subscribe_domain",
         "pan_domain",
         "user_agent_limit",
-        "user_agent_list"
+        "user_agent_list",
+        "show_tutorial"
       ]
     },
     "SubscribeDiscount": {
