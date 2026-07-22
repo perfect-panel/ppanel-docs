@@ -28,7 +28,8 @@
                     "application/json"
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
@@ -69,10 +70,12 @@
                     }
                 ],
                 "consumes": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
@@ -107,10 +110,12 @@
                     }
                 ],
                 "consumes": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
@@ -145,10 +150,12 @@
                     }
                 ],
                 "consumes": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
@@ -186,7 +193,8 @@
                     "application/json"
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
@@ -227,7 +235,8 @@
                     }
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/protobuf"
                 ],
                 "tags": [
                     "node"
