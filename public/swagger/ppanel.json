@@ -10192,18 +10192,14 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "name": "auth_type",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "identifier",
+                        "name": "checkout_token",
                         "in": "query"
                     },
                     {
                         "type": "string",
                         "name": "order_no",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -12619,9 +12615,13 @@
         },
         "dto.CommissionWithdrawRequest": {
             "type": "object",
+            "required": [
+                "amount"
+            ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 2000000000
                 },
                 "content": {
                     "type": "string"
@@ -15260,6 +15260,14 @@
         },
         "dto.PortalPurchaseRequest": {
             "type": "object",
+            "required": [
+                "auth_type",
+                "identifier",
+                "password",
+                "payment",
+                "quantity",
+                "subscribe_id"
+            ],
             "properties": {
                 "auth_type": {
                     "type": "string"
@@ -15274,13 +15282,16 @@
                     "type": "string"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 128,
+                    "minLength": 8
                 },
                 "payment": {
                     "type": "integer"
                 },
                 "quantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 1000
                 },
                 "subscribe_id": {
                     "type": "integer"
@@ -15329,6 +15340,10 @@
         },
         "dto.PrePurchaseOrderRequest": {
             "type": "object",
+            "required": [
+                "quantity",
+                "subscribe_id"
+            ],
             "properties": {
                 "coupon": {
                     "type": "string"
@@ -15337,7 +15352,8 @@
                     "type": "integer"
                 },
                 "quantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 1000
                 },
                 "subscribe_id": {
                     "type": "integer"
