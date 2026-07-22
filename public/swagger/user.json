@@ -2929,6 +2929,9 @@
         "dto.CheckoutOrderRequest": {
             "type": "object",
             "properties": {
+                "checkout_token": {
+                    "type": "string"
+                },
                 "orderNo": {
                     "type": "string"
                 },
@@ -3297,6 +3300,9 @@
         "dto.PortalPurchaseResponse": {
             "type": "object",
             "properties": {
+                "checkout_token": {
+                    "type": "string"
+                },
                 "order_no": {
                     "type": "string"
                 }
