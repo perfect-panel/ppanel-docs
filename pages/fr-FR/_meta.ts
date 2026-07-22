@@ -21,12 +21,12 @@ const meta = {
     items: {
       user: {
         title: 'Site utilisateur',
-        href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
+        href: 'https://github.com/perfect-panel/frontend/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
         title: 'Site administration',
-        href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
+        href: 'https://github.com/perfect-panel/frontend/tree/main/apps/admin',
         newWindow: true,
       },
       server: {
@@ -35,7 +35,7 @@ const meta = {
       },
       node: {
         title: 'Node',
-        href: 'https://github.com/wyx2685/ppanel-node',
+        href: 'https://github.com/perfect-panel/ppanel-node',
       },
       subscription: {
         title: "Modèle d'abonnement",

@@ -1,51 +1,26 @@
-## Installing Docker
+# Host the user app with Docker
 
-Run the following command to install Docker:
-
-```bash
-curl -fsSL https://get.docker.com | bash
-```
-
-## Starting Services with Docker
-
-Run the following command to start the container:
+The user app is a Vite static site. Configure `apps/user/.env.production` as
+described in [Environment variables](./config), then build it:
 
 ```bash
-docker run -d -p 3000:3000 \
-  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
-  -e NEXT_PUBLIC_SITE_URL=https://user.example.com \
-  -e NEXT_PUBLIC_API_URL=https://api.example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+git clone https://github.com/perfect-panel/frontend.git
+cd frontend
+bun install --frozen-lockfile
+bun run build --filter=ppanel-user-web
 ```
 
-## Deploying with Docker Compose
-
-Create a `docker-compose.yml` file with the following content:
-
-```yaml
-version: '3'
-
-services:
-  ppanel-user-web:
-    image: ppanel/ppanel-user-web:latest
-    ports:
-      - '3000:3000'
-    environment:
-      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
-      NEXT_PUBLIC_SITE_URL: https://user.example.com
-      NEXT_PUBLIC_API_URL: https://api.example.com
-      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
-      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
-```
-
-Start the service:
+Serve the static files with an Nginx container:
 
 ```bash
-docker compose up -d
+docker run -d --name ppanel-user-web --restart unless-stopped \
+  -p 3002:80 \
+  -v "$(pwd)/apps/user/dist:/usr/share/nginx/html:ro" \
+  nginx:alpine
 ```
+
+Configure HTTPS for the public domain. `VITE_API_BASE_URL` must point to a
+backend API URL that browsers can reach.
 
 import Giscus from '@/components/giscus';
 

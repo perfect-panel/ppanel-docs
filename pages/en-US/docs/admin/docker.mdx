@@ -1,51 +1,27 @@
-## Installing Docker
+# Host the admin app with Docker
 
-Run the following command to install Docker:
-
-```bash
-curl -fsSL https://get.docker.com | bash
-```
-
-## Starting Services with Docker
-
-Run the following command to start the container:
+The admin app is a Vite static site; it does not need a long-running Node.js
+container. Configure `apps/admin/.env.production` as described in
+[Environment variables](./config), then build it in the frontend repository:
 
 ```bash
-docker run -d -p 3000:3000 \
-  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
-  -e NEXT_PUBLIC_SITE_URL=https://admin.example.com \
-  -e NEXT_PUBLIC_API_URL=https://api.example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-  --name ppanel-admin-web \
-  ppanel/ppanel-admin-web:latest
+git clone https://github.com/perfect-panel/frontend.git
+cd frontend
+bun install --frozen-lockfile
+bun run build --filter=ppanel-admin-web
 ```
 
-## Deploying with Docker Compose
-
-Create a `docker-compose.yml` file with the following content:
-
-```yaml
-version: '3'
-
-services:
-  ppanel-admin-web:
-    image: ppanel/ppanel-admin-web:latest
-    ports:
-      - '3000:3000'
-    environment:
-      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
-      NEXT_PUBLIC_SITE_URL: https://admin.example.com
-      NEXT_PUBLIC_API_URL: https://api.example.com
-      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
-      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
-```
-
-Start the service:
+Serve the generated files with an Nginx container:
 
 ```bash
-docker compose up -d
+docker run -d --name ppanel-admin-web --restart unless-stopped \
+  -p 3001:80 \
+  -v "$(pwd)/apps/admin/dist:/usr/share/nginx/html:ro" \
+  nginx:alpine
 ```
+
+Use a reverse proxy for HTTPS in production and restrict access to the admin
+application.
 
 import Giscus from '@/components/giscus';
 

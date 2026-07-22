@@ -1,21 +1,32 @@
-## 环境变量
+# 管理端环境变量
 
-在部署前，请确保在部署命令中直接设置以下环境变量以配置应用程序：
+管理端位于 [perfect-panel/frontend](https://github.com/perfect-panel/frontend)
+的 `apps/admin`，使用 Vite 构建。旧版 `NEXT_PUBLIC_*` 变量和
+`perfect-panel/ppanel-web` 链接不再适用。
 
-```bash
-# 应用的默认语言
-NEXT_PUBLIC_DEFAULT_LANGUAGE=<您的默认语言 zh-CN | en-US>
+在 `apps/admin/.env.production` 中设置：
 
-# 站点 URL 和 API 端点
-NEXT_PUBLIC_SITE_URL=<您的站点 URL>
-NEXT_PUBLIC_API_URL=<您的 API URL>
+```dotenv
+# 必填：服务端 API 的公开地址
+VITE_API_BASE_URL=https://api.example.com
 
-# 默认用户凭证（用于初始设置或测试目的）
-NEXT_PUBLIC_DEFAULT_USER_EMAIL=<您的默认用户邮箱>
-NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
+# 可选：反向代理的 API 路径前缀
+VITE_API_PREFIX=
+
+# 可选：静态资源 CDN
+VITE_CDN_URL=https://cdn.example.com
+
+# 可选：是否显示教程入口，默认 true
+VITE_TUTORIAL_DOCUMENT=true
+
+# 仅开发环境使用；生产环境保持为空
+VITE_USER_EMAIL=
+VITE_USER_PASSWORD=
 ```
 
-可以参考[示例环境文件](https://github.com/perfect-panel/ppanel-web/blob/main/apps/admin/.env.template)来查看结构化的参考文件。
+Vite 会在构建时将这些变量写入静态文件。修改 API 地址或 CDN 地址后必须重新构建
+并部署管理端。可参考当前的
+[`.env.example`](https://github.com/perfect-panel/frontend/blob/main/apps/admin/.env.example)。
 
 import Giscus from '@/components/giscus';
 

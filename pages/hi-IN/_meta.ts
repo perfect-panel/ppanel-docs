@@ -21,12 +21,12 @@ const meta = {
     items: {
       user: {
         title: 'उपयोगकर्ता वेबसाइट',
-        href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/user',
+        href: 'https://github.com/perfect-panel/frontend/tree/main/apps/user',
         newWindow: true,
       },
       admin: {
         title: 'प्रशासक वेबसाइट',
-        href: 'https://github.com/perfect-panel/ppanel-web/tree/main/apps/admin',
+        href: 'https://github.com/perfect-panel/frontend/tree/main/apps/admin',
         newWindow: true,
       },
       server: {
@@ -36,7 +36,7 @@ const meta = {
       },
       node: {
         title: 'नोड',
-        href: 'https://github.com/wyx2685/ppanel-node',
+        href: 'https://github.com/perfect-panel/ppanel-node',
       },
       subscription: {
         title: 'सब्सक्रिप्शन टेम्पलेट',

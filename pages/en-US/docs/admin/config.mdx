@@ -1,21 +1,33 @@
-## Environment Variables
+# Admin environment variables
 
-Before deployment, please ensure to set the following environment variables directly in the deployment command to configure the application:
+The admin application lives in `apps/admin` of
+[perfect-panel/frontend](https://github.com/perfect-panel/frontend) and is
+built with Vite. The old `NEXT_PUBLIC_*` variables and
+`perfect-panel/ppanel-web` links no longer apply.
 
-```bash
-# Default language of the application
-NEXT_PUBLIC_DEFAULT_LANGUAGE=<Your default language zh-CN | en-US>
+Set the following in `apps/admin/.env.production`:
 
-# Site URL and API endpoint
-NEXT_PUBLIC_SITE_URL=<Your site URL>
-NEXT_PUBLIC_API_URL=<Your API URL>
+```dotenv
+# Required: public backend API URL
+VITE_API_BASE_URL=https://api.example.com
 
-# Default user credentials (for initial setup or testing purposes)
-NEXT_PUBLIC_DEFAULT_USER_EMAIL=<Your default user email>
-NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<Your default user password>
+# Optional: API path prefix provided by a reverse proxy
+VITE_API_PREFIX=
+
+# Optional: static asset CDN
+VITE_CDN_URL=https://cdn.example.com
+
+# Optional: show the tutorial entry; defaults to true
+VITE_TUTORIAL_DOCUMENT=true
+
+# Development only; keep empty in production
+VITE_USER_EMAIL=
+VITE_USER_PASSWORD=
 ```
 
-You can refer to the [example environment file](https://github.com/perfect-panel/ppanel-web/blob/main/apps/admin/.env.template) for a structured reference.
+Vite embeds these values into the static build. Rebuild and redeploy the admin
+application after changing the API or CDN URL. See the current
+[`.env.example`](https://github.com/perfect-panel/frontend/blob/main/apps/admin/.env.example).
 
 import Giscus from '@/components/giscus';
 

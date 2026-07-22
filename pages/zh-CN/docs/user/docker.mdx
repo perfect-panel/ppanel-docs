@@ -1,51 +1,25 @@
-## 安装 Docker
+# 使用 Docker 托管用户端
 
-运行以下命令安装 Docker：
-
-```bash
-curl -fsSL https://get.docker.com | bash
-```
-
-## 使用 Docker 启动服务
-
-运行以下命令启动容器：
+用户端是 Vite 静态站点。先按[环境变量说明](./config)配置
+`apps/user/.env.production`，然后构建：
 
 ```bash
-docker run -d -p 3000:3000 \
-  -e NEXT_PUBLIC_DEFAULT_LANGUAGE=en-US \
-  -e NEXT_PUBLIC_SITE_URL=https://user.example.com \
-  -e NEXT_PUBLIC_API_URL=https://api.example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_EMAIL=user@example.com \
-  -e NEXT_PUBLIC_DEFAULT_USER_PASSWORD=password123 \
-  --name ppanel-user-web \
-  ppanel/ppanel-user-web:latest
+git clone https://github.com/perfect-panel/frontend.git
+cd frontend
+bun install --frozen-lockfile
+bun run build --filter=ppanel-user-web
 ```
 
-## 使用 Docker Compose 部署
-
-创建一个 `docker-compose.yml` 文件，内容如下：
-
-```yaml
-version: '3'
-
-services:
-  ppanel-user-web:
-    image: ppanel/ppanel-user-web:latest
-    ports:
-      - '3000:3000'
-    environment:
-      NEXT_PUBLIC_DEFAULT_LANGUAGE: en-US
-      NEXT_PUBLIC_SITE_URL: https://user.example.com
-      NEXT_PUBLIC_API_URL: https://api.example.com
-      NEXT_PUBLIC_DEFAULT_USER_EMAIL: user@example.com
-      NEXT_PUBLIC_DEFAULT_USER_PASSWORD: password123
-```
-
-启动服务：
+使用 Nginx 容器托管静态文件：
 
 ```bash
-docker compose up -d
+docker run -d --name ppanel-user-web --restart unless-stopped \
+  -p 3002:80 \
+  -v "$(pwd)/apps/user/dist:/usr/share/nginx/html:ro" \
+  nginx:alpine
 ```
+
+为公网域名配置 HTTPS；`VITE_API_BASE_URL` 必须指向浏览器可访问的后端 API 地址。
 
 import Giscus from '@/components/giscus';
 

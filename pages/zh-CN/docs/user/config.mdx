@@ -1,38 +1,34 @@
-## 环境变量
+# 用户端环境变量
 
-在部署前，请确保在部署命令中直接设置以下环境变量以配置应用程序：
+用户端位于 [perfect-panel/frontend](https://github.com/perfect-panel/frontend)
+的 `apps/user`，使用 Vite 构建。旧版 `NEXT_PUBLIC_*` 变量和
+`perfect-panel/ppanel-web` 链接不再适用。
 
-```bash
-# 应用的默认语言
-NEXT_PUBLIC_DEFAULT_LANGUAGE=<您的默认语言 zh-CN | en-US>
+在 `apps/user/.env.production` 中设置：
 
-# 站点 URL 和 API 端点
-NEXT_PUBLIC_SITE_URL=<您的站点 URL>
-NEXT_PUBLIC_API_URL=<您的 API URL>
+```dotenv
+# 必填：服务端 API 的公开地址
+VITE_API_BASE_URL=https://api.example.com
 
-# 支持或咨询的联系邮箱
-NEXT_PUBLIC_EMAIL=<您的联系邮箱>
+# 可选：反向代理的 API 路径前缀
+VITE_API_PREFIX=
 
-# 社区和社交媒体链接
-NEXT_PUBLIC_TELEGRAM_LINK=<您的 Telegram 链接>
-NEXT_PUBLIC_TWITTER_LINK=<您的 Twitter 链接>
-NEXT_PUBLIC_DISCORD_LINK=<您的 Discord 链接>
-NEXT_PUBLIC_INSTAGRAM_LINK=<您的 Instagram 链接>
-NEXT_PUBLIC_LINKEDIN_LINK=<您的 LinkedIn 链接>
-NEXT_PUBLIC_FACEBOOK_LINK=<您的 Facebook 链接>
-NEXT_PUBLIC_GITHUB_LINK=<您的 GitHub 链接>
+# 可选：静态资源 CDN
+VITE_CDN_URL=https://cdn.example.com
 
-# 默认用户凭证（用于初始设置或测试目的）
-NEXT_PUBLIC_DEFAULT_USER_EMAIL=<您的默认用户邮箱>
-NEXT_PUBLIC_DEFAULT_USER_PASSWORD=<您的默认用户密码>
+# 可选：是否显示教程入口，默认 true
+VITE_TUTORIAL_DOCUMENT=true
 
-# 主页配置
-NEXT_PUBLIC_HOME_USER_COUNT=999
-NEXT_PUBLIC_HOME_SERVER_COUNT=999
-NEXT_PUBLIC_HOME_LOCATION_COUNT=999
+# 可选：设置为 false 时直接进入登录页
+VITE_SHOW_LANDING_PAGE=true
+
+# 仅开发环境使用；生产环境保持为空
+VITE_USER_EMAIL=
+VITE_USER_PASSWORD=
 ```
 
-可以参考[示例环境文件](https://github.com/perfect-panel/ppanel-web/blob/main/apps/user/.env.template)来查看结构化的参考文件。
+Vite 会在构建时将这些变量写入静态文件。修改后必须重新构建并部署用户端。可参考
+当前的 [`.env.example`](https://github.com/perfect-panel/frontend/blob/main/apps/user/.env.example)。
 
 import Giscus from '@/components/giscus';
 

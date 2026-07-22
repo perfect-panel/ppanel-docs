@@ -1,157 +1,88 @@
-## Installing Docker
+# Deploy the server with Docker
 
-Run the following command to quickly install Docker:
+This guide builds an image from the current server source instead of relying
+on stale or unverified prebuilt images. Docker Compose v2 is required.
 
-```sh
-curl -fsSL https://get.docker.com | bash -s docker
+```bash
+git clone https://github.com/perfect-panel/server.git ppanel-server
+cd ppanel-server
+mkdir -p etc
+: > etc/ppanel.yaml
 ```
 
-## Quick Start
-
-### Initialization via Web Interface
-
-PPanel supports web-based initialization, simplifying the manual configuration process.
-
-### Initialization Steps
-
-1. **Create the necessary configuration file**: First, manually create and configure the `/app/etc/ppanel.yaml` file for subsequent configuration.
-
-2. **Run the Docker container**:
-
-   ```sh
-   docker run -d \
-     --network host \
-     --name ppanel-server \
-     -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
-     --restart=always \
-     --log-opt max-size=10m \
-     --log-opt max-file=3 \
-     ppanel/ppanel-server:latest
-   ```
-
-3. **Access the initialization page**: Open your browser and go to `http://serverIP:8080/init`.
-
-4. **Complete the configuration**: Follow the prompts to set up the admin account, configure the MySQL database, and the Redis server.
-
-5. **Click the initialize button**: After completing the configuration, click the "Initialize" button. The application will automatically save the configuration and restart.
-
-   > **Note**: PPanel uses port **8080** by default. Please ensure this port is accessible and adjust firewall settings if necessary.
-
-## Deploying with Docker
-
-PPanel uses port **8080** by default. Please ensure this port is accessible and adjust firewall settings if necessary.
-
-If you do not use web initialization, you can log in with the default admin account:
-
-- **Username**: `admin@ppanel.dev`
-- **Password**: `password`
-
-> **Note**: Please change the default password promptly after your first login to ensure security.
-
-### Create the Necessary Configuration File
-
-Before starting the Docker deployment, manually create and configure `/app/etc/ppanel.yaml` to ensure the system runs smoothly. For detailed configuration examples, please refer to the [Configuration Examples](#configuration-examples) section of the documentation.
-
-### Run the Docker Container
-
-Run the following command to start the container:
-
-```sh
-docker run -d \
-  --network host \
-  --name ppanel-server \
-  -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
-  --restart=always \
-  --log-opt max-size=10m \
-  --log-opt max-file=3 \
-  ppanel/ppanel-server:latest
-```
-
-## Deploying with Docker Compose
-
-PPanel uses port **8080** by default. Please ensure this port is accessible and adjust firewall settings if necessary.
-
-### Create the Necessary Configuration File
-
-Before starting the Docker Compose deployment, manually create and configure `/app/etc/ppanel.yaml` to ensure the system runs smoothly. For detailed configuration examples, please refer to the [Configuration Examples](#configuration-examples) section of the documentation.
-
-### Create the Docker Compose Configuration File
-
-Create a `docker-compose.yml` file:
+Create `compose.yaml`:
 
 ```yaml
-version: '3'
-
 services:
-  ppanel-server:
-    image: ppanel/ppanel-server:latest
+  ppanel:
+    build:
+      context: .
     container_name: ppanel-server
-    network_mode: host
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PPANEL_DB: postgres://ppanel:change-me@db:5432/ppanel?sslmode=disable&TimeZone=Asia%2FShanghai
+      PPANEL_REDIS: redis://:change-me@redis:6379/0
     volumes:
-      - /app/etc/ppanel.yaml:/app/etc/ppanel.yaml
-    restart: always
-    logging:
-      driver: 'json-file'
-      options:
-        max-size: '10m'
-        max-file: '3'
+      - ./etc:/app/etc
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ppanel
+      POSTGRES_USER: ppanel
+      POSTGRES_PASSWORD: change-me
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ppanel -d ppanel"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--requirepass", "change-me"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "change-me", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres-data:
+  redis-data:
 ```
 
-### Start the Service
+Replace every example password before the first start, then run:
 
-Run the following command to start the service:
-
-```sh
-docker compose up -d
+```bash
+docker compose up -d --build
+docker compose logs -f ppanel
 ```
 
-## Important Notes
+The first successful start writes the base configuration to
+`./etc/ppanel.yaml`. Edit `JwtAuth.AccessSecret`, `Administrator`, and
+`Database`, then restart the service:
 
-- **Security**: Be sure to change the default password and keys to ensure application security.
-- **Port Configuration**: Ensure that necessary ports are open to avoid network access issues.
-- **Data Persistence**: It is recommended to mount data volumes when running containers to achieve data persistence.
-
-## Configuration Examples
-
-Here is an example configuration for `ppanel.yaml`:
-
-```yaml
-Host: 0.0.0.0 # Listening IP
-Port: 8080 # Running port
-Debug: true # Enable debug mode
-JwtAuth:
-  AccessSecret: your-secret-key # Token secret (please modify)
-  AccessExpire: 604800 # Token expiration (seconds)
-Logger:
-  FilePath: ./ppanel.log # Log file path
-  MaxSize: 50
-  MaxBackup: 3
-  MaxAge: 30
-  Compress: true
-  LogType: json
-  Level: info # Log level: info, debug, error
-MySQL:
-  Addr: 127.0.0.1:3306 # Database address
-  Dbname: vpnboard # Database name
-  Username: root # Database username
-  Password: your-password # Database password (please modify)
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-  MaxIdleConns: 10
-  MaxOpenConns: 10
-  LogMode: dev
-  LogZap: false
-  SlowThreshold: 1000
-Redis:
-  Host: 127.0.0.1:6379
-  Pass: # Redis password (if any)
-  DB: 0
-
-Administer:
-  Password: password # Admin password (should be changed)
-  Email: admin@ppanel.dev # Admin email address
+```bash
+docker compose restart ppanel
 ```
 
-> **Note**: After modifying the configuration file, please restart the Docker container to apply the changes.
+The backend listens on `http://server-address:8080` by default. Terminate
+public HTTPS traffic at a reverse proxy and do not expose PostgreSQL or Redis.
+MySQL/MariaDB remains supported, but PostgreSQL is recommended for new
+deployments.
 
 import Giscus from '@/components/giscus';
 

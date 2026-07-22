@@ -1,157 +1,86 @@
-## 安装 Docker
+# 使用 Docker 部署服务端
 
-运行以下命令快速安装 Docker：
+本指南从当前服务端源码构建镜像，避免依赖过期或来源不明的预构建镜像。需要
+Docker Compose v2。
 
-```sh
-curl -fsSL https://get.docker.com | bash -s docker
+```bash
+git clone https://github.com/perfect-panel/server.git ppanel-server
+cd ppanel-server
+mkdir -p etc
+: > etc/ppanel.yaml
 ```
 
-## 快速开始
-
-### 通过 Web 界面初始化
-
-PPanel 支持基于 Web 的初始化，简化了手动配置过程。
-
-### 初始化步骤
-
-1. **创建必须的配置文件**：首先手动创建并配置 `/app/etc/ppanel.yaml` 文件，以便进行后续配置。
-
-2. **运行 Docker 容器**：
-
-   ```sh
-   docker run -d \
-     --network host \
-     --name ppanel-server \
-     -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
-     --restart=always \
-     --log-opt max-size=10m \
-     --log-opt max-file=3 \
-     ppanel/ppanel-server:latest
-   ```
-
-3. **访问初始化页面**：在浏览器中访问 `http://服务器IP:8080/init`。
-
-4. **完成配置**：按照指引设置管理员账户、配置 MySQL 数据库和 Redis 服务器。
-
-5. **点击初始化按钮**：完成配置后，点击“初始化”按钮，应用将自动保存配置并重启。
-
-   > **注意**：PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
-
-## 使用 Docker 部署
-
-PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
-
-如果不使用 Web 初始化，可以使用默认的管理员账户登录：
-
-- **用户名**：`admin@ppanel.dev`
-- **密码**：`password`
-
-> **注意**：首次登录后请及时更改默认密码以确保安全。
-
-### 创建必须的配置文件
-
-在开始 Docker 部署之前，首先手动创建并配置 `/app/etc/ppanel.yaml`，以确保系统正常运行。详细的配置项示例，请参阅文档的 [配置项示例](#配置项示例) 部分。
-
-### 运行 Docker 容器
-
-运行以下命令启动容器：
-
-```sh
-docker run -d \
-  --network host \
-  --name ppanel-server \
-  -v /app/etc/ppanel.yaml:/app/etc/ppanel.yaml \
-  --restart=always \
-  --log-opt max-size=10m \
-  --log-opt max-file=3 \
-  ppanel/ppanel-server:latest
-```
-
-## 使用 Docker Compose 部署
-
-PPanel 默认使用端口 **8080**，请确保此端口可访问，必要时调整防火墙设置。
-
-### 创建必须的配置文件
-
-在开始 Docker Compose 部署之前，首先手动创建并配置 `/app/etc/ppanel.yaml`，以确保系统正常运行。详细的配置项示例，请参阅文档的 [配置项示例](#配置项示例) 部分。
-
-### 创建 Docker Compose 配置文件
-
-创建 `docker-compose.yml` 文件：
+创建 `compose.yaml`：
 
 ```yaml
-version: '3'
-
 services:
-  ppanel-server:
-    image: ppanel/ppanel-server:latest
+  ppanel:
+    build:
+      context: .
     container_name: ppanel-server
-    network_mode: host
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PPANEL_DB: postgres://ppanel:change-me@db:5432/ppanel?sslmode=disable&TimeZone=Asia%2FShanghai
+      PPANEL_REDIS: redis://:change-me@redis:6379/0
     volumes:
-      - /app/etc/ppanel.yaml:/app/etc/ppanel.yaml
-    restart: always
-    logging:
-      driver: 'json-file'
-      options:
-        max-size: '10m'
-        max-file: '3'
+      - ./etc:/app/etc
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ppanel
+      POSTGRES_USER: ppanel
+      POSTGRES_PASSWORD: change-me
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ppanel -d ppanel"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--requirepass", "change-me"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "change-me", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres-data:
+  redis-data:
 ```
 
-### 启动服务
+在首次启动前替换示例中的所有密码，然后执行：
 
-运行以下命令启动服务：
-
-```sh
-docker compose up -d
+```bash
+docker compose up -d --build
+docker compose logs -f ppanel
 ```
 
-## 重要提示
+首次成功启动会将基础配置写入 `./etc/ppanel.yaml`。随后编辑该文件中的
+`JwtAuth.AccessSecret`、`Administrator` 与 `Database` 等项目，并重启服务：
 
-- **安全性**：请务必更改默认密码和密钥，以确保应用安全。
-- **端口配置**：确保必要的端口已开放，避免网络访问问题。
-- **数据持久化**：建议在运行容器时挂载数据卷以实现数据持久化。
-
-## 配置项示例
-
-下面是 `ppanel.yaml` 的配置项示例：
-
-```yaml
-Host: 0.0.0.0 # 监听 IP
-Port: 8080 # 运行端口
-Debug: true # 是否开启调试模式
-JwtAuth:
-  AccessSecret: your-secret-key # Token 密钥（请修改）
-  AccessExpire: 604800 # Token 有效期（秒）
-Logger:
-  FilePath: ./ppanel.log # 日志文件路径
-  MaxSize: 50
-  MaxBackup: 3
-  MaxAge: 30
-  Compress: true
-  LogType: json
-  Level: info # 日志级别：info, debug, error
-MySQL:
-  Addr: 127.0.0.1:3306 # 数据库地址
-  Dbname: vpnboard # 数据库名称
-  Username: root # 数据库用户名
-  Password: your-password # 数据库密码（请修改）
-  Config: charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-  MaxIdleConns: 10
-  MaxOpenConns: 10
-  LogMode: dev
-  LogZap: false
-  SlowThreshold: 1000
-Redis:
-  Host: 127.0.0.1:6379
-  Pass: # Redis 密码（如果有）
-  DB: 0
-
-Administrator:
-  Password: password # 管理员密码（应更改）
-  Email: admin@ppanel.dev # 管理员邮箱地址
+```bash
+docker compose restart ppanel
 ```
 
-> **注意**：修改配置文件后，请重启 Docker 容器以应用更改。
+服务端默认监听 `http://服务器地址:8080`。生产环境请在反向代理处配置 HTTPS，
+不要直接公开 PostgreSQL 或 Redis 端口。MySQL/MariaDB 仍可使用，但推荐新部署使用
+PostgreSQL。
 
 import Giscus from '@/components/giscus';
 

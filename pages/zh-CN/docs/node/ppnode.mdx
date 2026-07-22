@@ -1,19 +1,39 @@
-# PPanel-node
+# PPanel Node 部署
 
-一个基于多种内核的PPanel节点服务端，修改自V2bX，支持V2ay,Trojan,Shadowsocks,Tuic,Hysteria协议。
+PPanel Node 的当前仓库为
+[perfect-panel/ppanel-node](https://github.com/perfect-panel/ppanel-node)。旧文档引用的
+`wyx2685/ppanel-node` 脚本已不再作为官方安装来源。
 
-### 一键安装
+## 安装
 
-```
-wget -N https://raw.githubusercontent.com/wyx2685/ppanel-node/master/Scripts/install.sh && bash install.sh
-```
-
-## 构建
+请在节点服务器上执行官方仓库中的脚本：
 
 ```bash
-# 通过-tags选项指定要编译的内核， 可选 xray，sing
-go build -v -o ./node -tags "xray sing with_reality_server with_quic with_grpc with_utls with_wireguard with_acme" -trimpath -ldflags "-s -w -buildid="
+wget -N https://raw.githubusercontent.com/perfect-panel/ppanel-node/master/scripts/install.sh
+bash install.sh
 ```
+
+安装后按节点项目输出的配置文件填写面板地址、节点 ID 与通信密钥。不要将面板管理
+密钥或数据库凭据放入节点配置。
+
+## 协议协商
+
+节点在拉取配置时会通过 `Accept: application/protobuf` 协商传输格式：面板返回
+Protobuf 时，后续用户列表、在线用户、流量和状态上报也使用 Protobuf；面板返回
+JSON 时则继续使用 JSON。无需额外开关。
+
+面板可能提供当前节点版本尚未支持的入站协议；节点会跳过不支持的协议，不影响其他
+已支持的入站。
+
+## 从源码构建
+
+```bash
+git clone https://github.com/perfect-panel/ppanel-node.git
+cd ppanel-node
+GOEXPERIMENT=jsonv2 go build -v -o node -trimpath -ldflags "-s -w -buildid="
+```
+
+具体运行参数和配置字段请以该仓库的 README 与发布说明为准。
 
 import Giscus from '@/components/giscus';
 
