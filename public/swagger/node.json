@@ -1,4452 +1,914 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "",
-    "version": ""
-  },
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "paths": {
-    "/v1/server/config": {
-      "get": {
-        "summary": "Get server config",
-        "operationId": "GetServerConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetServerConfigResponse"
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "HTTP API for PPanel's Hertz server. Application errors are returned in the response code and message fields.",
+        "title": "PPanel API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/v1/server/config": {
+            "get": {
+                "security": [
+                    {
+                        "NodeSecret": []
                     }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
-    },
-    "/v1/server/online": {
-      "post": {
-        "summary": "Push online users",
-        "operationId": "PushOnlineUsers",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OnlineUsersRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
-    },
-    "/v1/server/push": {
-      "post": {
-        "summary": "Push user Traffic",
-        "operationId": "ServerPushUserTraffic",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerPushUserTrafficRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
-    },
-    "/v1/server/status": {
-      "post": {
-        "summary": "Push server status",
-        "operationId": "ServerPushStatus",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {}
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerPushStatusRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
-    },
-    "/v1/server/user": {
-      "get": {
-        "summary": "Get user list",
-        "operationId": "GetServerUserList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/GetServerUserListResponse"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Get server config",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "protocol",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "secret_key",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "server_id",
+                        "in": "query"
                     }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "protocol",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
-    },
-    "/v2/server/{server_id}": {
-      "get": {
-        "summary": "Get Server Protocol Config",
-        "operationId": "QueryServerProtocolConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Response"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/QueryServerConfigResponse"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.GetServerConfigResponse"
+                        }
                     }
-                  }
                 }
-              ]
             }
-          }
         },
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
+        "/v1/server/online": {
+            "post": {
+                "security": [
+                    {
+                        "NodeSecret": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Push online users",
+                "parameters": [
+                    {
+                        "description": "Request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.OnlineUsersRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.ResponseSuccessBean"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/server/push": {
+            "post": {
+                "security": [
+                    {
+                        "NodeSecret": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Push user Traffic",
+                "parameters": [
+                    {
+                        "description": "Request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ServerPushUserTrafficRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.ResponseSuccessBean"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/server/status": {
+            "post": {
+                "security": [
+                    {
+                        "NodeSecret": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Push server status",
+                "parameters": [
+                    {
+                        "description": "Request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ServerPushStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.ResponseSuccessBean"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/server/user": {
+            "get": {
+                "security": [
+                    {
+                        "NodeSecret": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Get user list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "protocol",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "secret_key",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "server_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.GetServerUserListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v2/server/{server_id}": {
+            "get": {
+                "security": [
+                    {
+                        "NodeSecret": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "node"
+                ],
+                "summary": "Get Server Protocol Config",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Server ID",
+                        "name": "server_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "Protocols to include",
+                        "name": "protocols",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/result.ResponseSuccessBean"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.QueryServerConfigResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.GetServerConfigResponse": {
+            "type": "object",
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/dto.ServerBasic"
+                },
+                "config": {},
+                "protocol": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.GetServerUserListResponse": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.ServerUser"
+                    }
+                }
+            }
+        },
+        "dto.NodeDNS": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "domains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "proto": {
+                    "type": "string"
+                },
+                "server_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.NodeOutbound": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "allow_insecure": {
+                    "type": "boolean"
+                },
+                "alpn": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cipher": {
+                    "type": "string"
+                },
+                "congestion_controller": {
+                    "type": "string"
+                },
+                "encryption": {
+                    "type": "string"
+                },
+                "encryption_client_padding": {
+                    "type": "string"
+                },
+                "encryption_mode": {
+                    "type": "string"
+                },
+                "encryption_password": {
+                    "type": "string"
+                },
+                "encryption_rtt": {
+                    "type": "string"
+                },
+                "encryption_ticket": {
+                    "type": "string"
+                },
+                "fingerprint": {
+                    "type": "string"
+                },
+                "flow": {
+                    "type": "string"
+                },
+                "heartbeat": {
+                    "type": "integer"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "multiplex": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "plugin": {
+                    "type": "string"
+                },
+                "plugin_opts": {},
+                "port": {
+                    "type": "integer"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "reality_public_key": {
+                    "type": "string"
+                },
+                "reality_short_id": {
+                    "type": "string"
+                },
+                "reduce_rtt": {
+                    "type": "boolean"
+                },
+                "rules": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "security": {
+                    "type": "string"
+                },
+                "service_name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "string"
+                },
+                "sni": {
+                    "type": "string"
+                },
+                "spider_x": {
+                    "type": "string"
+                },
+                "stream_settings": {
+                    "type": "string"
+                },
+                "transport": {
+                    "type": "string"
+                },
+                "udp_stream": {
+                    "type": "boolean"
+                },
+                "uot": {
+                    "type": "boolean"
+                },
+                "uot_version": {
+                    "type": "integer"
+                },
+                "user": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "xhttp_extra": {
+                    "type": "string"
+                },
+                "xhttp_mode": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.OnlineUser": {
+            "type": "object",
+            "properties": {
+                "ip": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.OnlineUsersRequest": {
+            "type": "object",
+            "properties": {
+                "protocol": {
+                    "type": "string"
+                },
+                "secret_key": {
+                    "type": "string"
+                },
+                "server_id": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.OnlineUser"
+                    }
+                }
+            }
+        },
+        "dto.Protocol": {
+            "type": "object",
+            "properties": {
+                "accept_proxy_protocol": {
+                    "description": "监听器通用兼容字段：是否接收 PROXY protocol；当前节点入站尚未统一启用。",
+                    "type": "boolean"
+                },
+                "allow_insecure": {
+                    "description": "TLS 客户端兼容字段：允许跳过证书校验；入站配置通常不消费，不能作为服务端证书配置使用。",
+                    "type": "boolean"
+                },
+                "alpn": {
+                    "description": "TLS/HTTP/QUIC 协议通用字段：TLS ALPN 列表，当前主要用于 VLESS、VMess、Trojan、TUIC。",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cert_dns_env": {
+                    "description": "TLS 协议通用字段：cert_mode=dns 时传给 DNS 服务商的环境变量/凭据配置。",
+                    "type": "string"
+                },
+                "cert_dns_provider": {
+                    "description": "TLS 协议通用字段：cert_mode=dns 时使用的 DNS 服务商标识。",
+                    "type": "string"
+                },
+                "cert_mode": {
+                    "description": "TLS 协议通用字段：证书来源模式，支持 file、self、http、dns；none 表示不配置证书。",
+                    "type": "string"
+                },
+                "cipher": {
+                    "description": "Shadowsocks/SSR 共用字段：Shadowsocks method 或 SSR cipher。",
+                    "type": "string"
+                },
+                "congestion_controller": {
+                    "description": "QUIC 协议共用字段：TUIC 的主拥塞控制字段，也是 Naive 的旧字段别名。",
+                    "type": "string"
+                },
+                "disable_sni": {
+                    "description": "TLS 客户端兼容字段：禁用 SNI；当前服务端入站不消费。",
+                    "type": "boolean"
+                },
+                "down_mbps": {
+                    "description": "Hysteria2 专属字段：服务端下行带宽参数，单位为 Mbps。",
+                    "type": "integer"
+                },
+                "ech_enable": {
+                    "description": "TLS ECH 兼容字段：是否启用 Encrypted ClientHello；当前节点入站尚未实现。",
+                    "type": "boolean"
+                },
+                "ech_server_name": {
+                    "description": "TLS ECH 兼容字段：ECH 外层 ServerName；当前节点入站尚未实现。",
+                    "type": "string"
+                },
+                "enable": {
+                    "description": "通用字段：是否启用该入站协议。",
+                    "type": "boolean"
+                },
+                "encryption": {
+                    "description": "VLESS Encryption 专属字段：加密套件，如 none、mlkem768x25519plus。",
+                    "type": "string"
+                },
+                "encryption_client_padding": {
+                    "description": "VLESS Encryption 客户端信息字段：客户端方向 padding 规则，用于订阅输出。",
+                    "type": "string"
+                },
+                "encryption_mode": {
+                    "description": "VLESS Encryption 专属字段：密钥封装模式，如 native、xorpub、random。",
+                    "type": "string"
+                },
+                "encryption_password": {
+                    "description": "VLESS Encryption 客户端信息字段：1-RTT/派生认证密码，用于订阅输出。",
+                    "type": "string"
+                },
+                "encryption_private_key": {
+                    "description": "VLESS Encryption 服务端专属字段：ML-KEM/X25519 私钥材料。",
+                    "type": "string"
+                },
+                "encryption_rtt": {
+                    "description": "VLESS Encryption 专属字段：握手往返模式，取值 0rtt 或 1rtt。",
+                    "type": "string"
+                },
+                "encryption_server_padding": {
+                    "description": "VLESS Encryption 服务端专属字段：服务端方向 padding 规则。",
+                    "type": "string"
+                },
+                "encryption_ticket": {
+                    "description": "VLESS Encryption 服务端专属字段：0-RTT ticket。",
+                    "type": "string"
+                },
+                "fingerprint": {
+                    "description": "TLS 客户端兼容字段：uTLS 指纹；当前节点入站不消费，仅为出站/旧配置兼容保留。",
+                    "type": "string"
+                },
+                "flow": {
+                    "description": "VLESS 专属字段：XTLS Vision 流控模式，当前有效值为 xtls-rprx-vision。",
+                    "type": "string"
+                },
+                "heartbeat": {
+                    "description": "TUIC 专属字段：连接心跳间隔，单位为秒；0 使用节点默认值。",
+                    "type": "integer"
+                },
+                "hop_interval": {
+                    "description": "Hysteria2/TUIC 类 QUIC 协议字段：端口跳跃时间间隔；当前节点入站尚未启用该能力。",
+                    "type": "integer"
+                },
+                "hop_ports": {
+                    "description": "Hysteria2/TUIC 类 QUIC 协议字段：端口跳跃范围；当前节点入站尚未启用该能力。",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "VLESS/VMess/Trojan 传输字段：WebSocket、HTTPUpgrade 或 XHTTP 的 Host。",
+                    "type": "string"
+                },
+                "mode": {
+                    "description": "Snell 专属字段：Snell v6 的工作模式；其他协议不应设置。",
+                    "type": "string"
+                },
+                "multiplex": {
+                    "description": "协议无关能力字段：多路复用级别（off、low、medium、high），适用于支持 mux 的流协议。",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "监听网络通用字段：选择 tcp、udp 或 both；Naive、Mieru、SSR、TUIC、Snell 等协议会按各自能力校验。",
+                    "type": "string"
+                },
+                "obfs": {
+                    "description": "混淆协议共用字段：Hysteria2 的 Salamander、Snell v5 的 obfs、SSR 的 obfs 方法。",
+                    "type": "string"
+                },
+                "obfs_host": {
+                    "description": "旧混淆实现兼容字段：混淆目标 Host；当前节点入站不消费，Shadowsocks 插件应使用 plugin_opts。",
+                    "type": "string"
+                },
+                "obfs_param": {
+                    "description": "SSR 专属字段：SSR obfs_param。",
+                    "type": "string"
+                },
+                "obfs_password": {
+                    "description": "Hysteria2 专属字段：Salamander 混淆密码，仅在 obfs=salamander 时使用。",
+                    "type": "string"
+                },
+                "obfs_path": {
+                    "description": "旧混淆实现兼容字段：混淆请求路径；当前节点入站不消费，Shadowsocks 插件应使用 plugin_opts。",
+                    "type": "string"
+                },
+                "padding_scheme": {
+                    "description": "AnyTLS 专属字段：TLS record padding 方案。",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "VLESS/VMess/Trojan 传输字段：WebSocket、HTTPUpgrade 或 XHTTP 的请求路径。",
+                    "type": "string"
+                },
+                "plugin": {
+                    "description": "Shadowsocks（AEAD/2022）专属字段：入站插件名，如 obfs、v2ray-plugin、shadow-tls、restls。",
+                    "type": "string"
+                },
+                "plugin_opts": {
+                    "description": "Shadowsocks（AEAD/2022）专属字段：所选入站插件的结构化参数。"
+                },
+                "port": {
+                    "description": "通用字段：入站监听端口。",
+                    "type": "integer"
+                },
+                "protocol": {
+                    "description": "SSR 专属字段：SSR protocol 方法；JSON 名称 protocol 与顶层 type 不同。",
+                    "type": "string"
+                },
+                "protocol_param": {
+                    "description": "SSR 专属字段：SSR protocol_param。",
+                    "type": "string"
+                },
+                "quic_congestion_control": {
+                    "description": "QUIC 协议共用字段：Naive 的主拥塞控制字段，也是 TUIC 的兼容别名。",
+                    "type": "string"
+                },
+                "ratio": {
+                    "description": "面板通用字段：流量计费倍率，默认值为 1；不参与节点协议握手。",
+                    "type": "number"
+                },
+                "reality_private_key": {
+                    "description": "VLESS/VMess REALITY 服务端专属字段：服务端 X25519 私钥。",
+                    "type": "string"
+                },
+                "reality_public_key": {
+                    "description": "VLESS/VMess REALITY 客户端信息字段：由私钥对应的公钥，主要用于订阅输出。",
+                    "type": "string"
+                },
+                "reality_server_addr": {
+                    "description": "VLESS/VMess REALITY 专属字段：REALITY 握手转发目标地址。",
+                    "type": "string"
+                },
+                "reality_server_port": {
+                    "description": "VLESS/VMess REALITY 专属字段：REALITY 握手转发目标端口。",
+                    "type": "integer"
+                },
+                "reality_short_id": {
+                    "description": "VLESS/VMess REALITY 专属字段：允许客户端使用的 short ID。",
+                    "type": "string"
+                },
+                "reduce_rtt": {
+                    "description": "TUIC 专属字段：启用 QUIC 0-RTT，以减少首次握手往返。",
+                    "type": "boolean"
+                },
+                "security": {
+                    "description": "TLS/REALITY 协议通用字段：选择 none、tls 或 reality；实际可选值由具体协议限制。",
+                    "type": "string"
+                },
+                "server_key": {
+                    "description": "密钥型协议共用字段：Shadowsocks 2022 服务端密钥、SSR 密码或 Snell PSK。",
+                    "type": "string"
+                },
+                "service_name": {
+                    "description": "VLESS/VMess/Trojan gRPC 传输专属字段：gRPC service name。",
+                    "type": "string"
+                },
+                "sni": {
+                    "description": "TLS 协议通用字段：证书域名及 TLS ServerName；REALITY 也用它作为服务端名称。",
+                    "type": "string"
+                },
+                "traffic_pattern": {
+                    "description": "Mieru 专属字段：流量形态/包长分布配置。",
+                    "type": "string"
+                },
+                "transport": {
+                    "description": "VLESS/VMess/Trojan 通用传输字段：tcp、ws、httpupgrade、grpc 或 xhttp。",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "通用字段：协议类型标识，例如 shadowsocks、vless、vmess、hysteria2、tuic。",
+                    "type": "string"
+                },
+                "udp_relay_mode": {
+                    "description": "TUIC/Hysteria 兼容字段：旧实现的 UDP relay 模式；当前节点入站不消费。",
+                    "type": "string"
+                },
+                "uot": {
+                    "description": "协议无关能力字段：UDP over TCP 开关，供支持 UoT 的协议使用，并非某一协议专属。",
+                    "type": "boolean"
+                },
+                "uot_version": {
+                    "description": "协议无关能力字段：UoT 协议版本，当前支持 1 或 2；0 表示使用默认版本。",
+                    "type": "integer"
+                },
+                "up_mbps": {
+                    "description": "Hysteria2 专属字段：服务端上行带宽参数，单位为 Mbps。",
+                    "type": "integer"
+                },
+                "user_hint_is_mandatory": {
+                    "description": "Mieru 专属字段：是否强制客户端携带可识别用户的 user hint。",
+                    "type": "boolean"
+                },
+                "version": {
+                    "description": "Snell/TUIC 共用字段：Snell 使用协议版本；TUIC 仅接受 5（0 表示默认）。",
+                    "type": "integer"
+                },
+                "xhttp_extra": {
+                    "description": "VLESS/VMess/Trojan XHTTP 传输专属字段：XHTTP 扩展路径/参数。",
+                    "type": "string"
+                },
+                "xhttp_mode": {
+                    "description": "VLESS/VMess/Trojan XHTTP 传输专属字段：XHTTP 工作模式，如 auto、packet-up、stream-up。",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.QueryServerConfigResponse": {
+            "type": "object",
+            "properties": {
+                "block": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "dns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.NodeDNS"
+                    }
+                },
+                "ip_strategy": {
+                    "type": "string"
+                },
+                "outbound": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.NodeOutbound"
+                    }
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Protocol"
+                    }
+                },
+                "pull_interval": {
+                    "type": "integer"
+                },
+                "push_interval": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "traffic_report_threshold": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.ServerBasic": {
+            "type": "object",
+            "properties": {
+                "pull_interval": {
+                    "type": "integer"
+                },
+                "push_interval": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.ServerPushStatusRequest": {
+            "type": "object",
+            "properties": {
+                "cpu": {
+                    "type": "number"
+                },
+                "disk": {
+                    "type": "number"
+                },
+                "mem": {
+                    "type": "number"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "secret_key": {
+                    "type": "string"
+                },
+                "server_id": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.ServerPushUserTrafficRequest": {
+            "type": "object",
+            "properties": {
+                "protocol": {
+                    "type": "string"
+                },
+                "secret_key": {
+                    "type": "string"
+                },
+                "server_id": {
+                    "type": "integer"
+                },
+                "traffic": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.UserTraffic"
+                    }
+                }
+            }
+        },
+        "dto.ServerUser": {
+            "type": "object",
+            "properties": {
+                "device_limit": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "speed_limit": {
+                    "type": "integer"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UserTraffic": {
+            "type": "object",
+            "properties": {
+                "download": {
+                    "type": "integer"
+                },
+                "uid": {
+                    "type": "integer"
+                },
+                "upload": {
+                    "type": "integer"
+                }
+            }
+        },
+        "result.ResponseSuccessBean": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+        "NodeSecret": {
+            "type": "apiKey",
             "name": "secret_key",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protocols",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ppanel/server"
-        ]
-      }
+            "in": "query"
+        },
+        "TelegramSecret": {
+            "type": "apiKey",
+            "name": "secret",
+            "in": "query"
+        }
     }
-  },
-  "definitions": {
-    "Ads": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "title": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "target_url": {
-          "type": "string"
-        },
-        "start_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "end_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Ads",
-      "required": [
-        "id",
-        "title",
-        "type",
-        "content",
-        "description",
-        "target_url",
-        "start_time",
-        "end_time",
-        "status",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "AlipayNotifyResponse": {
-      "type": "object",
-      "properties": {
-        "return_code": {
-          "type": "string"
-        }
-      },
-      "title": "AlipayNotifyResponse",
-      "required": [
-        "return_code"
-      ]
-    },
-    "Announcement": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "pinned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "popup": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Announcement",
-      "required": [
-        "id",
-        "title",
-        "content",
-        "show",
-        "pinned",
-        "popup",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "AnyTLS": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "AnyTLS",
-      "required": [
-        "port",
-        "security_config"
-      ]
-    },
-    "AppUserSubcbribe": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "start_time": {
-          "type": "string"
-        },
-        "expire_time": {
-          "type": "string"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AppUserSubscbribeNode"
-          }
-        }
-      },
-      "title": "AppUserSubcbribe",
-      "required": [
-        "id",
-        "name",
-        "upload",
-        "traffic",
-        "download",
-        "device_limit",
-        "start_time",
-        "expire_time",
-        "list"
-      ]
-    },
-    "AppUserSubscbribeNode": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "relay_mode": {
-          "type": "string"
-        },
-        "relay_node": {
-          "type": "string"
-        },
-        "server_addr": {
-          "type": "string"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic_ratio": {
-          "type": "number",
-          "format": "double"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "config": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "string"
-        },
-        "longitude": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "AppUserSubscbribeNode",
-      "required": [
-        "id",
-        "name",
-        "uuid",
-        "protocol",
-        "relay_mode",
-        "relay_node",
-        "server_addr",
-        "speed_limit",
-        "tags",
-        "traffic",
-        "traffic_ratio",
-        "upload",
-        "config",
-        "country",
-        "city",
-        "latitude",
-        "longitude",
-        "created_at",
-        "download"
-      ]
-    },
-    "Application": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "subscribe_type": {
-          "type": "string"
-        }
-      },
-      "title": "Application",
-      "required": [
-        "id",
-        "icon",
-        "name",
-        "description",
-        "subscribe_type"
-      ]
-    },
-    "ApplicationPlatform": {
-      "type": "object",
-      "properties": {
-        "ios": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        },
-        "macos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        },
-        "linux": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        },
-        "android": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        },
-        "windows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        },
-        "harmony": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationVersion"
-          }
-        }
-      },
-      "title": "ApplicationPlatform"
-    },
-    "ApplicationResponse": {
-      "type": "object",
-      "properties": {
-        "applications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationResponseInfo"
-          }
-        }
-      },
-      "title": "ApplicationResponse",
-      "required": [
-        "applications"
-      ]
-    },
-    "ApplicationResponseInfo": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "subscribe_type": {
-          "type": "string"
-        },
-        "platform": {
-          "$ref": "#/definitions/ApplicationPlatform"
-        }
-      },
-      "title": "ApplicationResponseInfo",
-      "required": [
-        "id",
-        "name",
-        "icon",
-        "description",
-        "subscribe_type",
-        "platform"
-      ]
-    },
-    "ApplicationVersion": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "url": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "is_default": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "ApplicationVersion",
-      "required": [
-        "id",
-        "url",
-        "version",
-        "description",
-        "is_default"
-      ]
-    },
-    "AuthConfig": {
-      "type": "object",
-      "properties": {
-        "mobile": {
-          "$ref": "#/definitions/MobileAuthenticateConfig"
-        },
-        "email": {
-          "$ref": "#/definitions/EmailAuthticateConfig"
-        },
-        "device": {
-          "$ref": "#/definitions/DeviceAuthticateConfig"
-        },
-        "register": {
-          "$ref": "#/definitions/PubilcRegisterConfig"
-        }
-      },
-      "title": "AuthConfig",
-      "required": [
-        "mobile",
-        "email",
-        "device",
-        "register"
-      ]
-    },
-    "AuthMethodConfig": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "method": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "AuthMethodConfig",
-      "required": [
-        "id",
-        "method",
-        "config",
-        "enabled"
-      ]
-    },
-    "BalanceLog": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "integer",
-          "format": "uin16"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_no": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "BalanceLog",
-      "required": [
-        "type",
-        "user_id",
-        "amount",
-        "balance",
-        "timestamp"
-      ]
-    },
-    "CheckoutOrderRequest": {
-      "type": "object",
-      "properties": {
-        "orderNo": {
-          "type": "string"
-        },
-        "returnUrl": {
-          "type": "string"
-        }
-      },
-      "title": "CheckoutOrderRequest",
-      "required": [
-        "orderNo"
-      ]
-    },
-    "CheckoutOrderResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "checkout_url": {
-          "type": "string"
-        },
-        "stripe": {
-          "$ref": "#/definitions/StripePayment"
-        }
-      },
-      "title": "CheckoutOrderResponse",
-      "required": [
-        "type"
-      ]
-    },
-    "CloseOrderRequest": {
-      "type": "object",
-      "properties": {
-        "orderNo": {
-          "type": "string"
-        }
-      },
-      "title": "CloseOrderRequest",
-      "required": [
-        "orderNo"
-      ]
-    },
-    "CommissionLog": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "integer",
-          "format": "uin16"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_no": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "CommissionLog",
-      "required": [
-        "type",
-        "user_id",
-        "amount",
-        "order_no",
-        "timestamp"
-      ]
-    },
-    "Coupon": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "start_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "expire_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        },
-        "used_count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Coupon",
-      "required": [
-        "id",
-        "name",
-        "code",
-        "count",
-        "type",
-        "discount",
-        "start_time",
-        "expire_time",
-        "user_limit",
-        "subscribe",
-        "used_count",
-        "enable",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "CurrencyConfig": {
-      "type": "object",
-      "properties": {
-        "access_key": {
-          "type": "string"
-        },
-        "currency_unit": {
-          "type": "string"
-        },
-        "currency_symbol": {
-          "type": "string"
-        }
-      },
-      "title": "CurrencyConfig",
-      "required": [
-        "access_key",
-        "currency_unit",
-        "currency_symbol"
-      ]
-    },
-    "DeviceAuthticateConfig": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "show_ads": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_security": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "only_real_device": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "DeviceAuthticateConfig",
-      "required": [
-        "enable",
-        "show_ads",
-        "enable_security",
-        "only_real_device"
-      ]
-    },
-    "Document": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Document",
-      "required": [
-        "id",
-        "title",
-        "content",
-        "tags",
-        "show",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "DownloadLink": {
-      "type": "object",
-      "properties": {
-        "ios": {
-          "type": "string"
-        },
-        "android": {
-          "type": "string"
-        },
-        "windows": {
-          "type": "string"
-        },
-        "mac": {
-          "type": "string"
-        },
-        "linux": {
-          "type": "string"
-        },
-        "harmony": {
-          "type": "string"
-        }
-      },
-      "title": "DownloadLink"
-    },
-    "EPayNotifyRequest": {
-      "type": "object",
-      "properties": {
-        "pid": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trade_no": {
-          "type": "string"
-        },
-        "out_trade_no": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "money": {
-          "type": "string"
-        },
-        "trade_status": {
-          "type": "string"
-        },
-        "param": {
-          "type": "string"
-        },
-        "sign": {
-          "type": "string"
-        },
-        "sign_type": {
-          "type": "string"
-        }
-      },
-      "title": "EPayNotifyRequest",
-      "required": [
-        "pid",
-        "trade_no",
-        "out_trade_no",
-        "type",
-        "name",
-        "money",
-        "trade_status",
-        "param",
-        "sign",
-        "sign_type"
-      ]
-    },
-    "EmailAuthticateConfig": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_domain_suffix": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "domain_suffix_list": {
-          "type": "string"
-        }
-      },
-      "title": "EmailAuthticateConfig",
-      "required": [
-        "enable",
-        "enable_verify",
-        "enable_domain_suffix",
-        "domain_suffix_list"
-      ]
-    },
-    "Follow": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ticket_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "from": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "content": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Follow",
-      "required": [
-        "id",
-        "ticket_id",
-        "from",
-        "type",
-        "content",
-        "created_at"
-      ]
-    },
-    "GetAvailablePaymentMethodsResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PaymentMethod"
-          }
-        }
-      },
-      "title": "GetAvailablePaymentMethodsResponse",
-      "required": [
-        "list"
-      ]
-    },
-    "GetServerConfigRequest": {
-      "type": "object",
-      "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secret_key": {
-          "type": "string"
-        }
-      },
-      "title": "GetServerConfigRequest"
-    },
-    "GetServerConfigResponse": {
-      "type": "object",
-      "properties": {
-        "basic": {
-          "$ref": "#/definitions/ServerBasic"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        }
-      },
-      "title": "GetServerConfigResponse",
-      "required": [
-        "basic",
-        "protocol",
-        "config"
-      ]
-    },
-    "GetServerUserListRequest": {
-      "type": "object",
-      "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secret_key": {
-          "type": "string"
-        }
-      },
-      "title": "GetServerUserListRequest"
-    },
-    "GetServerUserListResponse": {
-      "type": "object",
-      "properties": {
-        "users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerUser"
-          }
-        }
-      },
-      "title": "GetServerUserListResponse",
-      "required": [
-        "users"
-      ]
-    },
-    "GetUserSubscribeTrafficLogsRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "start_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "end_time": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "GetUserSubscribeTrafficLogsRequest",
-      "required": [
-        "page",
-        "size",
-        "user_id",
-        "subscribe_id",
-        "start_time",
-        "end_time"
-      ]
-    },
-    "GetUserSubscribeTrafficLogsResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TrafficLog"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "GetUserSubscribeTrafficLogsResponse",
-      "required": [
-        "list",
-        "total"
-      ]
-    },
-    "Hysteria2": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "hop_ports": {
-          "type": "string"
-        },
-        "hop_interval": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "obfs_password": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Hysteria2",
-      "required": [
-        "port",
-        "hop_ports",
-        "hop_interval",
-        "obfs_password",
-        "security_config"
-      ]
-    },
-    "InviteConfig": {
-      "type": "object",
-      "properties": {
-        "forced_invite": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "referral_percentage": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "only_first_purchase": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "InviteConfig",
-      "required": [
-        "forced_invite",
-        "referral_percentage",
-        "only_first_purchase"
-      ]
-    },
-    "MessageLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "to": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "string"
-        },
-        "content": {
-          "type": "object"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "MessageLog",
-      "required": [
-        "id",
-        "type",
-        "platform",
-        "to",
-        "subject",
-        "content",
-        "status",
-        "created_at"
-      ]
-    },
-    "MobileAuthenticateConfig": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_whitelist": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "whitelist": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "MobileAuthenticateConfig",
-      "required": [
-        "enable",
-        "enable_whitelist",
-        "whitelist"
-      ]
-    },
-    "NodeConfig": {
-      "type": "object",
-      "properties": {
-        "node_secret": {
-          "type": "string"
-        },
-        "node_pull_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "node_push_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic_report_threshold": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_strategy": {
-          "type": "string"
-        },
-        "dns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeDNS"
-          }
-        },
-        "block": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "outbound": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeOutbound"
-          }
-        }
-      },
-      "title": "NodeConfig",
-      "required": [
-        "node_secret",
-        "node_pull_interval",
-        "node_push_interval",
-        "traffic_report_threshold",
-        "ip_strategy",
-        "dns",
-        "block",
-        "outbound"
-      ]
-    },
-    "NodeDNS": {
-      "type": "object",
-      "properties": {
-        "proto": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "domains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "NodeDNS",
-      "required": [
-        "proto",
-        "address",
-        "domains"
-      ]
-    },
-    "NodeOutbound": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "cipher": {
-          "type": "string"
-        },
-        "security": {
-          "type": "string"
-        },
-        "sni": {
-          "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "host": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "service_name": {
-          "type": "string"
-        },
-        "flow": {
-          "type": "string"
-        },
-        "uot": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "uot_version": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "congestion_controller": {
-          "type": "string"
-        },
-        "udp_stream": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "reduce_rtt": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "heartbeat": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "reality_public_key": {
-          "type": "string"
-        },
-        "reality_short_id": {
-          "type": "string"
-        },
-        "spider_x": {
-          "type": "string"
-        },
-        "settings": {
-          "type": "string"
-        },
-        "stream_settings": {
-          "type": "string"
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "NodeOutbound",
-      "required": [
-        "name",
-        "protocol",
-        "address",
-        "port",
-        "password",
-        "rules"
-      ]
-    },
-    "NodeRelay": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "prefix": {
-          "type": "string"
-        }
-      },
-      "title": "NodeRelay",
-      "required": [
-        "host",
-        "port",
-        "prefix"
-      ]
-    },
-    "OnlineUser": {
-      "type": "object",
-      "properties": {
-        "uid": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip": {
-          "type": "string"
-        }
-      },
-      "title": "OnlineUser",
-      "required": [
-        "uid",
-        "ip"
-      ]
-    },
-    "OnlineUsersRequest": {
-      "type": "object",
-      "properties": {
-        "users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnlineUser"
-          }
-        }
-      },
-      "title": "OnlineUsersRequest",
-      "required": [
-        "users"
-      ]
-    },
-    "Order": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_no": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "gift_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        },
-        "coupon_discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "commission": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "payment": {
-          "$ref": "#/definitions/PaymentMethod"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trade_no": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Order",
-      "required": [
-        "id",
-        "user_id",
-        "order_no",
-        "type",
-        "quantity",
-        "price",
-        "amount",
-        "gift_amount",
-        "discount",
-        "coupon",
-        "coupon_discount",
-        "payment",
-        "fee_amount",
-        "trade_no",
-        "status",
-        "subscribe_id",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "OrderDetail": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_no": {
-          "type": "string"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "gift_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        },
-        "coupon_discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "commission": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "payment": {
-          "$ref": "#/definitions/PaymentMethod"
-        },
-        "method": {
-          "type": "string"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trade_no": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe": {
-          "$ref": "#/definitions/Subscribe"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "OrderDetail",
-      "required": [
-        "id",
-        "user_id",
-        "order_no",
-        "type",
-        "quantity",
-        "price",
-        "amount",
-        "gift_amount",
-        "discount",
-        "coupon",
-        "coupon_discount",
-        "payment",
-        "method",
-        "fee_amount",
-        "trade_no",
-        "status",
-        "subscribe_id",
-        "subscribe",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "PaymentConfig": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "PaymentConfig",
-      "required": [
-        "id",
-        "name",
-        "platform",
-        "description",
-        "config",
-        "fee_mode",
-        "enable"
-      ]
-    },
-    "PaymentMethod": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "PaymentMethod",
-      "required": [
-        "id",
-        "name",
-        "platform",
-        "description",
-        "icon",
-        "fee_mode",
-        "fee_percent",
-        "fee_amount",
-        "sort"
-      ]
-    },
-    "PaymentMethodDetail": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "config": {
-          "type": "object"
-        },
-        "fee_mode": {
-          "type": "integer",
-          "format": "uint32"
-        },
-        "fee_percent": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "notify_url": {
-          "type": "string"
-        }
-      },
-      "title": "PaymentMethodDetail",
-      "required": [
-        "id",
-        "name",
-        "platform",
-        "description",
-        "icon",
-        "domain",
-        "config",
-        "fee_mode",
-        "fee_percent",
-        "fee_amount",
-        "sort",
-        "enable",
-        "notify_url"
-      ]
-    },
-    "PlatformInfo": {
-      "type": "object",
-      "properties": {
-        "platform": {
-          "type": "string"
-        },
-        "platform_url": {
-          "type": "string"
-        },
-        "platform_field_description": {
-          "type": "object"
-        }
-      },
-      "title": "PlatformInfo",
-      "required": [
-        "platform",
-        "platform_url",
-        "platform_field_description"
-      ]
-    },
-    "PlatformResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlatformInfo"
-          }
-        }
-      },
-      "title": "PlatformResponse",
-      "required": [
-        "list"
-      ]
-    },
-    "PreOrderResponse": {
-      "type": "object",
-      "properties": {
-        "price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "gift_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        },
-        "coupon_discount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fee_amount": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "PreOrderResponse",
-      "required": [
-        "price",
-        "amount",
-        "discount",
-        "gift_amount",
-        "coupon",
-        "coupon_discount",
-        "fee_amount"
-      ]
-    },
-    "PreRenewalOrderResponse": {
-      "type": "object",
-      "properties": {
-        "orderNo": {
-          "type": "string"
-        }
-      },
-      "title": "PreRenewalOrderResponse",
-      "required": [
-        "orderNo"
-      ]
-    },
-    "PrivacyPolicyConfig": {
-      "type": "object",
-      "properties": {
-        "privacy_policy": {
-          "type": "string"
-        }
-      },
-      "title": "PrivacyPolicyConfig",
-      "required": [
-        "privacy_policy"
-      ]
-    },
-    "Protocol": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "uin16"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "security": {
-          "type": "string"
-        },
-        "sni": {
-          "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "reality_server_addr": {
-          "type": "string"
-        },
-        "reality_server_port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "reality_private_key": {
-          "type": "string"
-        },
-        "reality_public_key": {
-          "type": "string"
-        },
-        "reality_short_id": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "host": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "service_name": {
-          "type": "string"
-        },
-        "cipher": {
-          "type": "string"
-        },
-        "server_key": {
-          "type": "string"
-        },
-        "flow": {
-          "type": "string"
-        },
-        "hop_ports": {
-          "type": "string"
-        },
-        "hop_interval": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "obfs_password": {
-          "type": "string"
-        },
-        "disable_sni": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "reduce_rtt": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "udp_relay_mode": {
-          "type": "string"
-        },
-        "congestion_controller": {
-          "type": "string"
-        },
-        "multiplex": {
-          "type": "string",
-          "description": "mux, eg: off/low/medium/high"
-        },
-        "padding_scheme": {
-          "type": "string",
-          "description": "padding scheme"
-        },
-        "up_mbps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "upload speed limit"
-        },
-        "down_mbps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "download speed limit"
-        },
-        "obfs": {
-          "type": "string",
-          "description": "obfs, 'none', 'http', 'tls'"
-        },
-        "obfs_host": {
-          "type": "string",
-          "description": "obfs host"
-        },
-        "obfs_path": {
-          "type": "string",
-          "description": "obfs path"
-        },
-        "xhttp_mode": {
-          "type": "string",
-          "description": "xhttp mode"
-        },
-        "xhttp_extra": {
-          "type": "string",
-          "description": "xhttp extra path"
-        },
-        "encryption": {
-          "type": "string",
-          "description": "encryption，'none', 'mlkem768x25519plus'"
-        },
-        "encryption_mode": {
-          "type": "string",
-          "description": "encryption mode，'native', 'xorpub', 'random'"
-        },
-        "encryption_rtt": {
-          "type": "string",
-          "description": "encryption rtt，'0rtt', '1rtt'"
-        },
-        "encryption_ticket": {
-          "type": "string",
-          "description": "encryption ticket"
-        },
-        "encryption_server_padding": {
-          "type": "string",
-          "description": "encryption server padding"
-        },
-        "encryption_private_key": {
-          "type": "string",
-          "description": "encryption private key"
-        },
-        "encryption_client_padding": {
-          "type": "string",
-          "description": "encryption client padding"
-        },
-        "encryption_password": {
-          "type": "string",
-          "description": "encryption password"
-        },
-        "ratio": {
-          "type": "number",
-          "format": "double",
-          "description": "Traffic ratio, default is 1"
-        },
-        "cert_mode": {
-          "type": "string",
-          "description": "Certificate mode, `none`｜`http`｜`dns`｜`self`"
-        },
-        "cert_dns_provider": {
-          "type": "string",
-          "description": "DNS provider for certificate"
-        },
-        "cert_dns_env": {
-          "type": "string",
-          "description": "Environment for DNS provider"
-        }
-      },
-      "title": "Protocol",
-      "required": [
-        "type",
-        "port",
-        "enable"
-      ]
-    },
-    "PubilcRegisterConfig": {
-      "type": "object",
-      "properties": {
-        "stop_register": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_ip_register_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "ip_register_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_register_limit_duration": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "PubilcRegisterConfig",
-      "required": [
-        "stop_register",
-        "enable_ip_register_limit",
-        "ip_register_limit",
-        "ip_register_limit_duration"
-      ]
-    },
-    "PubilcVerifyCodeConfig": {
-      "type": "object",
-      "properties": {
-        "verify_code_interval": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "PubilcVerifyCodeConfig",
-      "required": [
-        "verify_code_interval"
-      ]
-    },
-    "PurchaseOrderRequest": {
-      "type": "object",
-      "properties": {
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64",
-          "maximum": 1000,
-          "exclusiveMinimum": true
-        },
-        "payment": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        }
-      },
-      "title": "PurchaseOrderRequest",
-      "required": [
-        "subscribe_id",
-        "quantity"
-      ]
-    },
-    "PurchaseOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order_no": {
-          "type": "string"
-        }
-      },
-      "title": "PurchaseOrderResponse",
-      "required": [
-        "order_no"
-      ]
-    },
-    "QueryAnnouncementRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "pinned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "popup": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "QueryAnnouncementRequest",
-      "required": [
-        "page",
-        "size",
-        "pinned",
-        "popup"
-      ]
-    },
-    "QueryAnnouncementResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "announcements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Announcement"
-          }
-        }
-      },
-      "title": "QueryAnnouncementResponse",
-      "required": [
-        "total",
-        "announcements"
-      ]
-    },
-    "QueryDocumentDetailRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QueryDocumentDetailRequest",
-      "required": [
-        "id"
-      ]
-    },
-    "QueryDocumentListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Document"
-          }
-        }
-      },
-      "title": "QueryDocumentListResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
-    "QueryOrderDetailRequest": {
-      "type": "object",
-      "properties": {
-        "order_no": {
-          "type": "string"
-        }
-      },
-      "title": "QueryOrderDetailRequest",
-      "required": [
-        "order_no"
-      ]
-    },
-    "QueryOrderListRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "title": "QueryOrderListRequest",
-      "required": [
-        "page",
-        "size"
-      ]
-    },
-    "QueryOrderListResponse": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OrderDetail"
-          }
-        }
-      },
-      "title": "QueryOrderListResponse",
-      "required": [
-        "total",
-        "list"
-      ]
-    },
-    "QueryServerConfigRequest": {
-      "type": "object",
-      "properties": {
-        "secret_key": {
-          "type": "string"
-        },
-        "protocols": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "QueryServerConfigRequest",
-      "required": [
-        "secret_key"
-      ]
-    },
-    "QueryServerConfigResponse": {
-      "type": "object",
-      "properties": {
-        "traffic_report_threshold": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_strategy": {
-          "type": "string"
-        },
-        "dns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeDNS"
-          }
-        },
-        "block": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "outbound": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeOutbound"
-          }
-        },
-        "protocols": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Protocol"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QueryServerConfigResponse",
-      "required": [
-        "traffic_report_threshold",
-        "ip_strategy",
-        "dns",
-        "block",
-        "outbound",
-        "protocols",
-        "total"
-      ]
-    },
-    "QuerySubscribeGroupListResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscribeGroup"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QuerySubscribeGroupListResponse",
-      "required": [
-        "list",
-        "total"
-      ]
-    },
-    "QuerySubscribeListResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Subscribe"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QuerySubscribeListResponse",
-      "required": [
-        "list",
-        "total"
-      ]
-    },
-    "QueryUserAffiliateCountResponse": {
-      "type": "object",
-      "properties": {
-        "registers": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "total_commission": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QueryUserAffiliateCountResponse",
-      "required": [
-        "registers",
-        "total_commission"
-      ]
-    },
-    "QueryUserAffiliateListRequest": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "title": "QueryUserAffiliateListRequest",
-      "required": [
-        "page",
-        "size"
-      ]
-    },
-    "QueryUserAffiliateListResponse": {
-      "type": "object",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserAffiliate"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "QueryUserAffiliateListResponse",
-      "required": [
-        "list",
-        "total"
-      ]
-    },
-    "RechargeOrderRequest": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "integer",
-          "format": "int64",
-          "maximum": 2000000000,
-          "exclusiveMinimum": true
-        },
-        "payment": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "RechargeOrderRequest",
-      "required": [
-        "amount",
-        "payment"
-      ]
-    },
-    "RechargeOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order_no": {
-          "type": "string"
-        }
-      },
-      "title": "RechargeOrderResponse",
-      "required": [
-        "order_no"
-      ]
-    },
-    "RegisterConfig": {
-      "type": "object",
-      "properties": {
-        "stop_register": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trial": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "trial_subscribe": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trial_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "trial_time_unit": {
-          "type": "string"
-        },
-        "enable_ip_register_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "ip_register_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip_register_limit_duration": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "RegisterConfig",
-      "required": [
-        "stop_register",
-        "enable_trial",
-        "trial_subscribe",
-        "trial_time",
-        "trial_time_unit",
-        "enable_ip_register_limit",
-        "ip_register_limit",
-        "ip_register_limit_duration"
-      ]
-    },
-    "RenewalOrderRequest": {
-      "type": "object",
-      "properties": {
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64",
-          "maximum": 1000
-        },
-        "payment": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "coupon": {
-          "type": "string"
-        }
-      },
-      "title": "RenewalOrderRequest",
-      "required": [
-        "user_subscribe_id",
-        "quantity",
-        "payment"
-      ]
-    },
-    "RenewalOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order_no": {
-          "type": "string"
-        }
-      },
-      "title": "RenewalOrderResponse",
-      "required": [
-        "order_no"
-      ]
-    },
-    "ResetSubscribeTrafficLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "type": {
-          "type": "integer",
-          "format": "uin16"
-        },
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_no": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ResetSubscribeTrafficLog",
-      "required": [
-        "id",
-        "type",
-        "user_subscribe_id",
-        "timestamp"
-      ]
-    },
-    "ResetTrafficOrderRequest": {
-      "type": "object",
-      "properties": {
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "payment": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ResetTrafficOrderRequest",
-      "required": [
-        "user_subscribe_id",
-        "payment"
-      ]
-    },
-    "ResetTrafficOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order_no": {
-          "type": "string"
-        }
-      },
-      "title": "ResetTrafficOrderResponse",
-      "required": [
-        "order_no"
-      ]
-    },
-    "ResetUserSubscribeTokenRequest": {
-      "type": "object",
-      "properties": {
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ResetUserSubscribeTokenRequest",
-      "required": [
-        "user_subscribe_id"
-      ]
-    },
-    "Response": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "description": "状态码"
-        },
-        "msg": {
-          "type": "string",
-          "description": "消息"
-        },
-        "data": {
-          "type": "object",
-          "description": "数据"
-        }
-      }
-    },
-    "SecurityConfig": {
-      "type": "object",
-      "properties": {
-        "sni": {
-          "type": "string"
-        },
-        "allow_insecure": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "reality_server_addr": {
-          "type": "string"
-        },
-        "reality_server_port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "reality_private_key": {
-          "type": "string"
-        },
-        "reality_public_key": {
-          "type": "string"
-        },
-        "reality_short_id": {
-          "type": "string"
-        }
-      },
-      "title": "SecurityConfig",
-      "required": [
-        "sni",
-        "allow_insecure",
-        "fingerprint",
-        "reality_server_addr",
-        "reality_server_port",
-        "reality_private_key",
-        "reality_public_key",
-        "reality_short_id"
-      ]
-    },
-    "ServerBasic": {
-      "type": "object",
-      "properties": {
-        "push_interval": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "pull_interval": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerBasic",
-      "required": [
-        "push_interval",
-        "pull_interval"
-      ]
-    },
-    "ServerCommon": {
-      "type": "object",
-      "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secret_key": {
-          "type": "string"
-        }
-      },
-      "title": "ServerCommon",
-      "required": [
-        "protocol",
-        "server_id",
-        "secret_key"
-      ]
-    },
-    "ServerGroup": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerGroup",
-      "required": [
-        "id",
-        "name",
-        "description",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "ServerPushStatusRequest": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "type": "number",
-          "format": "double"
-        },
-        "mem": {
-          "type": "number",
-          "format": "double"
-        },
-        "disk": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerPushStatusRequest",
-      "required": [
-        "cpu",
-        "mem",
-        "disk",
-        "updated_at"
-      ]
-    },
-    "ServerPushUserTrafficRequest": {
-      "type": "object",
-      "properties": {
-        "traffic": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserTraffic"
-          }
-        }
-      },
-      "title": "ServerPushUserTrafficRequest",
-      "required": [
-        "traffic"
-      ]
-    },
-    "ServerRuleGroup": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "rules": {
-          "type": "string"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "default": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerRuleGroup",
-      "required": [
-        "id",
-        "icon",
-        "name",
-        "type",
-        "tags",
-        "rules",
-        "enable",
-        "default",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "ServerUser": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "ServerUser",
-      "required": [
-        "id",
-        "uuid",
-        "speed_limit",
-        "device_limit"
-      ]
-    },
-    "Shadowsocks": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "server_key": {
-          "type": "string"
-        }
-      },
-      "title": "Shadowsocks",
-      "required": [
-        "method",
-        "port",
-        "server_key"
-      ]
-    },
-    "ShadowsocksProtocol": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "method": {
-          "type": "string"
-        }
-      },
-      "title": "ShadowsocksProtocol",
-      "required": [
-        "port",
-        "method"
-      ]
-    },
-    "SiteConfig": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "site_name": {
-          "type": "string"
-        },
-        "site_desc": {
-          "type": "string"
-        },
-        "site_logo": {
-          "type": "string"
-        },
-        "keywords": {
-          "type": "string"
-        },
-        "custom_html": {
-          "type": "string"
-        },
-        "custom_data": {
-          "type": "string"
-        }
-      },
-      "title": "SiteConfig",
-      "required": [
-        "host",
-        "site_name",
-        "site_desc",
-        "site_logo",
-        "keywords",
-        "custom_html",
-        "custom_data"
-      ]
-    },
-    "SiteCustomDataContacts": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "telephone": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        }
-      },
-      "title": "SiteCustomDataContacts",
-      "required": [
-        "email",
-        "telephone",
-        "address"
-      ]
-    },
-    "SortItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SortItem",
-      "required": [
-        "id",
-        "sort"
-      ]
-    },
-    "StripePayment": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
-        },
-        "publishable_key": {
-          "type": "string"
-        }
-      },
-      "title": "StripePayment",
-      "required": [
-        "method",
-        "client_secret",
-        "publishable_key"
-      ]
-    },
-    "Subscribe": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "language": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "unit_price": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "unit_time": {
-          "type": "string"
-        },
-        "discount": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscribeDiscount"
-          }
-        },
-        "replacement": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "inventory": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "speed_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "device_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quota": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "nodes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "node_tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "show": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sell": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "sort": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "deduction_ratio": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "allow_deduction": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "reset_cycle": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "renewal_reset": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "show_original_price": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Subscribe",
-      "required": [
-        "id",
-        "name",
-        "language",
-        "description",
-        "unit_price",
-        "unit_time",
-        "discount",
-        "replacement",
-        "inventory",
-        "traffic",
-        "speed_limit",
-        "device_limit",
-        "quota",
-        "nodes",
-        "node_tags",
-        "show",
-        "sell",
-        "sort",
-        "deduction_ratio",
-        "allow_deduction",
-        "reset_cycle",
-        "renewal_reset",
-        "show_original_price",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "SubscribeConfig": {
-      "type": "object",
-      "properties": {
-        "single_model": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "subscribe_path": {
-          "type": "string"
-        },
-        "subscribe_domain": {
-          "type": "string"
-        },
-        "pan_domain": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "user_agent_limit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "user_agent_list": {
-          "type": "string"
-        },
-        "show_tutorial": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "SubscribeConfig",
-      "required": [
-        "single_model",
-        "subscribe_path",
-        "subscribe_domain",
-        "pan_domain",
-        "user_agent_limit",
-        "user_agent_list",
-        "show_tutorial"
-      ]
-    },
-    "SubscribeDiscount": {
-      "type": "object",
-      "properties": {
-        "quantity": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "discount": {
-          "type": "number",
-          "format": "double"
-        }
-      },
-      "title": "SubscribeDiscount",
-      "required": [
-        "quantity",
-        "discount"
-      ]
-    },
-    "SubscribeGroup": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "SubscribeGroup",
-      "required": [
-        "id",
-        "name",
-        "description",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "SubscribeType": {
-      "type": "object",
-      "properties": {
-        "subscribe_types": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "title": "SubscribeType",
-      "required": [
-        "subscribe_types"
-      ]
-    },
-    "TelegramConfig": {
-      "type": "object",
-      "properties": {
-        "telegram_bot_token": {
-          "type": "string"
-        },
-        "telegram_group_url": {
-          "type": "string"
-        },
-        "telegram_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "telegram_web_hook_domain": {
-          "type": "string"
-        }
-      },
-      "title": "TelegramConfig",
-      "required": [
-        "telegram_bot_token",
-        "telegram_group_url",
-        "telegram_notify",
-        "telegram_web_hook_domain"
-      ]
-    },
-    "Ticket": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "follow": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Follow"
-          }
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "Ticket",
-      "required": [
-        "id",
-        "title",
-        "description",
-        "user_id",
-        "status",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "TimePeriod": {
-      "type": "object",
-      "properties": {
-        "start_time": {
-          "type": "string"
-        },
-        "end_time": {
-          "type": "string"
-        },
-        "multiplier": {
-          "type": "number",
-          "format": "float"
-        }
-      },
-      "title": "TimePeriod",
-      "required": [
-        "start_time",
-        "end_time",
-        "multiplier"
-      ]
-    },
-    "TosConfig": {
-      "type": "object",
-      "properties": {
-        "tos_content": {
-          "type": "string"
-        }
-      },
-      "title": "TosConfig",
-      "required": [
-        "tos_content"
-      ]
-    },
-    "TrafficLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "server_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "TrafficLog",
-      "required": [
-        "id",
-        "server_id",
-        "user_id",
-        "subscribe_id",
-        "download",
-        "upload",
-        "timestamp"
-      ]
-    },
-    "TransportConfig": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "host": {
-          "type": "string"
-        },
-        "service_name": {
-          "type": "string"
-        }
-      },
-      "title": "TransportConfig",
-      "required": [
-        "path",
-        "host",
-        "service_name"
-      ]
-    },
-    "Trojan": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Trojan",
-      "required": [
-        "port",
-        "transport",
-        "transport_config",
-        "security",
-        "security_config"
-      ]
-    },
-    "TrojanProtocol": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enable_tls": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "tls_config": {
-          "type": "string"
-        },
-        "network": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        }
-      },
-      "title": "TrojanProtocol",
-      "required": [
-        "host",
-        "port",
-        "enable_tls",
-        "tls_config",
-        "network",
-        "transport"
-      ]
-    },
-    "Tuic": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "disable_sni": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "reduce_rtt": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "udp_relay_mode": {
-          "type": "string"
-        },
-        "congestion_controller": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Tuic",
-      "required": [
-        "port",
-        "disable_sni",
-        "reduce_rtt",
-        "udp_relay_mode",
-        "congestion_controller",
-        "security_config"
-      ]
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "avatar": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "commission": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "referral_percentage": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "only_first_purchase": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "gift_amount": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "telegram": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "refer_code": {
-          "type": "string"
-        },
-        "referer_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "is_admin": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_balance_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_login_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_subscribe_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_trade_notify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "auth_methods": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserAuthMethod"
-          }
-        },
-        "user_devices": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserDevice"
-          }
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "deleted_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "User",
-      "required": [
-        "id",
-        "avatar",
-        "balance",
-        "commission",
-        "referral_percentage",
-        "only_first_purchase",
-        "gift_amount",
-        "telegram",
-        "refer_code",
-        "referer_id",
-        "enable",
-        "enable_balance_notify",
-        "enable_login_notify",
-        "enable_subscribe_notify",
-        "enable_trade_notify",
-        "auth_methods",
-        "user_devices",
-        "rules",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "UserAffiliate": {
-      "type": "object",
-      "properties": {
-        "avatar": {
-          "type": "string"
-        },
-        "identifier": {
-          "type": "string"
-        },
-        "registered_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UserAffiliate",
-      "required": [
-        "avatar",
-        "identifier",
-        "registered_at",
-        "enable"
-      ]
-    },
-    "UserAuthMethod": {
-      "type": "object",
-      "properties": {
-        "auth_type": {
-          "type": "string"
-        },
-        "auth_identifier": {
-          "type": "string"
-        },
-        "verified": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "UserAuthMethod",
-      "required": [
-        "auth_type",
-        "auth_identifier",
-        "verified"
-      ]
-    },
-    "UserDevice": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "ip": {
-          "type": "string"
-        },
-        "identifier": {
-          "type": "string"
-        },
-        "user_agent": {
-          "type": "string"
-        },
-        "online": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserDevice",
-      "required": [
-        "id",
-        "ip",
-        "identifier",
-        "user_agent",
-        "online",
-        "enabled",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "UserLoginLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "login_ip": {
-          "type": "string"
-        },
-        "user_agent": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserLoginLog",
-      "required": [
-        "id",
-        "user_id",
-        "login_ip",
-        "user_agent",
-        "success",
-        "timestamp"
-      ]
-    },
-    "UserSubscribe": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "order_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "subscribe": {
-          "$ref": "#/definitions/Subscribe"
-        },
-        "start_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "expire_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "finished_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "reset_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "traffic": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "token": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "uint8"
-        },
-        "short": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserSubscribe",
-      "required": [
-        "id",
-        "user_id",
-        "order_id",
-        "subscribe_id",
-        "subscribe",
-        "start_time",
-        "expire_time",
-        "finished_at",
-        "reset_time",
-        "traffic",
-        "download",
-        "upload",
-        "token",
-        "status",
-        "short",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "UserSubscribeLog": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "user_subscribe_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "token": {
-          "type": "string"
-        },
-        "ip": {
-          "type": "string"
-        },
-        "user_agent": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserSubscribeLog",
-      "required": [
-        "id",
-        "user_id",
-        "user_subscribe_id",
-        "token",
-        "ip",
-        "user_agent",
-        "timestamp"
-      ]
-    },
-    "UserTraffic": {
-      "type": "object",
-      "properties": {
-        "uid": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "upload": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "download": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "UserTraffic",
-      "required": [
-        "uid",
-        "upload",
-        "download"
-      ]
-    },
-    "VerifyCodeConfig": {
-      "type": "object",
-      "properties": {
-        "verify_code_expire_time": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "verify_code_limit": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "verify_code_interval": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "title": "VerifyCodeConfig",
-      "required": [
-        "verify_code_expire_time",
-        "verify_code_limit",
-        "verify_code_interval"
-      ]
-    },
-    "VerifyConfig": {
-      "type": "object",
-      "properties": {
-        "turnstile_site_key": {
-          "type": "string"
-        },
-        "turnstile_secret": {
-          "type": "string"
-        },
-        "enable_login_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_register_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "enable_reset_password_verify": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      },
-      "title": "VerifyConfig",
-      "required": [
-        "turnstile_site_key",
-        "turnstile_secret",
-        "enable_login_verify",
-        "enable_register_verify",
-        "enable_reset_password_verify"
-      ]
-    },
-    "Vless": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "flow": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Vless",
-      "required": [
-        "port",
-        "flow",
-        "transport",
-        "transport_config",
-        "security",
-        "security_config"
-      ]
-    },
-    "VlessProtocol": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "network": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "type": "string"
-        },
-        "xtls": {
-          "type": "string"
-        }
-      },
-      "title": "VlessProtocol",
-      "required": [
-        "host",
-        "port",
-        "network",
-        "transport",
-        "security",
-        "security_config",
-        "xtls"
-      ]
-    },
-    "Vmess": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "transport": {
-          "type": "string"
-        },
-        "transport_config": {
-          "$ref": "#/definitions/TransportConfig"
-        },
-        "security": {
-          "type": "string"
-        },
-        "security_config": {
-          "$ref": "#/definitions/SecurityConfig"
-        }
-      },
-      "title": "Vmess",
-      "required": [
-        "port",
-        "transport",
-        "transport_config",
-        "security",
-        "security_config"
-      ]
-    },
-    "VmessProtocol": {
-      "type": "object",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enable_tls": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "tls_config": {
-          "type": "string"
-        },
-        "network": {
-          "type": "string"
-        },
-        "transport": {
-          "type": "string"
-        }
-      },
-      "title": "VmessProtocol",
-      "required": [
-        "host",
-        "port",
-        "enable_tls",
-        "tls_config",
-        "network",
-        "transport"
-      ]
-    }
-  },
-  "securityDefinitions": {
-    "apiKey": {
-      "type": "apiKey",
-      "description": "Enter JWT Bearer token **_only_**",
-      "name": "Authorization",
-      "in": "header"
-    }
-  }
 }
