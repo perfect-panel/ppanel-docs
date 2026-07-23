@@ -14710,6 +14710,9 @@
                 },
                 "subscribe_id": {
                     "type": "integer"
+                },
+                "user_subscribe_id": {
+                    "type": "integer"
                 }
             }
         },
