@@ -3930,7 +3930,9 @@
             ],
             "properties": {
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 128,
+                    "minLength": 8
                 }
             }
         },
