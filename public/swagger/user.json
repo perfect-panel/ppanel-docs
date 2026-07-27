@@ -2822,7 +2822,7 @@
                     "$ref": "#/definitions/dto.StripePayment"
                 },
                 "type": {
-                    "description": "Type is url (including EPay mapi payurl/urlscheme), qr, stripe, or balance.",
+                    "description": "Type is url, qr, stripe, or balance.",
                     "type": "string",
                     "enum": [
                         "url",
@@ -4312,7 +4312,7 @@
                     "$ref": "#/definitions/dto.StripePayment"
                 },
                 "type": {
-                    "description": "Type is url (including EPay mapi payurl/urlscheme), qr, stripe, or balance.",
+                    "description": "Type is url, qr, stripe, or balance.",
                     "type": "string",
                     "enum": [
                         "url",
