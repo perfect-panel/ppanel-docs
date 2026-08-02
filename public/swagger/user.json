@@ -4467,8 +4467,8 @@
         },
         "TelegramSecret": {
             "type": "apiKey",
-            "name": "secret",
-            "in": "query"
+            "name": "X-Telegram-Bot-Api-Secret-Token",
+            "in": "header"
         }
     }
 }
