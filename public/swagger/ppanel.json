@@ -17654,6 +17654,10 @@
                     "type": "integer"
                 },
                 "sid": {
+                    "description": "SID identifies the user_subscribe row the traffic was billed to, UID the\nuser owning it. UID is carried separately so the console can still name\nthe user after the subscription row is gone.",
+                    "type": "integer"
+                },
+                "uid": {
                     "type": "integer"
                 },
                 "upload": {
