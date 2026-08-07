@@ -7636,6 +7636,10 @@
         "dto.CreateSubscribeApplicationRequest": {
             "type": "object",
             "properties": {
+                "default_params": {
+                    "description": "DefaultParams holds the template params this client should receive when the\nsubscription URL does not carry them, in query-string form such as\n\"mode=rule\u0026emoji=1\".",
+                    "type": "string"
+                },
                 "description": {
                     "type": "string"
                 },
@@ -10236,6 +10240,9 @@
                 "created_at": {
                     "type": "integer"
                 },
+                "default_params": {
+                    "type": "string"
+                },
                 "description": {
                     "type": "string"
                 },
@@ -10947,6 +10954,9 @@
         "dto.UpdateSubscribeApplicationRequest": {
             "type": "object",
             "properties": {
+                "default_params": {
+                    "type": "string"
+                },
                 "description": {
                     "type": "string"
                 },
